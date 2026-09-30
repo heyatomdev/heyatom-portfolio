@@ -2,14 +2,20 @@
 import { updated, uses } from '~/data/uses'
 import { gsap, MOTION_OK, SplitText, useMotion } from '~/utils/motion'
 
+const { t, locale } = useI18n()
+
 useSeoMeta({
   title: 'Uses',
-  description: 'Hardware, software e servizi che Andrea Tombolato usa ogni giorno: postazione di lavoro, strumenti di sviluppo, design e produttività.',
+  description: () => t('uses.seo.description'),
   ogTitle: 'Uses · HeyAtom',
-  ogDescription: 'Hardware, software e servizi di tutti i giorni.',
+  ogDescription: () => t('uses.seo.ogDescription'),
 })
 
-const updatedLabel = new Date(updated).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })
+const updatedLabel = computed(() => new Date(updated).toLocaleDateString(locale.value === 'en' ? 'en-GB' : 'it-IT', { day: 'numeric', month: 'long', year: 'numeric' }))
+// English overrides on the Italian items; anchors keep using the Italian titles so links stay stable.
+const groups = computed(() => uses.map(g => locale.value === 'en'
+  ? { ...g, label: g.en, items: g.items.map(i => ({ ...i, ...i.en })) }
+  : { ...g, label: g.title }))
 const pad = (n: number) => String(n).padStart(2, '0')
 // Stable anchor per group: "Design & produttività" → "design-produttivita".
 const slug = (t: string) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
@@ -67,19 +73,19 @@ useMotion(root, (mm, el) => {
     <header class="head hexed" data-intro>
       <h1>Uses</h1>
       <p>
-        Hardware, software e servizi che compongono la mia postazione.
-        <span class="mono">Aggiornata il <time :datetime="updated">{{ updatedLabel }}</time></span>
+        {{ t('uses.intro') }}
+        <span class="mono">{{ t('uses.updated') }} <time :datetime="updated">{{ updatedLabel }}</time></span>
       </p>
     </header>
 
-    <section v-for="g in uses" :id="slug(g.title)" :key="g.title" class="group" :aria-labelledby="`${slug(g.title)}-h`">
+    <section v-for="g in groups" :id="slug(g.title)" :key="g.title" class="group" :aria-labelledby="`${slug(g.title)}-h`">
       <span class="rule" aria-hidden="true" />
       <div class="side">
         <h2 :id="`${slug(g.title)}-h`">
-          <a :href="`#${slug(g.title)}`" class="anchor" :aria-label="`${g.title}, copia link alla sezione`" @click="copyLink(slug(g.title))">{{ g.title }}<span class="hash" aria-hidden="true">#</span></a>
+          <a :href="`#${slug(g.title)}`" class="anchor" :aria-label="`${g.label}, ${t('uses.copyLink')}`" @click="copyLink(slug(g.title))">{{ g.label }}<span class="hash" aria-hidden="true">#</span></a>
         </h2>
         <span class="mono count" aria-hidden="true">{{ pad(g.items.length) }}</span>
-        <span class="mono copied" role="status">{{ copied === slug(g.title) ? 'link copiato' : '' }}</span>
+        <span class="mono copied" role="status">{{ copied === slug(g.title) ? t('uses.copied') : '' }}</span>
       </div>
       <ul>
         <li v-for="i in g.items" :key="i.name">

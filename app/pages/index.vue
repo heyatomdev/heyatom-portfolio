@@ -2,85 +2,88 @@
 import { projects, works } from '~/data/works'
 import { gsap, magnetic, MOTION_OK, revealLines, ScrollTrigger, SplitText, useMotion } from '~/utils/motion'
 
+const { t } = useI18n()
+const localePath = useLocalePath()
+
 useSeoMeta({
   title: 'Andrea Tombolato, full-stack developer',
-  description: 'Sono Andrea (HeyAtom), sviluppatore full-stack dal 2016. Costruisco siti e web app su misura per associazioni, professionisti e piccole realtà. Parli sempre con me.',
+  description: () => t('home.seo.description'),
   ogTitle: 'Andrea Tombolato · HeyAtom',
-  ogDescription: 'Siti e web app su misura, costruiti da una persona sola. Vue, Nuxt, Node, NestJS e Java dal 2016.',
+  ogDescription: () => t('home.seo.ogDescription'),
 })
 
 const bySlug = (s: string) => works.find(w => w.slug === s)!
 // Last slot is dealt in front.
 const deck = ['element', 'sgweb', 'kaish-dbd'].map(bySlug)
 
-const picks = [
-  { slug: 'kaish-dbd', line: 'Community e costruttore di build per Dead by Daylight: utenti, ruoli, wiki e traduzione completa.' },
-  { slug: 'sgweb', line: 'Il sito dei corsi di Tai Chi e Qi Gong: sedi, orari e contatto diretto, in italiano e inglese.' },
-  { slug: 'element', line: 'Il sito del network e-sport, con lo stato live degli streamer dalle API di Twitch.' },
-].map(p => ({ ...bySlug(p.slug), line: p.line }))
+const picks = computed(() => [
+  { slug: 'kaish-dbd', line: t('home.picks.kaish') },
+  { slug: 'sgweb', line: t('home.picks.sgweb') },
+  { slug: 'element', line: t('home.picks.element') },
+].map(p => ({ ...bySlug(p.slug), line: p.line })))
 
-const offers = [
+const offers = computed(() => [
   {
-    title: 'Un sito per la tua associazione o attività',
-    text: 'Chiaro, veloce, facile da aggiornare. Si legge bene dal telefono ed è pronto per Google.',
+    title: t('home.offers.site.title'),
+    text: t('home.offers.site.text'),
     examples: ['prociv', 'puma-arts'],
   },
   {
-    title: 'Una web app su misura',
-    text: 'Aree riservate, gestionali, strumenti per la tua community: quello che un sito vetrina non fa.',
+    title: t('home.offers.app.title'),
+    text: t('home.offers.app.text'),
     examples: ['kaish-dbd', 'element'],
   },
   {
-    title: 'Collegare i tuoi strumenti',
-    text: 'Far parlare tra loro sistemi che non si parlano, automatizzare i passaggi ripetitivi e farli funzionare senza intoppi.',
+    title: t('home.offers.tools.title'),
+    text: t('home.offers.tools.text'),
     examples: ['beacon', 'alertconnector'],
   },
-].map(o => ({ ...o, examples: o.examples.map(bySlug) }))
+].map(o => ({ ...o, examples: o.examples.map(bySlug) })))
 
-const path = [
+const path = computed(() => [
   {
-    when: '2016 → oggi',
+    when: t('home.path.since2016'),
     role: 'Full-stack developer',
     org: 'Medas Solutions',
-    text: 'Software in ambito sanitario con Java, Node.js e Vue: dossier online per dare ai pazienti accesso a referti e documentazione clinica.',
+    text: t('home.path.medas'),
   },
   {
-    when: '2020 → oggi',
-    role: 'Consiglio direttivo',
+    when: t('home.path.since2020'),
+    role: t('home.path.board'),
     org: 'Element Gaming',
-    text: 'Gestione di una community gaming no profit: coordinamento del team, decisioni organizzative, nuove iniziative.',
+    text: t('home.path.elementBoard'),
   },
   {
     when: '2019 → 2020',
-    role: 'Full-stack developer e project manager',
+    role: t('home.path.devPm'),
     org: 'Element Gaming',
-    text: 'Piattaforma web del network con Nuxt e Node.js, dashboard per team e streamer, strumenti interni.',
+    text: t('home.path.elementDev'),
   },
   {
-    when: '2015 → oggi',
-    role: 'Volontario, capo squadra, consigliere',
-    org: 'Protezione Civile',
-    text: 'Dal 2022 responsabile della comunicazione pubblica: ho rilanciato i social e costruito da zero il sito del gruppo.',
+    when: t('home.path.since2015'),
+    role: t('home.path.volunteer'),
+    org: t('home.path.prociv'),
+    text: t('home.path.procivText'),
   },
-]
+])
 
-const stack = [
+const stack = computed(() => [
   { group: 'Frontend', items: ['Vue', 'Nuxt', 'TypeScript', 'Vuetify', 'Pinia', 'GSAP'] },
   { group: 'Backend', items: ['Node.js', 'NestJS', 'Prisma', 'PostgreSQL', 'Java'] },
-  { group: 'Infrastruttura', items: ['Docker', 'NGINX', 'GitHub Actions', 'Prometheus'] },
-  { group: 'Integrazioni', items: ['Stripe', 'Brevo', 'Twitch', 'Discord', 'OAuth'] },
-]
+  { group: t('home.stack.infra'), items: ['Docker', 'NGINX', 'GitHub Actions', 'Prometheus'] },
+  { group: t('home.stack.integrations'), items: ['Stripe', 'Brevo', 'Twitch', 'Discord', 'OAuth'] },
+])
 
-const travels = [
-  { src: 'https://fileharbor.heyatom.dev/v2/images/f4a215ed-406d-4532-8f4f-67cc3fa132f6', place: 'Edimburgo, Scozia', year: 2022, alt: 'Via di Edimburgo al tramonto, con una cabina telefonica rossa e palazzi in pietra' },
-  { src: 'https://fileharbor.heyatom.dev/v2/images/b6e3fce0-4b4a-49c5-a636-c8d5d5954335', place: 'Chicago, USA', year: 2022, alt: 'Aiuola di tulipani davanti all’insegna del Chicago Theatre, tra i grattacieli' },
-  { src: 'https://fileharbor.heyatom.dev/v2/images/085153e2-9300-4168-ae78-c12ddb247064', place: 'Valsesia, Piemonte', year: 2023, alt: 'Vette innevate che si specchiano in un laghetto di montagna' },
-  { src: 'https://fileharbor.heyatom.dev/v2/images/821de266-6804-4f06-9576-6febd993396c', place: 'Lisbona, Portogallo', year: 2019, alt: 'Arco di Rua Augusta affacciato su Praça do Comércio, sotto un cielo azzurro' },
-  { src: 'https://fileharbor.heyatom.dev/v2/images/0056c6b0-0b84-4b19-8af9-4571e4e1e53c', place: 'Dolomiti, Trentino', year: 2018, alt: 'Lago verde smeraldo circondato da abeti, con le guglie delle Dolomiti sullo sfondo' },
-  { src: 'https://fileharbor.heyatom.dev/v2/images/243e5eef-2a2b-4b38-a694-11cefd754e74', place: 'Siviglia, Spagna', year: 2019, alt: 'Plaza de España a Siviglia, con le torri e la balaustra illuminate dal sole' },
-  { src: 'https://fileharbor.heyatom.dev/v2/images/8ab40bb6-4e37-4c3b-b12b-726e913e477d', place: 'Londra, Regno Unito', year: 2014, alt: 'Il Parlamento di Westminster illuminato di notte, riflesso sul Tamigi' },
-  { src: 'https://fileharbor.heyatom.dev/v2/images/07dc987f-631e-49c2-87dd-c7602fc58243', place: 'Prealpi Bergamasche', year: 2023, alt: 'Cima rocciosa tra le nuvole sopra pendii verdi' },
-]
+const travels = computed(() => [
+  { src: 'https://fileharbor.heyatom.dev/v2/images/f4a215ed-406d-4532-8f4f-67cc3fa132f6', place: t('home.travels.edinburgh.place'), year: 2022, alt: t('home.travels.edinburgh.alt') },
+  { src: 'https://fileharbor.heyatom.dev/v2/images/b6e3fce0-4b4a-49c5-a636-c8d5d5954335', place: 'Chicago, USA', year: 2022, alt: t('home.travels.chicago.alt') },
+  { src: 'https://fileharbor.heyatom.dev/v2/images/085153e2-9300-4168-ae78-c12ddb247064', place: t('home.travels.valsesia.place'), year: 2023, alt: t('home.travels.valsesia.alt') },
+  { src: 'https://fileharbor.heyatom.dev/v2/images/821de266-6804-4f06-9576-6febd993396c', place: t('home.travels.lisbon.place'), year: 2019, alt: t('home.travels.lisbon.alt') },
+  { src: 'https://fileharbor.heyatom.dev/v2/images/0056c6b0-0b84-4b19-8af9-4571e4e1e53c', place: t('home.travels.dolomites.place'), year: 2018, alt: t('home.travels.dolomites.alt') },
+  { src: 'https://fileharbor.heyatom.dev/v2/images/243e5eef-2a2b-4b38-a694-11cefd754e74', place: t('home.travels.seville.place'), year: 2019, alt: t('home.travels.seville.alt') },
+  { src: 'https://fileharbor.heyatom.dev/v2/images/8ab40bb6-4e37-4c3b-b12b-726e913e477d', place: t('home.travels.london.place'), year: 2014, alt: t('home.travels.london.alt') },
+  { src: 'https://fileharbor.heyatom.dev/v2/images/07dc987f-631e-49c2-87dd-c7602fc58243', place: t('home.travels.bergamo.place'), year: 2023, alt: t('home.travels.bergamo.alt') },
+])
 
 const years = new Date().getFullYear() - 2016
 const available = useRuntimeConfig().public.freelanceAvailable === 'true'
@@ -213,31 +216,34 @@ function untilt(e: PointerEvent) {
   <!-- ── Hero ─────────────────────────────────────── -->
   <section class="hero wrap" aria-labelledby="hero-title">
     <div class="hero-copy" data-intro>
-      <p v-if="available" class="avail"><span class="dot" aria-hidden="true" />Disponibile per progetti freelance</p>
+      <p v-if="available" class="avail"><span class="dot" aria-hidden="true" />{{ t('common.availableFreelance') }}</p>
       <h1 id="hero-title">
-        <span class="hi">Ciao, sono Andrea.</span>
-        Costruisco <span class="nw">siti e web</span> app <span class="nw">su misura.</span>
+        <span class="hi">{{ t('home.hero.hi') }}</span>
+        <i18n-t keypath="home.hero.title" scope="global">
+          <template #a><span class="nw">{{ t('home.hero.titleA') }}</span></template>
+          <template #b><span class="nw">{{ t('home.hero.titleB') }}</span></template>
+        </i18n-t>
       </h1>
       <p class="lead">
-        Per associazioni, professionisti e piccole realtà. Sviluppo full-stack dal 2016, dalla prima riga alla messa online.
-        E parli sempre con me, non con un’agenzia.
+        {{ t('home.hero.lead') }}
+        {{ t('home.hero.leadAgency') }}
       </p>
       <div class="actions">
         <a class="btn btn--primary" href="#contatti">
-          Raccontami il progetto <Icon name="arrow-right" />
+          {{ t('common.tellMe') }} <Icon name="arrow-right" />
         </a>
-        <NuxtLink class="btn btn--ghost" to="/works">Vedi tutti i lavori</NuxtLink>
+        <NuxtLink class="btn btn--ghost" :to="localePath('/works')">{{ t('common.seeAllWorks') }}</NuxtLink>
       </div>
     </div>
 
     <NuxtLink
-      to="/works" class="stage" data-intro :aria-label="`Alcuni lavori: ${[...deck].reverse().map(w => w.title).join(', ')}. Vedi tutti i lavori`"
+      :to="localePath('/works')" class="stage" data-intro :aria-label="`${t('home.hero.someWorks')}: ${[...deck].reverse().map(w => w.title).join(', ')}. ${t('common.seeAllWorks')}`"
       @pointermove="tilt" @pointerleave="untilt"
     >
       <figure v-for="(w, i) in deck" :key="w.slug" class="shot" :class="`shot--${i}`">
         <img
           :src="img(w.preview, 960)" :srcset="srcset(w.preview, [640, 960, 1280])" sizes="(max-width: 900px) 80vw, 34vw"
-          :alt="`Schermata di ${w.title}`" width="1280" height="720" :fetchpriority="i === 2 ? 'high' : 'auto'"
+          :alt="`${t('common.screenshotOf', { title: w.title })}`" width="1280" height="720" :fetchpriority="i === 2 ? 'high' : 'auto'"
         >
         <figcaption><span>{{ w.title }}</span><span class="mono">{{ w.year }}</span></figcaption>
       </figure>
@@ -247,18 +253,18 @@ function untilt(e: PointerEvent) {
       </span>
     </NuxtLink>
 
-    <ul class="facts" data-intro aria-label="In breve">
-      <li><span class="mono">2016 → oggi</span>Full-stack in Medas Solutions</li>
-      <li><span class="mono">2020 → oggi</span>Consiglio direttivo Element Gaming</li>
-      <li><span class="mono">dal 2015</span>Volontario in Protezione Civile</li>
+    <ul class="facts" data-intro :aria-label="t('home.facts.label')">
+      <li><span class="mono">{{ t('home.path.since2016') }}</span>{{ t('home.facts.medas') }}</li>
+      <li><span class="mono">{{ t('home.path.since2020') }}</span>{{ t('home.facts.element') }}</li>
+      <li><span class="mono">{{ t('home.facts.since2015') }}</span>{{ t('home.facts.prociv') }}</li>
     </ul>
   </section>
 
   <!-- ── Lavori scelti ────────────────────────────── -->
   <section class="sec wrap" aria-labelledby="picks-title">
     <div class="sec-head">
-      <h2 id="picks-title">Cose che ho costruito e che girano davvero.</h2>
-      <NuxtLink to="/works" class="more">Tutti i {{ projects.length }} lavori <Icon name="arrow-right" /></NuxtLink>
+      <h2 id="picks-title">{{ t('home.picks.title') }}</h2>
+      <NuxtLink :to="localePath('/works')" class="more">{{ t('home.picks.all', { n: projects.length }) }} <Icon name="arrow-right" /></NuxtLink>
     </div>
 
     <div class="picks">
@@ -270,7 +276,7 @@ function untilt(e: PointerEvent) {
           <img
             :src="img(p.preview, 960)" :srcset="srcset(p.preview, [640, 960, 1280])"
             sizes="(max-width: 900px) 92vw, 680px"
-            :alt="`Schermata di ${p.title}`" width="1280" height="720" loading="lazy"
+            :alt="`${t('common.screenshotOf', { title: p.title })}`" width="1280" height="720" loading="lazy"
           >
         </div>
         <div class="pick-body">
@@ -285,12 +291,10 @@ function untilt(e: PointerEvent) {
   <!-- ── Cosa faccio per te ───────────────────────── -->
   <section class="sec sec--near wrap" aria-labelledby="offer-title">
     <div class="sec-head">
-      <h2 id="offer-title">Cosa posso fare per te.</h2>
-      <p>
-        Niente pacchetti né listini: capisco cosa ti serve e ti propongo la strada più semplice che funziona.
-        E non riparto da zero: accessi, immagini, contenuti, eventi ed email poggiano su una
-        <NuxtLink to="/works#piattaforma">base comune</NuxtLink> già collaudata.
-      </p>
+      <h2 id="offer-title">{{ t('home.offers.title') }}</h2>
+      <i18n-t keypath="home.offers.intro" tag="p" scope="global">
+        <template #link><NuxtLink :to="localePath('/works#piattaforma')">{{ t('home.offers.introLink') }}</NuxtLink></template>
+      </i18n-t>
     </div>
     <ul class="offers">
       <li v-for="o in offers" :key="o.title" class="offer">
@@ -298,9 +302,9 @@ function untilt(e: PointerEvent) {
         <h3>{{ o.title }}</h3>
         <p>{{ o.text }}</p>
         <p class="ex">
-          <span class="ex-label">Per esempio</span>
+          <span class="ex-label">{{ t('home.offers.example') }}</span>
           <template v-for="(e, j) in o.examples" :key="e.slug">
-            <NuxtLink :to="`/works#${e.slug}`">{{ e.title }}</NuxtLink><span v-if="j < o.examples.length - 1">, </span>
+            <NuxtLink :to="localePath(`/works#${e.slug}`)">{{ e.title }}</NuxtLink><span v-if="j < o.examples.length - 1">, </span>
           </template>
         </p>
       </li>
@@ -310,8 +314,8 @@ function untilt(e: PointerEvent) {
   <!-- ── Percorso ─────────────────────────────────── -->
   <section id="percorso" class="sec sec--far wrap" aria-labelledby="path-title">
     <div class="sec-head">
-      <h2 id="path-title">{{ years }} anni di codice, e non solo.</h2>
-      <p>Di giorno software sanitario, dove un errore non è un dettaglio. Il resto del tempo community, volontariato e progetti miei.</p>
+      <h2 id="path-title">{{ t('home.path.title', { n: years }) }}</h2>
+      <p>{{ t('home.path.intro') }}</p>
     </div>
 
     <div class="path-grid">
@@ -327,7 +331,7 @@ function untilt(e: PointerEvent) {
       </ol>
 
       <aside class="stack" aria-labelledby="stack-title">
-        <h3 id="stack-title">Con cosa lavoro</h3>
+        <h3 id="stack-title">{{ t('home.stack.title') }}</h3>
         <dl>
           <template v-for="s in stack" :key="s.group">
             <dt>{{ s.group }}</dt>
@@ -337,7 +341,7 @@ function untilt(e: PointerEvent) {
           </template>
         </dl>
         <a class="btn btn--ghost cv" href="/assets/cv-tombolato.pdf" download>
-          Scarica il CV <Icon name="download" />
+          {{ t('home.stack.cv') }} <Icon name="download" />
         </a>
       </aside>
     </div>
@@ -346,10 +350,10 @@ function untilt(e: PointerEvent) {
   <!-- ── Fuori dallo schermo ──────────────────────── -->
   <section class="sec sec--near off" aria-labelledby="off-title">
     <div class="wrap sec-head">
-      <h2 id="off-title">Fuori dallo schermo.</h2>
-      <p>Montagna, viaggi, gaming. Mi ricaricano, e secondo me si vede nella cura dei dettagli.</p>
+      <h2 id="off-title">{{ t('home.off.title') }}</h2>
+      <p>{{ t('home.off.text') }}</p>
     </div>
-    <ul class="strip" tabindex="0" aria-label="Foto di viaggio">
+    <ul class="strip" tabindex="0" :aria-label="t('home.off.label')">
       <li v-for="t in travels" :key="t.src">
         <img :src="img(t.src, 720)" :alt="t.alt" width="720" height="900" loading="lazy">
         <span class="mono">{{ t.place }} · {{ t.year }}</span>
@@ -366,12 +370,12 @@ function untilt(e: PointerEvent) {
         <img src="/favicon.svg" alt="" width="120" height="120">
       </div>
       <div class="close-copy">
-        <h2 id="close-title">Hai un progetto in mente? Raccontamelo.</h2>
-        <p>Lavoro con associazioni, professionisti e piccole realtà. Due righe su cosa ti serve bastano: rispondo a tutti, e rispondo io. Se non sono la persona giusta, te lo dico.</p>
-        <p class="aside">Sei un recruiter? Non cerco un impiego, ma una proposta interessante la leggo volentieri.</p>
+        <h2 id="close-title">{{ t('home.close.title') }}</h2>
+        <p>{{ t('home.close.text') }}</p>
+        <p class="aside">{{ t('home.close.recruiter') }}</p>
         <a class="mail" href="mailto:hey@heyatom.dev">hey@heyatom.dev</a>
         <div class="actions">
-          <a class="btn btn--primary" href="mailto:hey@heyatom.dev?subject=Ciao%20Andrea"><Icon name="mail" /> Scrivimi una mail</a>
+          <a class="btn btn--primary" :href="`mailto:hey@heyatom.dev?subject=${t('home.close.subject')}`"><Icon name="mail" /> {{ t('home.close.mail') }}</a>
           <a class="btn btn--ghost" href="https://www.linkedin.com/in/atombolato" target="_blank" rel="noopener"><Icon name="linkedin" /> LinkedIn</a>
           <a class="btn btn--ghost" href="https://github.com/andreacw5" target="_blank" rel="noopener"><Icon name="github" /> GitHub</a>
         </div>

@@ -1,40 +1,43 @@
 <script setup lang="ts">
-import { projects } from '~/data/works'
+import { localize, projects } from '~/data/works'
 import { gsap, MOTION_OK, revealLines, useMotion } from '~/utils/motion'
 
 const route = useRoute()
-const w = projects.find(p => p.slug === route.params.slug)
-if (!w) throw createError({ statusCode: 404, statusMessage: 'Progetto non trovato', fatal: true })
+const { t, locale } = useI18n()
+const localePath = useLocalePath()
+const src = projects.find(p => p.slug === route.params.slug)
+if (!src) throw createError({ statusCode: 404, statusMessage: t('work.notFound'), fatal: true })
+const w = computed(() => localize(src, locale.value))
 
-const kindLabel = { 'cliente': 'Cliente', 'open-source': 'Open source', 'personale': 'Personale' } as const
+const kindLabel = computed(() => ({ 'cliente': t('common.kind.client'), 'open-source': 'Open source', 'personale': t('common.kind.personal') }))
 
 useSeoMeta({
-  title: w.title,
-  description: w.description,
-  ogTitle: `${w.title} · HeyAtom`,
-  ogDescription: w.description,
-  ogImage: `${useRuntimeConfig().public.siteUrl}/og/works/${w.slug}.jpg`,
-  ogImageAlt: `HeyAtom: ${w.title}, ${w.year}`,
+  title: src.title,
+  description: () => w.value.description,
+  ogTitle: `${src.title} · HeyAtom`,
+  ogDescription: () => w.value.description,
+  ogImage: `${useRuntimeConfig().public.siteUrl}/og/works/${src.slug}.jpg`,
+  ogImageAlt: `HeyAtom: ${src.title}, ${src.year}`,
 })
 
 // Similar: most shared stack entries, newest first on ties.
 const similar = projects
-  .filter(p => p.slug !== w.slug)
-  .map(p => ({ p, score: p.stack.filter(s => w.stack.includes(s)).length }))
+  .filter(p => p.slug !== src.slug)
+  .map(p => ({ p, score: p.stack.filter(s => src.stack.includes(s)).length }))
   .filter(x => x.score > 0)
   .sort((a, b) => b.score - a.score || b.p.year - a.p.year)
   .slice(0, 3)
   .map(x => x.p)
 
 // Lightbox on a native <dialog>: Esc, focus trap and backdrop come for free.
-const shots = w.images ?? []
+const shots = computed(() => w.value.images ?? [])
 const box = ref<HTMLDialogElement>()
 const at = ref(0)
 function show(i: number) {
   at.value = i
   box.value?.showModal()
 }
-const step = (d: number) => { at.value = (at.value + d + shots.length) % shots.length }
+const step = (d: number) => { at.value = (at.value + d + shots.value.length) % shots.value.length }
 function key(e: KeyboardEvent) {
   if (e.key === 'ArrowLeft') step(-1)
   if (e.key === 'ArrowRight') step(1)
@@ -59,34 +62,34 @@ useMotion(root, (mm, el) => {
 
 <template>
   <div ref="root" class="wrap page">
-    <NuxtLink to="/works" class="back mono">← Tutti i lavori</NuxtLink>
+    <NuxtLink :to="localePath('/works')" class="back mono">← {{ t('common.allWorks') }}</NuxtLink>
 
     <header class="head hexed" data-intro>
       <p class="meta mono">
-        {{ w.year }} · {{ kindLabel[w.kind] }}<template v-if="w.current"> · <em>in corso</em></template>
+        {{ w.year }} · {{ kindLabel[w.kind] }}<template v-if="w.current"> · <em>{{ t('common.ongoing') }}</em></template>
       </p>
       <h1>{{ w.title }}</h1>
       <p class="client">{{ w.client }}</p>
       <div class="links">
         <a v-if="w.website" class="btn btn--primary" :href="w.website" target="_blank" rel="noopener">
-          Visita il sito <Icon name="arrow-up-right" />
+          {{ t('common.visitSite') }} <Icon name="arrow-up-right" />
         </a>
         <a v-if="w.github" class="btn btn--ghost" :href="w.github" target="_blank" rel="noopener">
-          <Icon name="github" /> Codice
+          <Icon name="github" /> {{ t('common.code') }}
         </a>
-        <span v-if="!w.website && !w.github" class="private">Progetto privato, niente link pubblico.</span>
+        <span v-if="!w.website && !w.github" class="private">{{ t('common.private') }}</span>
       </div>
     </header>
 
     <img
       class="hero" data-intro
       :src="img(w.preview!, 1280)" :srcset="srcset(w.preview!, [640, 960, 1280, 1920])" sizes="(max-width: 1240px) 92vw, 1150px"
-      :alt="`Schermata di ${w.title}`" width="1920" height="1080" fetchpriority="high"
+      :alt="`${t('common.screenshotOf', { title: w.title })}`" width="1920" height="1080" fetchpriority="high"
     >
 
     <div class="body">
       <section aria-labelledby="about">
-        <h2 id="about">Il progetto</h2>
+        <h2 id="about">{{ t('work.about') }}</h2>
         <p class="desc">{{ w.description }}</p>
         <ul v-if="w.features.length" class="feats">
           <li v-for="f in w.features" :key="f">{{ f }}</li>
@@ -101,11 +104,11 @@ useMotion(root, (mm, el) => {
     </div>
 
     <section v-if="shots.length" class="gallery" aria-labelledby="shots-title">
-      <h2 id="shots-title">Schermate <span class="mono count">{{ shots.length }}</span></h2>
+      <h2 id="shots-title">{{ t('common.screenshots') }} <span class="mono count">{{ shots.length }}</span></h2>
       <ul class="shots">
         <li v-for="(s, i) in shots" :key="s.image">
           <button type="button" @click="show(i)">
-            <img :src="img(s.image, 640)" :alt="s.title || `Schermata ${i + 1} di ${w.title}`" width="640" height="400" loading="lazy">
+            <img :src="img(s.image, 640)" :alt="s.title || `${t('work.screenshotN', { n: i + 1, title: w.title })}`" width="640" height="400" loading="lazy">
             <span v-if="s.title">{{ s.title }}</span>
           </button>
         </li>
@@ -114,13 +117,13 @@ useMotion(root, (mm, el) => {
 
     <section v-if="similar.length" class="similar" aria-labelledby="sim-title">
       <div class="sim-head">
-        <h2 id="sim-title">Progetti simili</h2>
-        <NuxtLink to="/works" class="more">Tutti i lavori <Icon name="arrow-right" /></NuxtLink>
+        <h2 id="sim-title">{{ t('work.similar') }}</h2>
+        <NuxtLink :to="localePath('/works')" class="more">{{ t('common.allWorks') }} <Icon name="arrow-right" /></NuxtLink>
       </div>
       <ul class="sim-list">
         <li v-for="p in similar" :key="p.slug">
-          <NuxtLink :to="`/works/${p.slug}`">
-            <img :src="img(p.preview!, 640)" :alt="`Schermata di ${p.title}`" width="640" height="360" loading="lazy">
+          <NuxtLink :to="localePath(`/works/${p.slug}`)">
+            <img :src="img(p.preview!, 640)" :alt="`${t('common.screenshotOf', { title: p.title })}`" width="640" height="360" loading="lazy">
             <span class="mono year">{{ p.year }}</span>
             <strong>{{ p.title }}</strong>
             <span class="mono tags">{{ p.stack.slice(0, 3).join(' · ') }}</span>
@@ -129,22 +132,22 @@ useMotion(root, (mm, el) => {
       </ul>
     </section>
 
-    <dialog v-if="shots.length" ref="box" class="box" aria-label="Schermate" @keydown="key" @click.self="box?.close()">
+    <dialog v-if="shots.length" ref="box" class="box" :aria-label="t('common.screenshots')" @keydown="key" @click.self="box?.close()">
       <figure>
-        <img :src="img(shots[at]!.image, 1920)" :alt="shots[at]!.title || `Schermata ${at + 1} di ${w.title}`">
+        <img :src="img(shots[at]!.image, 1920)" :alt="shots[at]!.title || `${t('work.screenshotN', { n: at + 1, title: w.title })}`">
         <figcaption class="mono">
           <span v-if="shots[at]!.title">{{ shots[at]!.title }}</span>
           <span class="n">{{ at + 1 }} / {{ shots.length }}</span>
         </figcaption>
       </figure>
-      <button type="button" class="nav close" aria-label="Chiudi" @click="box?.close()">
+      <button type="button" class="nav close" :aria-label="t('work.close')" @click="box?.close()">
         <Icon name="plus" :size="22" />
       </button>
       <template v-if="shots.length > 1">
-        <button type="button" class="nav prev" aria-label="Schermata precedente" @click="step(-1)">
+        <button type="button" class="nav prev" :aria-label="t('work.prev')" @click="step(-1)">
           <Icon name="arrow-right" :size="20" />
         </button>
-        <button type="button" class="nav next" aria-label="Schermata successiva" @click="step(1)">
+        <button type="button" class="nav next" :aria-label="t('work.next')" @click="step(1)">
           <Icon name="arrow-right" :size="20" />
         </button>
       </template>

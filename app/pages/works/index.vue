@@ -1,17 +1,25 @@
 <script setup lang="ts">
-import { platform, platformBase, projects, tools, type Work } from '~/data/works'
+import { localize, platform, platformBase, projects, tools, type Work } from '~/data/works'
 import { gsap, magnetic, MOTION_OK, revealLines, SplitText, useMotion } from '~/utils/motion'
 
+const { t, locale } = useI18n()
+const localePath = useLocalePath()
+
 useSeoMeta({
-  title: 'Lavori',
-  description: `${projects.length} progetti di Andrea Tombolato dal 2016 per clienti, associazioni e community, e la base comune su cui costruisco i nuovi: accessi, immagini, contenuti ed eventi.`,
-  ogTitle: 'Lavori · HeyAtom',
-  ogDescription: `${projects.length} progetti dal 2016 per clienti, associazioni e community.`,
+  title: () => t('common.works'),
+  description: () => t('works.seo.description', { n: projects.length }),
+  ogTitle: () => t('works.seo.ogTitle'),
+  ogDescription: () => t('works.seo.ogDescription', { n: projects.length }),
   ogImage: `${useRuntimeConfig().public.siteUrl}/og-works.jpg`,
-  ogImageAlt: 'HeyAtom: 9 progetti dal 2016',
+  ogImageAlt: () => t('works.seo.ogImageAlt'),
 })
 
-const kindLabel = { 'cliente': 'Cliente', 'open-source': 'Open source', 'personale': 'Personale' } as const
+const kindLabel = computed(() => ({ 'cliente': t('common.kind.client'), 'open-source': 'Open source', 'personale': t('common.kind.personal') }))
+const loc = (w: Work) => localize(w, locale.value)
+const list = computed(() => projects.map(loc))
+const services = computed(() => platform.map(loc))
+const base = computed(() => loc(platformBase))
+const toolList = computed(() => tools.map(loc))
 
 // Open the row targeted by the URL hash (links from the home page).
 const open = ref<string | null>(null)
@@ -102,25 +110,25 @@ useMotion(root, (mm, el) => {
   <div ref="root">
   <div class="wrap page">
     <header class="head hexed" data-intro>
-      <h1>Lavori</h1>
+      <h1>{{ t('common.works') }}</h1>
       <p>
-        {{ projects.length }} progetti per clienti, associazioni e community, dal 2016 a oggi.
-        Più sotto, la piattaforma su cui li costruisco e gli strumenti che ho reso pubblici.
+        {{ t('works.intro', { n: projects.length }) }}
+        {{ t('works.introMore') }}
       </p>
     </header>
 
     <div class="cols mono" data-intro aria-hidden="true">
-      <span>Anno</span><span>Progetto</span><span>Stack</span>
+      <span>{{ t('works.cols.year') }}</span><span>{{ t('works.cols.project') }}</span><span>Stack</span>
     </div>
 
     <ul class="list" data-intro @pointermove="move">
-      <li v-for="w in projects" :id="w.slug" :key="w.slug">
+      <li v-for="w in list" :id="w.slug" :key="w.slug">
         <details :open="open === w.slug" @toggle="toggle(w.slug, $event)">
           <summary @pointerenter="peek = w" @pointerleave="peek = null">
             <span class="mono year">{{ w.year }}</span>
             <span class="name">
               <strong>{{ w.title }}</strong>
-              <span class="client">{{ w.client }}<template v-if="w.current"> · <em>in corso</em></template></span>
+              <span class="client">{{ w.client }}<template v-if="w.current"> · <em>{{ t('common.ongoing') }}</em></template></span>
             </span>
             <span class="mono tags">{{ w.stack.slice(0, 3).join(' · ') }}</span>
             <span class="plus" aria-hidden="true"><Icon name="plus" :size="20" /></span>
@@ -129,7 +137,7 @@ useMotion(root, (mm, el) => {
           <div class="detail">
             <img
               :src="img(w.preview!, 960)" :srcset="srcset(w.preview!, [640, 960, 1280])" sizes="(max-width: 900px) 92vw, 44vw"
-              :alt="`Schermata di ${w.title}`" width="1280" height="720" loading="lazy"
+              :alt="`${t('common.screenshotOf', { title: w.title })}`" width="1280" height="720" loading="lazy"
             >
             <div class="info">
               <p class="kind">{{ kindLabel[w.kind] }}</p>
@@ -139,16 +147,16 @@ useMotion(root, (mm, el) => {
               </ul>
               <p class="mono stackfull">{{ w.stack.join(' · ') }}</p>
               <div class="links">
-                <NuxtLink class="btn btn--primary" :to="`/works/${w.slug}`">
-                  Scheda e schermate <Icon name="arrow-right" />
+                <NuxtLink class="btn btn--primary" :to="localePath(`/works/${w.slug}`)">
+                  {{ t('works.details') }} <Icon name="arrow-right" />
                 </NuxtLink>
                 <a v-if="w.website" class="btn btn--ghost" :href="w.website" target="_blank" rel="noopener">
-                  Visita il sito <Icon name="arrow-up-right" />
+                  {{ t('common.visitSite') }} <Icon name="arrow-up-right" />
                 </a>
                 <a v-if="w.github" class="btn btn--ghost" :href="w.github" target="_blank" rel="noopener">
-                  <Icon name="github" /> Codice
+                  <Icon name="github" /> {{ t('common.code') }}
                 </a>
-                <span v-if="!w.website && !w.github" class="private">Progetto privato, niente link pubblico.</span>
+                <span v-if="!w.website && !w.github" class="private">{{ t('common.private') }}</span>
               </div>
             </div>
           </div>
@@ -158,16 +166,15 @@ useMotion(root, (mm, el) => {
 
     <section id="piattaforma" class="platform hexed" aria-labelledby="platform-title">
       <div class="platform-head">
-        <h2 id="platform-title">La base comune</h2>
+        <h2 id="platform-title">{{ t('works.platform.title') }}</h2>
         <p>
-          Accessi, immagini, contenuti, eventi, email: servono a quasi tutti i progetti. Li ho scritti una volta, bene,
-          e li riuso per ogni cliente. Così il tempo va sul tuo progetto, non sulla trentesima riscrittura del login.
+          {{ t('works.platform.text') }}
         </p>
       </div>
 
-      <div class="core" aria-hidden="true">Il tuo progetto</div>
+      <div class="core" aria-hidden="true">{{ t('works.platform.core') }}</div>
       <ul class="services">
-        <li v-for="p in platform" :id="p.slug" :key="p.slug" class="service">
+        <li v-for="p in services" :id="p.slug" :key="p.slug" class="service">
           <span class="wire" aria-hidden="true" />
           <p class="role">{{ p.role }}</p>
           <h3>{{ p.title }}</h3>
@@ -177,49 +184,49 @@ useMotion(root, (mm, el) => {
           </ul>
           <p class="mono stackfull">{{ p.stack.join(' · ') }}</p>
           <a v-if="p.github" class="svc-link" :href="p.github" target="_blank" rel="noopener">
-            <Icon name="github" :size="16" /> Codice
+            <Icon name="github" :size="16" /> {{ t('common.code') }}
           </a>
-          <span v-else class="svc-link svc-link--off">Codice privato</span>
+          <span v-else class="svc-link svc-link--off">{{ t('works.platform.privateCode') }}</span>
         </li>
       </ul>
 
-      <div :id="platformBase.slug" class="service service--base">
+      <div :id="base.slug" class="service service--base">
         <div>
-          <p class="role">{{ platformBase.role }}</p>
-          <h3>{{ platformBase.title }}</h3>
+          <p class="role">{{ base.role }}</p>
+          <h3>{{ base.title }}</h3>
         </div>
-        <p class="line">{{ platformBase.line }}</p>
+        <p class="line">{{ base.line }}</p>
         <ul class="svc-feats">
-          <li v-for="f in platformBase.features" :key="f">{{ f }}</li>
+          <li v-for="f in base.features" :key="f">{{ f }}</li>
         </ul>
-        <span class="svc-link svc-link--off">Codice privato</span>
+        <span class="svc-link svc-link--off">{{ t('works.platform.privateCode') }}</span>
       </div>
     </section>
 
     <section class="tools" aria-labelledby="tools-title">
       <div class="tools-head">
-        <h2 id="tools-title">Strumenti e codice aperto</h2>
-        <p>Cose che ho scritto per lavorare meglio io, e che chiunque può usare.</p>
+        <h2 id="tools-title">{{ t('works.tools.title') }}</h2>
+        <p>{{ t('works.tools.text') }}</p>
       </div>
       <ul class="tool-list">
-        <li v-for="t in tools" :id="t.slug" :key="t.slug">
-          <a :href="t.github" target="_blank" rel="noopener">
-            <span class="mono year">{{ t.year }}</span>
+        <li v-for="tl in toolList" :id="tl.slug" :key="tl.slug">
+          <a :href="tl.github" target="_blank" rel="noopener">
+            <span class="mono year">{{ tl.year }}</span>
             <span class="tool-name">
-              <strong>{{ t.title }}</strong>
-              <span>{{ t.line }}</span>
+              <strong>{{ tl.title }}</strong>
+              <span>{{ tl.line }}</span>
             </span>
-            <span class="mono tags">{{ t.stack.slice(0, 3).join(' · ') }}</span>
+            <span class="mono tags">{{ tl.stack.slice(0, 3).join(' · ') }}</span>
             <span class="gh" aria-hidden="true"><Icon name="github" :size="18" /></span>
-            <span class="sr-only">(codice su GitHub)</span>
+            <span class="sr-only">{{ t('works.tools.onGithub') }}</span>
           </a>
         </li>
       </ul>
     </section>
 
     <section class="next hexed" aria-labelledby="next-title">
-      <h2 id="next-title">Il prossimo potrebbe essere il tuo.</h2>
-      <a class="btn btn--primary" href="/#contatti">Raccontami il progetto <Icon name="arrow-right" /></a>
+      <h2 id="next-title">{{ t('works.next') }}</h2>
+      <a class="btn btn--primary" :href="localePath('/#contatti')">{{ t('common.tellMe') }} <Icon name="arrow-right" /></a>
     </section>
   </div>
 
