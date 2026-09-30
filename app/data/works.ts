@@ -109,31 +109,31 @@ export const works: Work[] = [
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/d2daf068-6309-4a4e-84b2-12cdad857da3",
-        "title": "Article list page"
+        "title": "Elenco articoli"
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/ca6ac13d-7010-4b7b-9c77-707aa970b594",
-        "title": "Article detail page"
+        "title": "Dettaglio articolo"
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/3f3fa0c5-e3b6-4e13-840b-9082fb67d845",
-        "title": "Translation page for article content with editor"
+        "title": "Traduzione di un articolo nell'editor"
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/885f8de8-77d6-4d3a-b760-0aba96deffc8",
-        "title": "Categories list page"
+        "title": "Elenco categorie"
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/2c38c3af-61f0-4b07-a8d0-00e154527249",
-        "title": "Categories show page"
+        "title": "Dettaglio categoria"
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/b5dc8945-209d-4288-a8c8-9544bab92e2b",
-        "title": "Tags list page"
+        "title": "Elenco tag"
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/b7f0806f-de8b-4809-804b-da0b594a95da",
-        "title": "Banned words list page"
+        "title": "Parole vietate"
       }
     ]
   },
@@ -169,7 +169,7 @@ export const works: Work[] = [
     "current": true,
     "kind": "cliente",
     "client": "Federico Liuzzi",
-    "description": "Sito per i corsi di Tai Chi e Qi Gong di Federico Liuzzi a Sesto San Giovanni e Cinisello Balsamo, insegnante nel lignaggio di Lo Spazio del Tao. Realizzato con Nuxt e Vuetify: presenta la pratica, le sedi con orari e indicazioni, gli insegnanti e i contatti diretti via email e WhatsApp.",
+    "description": "Il sito dei corsi di Tai Chi e Qi Gong di Federico Liuzzi, insegnante nel lignaggio di Lo Spazio del Tao, a Sesto San Giovanni e Cinisello Balsamo. Presenta la pratica, le sedi con orari e indicazioni, gli insegnanti, e si scrive direttamente a Federico via email o WhatsApp.",
     "features": [
       "Italiano e inglese",
       "Sedi, orari e come arrivare",
@@ -193,12 +193,12 @@ export const works: Work[] = [
     "current": true,
     "kind": "personale",
     "client": "Progetto personale",
-    "description": "Microservizio NestJS per il monitoraggio in tempo reale dei canali Twitch. Rileva eventi live, cambio gioco e variazioni di viewership, distribuisce notifiche via webhook multi-piattaforma (Discord e HTTP) con retry automatico e log di delivery, e persiste i dati su PostgreSQL via Prisma. REST API protetta da JWT Bastion e documentata con Swagger.",
+    "description": "Tiene d'occhio i canali Twitch e avvisa quando qualcuno va in live, cambia gioco o cambiano gli spettatori: le notifiche arrivano su Discord o su qualsiasi altro sistema, con nuovi tentativi automatici se qualcosa non passa. Ogni live resta salvata, così le statistiche si leggono anche nel tempo.",
     "features": [
       "Monitoraggio live",
       "Notifiche multi-piattaforma",
-      "Analytics stream",
-      "API sicura"
+      "Statistiche delle live",
+      "API protetta"
     ],
     "stack": [
       "NestJS",
@@ -217,9 +217,9 @@ export const works: Work[] = [
     "current": true,
     "kind": "cliente",
     "client": "Kaish79",
-    "description": "Sito personale per lo streamer Kaish79 con un builder interattivo di build per Dead by Daylight. Frontend in Nuxt.js + Vuetify, backend NestJS con Prisma su PostgreSQL. Include autenticazione con ruoli, upload immagini via FileHarbor, tracciamento visualizzazioni e pannello admin per la gestione delle build in evidenza.",
+    "description": "Il sito dello streamer Kaish79, costruito attorno a un costruttore di build per Dead by Daylight. Gli utenti si registrano, creano e condividono le proprie build; Kaish mette in evidenza le migliori dal pannello di amministrazione e vede quante volte vengono aperte. Intorno, una wiki completa del gioco, tutta tradotta.",
     "features": [
-      "Build builder completo",
+      "Costruttore di build completo",
       "Sistema utenti e ruoli",
       "Upload immagini via FileHarbor",
       "Build in evidenza e metriche",
@@ -249,35 +249,35 @@ export const works: Work[] = [
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/81d71322-247e-468f-bc74-58fa2511c5c6",
-        "title": "Builds della community"
+        "title": "Build della community"
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/646c8250-fc36-4e27-a8a7-9c963664e68a",
-        "title": "Random build generator"
+        "title": "Generatore di build casuali"
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/d80d88ea-edba-4670-9be6-850d3ab85e9c",
-        "title": "Killers page"
+        "title": "Killer"
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/52d4aedb-866e-4f3d-aa36-d590f1a297b3",
-        "title": "Survivors page"
+        "title": "Sopravvissuti"
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/a0953a61-dae5-40a4-8b47-4a2a2b58c72e",
-        "title": "Perks page"
+        "title": "Perk"
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/85802c5d-c5d0-4383-be69-a2f5e2687bb7",
-        "title": "Addons page"
+        "title": "Add-on"
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/cf69ee7f-9795-4c6a-b472-a3d9bbc48564",
-        "title": "Maps page"
+        "title": "Mappe"
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/d98fdcb3-4c41-4c0f-a2b3-bd335f5be595",
-        "title": "Queue page"
+        "title": "Tempi di attesa"
       }
     ]
   },
@@ -315,7 +315,7 @@ export const works: Work[] = [
     "current": false,
     "kind": "cliente",
     "client": "Element Gaming ASD",
-    "description": "Landing page personalizzata in stile Linktree per Element Gaming, costruita con Nuxt.js e SSR abilitato. Aggrega in un'unica pagina tutti i link rilevanti del brand — social, comunicati e risorse — con personalizzazione grafica completa e caricamento rapido.",
+    "description": "Una pagina sola con tutti i link di Element Gaming: social, comunicati e risorse, nella grafica del brand. L'idea di Linktree, ma su un dominio di Element.",
     "features": [
       "Gestione dei link",
       "Profili social integrati",
@@ -348,7 +348,7 @@ export const works: Work[] = [
     "client": "Progetto open source",
     "description": "Template open source per avviare rapidamente progetti Nuxt 4 con Vuetify 3. Include TypeScript, Pinia, i18n (it/en), SEO ottimizzato con @nuxtjs/seo, tema chiaro/scuro, app bar responsive e un'architettura modulare pronta alla personalizzazione.",
     "features": [
-      "Stack moderno: Nuxt 4 + Vuetify 3",
+      "Nuxt 4 e Vuetify 3",
       "Internazionalizzazione",
       "UI pre-configurata",
       "SEO e bot",
@@ -369,7 +369,7 @@ export const works: Work[] = [
     "current": true,
     "kind": "cliente",
     "client": "Studio Arte Puma",
-    "description": "Sito web personale per l'artista Emanuele Puma, realizzato con Nuxt.js e Vuetify. Vetrina pulita e performante per opere, progetti e collaborazioni, con galleria immagini ottimizzata e design su misura per l'identità visiva del brand artistico.",
+    "description": "Il sito dell'artista Emanuele Puma: opere, progetti e collaborazioni, con una galleria di immagini ottimizzate che si sfoglia bene anche dal telefono.",
     "features": [],
     "stack": [
       "Nuxt",
@@ -450,12 +450,12 @@ export const works: Work[] = [
     "current": false,
     "kind": "cliente",
     "client": "Element Gaming ASD",
-    "description": "Piattaforma web per il network e-sport Element Gaming, sviluppata con Nuxt.js e Vuetify. Integra le API di Twitch per il monitoraggio in tempo reale degli streamer del network, con dashboard per team, eventi, news e un marketplace interno per gli streamer.",
+    "description": "La piattaforma del network e-sport Element Gaming: team, giocatori, eventi e news, più lo stato live degli streamer letto dalle API di Twitch. Gli streamer hanno una loro dashboard e un marketplace interno.",
     "features": [
       "Monitoraggio in tempo reale",
       "Integrazione Twitch API",
       "Dashboard team e streamer",
-      "Backend Node.js performante"
+      "Backend Node.js"
     ],
     "stack": [
       "Nuxt",
@@ -481,7 +481,7 @@ export const works: Work[] = [
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/018add78-73a9-47f7-a04a-3f4126e61c6d",
-        "title": "Elenco streamers"
+        "title": "Elenco streamer"
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/2f39fb43-9613-4c27-959b-93c14dd7769b",
@@ -532,12 +532,12 @@ export const works: Work[] = [
     "current": false,
     "kind": "cliente",
     "client": "Protezione Civile di Settimo Milanese",
-    "description": "Sito web istituzionale per la Protezione Civile di Settimo Milanese, sviluppato con Nuxt.js e Vuetify. Vetrina digitale delle attività, del personale e delle attrezzature dell'associazione, con una sezione aggiornamenti di emergenza in tempo reale tramite integrazione backend NestJS.",
+    "description": "Il sito della Protezione Civile di Settimo Milanese: attività, volontari, sede e mezzi del gruppo, più una sezione con gli aggiornamenti di emergenza in tempo reale collegata ai sistemi di allerta.",
     "features": [
       "Aggiornamenti di emergenza in tempo reale",
       "Attività ed eventi dell'associazione",
       "Integrazione sistemi di allerta",
-      "Interfaccia accessibile e mobile-first"
+      "Pensato prima per il telefono"
     ],
     "stack": [
       "Nuxt",
@@ -563,7 +563,7 @@ export const works: Work[] = [
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/36c10583-fce9-447b-9017-4d869d946079",
-        "title": "I Volontari"
+        "title": "I volontari"
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/81f5a5ef-6320-4fe1-a3f1-641a061c7563",
@@ -578,7 +578,7 @@ export const works: Work[] = [
     "current": false,
     "kind": "cliente",
     "client": "Personal trainer",
-    "description": "Applicazione web per la gestione remota dei clienti di un personal trainer, con backend Node.js e frontend HTML/CSS/JS. Include profili cliente, pianificazione sessioni, piani di esercizi personalizzati, monitoraggio progressi e chat integrata.",
+    "description": "Web app per un personal trainer che segue i clienti a distanza: profili, calendario delle sessioni, schede di esercizi su misura, progressi e chat.",
     "features": [
       "Gestione clienti",
       "Pianificazione sessioni",
@@ -601,7 +601,7 @@ export const works: Work[] = [
     "current": false,
     "kind": "cliente",
     "client": "ALIR Community",
-    "description": "Portale web per la consultazione in tempo reale dei dati di gioco personali su Arma 3: veicoli posseduti, armi, ruoli, incarichi e saldo bancario in-game. Interfaccia JavaScript che legge i dati esposti dall'API del server dedicato della community ALIR.",
+    "description": "Portale per i giocatori della community ALIR su Arma 3: ognuno consulta in tempo reale i propri veicoli, armi, ruoli, incarichi e il saldo in gioco, letti dall'API del server dedicato.",
     "features": [
       "Dashboard dati personali",
       "Monitoraggio veicoli",
@@ -622,15 +622,15 @@ export const works: Work[] = [
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/d461d7e8-4620-44ce-8bb6-c84346af8f96",
-        "title": "User information tab"
+        "title": "Scheda del giocatore"
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/04f8e603-874e-4951-b0ce-0942c9578652",
-        "title": "User vehicle tab"
+        "title": "Veicoli del giocatore"
       },
       {
         "image": "https://fileharbor.heyatom.dev/v2/images/46397a26-b684-4e5e-9b2b-ac9899937e03",
-        "title": "Faction player list"
+        "title": "Giocatori per fazione"
       }
     ]
   },
@@ -641,7 +641,7 @@ export const works: Work[] = [
     "current": false,
     "kind": "cliente",
     "client": "ALIR Community",
-    "description": "Sito web e forum per la community ALIR di Arma 3, realizzato con HTML, CSS, JavaScript e PHP. Piattaforma di discussione e supporto dedicata al server Altis Life dell'associazione, con gestione degli utenti e dei contenuti.",
+    "description": "Sito e forum della community ALIR, per il server Altis Life di Arma 3: discussioni, supporto ai giocatori e gestione di utenti e contenuti.",
     "features": [],
     "stack": [
       "HTML5",

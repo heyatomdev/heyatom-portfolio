@@ -1,5 +1,5 @@
 <template>
-  <footer class="ftr">
+  <footer class="ftr hexed">
     <div class="wrap row">
       <p>
         <img src="/favicon.svg" alt="" width="22" height="22">
@@ -8,6 +8,7 @@
       <ul>
         <li><a href="https://github.com/andreacw5" rel="me noopener" target="_blank">GitHub</a></li>
         <li><a href="https://www.linkedin.com/in/atombolato" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><NuxtLink to="/uses">Uses</NuxtLink></li>
         <li><a href="mailto:hey@heyatom.dev">hey@heyatom.dev</a></li>
       </ul>
       <p class="tag">Code meets personality · {{ new Date().getFullYear() }}</p>
@@ -21,6 +22,9 @@
   padding: 2.25rem 0 2.75rem;
   color: var(--ink-3);
   font-size: 0.92rem;
+  overflow: hidden;
+  --hex-inset: 0 0 0 60%;
+  --hex-o: 0.09;
 }
 .row {
   display: flex;
@@ -33,5 +37,7 @@
 ul { display: flex; gap: 1.4rem; list-style: none; margin: 0; padding: 0; }
 a { color: var(--ink-2); text-decoration: none; }
 a:hover { color: var(--green-light); }
+.row p:first-child img { transition: transform 0.5s var(--ease-out); transform-origin: 50% 85%; }
+.row p:first-child:hover img { transform: rotate(-12deg); }
 .tag { font-size: 0.85rem; }
 </style>

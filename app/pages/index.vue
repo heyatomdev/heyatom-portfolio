@@ -14,7 +14,7 @@ const bySlug = (s: string) => works.find(w => w.slug === s)!
 const deck = ['element', 'sgweb', 'kaish-dbd'].map(bySlug)
 
 const picks = [
-  { slug: 'kaish-dbd', line: 'Community e build builder per Dead by Daylight: utenti, ruoli, wiki e traduzione completa.' },
+  { slug: 'kaish-dbd', line: 'Community e costruttore di build per Dead by Daylight: utenti, ruoli, wiki e traduzione completa.' },
   { slug: 'sgweb', line: 'Il sito dei corsi di Tai Chi e Qi Gong: sedi, orari e contatto diretto, in italiano e inglese.' },
   { slug: 'element', line: 'Il sito del network e-sport, con lo stato live degli streamer dalle API di Twitch.' },
 ].map(p => ({ ...bySlug(p.slug), line: p.line }))
@@ -22,7 +22,7 @@ const picks = [
 const offers = [
   {
     title: 'Un sito per la tua associazione o attività',
-    text: 'Chiaro, veloce, facile da aggiornare. Si legge bene dal telefono e ti trovano su Google.',
+    text: 'Chiaro, veloce, facile da aggiornare. Si legge bene dal telefono ed è pronto per Google.',
     examples: ['prociv', 'puma-arts'],
   },
   {
@@ -31,9 +31,9 @@ const offers = [
     examples: ['kaish-dbd', 'element'],
   },
   {
-    title: 'API e integrazioni',
-    text: 'Collegare sistemi che non si parlano, automatizzare, e tenere tutto acceso in produzione.',
-    examples: ['alertconnector', 'fileharbor'],
+    title: 'Collegare i tuoi strumenti',
+    text: 'Far parlare tra loro sistemi che non si parlano, automatizzare i passaggi ripetitivi e farli funzionare senza intoppi.',
+    examples: ['beacon', 'alertconnector'],
   },
 ].map(o => ({ ...o, examples: o.examples.map(bySlug) }))
 
@@ -42,13 +42,13 @@ const path = [
     when: '2016 → oggi',
     role: 'Full-stack developer',
     org: 'Medas Solutions',
-    text: 'Software in ambito sanitario con Java, Node.js e Vue: dossier online per dare ai pazienti accesso a referti e documentazione clinica. Sistemi dove continuità e affidabilità non sono negoziabili.',
+    text: 'Software in ambito sanitario con Java, Node.js e Vue: dossier online per dare ai pazienti accesso a referti e documentazione clinica.',
   },
   {
     when: '2020 → oggi',
     role: 'Consiglio direttivo',
     org: 'Element Gaming',
-    text: 'Gestione di una community gaming no-profit: coordinamento del team, decisioni organizzative, nuove iniziative.',
+    text: 'Gestione di una community gaming no profit: coordinamento del team, decisioni organizzative, nuove iniziative.',
   },
   {
     when: '2019 → 2020',
@@ -65,9 +65,10 @@ const path = [
 ]
 
 const stack = [
-  { group: 'Frontend', items: ['Vue', 'Nuxt', 'TypeScript', 'Vuetify', 'Sass'] },
-  { group: 'Backend', items: ['Node.js', 'NestJS', 'Java', 'Grails', 'Prisma', 'PostgreSQL', 'MySQL'] },
-  { group: 'Infrastruttura', items: ['Docker', 'NGINX', 'Git', 'Swagger'] },
+  { group: 'Frontend', items: ['Vue', 'Nuxt', 'TypeScript', 'Vuetify', 'Pinia', 'GSAP'] },
+  { group: 'Backend', items: ['Node.js', 'NestJS', 'Prisma', 'PostgreSQL', 'Java'] },
+  { group: 'Infrastruttura', items: ['Docker', 'NGINX', 'GitHub Actions', 'Prometheus'] },
+  { group: 'Integrazioni', items: ['Stripe', 'Brevo', 'Twitch', 'Discord', 'OAuth'] },
 ]
 
 const travels = [
@@ -159,9 +160,7 @@ useMotion(root, (mm, el) => {
       scrollTrigger: { trigger: q('.stack')[0], start: 'top 80%' },
     })
 
-    // Close: rings turn only while on screen; the orb leans toward the pointer.
-    const rings = gsap.to(q('.orb-ring--a, .orb-ring--b'), { rotation: i => (i ? -360 : 360), duration: i => (i ? 26 : 16), ease: 'none', repeat: -1, paused: true })
-    ScrollTrigger.create({ trigger: q('.close')[0], onToggle: s => (s.isActive ? rings.play() : rings.pause()) })
+    // Close: the bubble leans toward the pointer.
     gsap.from(q('.orb'), { scale: 0.7, autoAlpha: 0, rotation: -30, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: q('.close')[0], start: 'top 75%' } })
     gsap.from(q('.mail, .close .actions > *'), { y: 24, autoAlpha: 0, stagger: 0.08, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: q('.mail')[0], start: 'top 92%' } })
 
@@ -220,7 +219,7 @@ function untilt(e: PointerEvent) {
         Costruisco <span class="nw">siti e web</span> app <span class="nw">su misura.</span>
       </h1>
       <p class="lead">
-        Per associazioni, professionisti e piccole realtà. Sviluppo full-stack dal 2016, dalla prima riga al deploy.
+        Per associazioni, professionisti e piccole realtà. Sviluppo full-stack dal 2016, dalla prima riga alla messa online.
         E parli sempre con me, non con un’agenzia.
       </p>
       <div class="actions">
@@ -368,8 +367,8 @@ function untilt(e: PointerEvent) {
       </div>
       <div class="close-copy">
         <h2 id="close-title">Hai un progetto in mente? Raccontamelo.</h2>
-        <p>Seguo soprattutto no profit e piccole realtà del gaming e del benessere, come palestre, dojo e massaggiatori. Due righe su cosa ti serve bastano: rispondo io, a tutti i messaggi, e se non sono la persona giusta te lo dico.</p>
-        <p class="aside">Non cerco lavoro attivamente, ma se hai una proposta interessante scrivimi pure.</p>
+        <p>Lavoro con associazioni, professionisti e piccole realtà. Due righe su cosa ti serve bastano: rispondo a tutti, e rispondo io. Se non sono la persona giusta, te lo dico.</p>
+        <p class="aside">Sei un recruiter? Non cerco un impiego, ma una proposta interessante la leggo volentieri.</p>
         <a class="mail" href="mailto:hey@heyatom.dev">hey@heyatom.dev</a>
         <div class="actions">
           <a class="btn btn--primary" href="mailto:hey@heyatom.dev?subject=Ciao%20Andrea"><Icon name="mail" /> Scrivimi una mail</a>
@@ -436,7 +435,7 @@ function untilt(e: PointerEvent) {
   gap: 0.55rem;
   margin-bottom: 1.6rem;
   padding: 0.4rem 0.9rem 0.4rem 0.75rem;
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   font-size: 0.88rem;
   font-weight: 600;
   color: var(--green-light);
@@ -465,7 +464,7 @@ function untilt(e: PointerEvent) {
   isolation: isolate;
   color: inherit;
   text-decoration: none;
-  border-radius: 20px;
+  border-radius: var(--r-lg);
 }
 .stage::before {
   content: '';
@@ -482,7 +481,7 @@ function untilt(e: PointerEvent) {
   position: absolute;
   margin: 0;
   width: 78%;
-  border-radius: 14px;
+  border-radius: var(--r-sm);
   overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--hair-strong);
@@ -528,7 +527,7 @@ function untilt(e: PointerEvent) {
   aspect-ratio: 1;
   display: grid;
   place-items: center;
-  border-radius: 50%;
+  border-radius: 50% 50% 50% 10%;
   background: radial-gradient(circle at 35% 28%, rgba(0, 168, 107, 0.28), var(--surface) 65%);
   border: 1px solid var(--hair-strong);
   box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.7), inset 0 2px 24px rgba(0, 168, 107, 0.18);
@@ -540,7 +539,7 @@ function untilt(e: PointerEvent) {
 .medal-ring {
   position: absolute;
   inset: -9%;
-  border-radius: 50%;
+  border-radius: inherit;
   border: 1px solid rgba(0, 168, 107, 0.2);
   border-top-color: var(--green-light);
 }
@@ -591,7 +590,7 @@ function untilt(e: PointerEvent) {
   align-items: center;
   color: inherit;
   text-decoration: none;
-  border-radius: 18px;
+  border-radius: var(--r-lg);
   background: var(--surface);
   border: 1px solid var(--hair);
   overflow: hidden;
@@ -701,7 +700,7 @@ function untilt(e: PointerEvent) {
   position: sticky;
   top: 6.5rem;
   padding: 1.6rem;
-  border-radius: 18px;
+  border-radius: var(--r-lg);
   background: var(--surface);
   border: 1px solid var(--hair);
 }
@@ -711,7 +710,7 @@ function untilt(e: PointerEvent) {
 .stack dd { margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .chip {
   padding: 0.28rem 0.6rem;
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   font-size: 0.78rem;
   color: var(--ink);
   background: var(--surface-2);
@@ -750,7 +749,7 @@ function untilt(e: PointerEvent) {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  border-radius: 14px;
+  border-radius: var(--r-sm);
   filter: saturate(0.85);
   transition: filter 0.5s ease;
 }
@@ -795,7 +794,7 @@ function untilt(e: PointerEvent) {
   margin-inline: auto;
   display: grid;
   place-items: center;
-  border-radius: 50%;
+  border-radius: 50% 50% 10% 50%;
   background:
     radial-gradient(circle at 35% 28%, rgba(0, 168, 107, 0.2), rgba(18, 28, 25, 0.7) 60%),
     linear-gradient(160deg, var(--surface), var(--surface-3));
@@ -804,7 +803,7 @@ function untilt(e: PointerEvent) {
 }
 .orb img { width: 42%; filter: drop-shadow(0 6px 22px rgba(0, 168, 107, 0.55)); transform-origin: 52% 88%; }
 .orb:hover img { animation: wave 1.3s ease-in-out; }
-.orb-ring { position: absolute; border-radius: 50%; pointer-events: none; }
+.orb-ring { position: absolute; border-radius: inherit; pointer-events: none; }
 .orb-ring--a { inset: -8%; border: 1px solid rgba(0, 168, 107, 0.2); border-top-color: var(--green-light); }
 .orb-ring--b { inset: 5%; border: 1px dashed rgba(0, 168, 107, 0.16); border-bottom-color: rgba(0, 168, 107, 0.5); }
 

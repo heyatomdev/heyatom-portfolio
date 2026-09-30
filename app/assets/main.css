@@ -10,6 +10,9 @@
   --ink-2: #d1d5d2;
   --ink-3: #a1a6a2;
   --on-green: #04140d;
+  /* Tight corners, echoing the small rounding on hex.svg cells. */
+  --r-sm: 10px;
+  --r-lg: 14px;
   --hair: rgba(0, 168, 107, 0.16);
   --hair-strong: rgba(0, 168, 107, 0.38);
 
@@ -127,13 +130,27 @@ img { display: block; max-width: 100%; height: auto; }
   white-space: nowrap;
 }
 
+/* Faded hex pattern behind a block. Tune placement per use with the --hex-* vars. */
+.hexed { position: relative; isolation: isolate; }
+.hexed::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: var(--hex-inset, -90% -10% -40% 45%);
+  background: url('/assets/hex.svg') var(--hex-pos, right center) / var(--hex-size, cover) no-repeat;
+  opacity: var(--hex-o, 0.07);
+  /* Radial fade centred inside the box: dissolves on every side, no hard cut. */
+  mask-image: radial-gradient(ellipse 50% 50% at var(--hex-at, 60% 50%), #000 20%, transparent 100%);
+  pointer-events: none;
+}
+
 /* ── Buttons ───────────────────────────────────── */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
   padding: 0.95rem 1.6rem;
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   font: 600 1rem/1 var(--sans);
   text-decoration: none;
   border: 1px solid transparent;

@@ -61,7 +61,7 @@ useMotion(root, (mm, el) => {
   <div ref="root" class="wrap page">
     <NuxtLink to="/works" class="back mono">← Tutti i lavori</NuxtLink>
 
-    <header class="head" data-intro>
+    <header class="head hexed" data-intro>
       <p class="meta mono">
         {{ w.year }} · {{ kindLabel[w.kind] }}<template v-if="w.current"> · <em>in corso</em></template>
       </p>
@@ -176,7 +176,7 @@ useMotion(root, (mm, el) => {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
-  border-radius: 18px;
+  border-radius: var(--r-lg);
   border: 1px solid var(--hair-strong);
   background: var(--surface-2);
   box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.9);
@@ -193,7 +193,7 @@ useMotion(root, (mm, el) => {
 .feats, .stack { list-style: none; margin: 1.5rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .feats li, .stack li {
   padding: 0.3rem 0.75rem;
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   font-size: 0.85rem;
   color: var(--ink);
   background: var(--surface-2);
@@ -202,7 +202,7 @@ useMotion(root, (mm, el) => {
 aside {
   align-self: start;
   padding: 1.4rem;
-  border-radius: 18px;
+  border-radius: var(--r-lg);
   background: var(--surface);
   border: 1px solid var(--hair);
 }
@@ -226,14 +226,14 @@ aside {
   gap: 0.5rem;
   width: 100%;
   cursor: zoom-in;
-  border-radius: 14px;
+  border-radius: var(--r-sm);
 }
 .shots img {
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
   object-position: top;
-  border-radius: 14px;
+  border-radius: var(--r-sm);
   border: 1px solid var(--hair);
   background: var(--surface-2);
   transition: translate 0.4s var(--ease-out), border-color 0.2s ease, box-shadow 0.4s var(--ease-out);
@@ -257,7 +257,7 @@ aside {
   display: grid;
   gap: 0.3rem;
   padding: 0.75rem 0.75rem 1.1rem;
-  border-radius: 18px;
+  border-radius: var(--r-lg);
   background: var(--surface);
   border: 1px solid var(--hair);
   color: inherit;
@@ -265,7 +265,7 @@ aside {
   transition: border-color 0.2s ease, translate 0.4s var(--ease-out);
 }
 .sim-list a:hover { border-color: var(--hair-strong); translate: 0 -4px; }
-.sim-list img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; margin-bottom: 0.6rem; }
+.sim-list img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--r-sm); margin-bottom: 0.6rem; }
 .sim-list .year { font-size: 0.8rem; color: var(--green-light); }
 .sim-list strong { font-size: 1.25rem; letter-spacing: -0.02em; }
 .sim-list .tags { font-size: 0.78rem; color: var(--ink-3); }
@@ -288,7 +288,7 @@ aside {
   max-width: min(100%, 1600px);
   max-height: calc(100dvh - 8rem);
   object-fit: contain;
-  border-radius: 12px;
+  border-radius: var(--r-sm);
   pointer-events: auto;
 }
 .box figcaption { display: flex; gap: 1rem; font-size: 0.85rem; color: var(--ink-2); }
