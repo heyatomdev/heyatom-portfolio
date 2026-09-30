@@ -1,0 +1,38 @@
+<!doctype html><meta charset="utf-8">
+<!-- One template for every /works/<slug> page: render.sh fills it through the query string. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Manrope:wght@500;800&display=block"><style>
+*{margin:0;box-sizing:border-box}
+html,body{width:1200px;height:630px;overflow:hidden;background:#1e201e;color:#eef1ef;font-family:Manrope}
+.c{position:absolute;inset:0;padding:72px 80px;display:flex;flex-direction:column;width:600px}
+.brand{display:flex;align-items:center;gap:18px;font-weight:800;font-size:30px;letter-spacing:-.02em}
+.brand img{width:56px;height:56px}
+.k{margin-top:auto;font-family:"JetBrains Mono";font-size:22px;color:#00a86b}
+h1{margin-top:14px;font-weight:800;font-size:64px;line-height:1.02;letter-spacing:-.04em;text-wrap:balance}
+p:empty{display:none}
+p{margin-top:18px;font-size:26px;font-weight:500;color:#d1d5d2;line-height:1.35}
+.foot{margin-top:36px;font-family:"JetBrains Mono";font-size:20px;color:#00a86b;border-top:1px solid rgba(0,168,107,.38);padding-top:22px}
+.shot{position:absolute;left:600px;top:95px;width:720px;aspect-ratio:16/9;object-fit:cover;object-position:top;border-radius:16px;
+ border:1px solid rgba(0,168,107,.38);box-shadow:0 40px 80px rgba(0,0,0,.6);transform:perspective(1400px) rotateY(-14deg) rotate(2deg)}
+.glow{position:absolute;left:560px;top:60px;width:700px;height:520px;background:radial-gradient(closest-side,rgba(0,168,107,.22),transparent)}
+</style>
+<div class="glow"></div>
+<img class="shot" id="shot" alt="">
+<div class="c">
+<div class="brand"><img src="../public/favicon.svg">HeyAtom</div>
+<div class="k" id="k"></div>
+<h1 id="t"></h1>
+<p id="cl"></p>
+<div class="foot" id="u"></div>
+</div>
+<script>
+const q = new URLSearchParams(location.search)
+document.getElementById('shot').src = q.get('img')
+document.getElementById('k').textContent = q.get('meta')
+const title = q.get('title'), client = q.get('client')
+const t = document.getElementById('t')
+t.textContent = title
+if (title.length > 20) t.style.fontSize = '52px'
+// "ALIR Community" by "ALIR Community": the client line would only repeat the title.
+if (client.split(' ')[0] !== title.split(' ')[0]) document.getElementById('cl').textContent = client
+document.getElementById('u').textContent = `heyatom.dev/works/${q.get('slug')}`
+</script>

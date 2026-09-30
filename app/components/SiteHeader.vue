@@ -47,7 +47,7 @@ const anchors = [{ to: '/#percorso', label: 'Percorso' }, { to: '/#contatti', la
       </NuxtLink>
 
       <ul class="links">
-        <li><NuxtLink to="/works" :aria-current="route.path === '/works' ? 'page' : undefined">Lavori</NuxtLink></li>
+        <li><NuxtLink to="/works" :aria-current="route.path.startsWith('/works') ? 'page' : undefined">Lavori</NuxtLink></li>
         <li v-for="l in anchors" :key="l.to">
           <NuxtLink v-slot="{ href, navigate }" :to="l.to" custom>
             <a :href="href" @click="navigate">{{ l.label }}</a>

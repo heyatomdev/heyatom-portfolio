@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     download: true,
   },
   runtimeConfig: {
-    public: { freelanceAvailable: 'true', siteUrl: 'https://heyatom.dev' },
+    public: { freelanceAvailable: 'false', siteUrl: 'https://heyatom.dev' },
   },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
