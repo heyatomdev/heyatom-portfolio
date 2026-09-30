@@ -1,13 +1,16 @@
 export default defineNuxtConfig({
   compatibilityDate: '2026-09-01',
   devtools: { enabled: false },
-  modules: ['@nuxtjs/google-fonts', '@nuxtjs/i18n'],
+  modules: ['@nuxtjs/google-fonts', '@nuxtjs/i18n', '@nuxtjs/sitemap'],
   css: ['~/assets/main.css'],
   googleFonts: {
     families: { Manrope: [400, 500, 600, 700, 800], 'JetBrains Mono': [400, 600] },
     display: 'swap',
     download: true,
   },
+  site: { url: 'https://heyatom.dev' },
+  // Static pages are found from the routes; work pages come from the server list.
+  sitemap: { sources: ['/api/__sitemap__/urls'] },
   i18n: {
     locales: [
       { code: 'it', language: 'it-IT', name: 'Italiano', file: 'it.json' },

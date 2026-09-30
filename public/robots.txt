@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://heyatom.dev/sitemap.xml
+Sitemap: https://heyatom.dev/sitemap_index.xml
