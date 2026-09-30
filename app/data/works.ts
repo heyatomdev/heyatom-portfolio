@@ -184,8 +184,29 @@ export const works: Work[] = [
       "TypeScript"
     ],
     "website": "https://taichisesto.it/",
-    // ponytail: file locale, ?width= ignorato (sempre 1280px, 29 KB). Spostare su FileHarbor per il resize.
-    "preview": "/works/sgweb.webp"
+    "preview": "/shots/sgweb/1.webp",
+    "images": [
+      {
+        "image": "/shots/sgweb/1.webp",
+        "title": "Homepage"
+      },
+      {
+        "image": "/shots/sgweb/2.webp",
+        "title": "La pratica"
+      },
+      {
+        "image": "/shots/sgweb/3.webp",
+        "title": "Sedi"
+      },
+      {
+        "image": "/shots/sgweb/4.webp",
+        "title": "Insegnanti"
+      },
+      {
+        "image": "/shots/sgweb/5.webp",
+        "title": "Corsi e orari"
+      }
+    ]
   },
   {
     "slug": "beacon",
@@ -237,48 +258,60 @@ export const works: Work[] = [
       "TypeScript",
       "PostgreSQL"
     ],
-    "website": "https://kaish-dbd.it",
-    "preview": "https://fileharbor.heyatom.dev/v2/images/293f4c8b-7fa8-472f-92b3-027f5011cc99",
+    "website": "https://dbd-builds.it",
+    "preview": "/shots/kaish-dbd/1.webp",
     "images": [
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/293f4c8b-7fa8-472f-92b3-027f5011cc99",
+        "image": "/shots/kaish-dbd/1.webp",
         "title": "Homepage"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/9de997e4-8b63-4f2a-947a-cfb158e21ccc",
+        "image": "/shots/kaish-dbd/2.webp",
         "title": "Kaish Top Builds"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/81d71322-247e-468f-bc74-58fa2511c5c6",
+        "image": "/shots/kaish-dbd/3.webp",
         "title": "Build della community"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/646c8250-fc36-4e27-a8a7-9c963664e68a",
+        "image": "/shots/kaish-dbd/4.webp",
         "title": "Generatore di build casuali"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/d80d88ea-edba-4670-9be6-850d3ab85e9c",
+        "image": "/shots/kaish-dbd/5.webp",
         "title": "Killer"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/52d4aedb-866e-4f3d-aa36-d590f1a297b3",
+        "image": "/shots/kaish-dbd/6.webp",
         "title": "Sopravvissuti"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/a0953a61-dae5-40a4-8b47-4a2a2b58c72e",
+        "image": "/shots/kaish-dbd/7.webp",
         "title": "Perk"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/85802c5d-c5d0-4383-be69-a2f5e2687bb7",
+        "image": "/shots/kaish-dbd/8.webp",
         "title": "Add-on"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/cf69ee7f-9795-4c6a-b472-a3d9bbc48564",
+        "image": "/shots/kaish-dbd/9.webp",
         "title": "Mappe"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/d98fdcb3-4c41-4c0f-a2b3-bd335f5be595",
+        "image": "/shots/kaish-dbd/10.webp",
         "title": "Tempi di attesa"
+      },
+      {
+        "image": "/shots/kaish-dbd/11.webp",
+        "title": "Articoli"
+      },
+      {
+        "image": "/shots/kaish-dbd/12.webp",
+        "title": "Wiki"
+      },
+      {
+        "image": "/shots/kaish-dbd/13.webp",
+        "title": "Profilo utente"
       }
     ]
   },
@@ -330,10 +363,10 @@ export const works: Work[] = [
       "Sass"
     ],
     "website": "https://links.element-gaming.eu",
-    "preview": "https://fileharbor.heyatom.dev/v2/images/7acfe6a7-6da0-4782-9b40-1a5952496855",
+    "preview": "/shots/emt-links/1.webp",
     "images": [
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/7acfe6a7-6da0-4782-9b40-1a5952496855",
+        "image": "/shots/emt-links/1.webp",
         "title": "Homepage"
       }
     ]
@@ -380,14 +413,14 @@ export const works: Work[] = [
     ],
     "website": "https://studioartepuma.it/",
     "github": "https://github.com/andreacw5/puma-arts",
-    "preview": "https://fileharbor.heyatom.dev/v2/images/2f51a644-d100-477e-bed0-8bdb0b1e7d77",
+    "preview": "/shots/puma-arts/1.webp",
     "images": [
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/2f51a644-d100-477e-bed0-8bdb0b1e7d77",
+        "image": "/shots/puma-arts/1.webp",
         "title": "Homepage"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/30e622a6-b93b-4e93-84f1-936d03b6da22",
+        "image": "/shots/puma-arts/2.webp",
         "title": "Su di me"
       }
     ]
@@ -466,54 +499,54 @@ export const works: Work[] = [
       "Sass"
     ],
     "website": "https://element-gaming.eu",
-    "preview": "https://fileharbor.heyatom.dev/v2/images/6cccdde4-29b6-4cae-80be-f943b0105e10",
+    "preview": "/shots/element/1.webp",
     "images": [
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/6cccdde4-29b6-4cae-80be-f943b0105e10",
+        "image": "/shots/element/1.webp",
         "title": "Homepage"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/60b51919-9935-418d-9e72-5781a04d7386",
+        "image": "/shots/element/2.webp",
         "title": "Elenco giocatori"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/1c95f8ff-4f6a-4c2e-9c73-8f5029f55b43",
+        "image": "/shots/element/3.webp",
         "title": "Dettaglio giocatori"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/018add78-73a9-47f7-a04a-3f4126e61c6d",
+        "image": "/shots/element/4.webp",
         "title": "Elenco streamer"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/2f39fb43-9613-4c27-959b-93c14dd7769b",
+        "image": "/shots/element/5.webp",
         "title": "Dettaglio streamer"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/f458c4e0-3615-45e3-a053-dd039ae1f014",
+        "image": "/shots/element/6.webp",
         "title": "Elenco delle sezioni"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/787d418f-960e-4d96-9e35-578a1787444c",
+        "image": "/shots/element/7.webp",
         "title": "Elenco dei team"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/c7a9c66c-b0c0-4f1a-af4d-3deab63c03e3",
+        "image": "/shots/element/8.webp",
         "title": "Dettaglio del team"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/234ddc03-d6e6-4d02-a6b3-4b19b7655dbc",
+        "image": "/shots/element/9.webp",
         "title": "Elenco degli eventi"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/31bf545f-14d4-41c6-8b66-6f8ca19aaf89",
+        "image": "/shots/element/10.webp",
         "title": "Dettaglio evento"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/4a26d3d6-ed79-45d6-b228-e2a220f223ca",
+        "image": "/shots/element/11.webp",
         "title": "Elenco delle news"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/d7a7c9e8-0a46-45cc-a424-e89183d24d4d",
+        "image": "/shots/element/12.webp",
         "title": "Dettaglio news"
       },
       {

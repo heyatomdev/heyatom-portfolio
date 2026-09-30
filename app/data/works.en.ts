@@ -40,6 +40,7 @@ export const worksEn: Record<string, WorkEn> = {
   'sgweb': {
     description: 'The site for Federico Liuzzi’s Tai Chi and Qi Gong classes in Sesto San Giovanni and Cinisello Balsamo; he teaches in the Lo Spazio del Tao lineage. It introduces the practice, the venues with schedules and directions, the teachers, and lets you write to Federico directly by email or WhatsApp.',
     features: ['Italian and English', 'Venues, schedules and directions', 'Map loaded only on consent', 'Direct contact via WhatsApp', 'SEO and share previews'],
+    images: ['Homepage', 'The practice', 'Venues', 'Teachers', 'Classes and schedule'],
   },
   'beacon': {
     client: personal,
@@ -49,7 +50,7 @@ export const worksEn: Record<string, WorkEn> = {
   'kaish-dbd': {
     description: 'The site of streamer Kaish79, built around a build creator for Dead by Daylight. Users sign up, create and share their own builds; Kaish features the best ones from the admin panel and sees how often they get opened. Around it, a complete game wiki, fully translated.',
     features: ['Full build creator', 'Users and roles', 'Image upload via FileHarbor', 'Featured builds and metrics', 'Complete game wiki', 'Full translation', 'Lobby wait times', 'Maps with callouts and realms'],
-    images: ['Homepage', 'Kaish Top Builds', 'Community builds', 'Random build generator', 'Killers', 'Survivors', 'Perks', 'Add-ons', 'Maps', 'Wait times'],
+    images: ['Homepage', 'Kaish Top Builds', 'Community builds', 'Random build generator', 'Killers', 'Survivors', 'Perks', 'Add-ons', 'Maps', 'Wait times', 'Articles', 'Wiki', 'User profile'],
   },
   'fileharbor': {
     role: 'Images and video',
