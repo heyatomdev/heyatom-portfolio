@@ -21,6 +21,7 @@ const switchLocalePath = useSwitchLocalePath()
         <li><a href="https://github.com/andreacw5" rel="me noopener" target="_blank">GitHub</a></li>
         <li><a href="https://www.linkedin.com/in/atombolato" rel="me noopener" target="_blank">LinkedIn</a></li>
         <li><NuxtLink :to="localePath('/uses')">Uses</NuxtLink></li>
+        <li><a href="https://status.heyatom.dev/en" rel="noopener" target="_blank">Status</a></li>
         <li><a href="mailto:hey@heyatom.dev">hey@heyatom.dev</a></li>
       </ul>
       <p class="tag">Code meets personality · {{ new Date().getFullYear() }}</p>
