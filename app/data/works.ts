@@ -15,6 +15,8 @@ export interface Work {
   github?: string
   /** Screenshot; every entry in `projects` has one. */
   preview?: string
+  /** Screenshot gallery for the detail page. */
+  images?: { image: string; title: string }[]
   /**
    * platform: the shared services every client project is built on.
    * tool: developer tooling, listed apart as a compact row.
@@ -99,7 +101,41 @@ export const works: Work[] = [
       "PostgreSQL"
     ],
     "github": "https://github.com/heyatomdev/articuno",
-    "preview": "https://fileharbor.heyatom.dev/v2/images/336db078-c00b-4135-85b0-dc93d6f06adb"
+    "preview": "https://fileharbor.heyatom.dev/v2/images/336db078-c00b-4135-85b0-dc93d6f06adb",
+    "images": [
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/336db078-c00b-4135-85b0-dc93d6f06adb",
+        "title": "Homepage"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/d2daf068-6309-4a4e-84b2-12cdad857da3",
+        "title": "Article list page"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/ca6ac13d-7010-4b7b-9c77-707aa970b594",
+        "title": "Article detail page"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/3f3fa0c5-e3b6-4e13-840b-9082fb67d845",
+        "title": "Translation page for article content with editor"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/885f8de8-77d6-4d3a-b760-0aba96deffc8",
+        "title": "Categories list page"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/2c38c3af-61f0-4b07-a8d0-00e154527249",
+        "title": "Categories show page"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/b5dc8945-209d-4288-a8c8-9544bab92e2b",
+        "title": "Tags list page"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/b7f0806f-de8b-4809-804b-da0b594a95da",
+        "title": "Banned words list page"
+      }
+    ]
   },
   {
     "slug": "gatherly",
@@ -201,7 +237,49 @@ export const works: Work[] = [
       "PostgreSQL"
     ],
     "website": "https://kaish-dbd.it",
-    "preview": "https://fileharbor.heyatom.dev/v2/images/293f4c8b-7fa8-472f-92b3-027f5011cc99"
+    "preview": "https://fileharbor.heyatom.dev/v2/images/293f4c8b-7fa8-472f-92b3-027f5011cc99",
+    "images": [
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/293f4c8b-7fa8-472f-92b3-027f5011cc99",
+        "title": "Homepage"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/9de997e4-8b63-4f2a-947a-cfb158e21ccc",
+        "title": "Kaish Top Builds"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/81d71322-247e-468f-bc74-58fa2511c5c6",
+        "title": "Builds della community"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/646c8250-fc36-4e27-a8a7-9c963664e68a",
+        "title": "Random build generator"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/d80d88ea-edba-4670-9be6-850d3ab85e9c",
+        "title": "Killers page"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/52d4aedb-866e-4f3d-aa36-d590f1a297b3",
+        "title": "Survivors page"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/a0953a61-dae5-40a4-8b47-4a2a2b58c72e",
+        "title": "Perks page"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/85802c5d-c5d0-4383-be69-a2f5e2687bb7",
+        "title": "Addons page"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/cf69ee7f-9795-4c6a-b472-a3d9bbc48564",
+        "title": "Maps page"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/d98fdcb3-4c41-4c0f-a2b3-bd335f5be595",
+        "title": "Queue page"
+      }
+    ]
   },
   {
     "slug": "fileharbor",
@@ -251,7 +329,13 @@ export const works: Work[] = [
       "Sass"
     ],
     "website": "https://links.element-gaming.eu",
-    "preview": "https://fileharbor.heyatom.dev/v2/images/7acfe6a7-6da0-4782-9b40-1a5952496855"
+    "preview": "https://fileharbor.heyatom.dev/v2/images/7acfe6a7-6da0-4782-9b40-1a5952496855",
+    "images": [
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/7acfe6a7-6da0-4782-9b40-1a5952496855",
+        "title": "Homepage"
+      }
+    ]
   },
   {
     "slug": "nuxt-vuetify-template",
@@ -295,7 +379,17 @@ export const works: Work[] = [
     ],
     "website": "https://studioartepuma.it/",
     "github": "https://github.com/andreacw5/puma-arts",
-    "preview": "https://fileharbor.heyatom.dev/v2/images/2f51a644-d100-477e-bed0-8bdb0b1e7d77"
+    "preview": "https://fileharbor.heyatom.dev/v2/images/2f51a644-d100-477e-bed0-8bdb0b1e7d77",
+    "images": [
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/2f51a644-d100-477e-bed0-8bdb0b1e7d77",
+        "title": "Homepage"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/30e622a6-b93b-4e93-84f1-936d03b6da22",
+        "title": "Su di me"
+      }
+    ]
   },
   {
     "slug": "ziplink",
@@ -371,7 +465,65 @@ export const works: Work[] = [
       "Sass"
     ],
     "website": "https://element-gaming.eu",
-    "preview": "https://fileharbor.heyatom.dev/v2/images/6cccdde4-29b6-4cae-80be-f943b0105e10"
+    "preview": "https://fileharbor.heyatom.dev/v2/images/6cccdde4-29b6-4cae-80be-f943b0105e10",
+    "images": [
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/6cccdde4-29b6-4cae-80be-f943b0105e10",
+        "title": "Homepage"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/60b51919-9935-418d-9e72-5781a04d7386",
+        "title": "Elenco giocatori"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/1c95f8ff-4f6a-4c2e-9c73-8f5029f55b43",
+        "title": "Dettaglio giocatori"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/018add78-73a9-47f7-a04a-3f4126e61c6d",
+        "title": "Elenco streamers"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/2f39fb43-9613-4c27-959b-93c14dd7769b",
+        "title": "Dettaglio streamer"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/f458c4e0-3615-45e3-a053-dd039ae1f014",
+        "title": "Elenco delle sezioni"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/787d418f-960e-4d96-9e35-578a1787444c",
+        "title": "Elenco dei team"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/c7a9c66c-b0c0-4f1a-af4d-3deab63c03e3",
+        "title": "Dettaglio del team"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/234ddc03-d6e6-4d02-a6b3-4b19b7655dbc",
+        "title": "Elenco degli eventi"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/31bf545f-14d4-41c6-8b66-6f8ca19aaf89",
+        "title": "Dettaglio evento"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/4a26d3d6-ed79-45d6-b228-e2a220f223ca",
+        "title": "Elenco delle news"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/d7a7c9e8-0a46-45cc-a424-e89183d24d4d",
+        "title": "Dettaglio news"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/e0bd7543-362b-4c58-bc8c-5680e7ceb923",
+        "title": "Dashboard degli streamer"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/729fbb1f-15e8-4b52-b786-3d6da9c2bcc5",
+        "title": "Marketplace degli streamer"
+      }
+    ]
   },
   {
     "slug": "prociv",
@@ -395,7 +547,29 @@ export const works: Work[] = [
     ],
     "website": "https://procivsettimomi.it",
     "github": "https://github.com/prociv-sm/website",
-    "preview": "https://fileharbor.heyatom.dev/v2/images/3e7de746-fc49-4d59-83e2-12ef0fdedabe"
+    "preview": "https://fileharbor.heyatom.dev/v2/images/3e7de746-fc49-4d59-83e2-12ef0fdedabe",
+    "images": [
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/3e7de746-fc49-4d59-83e2-12ef0fdedabe",
+        "title": "Homepage"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/144010e3-811d-4673-9c95-12ed830b424f",
+        "title": "Le attività del gruppo"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/46fbfa7e-49c8-4078-b2bb-b61e94e11a7e",
+        "title": "La sede e i contatti"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/36c10583-fce9-447b-9017-4d869d946079",
+        "title": "I Volontari"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/81f5a5ef-6320-4fe1-a3f1-641a061c7563",
+        "title": "I mezzi del gruppo"
+      }
+    ]
   },
   {
     "slug": "gymtrack",
@@ -440,7 +614,25 @@ export const works: Work[] = [
       "JavaScript"
     ],
     "github": "https://github.com/andreacw5/ALIRDB",
-    "preview": "https://fileharbor.heyatom.dev/v2/images/6dc7d8e3-1298-4510-8650-f23dfb36e534"
+    "preview": "https://fileharbor.heyatom.dev/v2/images/6dc7d8e3-1298-4510-8650-f23dfb36e534",
+    "images": [
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/ba35ea74-37ea-4183-93c3-22fc2fc1e901",
+        "title": "Homepage"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/d461d7e8-4620-44ce-8bb6-c84346af8f96",
+        "title": "User information tab"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/04f8e603-874e-4951-b0ce-0942c9578652",
+        "title": "User vehicle tab"
+      },
+      {
+        "image": "https://fileharbor.heyatom.dev/v2/images/46397a26-b684-4e5e-9b2b-ac9899937e03",
+        "title": "Faction player list"
+      }
+    ]
   },
   {
     "slug": "alircommunity",

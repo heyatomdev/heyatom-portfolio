@@ -139,7 +139,10 @@ useMotion(root, (mm, el) => {
               </ul>
               <p class="mono stackfull">{{ w.stack.join(' · ') }}</p>
               <div class="links">
-                <a v-if="w.website" class="btn btn--primary" :href="w.website" target="_blank" rel="noopener">
+                <NuxtLink class="btn btn--primary" :to="`/works/${w.slug}`">
+                  Scheda e schermate <Icon name="arrow-right" />
+                </NuxtLink>
+                <a v-if="w.website" class="btn btn--ghost" :href="w.website" target="_blank" rel="noopener">
                   Visita il sito <Icon name="arrow-up-right" />
                 </a>
                 <a v-if="w.github" class="btn btn--ghost" :href="w.github" target="_blank" rel="noopener">
