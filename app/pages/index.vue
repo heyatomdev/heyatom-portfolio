@@ -159,9 +159,7 @@ useMotion(root, (mm, el) => {
       scrollTrigger: { trigger: q('.stack')[0], start: 'top 80%' },
     })
 
-    // Close: rings turn only while on screen; the orb leans toward the pointer.
-    const rings = gsap.to(q('.orb-ring--a, .orb-ring--b'), { rotation: i => (i ? -360 : 360), duration: i => (i ? 26 : 16), ease: 'none', repeat: -1, paused: true })
-    ScrollTrigger.create({ trigger: q('.close')[0], onToggle: s => (s.isActive ? rings.play() : rings.pause()) })
+    // Close: the bubble leans toward the pointer.
     gsap.from(q('.orb'), { scale: 0.7, autoAlpha: 0, rotation: -30, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: q('.close')[0], start: 'top 75%' } })
     gsap.from(q('.mail, .close .actions > *'), { y: 24, autoAlpha: 0, stagger: 0.08, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: q('.mail')[0], start: 'top 92%' } })
 
@@ -528,7 +526,7 @@ function untilt(e: PointerEvent) {
   aspect-ratio: 1;
   display: grid;
   place-items: center;
-  border-radius: 50%;
+  border-radius: 50% 50% 50% 10%;
   background: radial-gradient(circle at 35% 28%, rgba(0, 168, 107, 0.28), var(--surface) 65%);
   border: 1px solid var(--hair-strong);
   box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.7), inset 0 2px 24px rgba(0, 168, 107, 0.18);
@@ -540,7 +538,7 @@ function untilt(e: PointerEvent) {
 .medal-ring {
   position: absolute;
   inset: -9%;
-  border-radius: 50%;
+  border-radius: inherit;
   border: 1px solid rgba(0, 168, 107, 0.2);
   border-top-color: var(--green-light);
 }
@@ -795,7 +793,7 @@ function untilt(e: PointerEvent) {
   margin-inline: auto;
   display: grid;
   place-items: center;
-  border-radius: 50%;
+  border-radius: 50% 50% 10% 50%;
   background:
     radial-gradient(circle at 35% 28%, rgba(0, 168, 107, 0.2), rgba(18, 28, 25, 0.7) 60%),
     linear-gradient(160deg, var(--surface), var(--surface-3));
@@ -804,7 +802,7 @@ function untilt(e: PointerEvent) {
 }
 .orb img { width: 42%; filter: drop-shadow(0 6px 22px rgba(0, 168, 107, 0.55)); transform-origin: 52% 88%; }
 .orb:hover img { animation: wave 1.3s ease-in-out; }
-.orb-ring { position: absolute; border-radius: 50%; pointer-events: none; }
+.orb-ring { position: absolute; border-radius: inherit; pointer-events: none; }
 .orb-ring--a { inset: -8%; border: 1px solid rgba(0, 168, 107, 0.2); border-top-color: var(--green-light); }
 .orb-ring--b { inset: 5%; border: 1px dashed rgba(0, 168, 107, 0.16); border-bottom-color: rgba(0, 168, 107, 0.5); }
 
