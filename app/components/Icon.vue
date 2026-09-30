@@ -1,12 +1,13 @@
 <script setup lang="ts">
 // Lucide paths (stroke) + Simple Icons (fill) for the few glyphs the site needs.
-const props = defineProps<{ name: 'arrow-right' | 'arrow-up-right' | 'mail' | 'plus' | 'github' | 'linkedin' | 'download'; size?: number }>()
+const props = defineProps<{ name: 'arrow-right' | 'arrow-up-right' | 'mail' | 'plus' | 'github' | 'linkedin' | 'download' | 'shield'; size?: number }>()
 
 const stroke: Record<string, string> = {
   'arrow-right': 'M5 12h14M12 5l7 7-7 7',
   'arrow-up-right': 'M7 7h10v10M7 17 17 7',
   mail: 'M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm18 2-10 7L2 6',
   plus: 'M12 5v14M5 12h14',
+  shield: 'M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z',
   download: 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3',
 }
 const fill: Record<string, string> = {

@@ -13,8 +13,9 @@ const switchLocalePath = useSwitchLocalePath()
       </p>
       <div class="lang" role="group" :aria-label="t('footer.language')">
         <!-- Plain links: a full load renders the page in the new language (GSAP's split text can't be patched live).
-             The cookie goes first, or / would bounce an English visitor back to /en. -->
-        <a v-for="l in ['it', 'en']" :key="l" :href="switchLocalePath(l)" :lang="l" :hreflang="l" :aria-current="locale === l ? 'true' : undefined" @click="setLocaleCookie(l)">{{ l.toUpperCase() }}</a>
+             The cookie goes first, or / would bounce an English visitor back to /en.
+             Hash dropped: the server never sees it, so keeping it would break hydration. -->
+        <a v-for="l in ['it', 'en']" :key="l" :href="switchLocalePath(l).split('#')[0]" :lang="l" :hreflang="l" :aria-current="locale === l ? 'true' : undefined" @click="setLocaleCookie(l)">{{ l.toUpperCase() }}</a>
       </div>
       <ul>
         <li><a href="https://github.com/andreacw5" rel="me noopener" target="_blank">GitHub</a></li>

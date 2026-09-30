@@ -40,32 +40,50 @@ const offers = computed(() => [
   },
 ].map(o => ({ ...o, examples: o.examples.map(bySlug) })))
 
+// Whole years between 'YYYY-MM' and 'YYYY-MM' (or today).
+const span = (from: string, to?: string) => {
+  const [fy, fm] = from.split('-').map(Number)
+  const end = to ? to.split('-').map(Number) : [new Date().getFullYear(), new Date().getMonth() + 1]
+  return t('home.path.years', Math.max(1, Math.floor(((end[0]! - fy!) * 12 + end[1]! - fm!) / 12)))
+}
+
 const path = computed(() => [
   {
     when: t('home.path.since2016'),
+    span: span('2016-06'),
     role: 'Full-stack developer',
     org: 'Medas Solutions',
+    logo: 'medas',
+    url: 'https://medas-solutions.it',
     text: t('home.path.medas'),
   },
   {
     when: t('home.path.since2020'),
+    span: span('2020-11'),
     role: t('home.path.board'),
     org: 'Element Gaming',
+    logo: 'element',
+    url: 'https://element-gaming.eu',
     text: t('home.path.elementBoard'),
   },
   {
     when: '2019 → 2020',
+    span: span('2019-02', '2020-11'),
     role: t('home.path.devPm'),
     org: 'Element Gaming',
+    logo: 'element',
+    url: 'https://element-gaming.eu',
     text: t('home.path.elementDev'),
   },
-  {
-    when: t('home.path.since2015'),
-    role: t('home.path.volunteer'),
-    org: t('home.path.prociv'),
-    text: t('home.path.procivText'),
-  },
 ])
+
+const volunteering = computed(() => ({
+  when: t('home.path.since2015'),
+  span: span('2015-01'),
+  role: t('home.path.volunteer'),
+  org: t('home.path.prociv'),
+  text: t('home.path.procivText'),
+}))
 
 const stack = computed(() => [
   { group: 'Frontend', items: ['Vue', 'Nuxt', 'TypeScript', 'Vuetify', 'Pinia', 'GSAP'] },
@@ -158,6 +176,10 @@ useMotion(root, (mm, el) => {
       scrollTrigger: { trigger: q('.path')[0], start: 'top 65%', end: 'bottom 65%', scrub: 0.4 },
     })
     q('.path > li').forEach(li => ScrollTrigger.create({ trigger: li, start: 'top 65%', toggleClass: { targets: li, className: 'on' } }))
+    gsap.from(q('.volunteer-title, .volunteer-card'), {
+      y: 24, autoAlpha: 0, stagger: 0.1, duration: 0.9, ease: 'expo.out',
+      scrollTrigger: { trigger: q('.volunteer')[0], start: 'top 88%' },
+    })
     gsap.from(q('.chip'), {
       scale: 0.6, autoAlpha: 0, duration: 0.6, ease: 'back.out(2)', stagger: { each: 0.025, from: 'random' },
       scrollTrigger: { trigger: q('.stack')[0], start: 'top 80%' },
@@ -319,16 +341,37 @@ function untilt(e: PointerEvent) {
     </div>
 
     <div class="path-grid">
-      <ol class="path">
-        <span class="path-track" aria-hidden="true"><span class="path-progress" /></span>
-        <li v-for="p in path" :key="p.role + p.org">
-          <span class="mono when">{{ p.when }}</span>
-          <div>
-            <h3>{{ p.role }} <span class="org">· {{ p.org }}</span></h3>
-            <p>{{ p.text }}</p>
+      <div>
+        <ol class="path">
+          <span class="path-track" aria-hidden="true"><span class="path-progress" /></span>
+          <li v-for="p in path" :key="p.role + p.org">
+            <span class="mono when">{{ p.when }}<span class="span">{{ p.span }}</span></span>
+            <div class="step">
+              <span class="logo" :style="{ '--logo': `url(/assets/logos/${p.logo}.svg)` }" aria-hidden="true" />
+              <div>
+                <h3>{{ p.role }}</h3>
+                <a class="org" :href="p.url" target="_blank" rel="noopener">{{ p.org }} <Icon name="arrow-up-right" :size="14" /></a>
+                <p>{{ p.text }}</p>
+              </div>
+            </div>
+          </li>
+        </ol>
+
+        <div class="volunteer">
+          <h3 class="volunteer-title">{{ t('home.path.volunteering') }}</h3>
+          <div class="volunteer-card">
+            <span class="mono when">{{ volunteering.when }}<span class="span">{{ volunteering.span }}</span></span>
+            <div class="step">
+              <span class="logo logo--icon" aria-hidden="true"><Icon name="shield" /></span>
+              <div>
+                <h3>{{ volunteering.role }}</h3>
+                <span class="org">{{ volunteering.org }}</span>
+                <p>{{ volunteering.text }}</p>
+              </div>
+            </div>
           </div>
-        </li>
-      </ol>
+        </div>
+      </div>
 
       <aside class="stack" aria-labelledby="stack-title">
         <h3 id="stack-title">{{ t('home.stack.title') }}</h3>
@@ -340,7 +383,7 @@ function untilt(e: PointerEvent) {
             </dd>
           </template>
         </dl>
-        <a class="btn btn--ghost cv" href="/assets/cv-tombolato.pdf" download>
+        <a class="btn btn--primary cv" href="/assets/cv-tombolato.pdf" download>
           {{ t('home.stack.cv') }} <Icon name="download" />
         </a>
       </aside>
@@ -680,7 +723,7 @@ function untilt(e: PointerEvent) {
   border-radius: 50%;
   background: var(--bg);
   border: 2px solid var(--hair-strong);
-  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, scale 0.3s var(--ease-out);
 }
 .path li:first-child::before { top: 0.55rem; }
 .path li.on::before { background: var(--green); border-color: var(--green-light); box-shadow: 0 0 0 5px rgba(0, 168, 107, 0.15); }
@@ -696,9 +739,73 @@ function untilt(e: PointerEvent) {
 }
 .path li:first-child { border-top: 0; padding-top: 0.2rem; }
 .when { color: var(--green-light); font-size: 0.85rem; padding-top: 0.3rem; }
-.path h3 { font-size: 1.2rem; letter-spacing: -0.02em; line-height: 1.3; }
-.org { color: var(--ink-3); font-weight: 600; }
-.path p { color: var(--ink-2); margin-top: 0.45rem; max-width: 60ch; }
+.span {
+  display: block;
+  margin-top: 0.35rem;
+  font: 600 1rem/1.2 var(--sans);
+  letter-spacing: -0.01em;
+  color: var(--ink-2);
+  transition: color 0.4s ease;
+}
+.js .path li:not(.on) .span { color: var(--ink-3); }
+.path h3, .volunteer-card h3 { font-size: 1.2rem; letter-spacing: -0.02em; line-height: 1.3; }
+.path p, .volunteer-card p { color: var(--ink-2); margin-top: 0.45rem; max-width: 60ch; }
+.step { position: relative; isolation: isolate; }
+/* Company mark as a faint watermark behind the text. */
+.logo {
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: 50%;
+  translate: 0 -50%;
+  width: 7rem;
+  height: 7rem;
+  color: var(--ink);
+  opacity: 0.05;
+  pointer-events: none;
+  transition: opacity 0.5s ease, color 0.5s ease, scale 0.6s var(--ease-out), rotate 0.6s var(--ease-out);
+}
+.logo:not(.logo--icon) {
+  background: currentColor;
+  mask: var(--logo) center / contain no-repeat;
+}
+.logo--icon svg { width: 100%; height: 100%; }
+.org {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.15rem;
+  color: var(--ink-3);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.org:hover { color: var(--green-light); }
+.org svg { transition: transform 0.35s var(--ease-out); }
+.org:hover svg { transform: translate(2px, -2px); }
+.path h3, .volunteer-card h3 { transition: color 0.3s ease; }
+.chip { transition: border-color 0.2s ease, color 0.2s ease, translate 0.3s var(--ease-out); }
+.volunteer-card { transition: border-color 0.3s ease; }
+
+@media (hover: hover) {
+  .path li:hover .logo, .volunteer-card:hover .logo { opacity: 0.14; color: var(--green-light); scale: 1.08; rotate: -4deg; }
+  .path li:hover h3, .volunteer-card:hover h3 { color: var(--green-light); }
+  .path li:hover::before { scale: 1.3; }
+  .volunteer-card:hover { border-color: var(--hair-strong); }
+  .chip:hover { border-color: var(--green); color: var(--green-light); translate: 0 -2px; }
+}
+
+.volunteer { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+.volunteer-title { font-size: 0.85rem; font-weight: 700; color: var(--ink-3); margin-bottom: 1rem; }
+.volunteer-card {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  gap: 0.5rem 1.5rem;
+  padding: 1.4rem;
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  border: 1px solid var(--hair);
+}
 
 .stack {
   position: sticky;
@@ -852,7 +959,7 @@ function untilt(e: PointerEvent) {
 
 @media (max-width: 560px) {
   .facts { grid-template-columns: minmax(0, 1fr); gap: 0.9rem; }
-  .path li { grid-template-columns: minmax(0, 1fr); }
+  .path li, .volunteer-card { grid-template-columns: minmax(0, 1fr); }
   .strip li:nth-child(even) { margin-top: 0; }
   .close .actions .btn { flex: 1 1 100%; justify-content: center; }
 }

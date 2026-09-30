@@ -73,6 +73,8 @@
       "elementDev": "The network’s web platform with Nuxt and Node.js, dashboards for teams and streamers, internal tools.",
       "since2015": "2015 → now",
       "volunteer": "Volunteer, squad leader, board member",
+      "years": "{n} year | {n} years",
+      "volunteering": "Volunteering",
       "prociv": "Civil Protection",
       "procivText": "In charge of public communication since 2022: I relaunched our socials and built the group’s site from scratch.",
       "intro": "By day, healthcare software, where a mistake is never a detail. The rest of the time, community, volunteering and my own projects.",
