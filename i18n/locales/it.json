@@ -12,7 +12,9 @@
     "skip": "Vai al contenuto",
     "main": "Principale",
     "available": "Disponibile",
-    "writeMe": "Scrivimi"
+    "writeMe": "Scrivimi",
+    "toLight": "Passa al tema chiaro",
+    "toDark": "Passa al tema scuro"
   },
   "common": {
     "works": "Lavori",

@@ -489,7 +489,7 @@ function untilt(e: PointerEvent) {
   overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--hair-strong);
-  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.75), 0 8px 18px -8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 30px 60px -20px rgb(0 0 0 / calc(0.75 * var(--shade))), 0 8px 18px -8px rgb(0 0 0 / calc(0.5 * var(--shade)));
   --in: 0;
   --spread: calc(1 + var(--fan) * 0.55 + var(--scatter) * 4.5);
   opacity: calc(1 - var(--in));
@@ -534,7 +534,7 @@ function untilt(e: PointerEvent) {
   border-radius: 50% 50% 50% 10%;
   background: radial-gradient(circle at 35% 28%, rgba(0, 168, 107, 0.28), var(--surface) 65%);
   border: 1px solid var(--hair-strong);
-  box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.7), inset 0 2px 24px rgba(0, 168, 107, 0.18);
+  box-shadow: 0 18px 40px -12px rgb(0 0 0 / calc(0.7 * var(--shade))), inset 0 2px 24px rgba(0, 168, 107, 0.18);
   translate: calc(var(--px) * 18px) calc(var(--py) * 18px - var(--scatter) * 160px);
   transition: translate 0.9s var(--ease-out);
 }
@@ -800,10 +800,10 @@ function untilt(e: PointerEvent) {
   place-items: center;
   border-radius: 50% 50% 10% 50%;
   background:
-    radial-gradient(circle at 35% 28%, rgba(0, 168, 107, 0.2), rgba(18, 28, 25, 0.7) 60%),
+    radial-gradient(circle at 35% 28%, rgba(0, 168, 107, 0.2), var(--glass) 60%),
     linear-gradient(160deg, var(--surface), var(--surface-3));
   border: 1px solid var(--hair-strong);
-  box-shadow: inset 0 2px 30px rgba(0, 168, 107, 0.14), 0 40px 80px -20px rgba(0, 0, 0, 0.6), 0 0 80px rgba(0, 168, 107, 0.16);
+  box-shadow: inset 0 2px 30px rgba(0, 168, 107, 0.14), 0 40px 80px -20px rgb(0 0 0 / calc(0.6 * var(--shade))), 0 0 80px rgba(0, 168, 107, 0.16);
 }
 .orb img { width: 42%; filter: drop-shadow(0 6px 22px rgba(0, 168, 107, 0.55)); transform-origin: 52% 88%; }
 .orb:hover img { animation: wave 1.3s ease-in-out; }

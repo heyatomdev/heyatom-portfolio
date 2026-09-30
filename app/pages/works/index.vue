@@ -333,7 +333,7 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
   border-radius: var(--r-sm);
   border: 1px solid var(--hair-strong);
   background: var(--surface-2);
-  box-shadow: 0 24px 50px -24px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 24px 50px -24px rgb(0 0 0 / calc(0.8 * var(--shade)));
 }
 .info { display: grid; gap: 1rem; align-content: start; }
 .kind { font-size: 0.88rem; font-weight: 700; color: var(--green-light); }
@@ -370,7 +370,7 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
   border-radius: var(--r-sm);
   overflow: hidden;
   border: 1px solid var(--hair-strong);
-  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 30px 60px -20px rgb(0 0 0 / calc(0.8 * var(--shade)));
   opacity: 0;
   scale: 0.9;
   rotate: -3deg;

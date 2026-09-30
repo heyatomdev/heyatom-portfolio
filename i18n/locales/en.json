@@ -12,7 +12,9 @@
     "skip": "Skip to content",
     "main": "Main",
     "available": "Available",
-    "writeMe": "Write me"
+    "writeMe": "Write me",
+    "toLight": "Switch to light theme",
+    "toDark": "Switch to dark theme"
   },
   "common": {
     "works": "Works",

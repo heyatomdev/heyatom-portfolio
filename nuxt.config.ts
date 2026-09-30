@@ -1,7 +1,15 @@
 export default defineNuxtConfig({
   compatibilityDate: '2026-09-01',
   devtools: { enabled: false },
-  modules: ['@nuxtjs/google-fonts', '@nuxtjs/i18n', '@nuxtjs/sitemap'],
+  modules: ['@nuxtjs/google-fonts', '@nuxtjs/i18n', '@nuxtjs/sitemap', '@nuxtjs/color-mode'],
+  // Dark by default whatever the OS says; the header toggle overrides it and the cookie keeps SSR in sync.
+  colorMode: {
+    preference: 'dark',
+    fallback: 'dark',
+    dataValue: 'theme',
+    classSuffix: '',
+    storage: 'cookie',
+  },
   css: ['~/assets/main.css'],
   googleFonts: {
     families: { Manrope: [400, 500, 600, 700, 800], 'JetBrains Mono': [400, 600] },
@@ -31,8 +39,7 @@ export default defineNuxtConfig({
     head: {
       titleTemplate: '%s · HeyAtom',
       meta: [
-        { name: 'theme-color', content: '#1e201e' },
-        { name: 'color-scheme', content: 'dark' },
+        { name: 'color-scheme', content: 'dark light' },
       ],
       link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
     },

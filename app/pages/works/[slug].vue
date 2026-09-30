@@ -182,7 +182,7 @@ useMotion(root, (mm, el) => {
   border-radius: var(--r-lg);
   border: 1px solid var(--hair-strong);
   background: var(--surface-2);
-  box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 40px 80px -40px rgb(0 0 0 / calc(0.9 * var(--shade)));
 }
 
 .body {
@@ -241,7 +241,7 @@ aside {
   background: var(--surface-2);
   transition: translate 0.4s var(--ease-out), border-color 0.2s ease, box-shadow 0.4s var(--ease-out);
 }
-.shots button:hover img { translate: 0 -4px; border-color: var(--hair-strong); box-shadow: 0 24px 40px -24px rgba(0, 0, 0, 0.9); }
+.shots button:hover img { translate: 0 -4px; border-color: var(--hair-strong); box-shadow: 0 24px 40px -24px rgb(0 0 0 / calc(0.9 * var(--shade))); }
 .shots button:focus-visible { outline: 2px solid var(--green-light); outline-offset: 3px; }
 .shots span { font-size: 0.88rem; color: var(--ink-3); padding-inline: 0.25rem; }
 
