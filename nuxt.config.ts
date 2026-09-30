@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     download: true,
   },
   runtimeConfig: {
-    public: { freelanceAvailable: 'true' },
+    public: { freelanceAvailable: 'true', siteUrl: 'https://heyatom.dev' },
   },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
@@ -17,7 +17,7 @@ export default defineNuxtConfig({
       htmlAttrs: { lang: 'it' },
       titleTemplate: '%s · HeyAtom',
       meta: [
-        { name: 'theme-color', content: '#0d1412' },
+        { name: 'theme-color', content: '#1e201e' },
         { name: 'color-scheme', content: 'dark' },
       ],
       link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],

@@ -10,12 +10,13 @@ useSeoMeta({
 })
 
 const bySlug = (s: string) => works.find(w => w.slug === s)!
-const deck = ['kaish-dbd', 'element', 'prociv'].map(bySlug)
+// Last slot is dealt in front.
+const deck = ['element', 'sgweb', 'kaish-dbd'].map(bySlug)
 
 const picks = [
   { slug: 'kaish-dbd', line: 'Community e build builder per Dead by Daylight: utenti, ruoli, wiki e traduzione completa.' },
+  { slug: 'sgweb', line: 'Il sito dei corsi di Tai Chi e Qi Gong: sedi, orari e contatto diretto, in italiano e inglese.' },
   { slug: 'element', line: 'Il sito del network e-sport, con lo stato live degli streamer dalle API di Twitch.' },
-  { slug: 'prociv', line: 'Il sito ufficiale del gruppo di Protezione Civile: informazioni chiare, anche da telefono.' },
 ].map(p => ({ ...bySlug(p.slug), line: p.line }))
 
 const offers = [
@@ -231,7 +232,7 @@ function untilt(e: PointerEvent) {
     </div>
 
     <NuxtLink
-      to="/works" class="stage" data-intro aria-label="Alcuni lavori: DBD Builds, Element Gaming, Protezione Civile. Vedi tutti i lavori"
+      to="/works" class="stage" data-intro :aria-label="`Alcuni lavori: ${[...deck].reverse().map(w => w.title).join(', ')}. Vedi tutti i lavori`"
       @pointermove="tilt" @pointerleave="untilt"
     >
       <figure v-for="(w, i) in deck" :key="w.slug" class="shot" :class="`shot--${i}`">

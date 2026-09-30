@@ -5,13 +5,13 @@ colors:
   green: "#00a86b"
   green-dark: "#007a4d"
   green-light: "#33bf89"
-  bg: "#0d1412"
-  surface: "#121c19"
-  surface-2: "#1d2b27"
-  surface-3: "#243630"
-  ink: "#eaf5f1"
-  ink-2: "#c5d8d1"
-  ink-3: "#8fa89f"
+  bg: "#1e201e"
+  surface: "#252725"
+  surface-2: "#2e312f"
+  surface-3: "#363936"
+  ink: "#eef1ef"
+  ink-2: "#d1d5d2"
+  ink-3: "#a1a6a2"
   on-green: "#04140d"
   hair: "rgba(0, 168, 107, 0.16)"
   hair-strong: "rgba(0, 168, 107, 0.38)"
@@ -139,7 +139,7 @@ components:
 
 **Creative North Star: "Il banco da lavoro di una persona sola"**
 
-Il sito è un banco da lavoro, non una brochure d'agenzia. Fondo verde-nero quasi nero, una sola tinta satura usata come luce, pannelli appena sollevati tenuti insieme da hairline verdi da 1px. La prova sta nelle immagini: screenshot reali 16:9 dei progetti, messi accanto alla persona fin dal primo schermo. Il carattere entra misurato: la mano "Vulcan salute" nell'orb, il motivo esagoni in trasparenza, una striscia di foto di viaggio.
+Il sito è un banco da lavoro, non una brochure d'agenzia. Fondo antracite neutro, una sola tinta satura usata come luce, pannelli appena sollevati tenuti insieme da hairline verdi da 1px. La prova sta nelle immagini: screenshot reali 16:9 dei progetti, messi accanto alla persona fin dal primo schermo. Il carattere entra misurato: la mano "Vulcan salute" nell'orb, il motivo esagoni in trasparenza, una striscia di foto di viaggio.
 
 Densità media e ritmo lungo: sezioni separate da grandi vuoti verticali, contenuti organizzati in righe con hairline più che in griglie di card. Il verde illumina i punti che contano (CTA, anni, stato aperto, alone dell'orb) e non riempie superfici. Il mazzo di screenshot nell'hero resta il momento d'autore; attorno, un movimento ricco ma legato allo scroll e alla struttura (vedi Motion).
 
@@ -154,7 +154,7 @@ Rifiuti confermati: niente kicker/eyebrow sopra i titoli, niente testo in gradie
 
 ## Colors
 
-Una palette monocroma verde-nera con un solo accento saturo che si comporta come luce.
+Neutri antracite con un solo accento saturo, il verde, che si comporta come luce.
 
 ### Primary
 - **Verde Atom** (`green`): bottone primario, pill "Il tuo progetto" della base comune, cerchio "+" della riga aperta, punto disponibilità, selezione testo, alone di orb e stage (sempre in rgba del verde).
@@ -162,7 +162,7 @@ Una palette monocroma verde-nera con un solo accento saturo che si comporta come
 - **Verde Menta** (`green-light`): link, anni e date in mono, nome del progetto aperto, "atom" nel wordmark, focus ring, bordo superiore degli anelli dell'orb.
 
 ### Neutral
-- **Notte Verde** (`bg`): fondo di pagina, unico sfondo.
+- **Antracite** (`bg`): fondo di pagina, unico sfondo. Grigio scuro quasi senza croma: i neutri non sono tinti di verde, così il verde resta l'unica tinta.
 - **Pannello** (`surface`): pick, pannello stack, figure del mazzo, banda "next", tinta dell'header pill al 72%.
 - **Pannello Rialzato** (`surface-2`): chip, pillole feature, placeholder immagini.
 - **Pannello Alto** (`surface-3`): solo come fine del gradiente dell'orb.

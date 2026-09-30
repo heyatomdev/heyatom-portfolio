@@ -127,6 +127,30 @@ export const works: Work[] = [
     "preview": "https://fileharbor.heyatom.dev/v2/images/a89676ac-41ec-40ad-adc8-7ae537b6d8cc"
   },
   {
+    "slug": "sgweb",
+    "title": "Tai Chi Sesto",
+    "year": 2026,
+    "current": true,
+    "kind": "cliente",
+    "client": "Federico Liuzzi",
+    "description": "Sito per i corsi di Tai Chi e Qi Gong di Federico Liuzzi a Sesto San Giovanni e Cinisello Balsamo, insegnante nel lignaggio di Lo Spazio del Tao. Realizzato con Nuxt e Vuetify: presenta la pratica, le sedi con orari e indicazioni, gli insegnanti e i contatti diretti via email e WhatsApp.",
+    "features": [
+      "Italiano e inglese",
+      "Sedi, orari e come arrivare",
+      "Mappa caricata solo su consenso",
+      "Contatto diretto via WhatsApp",
+      "SEO e anteprime di condivisione"
+    ],
+    "stack": [
+      "Nuxt",
+      "Vuetify",
+      "TypeScript"
+    ],
+    "website": "https://taichisesto.it/",
+    // ponytail: file locale, ?width= ignorato (sempre 1280px, 29 KB). Spostare su FileHarbor per il resize.
+    "preview": "/works/sgweb.webp"
+  },
+  {
     "slug": "beacon",
     "title": "Beacon",
     "year": 2025,

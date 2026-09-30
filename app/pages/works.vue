@@ -5,6 +5,10 @@ import { gsap, magnetic, MOTION_OK, revealLines, SplitText, useMotion } from '~/
 useSeoMeta({
   title: 'Lavori',
   description: `${projects.length} progetti di Andrea Tombolato dal 2016 per clienti, associazioni e community, costruiti su una piattaforma comune per accessi, immagini, contenuti ed eventi.`,
+  ogTitle: 'Lavori · HeyAtom',
+  ogDescription: `${projects.length} progetti dal 2016 per clienti, associazioni e community.`,
+  ogImage: `${useRuntimeConfig().public.siteUrl}/og-works.jpg`,
+  ogImageAlt: 'HeyAtom: 9 progetti dal 2016',
 })
 
 const kindLabel = { 'cliente': 'Cliente', 'open-source': 'Open source', 'personale': 'Personale' } as const
