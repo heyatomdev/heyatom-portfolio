@@ -1,0 +1,22 @@
+{
+  "name": "heyatom-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Portfolio di Andrea Tombolato (HeyAtom). Nuxt 4.",
+  "author": "Andrea Tombolato <hey@heyatom.dev> (https://heyatom.dev)",
+  "type": "module",
+  "scripts": {
+    "dev": "TMPDIR=/tmp nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxtjs/google-fonts": "^3.2.0",
+    "gsap": "^3.15.0",
+    "nuxt": "^4.5.2",
+    "vue": "^3.5.42",
+    "vue-router": "^5.3.1"
+  }
+}

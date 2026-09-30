@@ -1,0 +1,10 @@
+node_modules
+.nuxt
+.output
+.data
+dist
+.impeccable/review
+.impeccable/config.local.json
+.impeccable/ffprof
+.idea
+.DS_Store

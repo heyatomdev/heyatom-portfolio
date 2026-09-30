@@ -1,0 +1,438 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-30T12:55:14+00:00",
+  "title": "Design System: HeyAtom",
+  "extensions": {
+    "colorMeta": {
+      "green": {
+        "role": "primary",
+        "displayName": "Verde Atom",
+        "canonical": "#00a86b",
+        "tonalRamp": [
+          "#003d27",
+          "#005c3b",
+          "#007a4d",
+          "#00a86b",
+          "#33bf89",
+          "#6fd3a9",
+          "#a8e6cb",
+          "#e2f7ee"
+        ]
+      },
+      "green-dark": {
+        "role": "primary",
+        "displayName": "Verde Profondo",
+        "canonical": "#007a4d",
+        "tonalRamp": [
+          "#003d27",
+          "#005c3b",
+          "#007a4d",
+          "#00a86b",
+          "#33bf89",
+          "#6fd3a9",
+          "#a8e6cb",
+          "#e2f7ee"
+        ]
+      },
+      "green-light": {
+        "role": "primary",
+        "displayName": "Verde Menta",
+        "canonical": "#33bf89",
+        "tonalRamp": [
+          "#003d27",
+          "#005c3b",
+          "#007a4d",
+          "#00a86b",
+          "#33bf89",
+          "#6fd3a9",
+          "#a8e6cb",
+          "#e2f7ee"
+        ]
+      },
+      "bg": {
+        "role": "neutral",
+        "displayName": "Notte Verde",
+        "canonical": "#0d1412",
+        "tonalRamp": [
+          "#0d1412",
+          "#121c19",
+          "#1d2b27",
+          "#243630",
+          "#8fa89f",
+          "#c5d8d1",
+          "#eaf5f1",
+          "#f4faf8"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Pannello",
+        "canonical": "#121c19",
+        "tonalRamp": [
+          "#0d1412",
+          "#121c19",
+          "#1d2b27",
+          "#243630",
+          "#8fa89f",
+          "#c5d8d1",
+          "#eaf5f1",
+          "#f4faf8"
+        ]
+      },
+      "surface-2": {
+        "role": "neutral",
+        "displayName": "Pannello Rialzato",
+        "canonical": "#1d2b27",
+        "tonalRamp": [
+          "#0d1412",
+          "#121c19",
+          "#1d2b27",
+          "#243630",
+          "#8fa89f",
+          "#c5d8d1",
+          "#eaf5f1",
+          "#f4faf8"
+        ]
+      },
+      "surface-3": {
+        "role": "neutral",
+        "displayName": "Pannello Alto",
+        "canonical": "#243630",
+        "tonalRamp": [
+          "#0d1412",
+          "#121c19",
+          "#1d2b27",
+          "#243630",
+          "#8fa89f",
+          "#c5d8d1",
+          "#eaf5f1",
+          "#f4faf8"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Inchiostro",
+        "canonical": "#eaf5f1",
+        "tonalRamp": [
+          "#0d1412",
+          "#121c19",
+          "#1d2b27",
+          "#243630",
+          "#8fa89f",
+          "#c5d8d1",
+          "#eaf5f1",
+          "#f4faf8"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Inchiostro Tenue",
+        "canonical": "#c5d8d1",
+        "tonalRamp": [
+          "#0d1412",
+          "#121c19",
+          "#1d2b27",
+          "#243630",
+          "#8fa89f",
+          "#c5d8d1",
+          "#eaf5f1",
+          "#f4faf8"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Inchiostro Spento",
+        "canonical": "#8fa89f",
+        "tonalRamp": [
+          "#0d1412",
+          "#121c19",
+          "#1d2b27",
+          "#243630",
+          "#8fa89f",
+          "#c5d8d1",
+          "#eaf5f1",
+          "#f4faf8"
+        ]
+      },
+      "on-green": {
+        "role": "neutral",
+        "displayName": "Su Verde",
+        "canonical": "#04140d"
+      },
+      "hair": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "rgba(0, 168, 107, 0.16)"
+      },
+      "hair-strong": {
+        "role": "neutral",
+        "displayName": "Hairline Forte",
+        "canonical": "rgba(0, 168, 107, 0.38)"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "h1 dell'hero, con il saluto a 0.5em in green-light."
+      },
+      "display-index": {
+        "displayName": "Display Index",
+        "purpose": "h1 delle pagine indice, una parola."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "h2 di sezione, frase intera, max 18ch."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Offerte, nomi progetto nel registro, pick."
+      },
+      "title-sm": {
+        "displayName": "Title sm",
+        "purpose": "Voci del percorso, pannello stack."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Riga introduttiva dell'hero, max 44ch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Paragrafi in ink-2, max 52-62ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Nav, filtri, bottoni compatti."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Solo anni, stack, conteggi e dati tabellari; sentence case, tracking 0."
+      }
+    },
+    "shadows": [
+      {
+        "name": "screenshot",
+        "value": "0 30px 60px -20px rgba(0,0,0,0.75), 0 8px 18px -8px rgba(0,0,0,0.5)",
+        "purpose": "Figure del mazzo nell'hero."
+      },
+      {
+        "name": "peek",
+        "value": "0 30px 60px -20px rgba(0,0,0,0.8)",
+        "purpose": "Screenshot che segue il puntatore su /works."
+      },
+      {
+        "name": "detail-image",
+        "value": "0 24px 50px -24px rgba(0,0,0,0.8)",
+        "purpose": "Screenshot nel dettaglio aperto del registro."
+      },
+      {
+        "name": "header",
+        "value": "0 10px 30px -12px rgba(0,0,0,0.6)",
+        "purpose": "Header pill sticky."
+      },
+      {
+        "name": "glow-primary",
+        "value": "0 8px 24px -6px rgba(0,168,107,0.55)",
+        "purpose": "Bottone primario a riposo."
+      },
+      {
+        "name": "glow-primary-hover",
+        "value": "0 14px 34px -8px rgba(0,168,107,0.7)",
+        "purpose": "Bottone primario in hover."
+      },
+      {
+        "name": "glow-pick",
+        "value": "0 24px 50px -24px rgba(0,168,107,0.45)",
+        "purpose": "Pick in hover, con lift di 4px."
+      },
+      {
+        "name": "orb",
+        "value": "inset 0 2px 30px rgba(0,168,107,0.14), 0 40px 80px -20px rgba(0,0,0,0.6), 0 0 80px rgba(0,168,107,0.16)",
+        "purpose": "Orb della chiusura (la medaglia usa una variante più corta)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Unica curva per tutto ciò che si sposta."
+      },
+      {
+        "name": "color",
+        "value": "0.2s ease",
+        "purpose": "Colore, bordo, fondo negli stati."
+      },
+      {
+        "name": "rise",
+        "value": "1.1s ease-out; from opacity 0, translateY(22px), blur(8px); delay 0 / 0.12s / 0.22s / 0.4s",
+        "purpose": "Entrata della prima vista, una volta."
+      },
+      {
+        "name": "deal",
+        "value": "1.2s ease-out, delay 0.1/0.2/0.3s; from translateY(60px) scale(0.94)",
+        "purpose": "Entrata del mazzo, momento d'autore."
+      },
+      {
+        "name": "fan-tilt",
+        "value": "0.9s ease-out; rotateY ±14deg, rotateX ±10deg, fan x1.55 offset x1.6 rotation",
+        "purpose": "Mazzo che si apre in hover/focus e segue il mouse."
+      },
+      {
+        "name": "wave",
+        "value": "1.3s ease-in-out",
+        "purpose": "Saluto della mano in hover su medaglia e orb."
+      },
+      {
+        "name": "row-open",
+        "value": "0.6s ease-out; from translateY(-8px)",
+        "purpose": "Apertura del dettaglio nel registro."
+      },
+      {
+        "name": "peek",
+        "value": "opacity 0.25s ease; scale/rotate 0.4s ease-out; follow 0.5s ease-out",
+        "purpose": "Screenshot che segue il puntatore."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "duration 0.001ms, delay 0, iteration 1",
+        "purpose": "prefers-reduced-motion azzera tutto."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "md",
+        "value": "900px"
+      },
+      {
+        "name": "header",
+        "value": "760px"
+      },
+      {
+        "name": "sm",
+        "value": "560px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Pill piena verde con glow e freccia che scivola; una per blocco.",
+      "html": "<a class=\"ds-btn ds-btn-primary\" href=\"#\">Raccontami il progetto <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 1.6rem;border-radius:999px;font:600 1rem/1 var(--sans,Manrope,sans-serif);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1),background-color .2s ease,border-color .2s ease}.ds-btn svg{transition:transform .35s cubic-bezier(.16,1,.3,1)}.ds-btn:hover svg{transform:translateX(4px)}.ds-btn-primary{background:var(--green,#00a86b);color:var(--on-green,#04140d);box-shadow:0 8px 24px -6px rgba(0,168,107,.55)}.ds-btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px -8px rgba(0,168,107,.7)}.ds-btn-primary:active{background:var(--green-dark,#007a4d);transform:translateY(0)}.ds-btn:focus-visible{outline:2px solid var(--green-light,#33bf89);outline-offset:3px}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Pill con hairline forte per l'azione secondaria.",
+      "html": "<a class=\"ds-btn-ghost\" href=\"#\">Scarica il CV</a>",
+      "css": ".ds-btn-ghost{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 1.6rem;border-radius:999px;font:600 1rem/1 var(--sans,Manrope,sans-serif);text-decoration:none;color:var(--ink,#eaf5f1);border:1px solid var(--hair-strong,rgba(0,168,107,.38));background:rgba(0,168,107,.05);transition:background-color .2s ease,border-color .2s ease}.ds-btn-ghost:hover{border-color:var(--green,#00a86b);background:rgba(0,168,107,.1)}.ds-btn-ghost:focus-visible{outline:2px solid var(--green-light,#33bf89);outline-offset:3px}"
+    },
+    {
+      "name": "Header Pill",
+      "kind": "nav",
+      "refersTo": "header-pill",
+      "description": "Header sticky in pill, unica superficie in vetro.",
+      "html": "<nav class=\"ds-pill\"><a class=\"ds-brand\" href=\"#\">hey<b>atom</b></a><a class=\"ds-link ds-cur\" href=\"#\">Lavori</a><a class=\"ds-link\" href=\"#\">Percorso</a><a class=\"ds-cta\" href=\"#\">Scrivimi</a></nav>",
+      "css": ".ds-pill{display:flex;align-items:center;gap:.5rem;padding:.45rem .45rem .45rem .9rem;border-radius:999px;background:rgba(18,28,25,.72);border:1px solid var(--hair,rgba(0,168,107,.16));backdrop-filter:blur(18px) saturate(1.3);box-shadow:0 10px 30px -12px rgba(0,0,0,.6);font-family:var(--sans,Manrope,sans-serif)}.ds-brand{margin-right:auto;color:var(--ink,#eaf5f1);text-decoration:none;font-weight:600;font-size:1.05rem;letter-spacing:-.02em}.ds-brand b{font-weight:800;color:var(--green-light,#33bf89)}.ds-link{padding:.55rem .9rem;border-radius:999px;color:var(--ink-2,#c5d8d1);text-decoration:none;font-weight:600;font-size:.93rem;transition:background-color .2s ease,color .2s ease}.ds-link:hover,.ds-cur{color:var(--ink,#eaf5f1);background:rgba(0,168,107,.12)}.ds-cta{padding:.7rem 1.2rem;border-radius:999px;background:var(--green,#00a86b);color:var(--on-green,#04140d);font-weight:600;font-size:.93rem;text-decoration:none}.ds-link:focus-visible,.ds-cta:focus-visible{outline:2px solid var(--green-light,#33bf89);outline-offset:3px}"
+    },
+    {
+      "name": "Filter",
+      "kind": "chip",
+      "refersTo": "filter",
+      "description": "Filtro pill con conteggio mono; attivo pieno verde.",
+      "html": "<div class=\"ds-filters\"><button class=\"ds-filter\" aria-pressed=\"true\">Tutti <span>15</span></button><button class=\"ds-filter\" aria-pressed=\"false\">Clienti <span>6</span></button></div>",
+      "css": ".ds-filters{display:flex;gap:.5rem;flex-wrap:wrap}.ds-filter{display:inline-flex;align-items:center;gap:.55rem;padding:.6rem 1rem;border-radius:999px;font:600 .93rem/1 var(--sans,Manrope,sans-serif);color:var(--ink-2,#c5d8d1);background:transparent;border:1px solid var(--hair,rgba(0,168,107,.16));cursor:pointer;transition:background-color .2s ease,color .2s ease,border-color .2s ease}.ds-filter span{font-family:var(--mono,'JetBrains Mono',monospace);font-size:.78rem;color:var(--ink-3,#8fa89f)}.ds-filter:hover{color:var(--ink,#eaf5f1);border-color:var(--hair-strong,rgba(0,168,107,.38))}.ds-filter[aria-pressed=true]{background:var(--green,#00a86b);border-color:var(--green,#00a86b);color:var(--on-green,#04140d)}.ds-filter[aria-pressed=true] span{color:var(--on-green,#04140d)}.ds-filter:focus-visible{outline:2px solid var(--green-light,#33bf89);outline-offset:3px}"
+    },
+    {
+      "name": "Stack Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Tag di stack in mono dentro il pannello stack.",
+      "html": "<span class=\"ds-chip\">Nuxt</span> <span class=\"ds-chip\">NestJS</span> <span class=\"ds-chip\">Java</span>",
+      "css": ".ds-chip{display:inline-block;padding:.28rem .6rem;border-radius:999px;font-family:var(--mono,'JetBrains Mono',monospace);font-size:.78rem;color:var(--ink,#eaf5f1);background:var(--surface-2,#1d2b27);border:1px solid var(--hair,rgba(0,168,107,.16))}"
+    },
+    {
+      "name": "Pick Tile",
+      "kind": "card",
+      "refersTo": "pick-tile",
+      "description": "Card con screenshot reale 16:9, lift e alone verde in hover.",
+      "html": "<a class=\"ds-pick\" href=\"#\"><div class=\"ds-pick-img\"></div><div class=\"ds-pick-body\"><h3>Bastion</h3><p>Microservizio di autenticazione open source.</p><p class=\"ds-meta\">2024 · NestJS · Postgres</p></div></a>",
+      "css": ".ds-pick{display:flex;flex-direction:column;max-width:420px;color:var(--ink,#eaf5f1);text-decoration:none;border-radius:18px;background:var(--surface,#121c19);border:1px solid var(--hair,rgba(0,168,107,.16));overflow:hidden;font-family:var(--sans,Manrope,sans-serif);transition:border-color .3s ease,transform .6s cubic-bezier(.16,1,.3,1),box-shadow .6s cubic-bezier(.16,1,.3,1)}.ds-pick:hover{border-color:var(--hair-strong,rgba(0,168,107,.38));transform:translateY(-4px);box-shadow:0 24px 50px -24px rgba(0,168,107,.45)}.ds-pick:focus-visible{outline:2px solid var(--green-light,#33bf89);outline-offset:3px}.ds-pick-img{aspect-ratio:16/9;background:var(--surface-2,#1d2b27)}.ds-pick-body{padding:1.25rem 1.4rem 1.4rem;display:grid;gap:.5rem}.ds-pick h3{margin:0;font-size:1.35rem;font-weight:700;letter-spacing:-.03em}.ds-pick p{margin:0;color:var(--ink-2,#c5d8d1)}.ds-pick .ds-meta{font-family:var(--mono,'JetBrains Mono',monospace);font-size:.78rem;color:var(--ink-3,#8fa89f)}"
+    },
+    {
+      "name": "Works Ledger Row",
+      "kind": "custom",
+      "description": "Riga del registro lavori su details nativo: anno mono, nome, stack, cerchio + che ruota.",
+      "html": "<details class=\"ds-row\"><summary><span class=\"ds-year\">2024</span><span class=\"ds-name\"><strong>Herald</strong><span>Progetto personale · <em>in corso</em></span></span><span class=\"ds-plus\">+</span></summary><p class=\"ds-desc\">Newsletter multilingua con webhook.</p></details>",
+      "css": ".ds-row{border-bottom:1px solid var(--hair,rgba(0,168,107,.16));font-family:var(--sans,Manrope,sans-serif);color:var(--ink,#eaf5f1)}.ds-row summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:5.5rem minmax(0,1fr) 2.5rem;gap:1.5rem;align-items:center;padding:1.35rem .25rem;border-radius:14px;transition:background-color .25s ease}.ds-row summary::-webkit-details-marker{display:none}.ds-row summary:hover,.ds-row[open] summary{background:rgba(0,168,107,.07)}.ds-row summary:focus-visible{outline:2px solid var(--green-light,#33bf89);outline-offset:-2px}.ds-year{font-family:var(--mono,'JetBrains Mono',monospace);font-size:.9rem;color:var(--green-light,#33bf89)}.ds-name{display:grid;gap:.15rem}.ds-name strong{font-size:1.5rem;letter-spacing:-.03em;transition:transform .4s cubic-bezier(.16,1,.3,1)}.ds-row summary:hover strong{transform:translateX(6px)}.ds-row[open] strong{color:var(--green-light,#33bf89)}.ds-name span{color:var(--ink-3,#8fa89f);font-size:.92rem}.ds-name em{font-style:normal;color:var(--green-light,#33bf89)}.ds-plus{width:2.5rem;height:2.5rem;display:grid;place-items:center;border-radius:50%;border:1px solid var(--hair,rgba(0,168,107,.16));transition:transform .45s cubic-bezier(.16,1,.3,1),background-color .2s ease}.ds-row[open] .ds-plus{transform:rotate(45deg);background:var(--green,#00a86b);border-color:var(--green,#00a86b);color:var(--on-green,#04140d)}.ds-desc{margin:0;padding:.75rem .25rem 2rem 7rem;color:var(--ink-2,#c5d8d1)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Il banco da lavoro di una persona sola",
+    "overview": "Il sito è un banco da lavoro, non una brochure d'agenzia. Fondo verde-nero quasi nero, una sola tinta satura usata come luce, pannelli appena sollevati tenuti insieme da hairline verdi da 1px. La prova sta nelle immagini: screenshot reali 16:9 dei progetti, messi accanto alla persona fin dal primo schermo. Il carattere entra misurato: la mano \"Vulcan salute\" nell'orb, il motivo esagoni in trasparenza, una striscia di foto di viaggio.\n\nDensità media e ritmo lungo: sezioni separate da grandi vuoti verticali, contenuti organizzati in righe con hairline più che in griglie di card. Il verde illumina i punti che contano (CTA, anni, stato aperto, alone dell'orb) e non riempie superfici. Un solo momento d'autore in movimento, il mazzo di screenshot nell'hero; il resto si muove poco e con la stessa curva.\n\nRifiuti confermati: niente kicker/eyebrow sopra i titoli, niente testo in gradiente, niente card in vetro come decorazione, niente animazioni di reveal sparse sullo scroll. Il sito è solo dark (`color-scheme: dark`).",
+    "keyCharacteristics": [
+      "Fondo `bg` con griglia verde 56px al 4.5%, mascherata in un'ellisse dall'alto.",
+      "Un verde, tre gradi: pieno per l'azione, scuro per il press, chiaro per testo e dati.",
+      "Manrope stretto in negativo per tutti i titoli; JetBrains Mono solo per anni, stack e dati.",
+      "Pill ovunque ci sia interazione (header, bottoni, filtri, chip); raggi 14–22px per i pannelli.",
+      "Ombre nere a spread negativo per la profondità, alone verde solo su CTA primaria e orb."
+    ],
+    "rules": [
+      {
+        "name": "The Verde come Luce Rule",
+        "body": "Il verde pieno riempie solo il bottone primario, il filtro attivo e il \"+\" aperto. Altrove compare come testo (`green-light`), come hairline o come alone radiale in rgba; mai come fondo di sezione.",
+        "section": "colors"
+      },
+      {
+        "name": "The Hairline Rule",
+        "body": "Ogni separazione è una linea da 1px nel verde al 16% (38% in hover o per le immagini). Nessun bordo grigio, nessun divisore neutro.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mono per i Dati Rule",
+        "body": "JetBrains Mono solo per anni, tag di stack, conteggi e dati tabellari. Mai per titoli, kicker, CTA o frasi; mai maiuscolo con tracking.",
+        "section": "typography"
+      },
+      {
+        "name": "The Titolo Stretto Rule",
+        "body": "Ogni titolo Manrope va da 700 a 800 con tracking negativo (da -0.02em a -0.05em, più grande più stretto). Nessun titolo leggero, nessun tracking positivo.",
+        "section": "typography"
+      },
+      {
+        "name": "The Righe non Card Rule",
+        "body": "Elenchi di cose omogenee (servizi, esperienze, progetti) sono righe separate da hairline, non griglie di card. Le card esistono solo dove c'è un'immagine da mostrare (pick) o un blocco laterale (stack).",
+        "section": "layout"
+      },
+      {
+        "name": "The Ombra Nera, Alone Verde Rule",
+        "body": "Le ombre strutturali sono nere e a spread negativo; l'alone verde appartiene solo al CTA primario, alla pick in hover e all'orb/medaglia.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Un Solo Vetro Rule",
+        "body": "Il `backdrop-filter` (blur 18px, saturate 1.3) esiste solo sull'header pill sticky, perché scorre sopra il contenuto. Nessun'altra superficie è in vetro.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** usare solo le custom properties di `:root` in `main.css` per colori, font, curva e spaziature.",
+      "**Do** mostrare lavoro con screenshot reali 16:9, bordo `hair-strong`, radius 14px.",
+      "**Do** mettere anni, intervalli e stack in JetBrains Mono con cifre tabulari, in sentence case, separati da \" · \".",
+      "**Do** separare elenchi con hairline da 1px `hair` e tenere il verde pieno per l'unica azione principale di ogni blocco.",
+      "**Do** usare la curva `cubic-bezier(0.16, 1, 0.3, 1)` per ogni movimento e lasciare che `prefers-reduced-motion` azzeri durata e delay.",
+      "**Do** usare le icone di `Icon.vue` (tracciati Lucide a stroke 2, loghi Simple Icons in fill), a `currentColor`.",
+      "**Do** usare il marchio con la mano così com'è (favicon, orb, medaglia) e l'esagono solo come texture a bassa opacità."
+    ],
+    "donts": [
+      "**Don't** mettere kicker o eyebrow in mono maiuscolo sopra i titoli.",
+      "**Don't** usare testo in gradiente.",
+      "**Don't** usare il vetro (`backdrop-filter`) su card o pannelli: resta solo sull'header.",
+      "**Don't** aggiungere animazioni di reveal sullo scroll o loop decorativi continui; il punto disponibilità pulsa tre volte e si ferma.",
+      "**Don't** introdurre nuove tinte, colori semantici o un tema chiaro.",
+      "**Don't** usare ombre grigie piatte o bordi neutri al posto delle hairline verdi.",
+      "**Don't** costruire griglie di card per servizi o esperienze: sono righe."
+    ]
+  }
+}
