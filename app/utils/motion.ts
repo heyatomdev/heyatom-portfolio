@@ -1,11 +1,10 @@
 import gsap from 'gsap'
-import { Flip } from 'gsap/Flip'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
 
-if (import.meta.client) gsap.registerPlugin(ScrollTrigger, SplitText, Flip)
+if (import.meta.client) gsap.registerPlugin(ScrollTrigger, SplitText)
 
-export { Flip, gsap, ScrollTrigger, SplitText }
+export { gsap, ScrollTrigger, SplitText }
 
 export const MOTION_OK = '(prefers-reduced-motion: no-preference)'
 

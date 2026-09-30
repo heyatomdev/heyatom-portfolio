@@ -75,7 +75,9 @@ rounded:
   pill: "999px"
 spacing:
   gutter: "clamp(1rem, 4vw, 3rem)"
+  section-near: "clamp(3.5rem, 7vw, 5.5rem)"
   section: "clamp(5rem, 11vw, 8.5rem)"
+  section-far: "clamp(6.5rem, 15vw, 11.5rem)"
   max: "1240px"
 components:
   button-primary:
@@ -147,7 +149,7 @@ Rifiuti confermati: niente kicker/eyebrow sopra i titoli, niente testo in gradie
 - Fondo `bg` con griglia verde 56px al 4.5%, mascherata in un'ellisse dall'alto.
 - Un verde, tre gradi: pieno per l'azione, scuro per il press, chiaro per testo e dati.
 - Manrope stretto in negativo per tutti i titoli; JetBrains Mono solo per anni, stack e dati.
-- Pill ovunque ci sia interazione (header, bottoni, filtri, chip); raggi 14–22px per i pannelli.
+- Pill ovunque ci sia interazione (header, bottoni, chip); raggi 14–22px per i pannelli.
 - Ombre nere a spread negativo per la profondità, alone verde solo su CTA primaria e orb.
 
 ## Colors
@@ -155,7 +157,7 @@ Rifiuti confermati: niente kicker/eyebrow sopra i titoli, niente testo in gradie
 Una palette monocroma verde-nera con un solo accento saturo che si comporta come luce.
 
 ### Primary
-- **Verde Atom** (`green`): bottone primario, filtro attivo, cerchio "+" della riga aperta, punto disponibilità, selezione testo, alone di orb e stage (sempre in rgba del verde).
+- **Verde Atom** (`green`): bottone primario, pill "Il tuo progetto" della base comune, cerchio "+" della riga aperta, punto disponibilità, selezione testo, alone di orb e stage (sempre in rgba del verde).
 - **Verde Profondo** (`green-dark`): stato `:active` del primario, gradiente della scrollbar.
 - **Verde Menta** (`green-light`): link, anni e date in mono, nome del progetto aperto, "atom" nel wordmark, focus ring, bordo superiore degli anelli dell'orb.
 
@@ -166,12 +168,12 @@ Una palette monocroma verde-nera con un solo accento saturo che si comporta come
 - **Pannello Alto** (`surface-3`): solo come fine del gradiente dell'orb.
 - **Inchiostro** (`ink`): titoli e testo primario.
 - **Inchiostro Tenue** (`ink-2`): paragrafi, lead, link del nav a riposo.
-- **Inchiostro Spento** (`ink-3`): metadati, cliente, etichette di gruppo, footer, testo dei filtri conteggio.
+- **Inchiostro Spento** (`ink-3`): metadati, cliente, etichette di gruppo, footer.
 - **Su Verde** (`on-green`): testo su qualsiasi fondo `green`.
 - **Hairline** (`hair`) e **Hairline Forte** (`hair-strong`): tutti i bordi e i divisori; la forte per hover, screenshot e bottone ghost.
 
 ### Named Rules
-**The Verde come Luce Rule.** Il verde pieno riempie solo il bottone primario, il filtro attivo e il "+" aperto. Altrove compare come testo (`green-light`), come hairline o come alone radiale in rgba; mai come fondo di sezione.
+**The Verde come Luce Rule.** Il verde pieno riempie solo il bottone primario, la pill "Il tuo progetto" e il "+" aperto. Altrove compare come testo (`green-light`), come hairline o come alone radiale in rgba; mai come fondo di sezione.
 
 **The Hairline Rule.** Ogni separazione è una linea da 1px nel verde al 16% (38% in hover o per le immagini). Nessun bordo grigio, nessun divisore neutro.
 
@@ -190,8 +192,8 @@ Una palette monocroma verde-nera con un solo accento saturo che si comporta come
 - **Title** (700, `clamp(1.25rem, 2.3vw, 1.9rem)`, -0.03em): offerte, nomi progetto nel registro, pick. **Title sm** (700, 1.2rem, -0.02em): voci del percorso, pannello stack.
 - **Lead** (450, `clamp(1.06rem, 1.4vw, 1.2rem)`, max 44ch, `ink-2`) e testo dei sec-head (1.05rem, max 46ch).
 - **Body** (450, 1rem, 1.6): paragrafi in `ink-2`, max 52–62ch; `text-wrap: pretty` sui paragrafi, `balance` sui titoli.
-- **Label** (600, 0.93rem, line-height 1): nav, filtri, bottoni compatti. I bottoni pieni usano 600 1rem.
-- **Mono** (400, 0.76–0.9rem, letter-spacing 0, cifre tabulari): anni, intervalli ("2016 → oggi"), stack separati da " · ", conteggi dei filtri, intestazioni di colonna del registro, luogo e anno dei viaggi. Sempre in sentence case.
+- **Label** (600, 0.93rem, line-height 1): nav, bottoni compatti. I bottoni pieni usano 600 1rem.
+- **Mono** (400, 0.76–0.9rem, letter-spacing 0, cifre tabulari): anni, intervalli ("2016 → oggi"), stack separati da " · ", intestazioni di colonna del registro, luogo e anno dei viaggi. Sempre in sentence case.
 
 ### Named Rules
 **The Mono per i Dati Rule.** JetBrains Mono solo per anni, tag di stack, conteggi e dati tabellari. Mai per titoli, kicker, CTA o frasi; mai maiuscolo con tracking.
@@ -200,12 +202,12 @@ Una palette monocroma verde-nera con un solo accento saturo che si comporta come
 
 ## Layout
 
-Contenitore unico: larghezza massima `max` (1240px) centrata, padding laterale `gutter`. Le sezioni si separano con `section` in alto (`padding-top`), senza fondi alternati. Ogni sezione apre con un sec-head: h2 a sinistra, eventuale frase o link "Vedi tutti" allineati in basso a destra, `flex-wrap`.
+Contenitore unico: larghezza massima `max` (1240px) centrata, padding laterale `gutter`. Le sezioni si separano in alto (`padding-top` o `margin-top`), senza fondi alternati, con tre passi scelti per significato: `section-near` tra blocchi dello stesso discorso, `section` di default, `section-far` quando cambia argomento. Home: hero → lavori scelti `section`, → offerte `near` (sempre lavoro), → percorso `far` (si passa alla persona), → viaggi `near`, → chiusura `section`. `/works`: titolo → registro 40–64px, registro → base comune `far`, → strumenti `near` (sempre il mio codice), → banda "next" `section`. Ogni sezione apre con un sec-head: h2 a sinistra, eventuale frase o link "Vedi tutti" allineati in basso a destra, `flex-wrap`.
 
 Composizioni ricorrenti:
 - **Hero** a due colonne (1.1fr / 0.9fr): copia a sinistra, mazzo a destra, riga dei fatti a tutta larghezza sotto con hairline superiore e tre colonne. Altezza `min(92svh, 60rem)`.
 - **Pick**: tre progetti su griglia a 2 colonne. Il primo a tutta riga (screenshot 16:9 al 56%, testo centrato), gli altri due affiancati sotto come card quasi quadrate (screenshot 16:9 sopra, testo sotto). Mai celle che allungano lo screenshot oltre il 16:9.
-- **Righe**: offerte (tre colonne 1.1/1/0.7 su baseline), percorso (colonna data 9.5rem + contenuto), registro lavori (5.5rem anno / nome / stack 0.8fr / 2.5rem "+"). Ogni riga è chiusa da hairline.
+- **Righe**: offerte (tre colonne 1.1/1/0.7 su baseline), percorso (colonna data 9.5rem + contenuto), registro lavori (5.5rem anno / nome / stack 0.8fr / 2.5rem "+"), strumenti (stessa griglia, riga intera come link a GitHub, una frase al posto del cliente, icona GitHub al posto del "+", senza screenshot né dettaglio). Ogni riga è chiusa da hairline. `/works` ha tre parti, guidate dal campo `group` in `works.ts`: il registro (progetti senza `group`, niente filtri), la **base comune** (`group: 'platform'`: FileHarbor, Articuno, Gatherly, Herald come quattro card appese con fili verticali a una pill verde "Il tuo progetto", e Bastion come banda larga sotto di loro, perché tutti si autenticano lì; ogni card ha ruolo in `green-light`, frase per il cliente, chip delle funzionalità, stack completo, link al codice o "Codice privato"; 2 colonne ≤900px senza fili, 1 colonna ≤560px) e **strumenti e codice aperto** (`group: 'tool'`).
 - **Percorso + stack**: 1.7fr / 1fr, il pannello stack è sticky a `top: 6.5rem`.
 - **Striscia viaggi**: scroller orizzontale con snap, colonne `clamp(220px, 22vw, 300px)`, foto 4:5, pari sfalsate di 2.5rem.
 
@@ -234,7 +236,7 @@ Profondità ibrida: pannelli tonali (`surface` su `bg`) con hairline verde, più
 
 ## Shapes
 
-Due famiglie di forma. Tutto ciò che si clicca per navigare o filtrare è una pill (999px): header, link del nav, bottoni, filtri, chip, pillole feature, badge disponibilità. I contenitori hanno angoli morbidi: 12px il peek, 14px screenshot, foto di viaggio, immagine di dettaglio e alone di riga, 18px pick e pannello stack, 22px la banda "next". I cerchi sono riservati al marchio (orb, medaglia, anelli) e al "+" del registro. Gli anelli dell'orb sono hairline circolari con un solo arco in `green-light` (e un secondo anello tratteggiato). Il motivo esagoni (`/assets/hex.svg`) compare solo nella banda di chiusura, al 12%, sfumato da destra.
+Due famiglie di forma. Tutto ciò che si clicca per navigare è una pill (999px): header, link del nav, bottoni, chip, pillole feature, badge disponibilità. I contenitori hanno angoli morbidi: 12px il peek, 14px screenshot, foto di viaggio, immagine di dettaglio e alone di riga, 18px pick e pannello stack, 22px la banda "next". I cerchi sono riservati al marchio (orb, medaglia, anelli) e al "+" del registro. Gli anelli dell'orb sono hairline circolari con un solo arco in `green-light` (e un secondo anello tratteggiato). Il motivo esagoni (`/assets/hex.svg`) compare solo nella banda di chiusura, al 12%, sfumato da destra.
 
 ## Components
 
@@ -250,7 +252,6 @@ Pill piene e sicure, con una freccia che scivola.
 ### Chips
 - **Stack chip:** mono 0.78rem, `ink` su `surface-2`, hairline, pill, padding 0.28rem 0.6rem. Raggruppati sotto un'etichetta 700 0.85rem `ink-3`.
 - **Feature pill:** stessa forma in Manrope 0.85rem, padding 0.3rem 0.7rem, nel dettaglio del registro.
-- **Filtri:** pill trasparenti con hairline, label `ink-2` e conteggio mono `ink-3`; hover bordo forte e `ink`; attivo (`aria-pressed`) pieno `green` con testo e conteggio `on-green`.
 
 ### Cards / Containers
 - **Pick:** `surface`, hairline, radius 18px, immagine 16:9 sopra (la principale riempie l'altezza), corpo con titolo + freccia `arrow-up-right` in `green-light`, descrizione `ink-2`, meta mono `ink-3` "anno · stack". Hover: bordo forte, lift -4px, glow pick, immagine scale 1.035, freccia in diagonale.
@@ -280,8 +281,8 @@ Lista di `details` nativi. Il `summary` è la riga: anno mono `green-light`, nom
 Solo desktop con hover: uno screenshot di 320px, radius 12px, hairline forte, segue il puntatore sopra le righe; entra da scale 0.9 e -3° a 1 e 0°.
 
 ### Motion
-GSAP 3 (ScrollTrigger, SplitText, Flip) via `app/utils/motion.ts`: `useMotion(root, setup)` apre una `gsap.matchMedia` sulla pagina e la revoca all'unmount; `revealLines` e `magnetic` sono i due helper condivisi. Curva base `expo.out` (equivalente di `cubic-bezier(0.16, 1, 0.3, 1)`); `ease` CSS 0.2s per colore e bordo. Deciso dall'utente il 30/09/2026: più movimento di quanto chiedesse PRODUCT.md.
-Eccezioni alla curva unica, volute: `back.out` per la medaglia (1.7) e i chip (2), `elastic.out(1, 0.45)` per il rilascio magnetico, `expo.inOut` per le rivelazioni con `clip-path`, il Flip e la regola delle offerte, `power2.in` per le righe che escono dal filtro, `power1.in` per lo scatter. Le maschere di riga SplitText (`.ln-mask`) hanno 0.14em di margine per non tagliare le discendenti.
+GSAP 3 (ScrollTrigger, SplitText) via `app/utils/motion.ts`: `useMotion(root, setup)` apre una `gsap.matchMedia` sulla pagina e la revoca all'unmount; `revealLines` e `magnetic` sono i due helper condivisi. Curva base `expo.out` (equivalente di `cubic-bezier(0.16, 1, 0.3, 1)`); `ease` CSS 0.2s per colore e bordo. Deciso dall'utente il 30/09/2026: più movimento di quanto chiedesse PRODUCT.md.
+Eccezioni alla curva unica, volute: `back.out` per la medaglia (1.7) e i chip (2), `elastic.out(1, 0.45)` per il rilascio magnetico, `expo.inOut` per le rivelazioni con `clip-path`, i fili della base comune e la regola delle offerte, `power1.in` per lo scatter. Le maschere di riga SplitText (`.ln-mask`) hanno 0.14em di margine per non tagliare le discendenti.
 - **Intro hero** (timeline; seconda visita nella sessione a velocità ×2.2): mazzo, badge, lead e azioni partono subito; l'h1 parola per parola parte appena i font sono pronti, da una maschera di riga (yPercent 118, stagger 0.05), lead con blur, azioni, mazzo distribuito con `--in` 1→0 (stagger 0.15), medaglia `back.out` da scala 0 e -120°, fatti. Gli elementi `[data-intro]` sono nascosti prima del paint solo se `html.js` (script inline in `app.vue`); fallback CSS li mostra dopo 3s.
 - **Scatter:** uscendo dall'hero `--scatter` 0→1 (scrub 0.4, `power1.in`, transizioni CSS spente durante lo scrub) sparpaglia e solleva le carte (offset ×4.5, rotazione ×4.5, lift fino a -260px), la medaglia sale di 160px, il copy sale del 14% e sfuma.
 - **Fan / tilt:** col mouse lo stage ruota verso il puntatore (14° Y, 10° X); in hover/focus il mazzo si apre (offset ×1.55, rotazione ×1.6).
@@ -292,7 +293,7 @@ Eccezioni alla curva unica, volute: `back.out` per la medaglia (1.7) e i chip (2
 - **Viaggi (desktop ≥901px):** sezione pinnata per il 60% della distanza di scorrimento, la striscia scorre in orizzontale in scrub 0.6; niente tab stop mentre è pinnata.
 - **Chiusura:** anelli dell'orb ruotano solo mentre la sezione è visibile; orb e CTA primari magnetici.
 - **Header:** si nasconde scendendo oltre 240px, torna salendo o quando riceve il focus da tastiera; hairline verde di avanzamento pagina.
-- **Lavori:** "Lavori" lettera per lettera, righe in cascata; filtro con Flip (altezza lista tenuta, uscenti a sinistra, entranti dal basso); apertura riga con clip-path orizzontale sullo screenshot; peek con `quickTo` e inclinazione dalla velocità.
+- **Lavori:** "Lavori" lettera per lettera, righe in cascata; apertura riga con clip-path orizzontale sullo screenshot; peek con `quickTo` e inclinazione dalla velocità. Base comune: la pill "Il tuo progetto" appare, i fili scendono in sequenza, le quattro card salgono, poi la banda di Bastion si allarga sotto.
 - **Pagine:** transizione `page` out-in (opacity e 14px, senza blur).
 - **Reduced motion:** nessuna animazione GSAP, niente `html.js`, contenuto statico; CSS azzera durata e delay.
 

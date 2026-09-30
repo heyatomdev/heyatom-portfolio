@@ -1,21 +1,11 @@
 <script setup lang="ts">
-import { works, type Work } from '~/data/works'
-import { Flip, gsap, magnetic, MOTION_OK, revealLines, SplitText, useMotion } from '~/utils/motion'
+import { platform, platformBase, projects, tools, type Work } from '~/data/works'
+import { gsap, magnetic, MOTION_OK, revealLines, SplitText, useMotion } from '~/utils/motion'
 
 useSeoMeta({
   title: 'Lavori',
-  description: `${works.length} progetti di Andrea Tombolato dal 2016: siti e web app per associazioni e clienti, microservizi open source, strumenti per community.`,
+  description: `${projects.length} progetti di Andrea Tombolato dal 2016 per clienti, associazioni e community, costruiti su una piattaforma comune per accessi, immagini, contenuti ed eventi.`,
 })
-
-type Filter = 'tutti' | 'clienti' | 'miei'
-const filters: { id: Filter, label: string, match: (w: Work) => boolean }[] = [
-  { id: 'tutti', label: 'Tutti', match: () => true },
-  { id: 'clienti', label: 'Clienti e community', match: w => w.kind === 'cliente' },
-  { id: 'miei', label: 'Prodotti miei', match: w => w.kind !== 'cliente' },
-]
-const active = ref<Filter>('tutti')
-const visible = computed(() => new Set(works.filter(filters.find(f => f.id === active.value)!.match).map(w => w.slug)))
-const count = (f: typeof filters[number]) => works.filter(f.match).length
 
 const kindLabel = { 'cliente': 'Cliente', 'open-source': 'Open source', 'personale': 'Personale' } as const
 
@@ -23,7 +13,7 @@ const kindLabel = { 'cliente': 'Cliente', 'open-source': 'Open source', 'persona
 const open = ref<string | null>(null)
 onMounted(() => {
   const slug = location.hash.slice(1)
-  if (works.some(w => w.slug === slug)) {
+  if (projects.some(w => w.slug === slug)) {
     open.value = slug
     nextTick(() => document.getElementById(slug)?.scrollIntoView({ block: 'center' }))
   }
@@ -41,38 +31,6 @@ function toggle(slug: string, e: Event) {
     }
   }
   else if (open.value === slug) open.value = null
-}
-
-// Filtering reflows the ledger: rows slide to their new place (Flip), leavers fade, arrivals rise.
-const list = ref<HTMLElement>()
-let flip: gsap.core.Timeline | undefined
-let hold: gsap.core.Tween | undefined
-function pick(id: Filter) {
-  if (id === active.value) return
-  if (!motion() || !list.value) {
-    active.value = id
-    return
-  }
-  // A click mid-flight finishes the previous reflow first, so state is read from settled rows.
-  flip?.progress(1)
-  hold?.progress(1)
-  const ul = list.value
-  const rows = ul.querySelectorAll(':scope > li')
-  const state = Flip.getState(rows)
-  const from = ul.offsetHeight
-  active.value = id
-  nextTick(() => {
-    // Rows go absolute while flipping; hold the list's height so the page below doesn't jump.
-    hold = gsap.fromTo(ul, { height: from }, { height: ul.offsetHeight, duration: 0.7, ease: 'expo.inOut', clearProps: 'height' })
-    flip = Flip.from(state, {
-    duration: 0.7,
-    ease: 'expo.inOut',
-    absolute: true,
-    stagger: 0.02,
-    onEnter: els => gsap.fromTo(els, { autoAlpha: 0, x: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'expo.out', stagger: 0.04, delay: 0.2 }),
-    onLeave: els => gsap.to(els, { autoAlpha: 0, x: -30, duration: 0.35, ease: 'power2.in' }),
-    })
-  })
 }
 
 // Desktop: the hovered row's screenshot trails the pointer and leans with its speed.
@@ -112,13 +70,24 @@ useMotion(root, (mm, el) => {
       gsap.timeline({ defaults: { ease: 'expo.out' }, onComplete: () => split.revert() })
         .from(split.chars, { yPercent: 120, rotation: 12, duration: 1.2, stagger: 0.05 })
         .from(q('.head p'), { y: 24, autoAlpha: 0, filter: 'blur(10px)', duration: 1.1 }, 0.25)
-        .from(q('.filter'), { y: 16, autoAlpha: 0, stagger: 0.06, duration: 0.8 }, 0.4)
         .from(q('.cols'), { autoAlpha: 0, duration: 0.8 }, 0.5)
         .from(q('.list > li'), { y: 34, autoAlpha: 0, stagger: 0.045, duration: 1 }, 0.5)
       // Reveal the containers only now that every intro tween holds its start state (.cols fades itself).
-      gsap.set(q('.head, .filters, .list'), { autoAlpha: 1 })
+      gsap.set(q('.head, .list'), { autoAlpha: 1 })
     }))
     revealLines(q('.next h2')[0])
+    revealLines(q('.tools h2')[0])
+    revealLines(q('.platform h2')[0])
+    gsap.timeline({ scrollTrigger: { trigger: q('.platform')[0], start: 'top 75%' } })
+      .from(q('.platform-head p'), { y: 24, autoAlpha: 0, duration: 0.9, ease: 'expo.out' })
+      .from(q('.core'), { scale: 0.8, autoAlpha: 0, duration: 1, ease: 'expo.out' }, 0.1)
+      .from(q('.wire'), { scaleY: 0, duration: 0.7, ease: 'expo.inOut', stagger: 0.08 }, 0.35)
+      .from(q('.services .service'), { y: 40, autoAlpha: 0, duration: 1, ease: 'expo.out', stagger: 0.09 }, 0.5)
+      .from(q('.service--base'), { y: 30, autoAlpha: 0, scaleX: 0.94, duration: 1.1, ease: 'expo.out' }, 0.85)
+    gsap.from(q('.tools-head p, .tool-list > li'), {
+      y: 24, autoAlpha: 0, stagger: 0.08, duration: 0.9, ease: 'expo.out',
+      scrollTrigger: { trigger: q('.tools')[0], start: 'top 85%' },
+    })
     const off = magnetic(q('.next .btn')[0] as HTMLElement, 0.25)
     return off
   })
@@ -131,26 +100,17 @@ useMotion(root, (mm, el) => {
     <header class="head" data-intro>
       <h1>Lavori</h1>
       <p>
-        {{ works.length }} progetti dal 2016 a oggi. Siti e web app per clienti e associazioni, microservizi open source,
-        e qualche strumento che ho costruito perché mi serviva.
+        {{ projects.length }} progetti per clienti, associazioni e community, dal 2016 a oggi.
+        Più sotto, la piattaforma su cui li costruisco e gli strumenti che ho reso pubblici.
       </p>
     </header>
-
-    <div class="filters" data-intro role="group" aria-label="Filtra i lavori">
-      <button
-        v-for="f in filters" :key="f.id" type="button" class="filter" :aria-pressed="active === f.id"
-        @click="pick(f.id)"
-      >
-        {{ f.label }} <span class="mono">{{ count(f) }}</span>
-      </button>
-    </div>
 
     <div class="cols mono" data-intro aria-hidden="true">
       <span>Anno</span><span>Progetto</span><span>Stack</span>
     </div>
 
-    <ul ref="list" class="list" data-intro @pointermove="move">
-      <li v-for="w in works" :id="w.slug" :key="w.slug" :class="{ gone: !visible.has(w.slug) }">
+    <ul class="list" data-intro @pointermove="move">
+      <li v-for="w in projects" :id="w.slug" :key="w.slug">
         <details :open="open === w.slug" @toggle="toggle(w.slug, $event)">
           <summary @pointerenter="peek = w" @pointerleave="peek = null">
             <span class="mono year">{{ w.year }}</span>
@@ -164,7 +124,7 @@ useMotion(root, (mm, el) => {
 
           <div class="detail">
             <img
-              :src="img(w.preview, 960)" :srcset="srcset(w.preview, [640, 960, 1280])" sizes="(max-width: 900px) 92vw, 44vw"
+              :src="img(w.preview!, 960)" :srcset="srcset(w.preview!, [640, 960, 1280])" sizes="(max-width: 900px) 92vw, 44vw"
               :alt="`Schermata di ${w.title}`" width="1280" height="720" loading="lazy"
             >
             <div class="info">
@@ -189,6 +149,67 @@ useMotion(root, (mm, el) => {
       </li>
     </ul>
 
+    <section id="piattaforma" class="platform" aria-labelledby="platform-title">
+      <div class="platform-head">
+        <h2 id="platform-title">La base comune</h2>
+        <p>
+          Accessi, immagini, contenuti, eventi, email: servono a quasi tutti i progetti. Li ho scritti una volta, bene,
+          e li riuso per ogni cliente. Così il tempo va sul tuo progetto, non sulla trentesima riscrittura del login.
+        </p>
+      </div>
+
+      <div class="core" aria-hidden="true">Il tuo progetto</div>
+      <ul class="services">
+        <li v-for="p in platform" :id="p.slug" :key="p.slug" class="service">
+          <span class="wire" aria-hidden="true" />
+          <p class="role">{{ p.role }}</p>
+          <h3>{{ p.title }}</h3>
+          <p class="line">{{ p.line }}</p>
+          <ul class="svc-feats">
+            <li v-for="f in p.features" :key="f">{{ f }}</li>
+          </ul>
+          <p class="mono stackfull">{{ p.stack.join(' · ') }}</p>
+          <a v-if="p.github" class="svc-link" :href="p.github" target="_blank" rel="noopener">
+            <Icon name="github" :size="16" /> Codice
+          </a>
+          <span v-else class="svc-link svc-link--off">Codice privato</span>
+        </li>
+      </ul>
+
+      <div :id="platformBase.slug" class="service service--base">
+        <div>
+          <p class="role">{{ platformBase.role }}</p>
+          <h3>{{ platformBase.title }}</h3>
+        </div>
+        <p class="line">{{ platformBase.line }}</p>
+        <ul class="svc-feats">
+          <li v-for="f in platformBase.features" :key="f">{{ f }}</li>
+        </ul>
+        <span class="svc-link svc-link--off">Codice privato</span>
+      </div>
+    </section>
+
+    <section class="tools" aria-labelledby="tools-title">
+      <div class="tools-head">
+        <h2 id="tools-title">Strumenti e codice aperto</h2>
+        <p>Cose che ho scritto per lavorare meglio io, e che chiunque può usare.</p>
+      </div>
+      <ul class="tool-list">
+        <li v-for="t in tools" :id="t.slug" :key="t.slug">
+          <a :href="t.github" target="_blank" rel="noopener">
+            <span class="mono year">{{ t.year }}</span>
+            <span class="tool-name">
+              <strong>{{ t.title }}</strong>
+              <span>{{ t.line }}</span>
+            </span>
+            <span class="mono tags">{{ t.stack.slice(0, 3).join(' · ') }}</span>
+            <span class="gh" aria-hidden="true"><Icon name="github" :size="18" /></span>
+            <span class="sr-only">(codice su GitHub)</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
     <section class="next" aria-labelledby="next-title">
       <h2 id="next-title">Il prossimo potrebbe essere il tuo.</h2>
       <a class="btn btn--primary" href="/#contatti">Raccontami il progetto <Icon name="arrow-right" /></a>
@@ -196,7 +217,7 @@ useMotion(root, (mm, el) => {
   </div>
 
   <div ref="peekEl" class="peek" :class="{ on: peek && open !== peek.slug }" aria-hidden="true">
-    <img v-if="lastPeek" :src="img(lastPeek.preview, 640)" alt="" width="640" height="360">
+    <img v-if="lastPeek" :src="img(lastPeek.preview!, 640)" alt="" width="640" height="360">
   </div>
   </div>
 </template>
@@ -209,6 +230,7 @@ useMotion(root, (mm, el) => {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: end;
   gap: 1.5rem 3rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 .head h1 {
   font-size: clamp(3.5rem, 9vw, 6rem);
@@ -222,29 +244,6 @@ useMotion(root, (mm, el) => {
   max-width: 46ch;
 }
 
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: clamp(2.5rem, 5vw, 3.5rem) 0 1.5rem;
-}
-.filter {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.6rem 1rem;
-  border-radius: 999px;
-  font: 600 0.93rem/1 var(--sans);
-  color: var(--ink-2);
-  background: transparent;
-  border: 1px solid var(--hair);
-  cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-.filter .mono { font-size: 0.78rem; color: var(--ink-3); }
-.filter:hover { color: var(--ink); border-color: var(--hair-strong); }
-.filter[aria-pressed='true'] { background: var(--green); border-color: var(--green); color: var(--on-green); }
-.filter[aria-pressed='true'] .mono { color: var(--on-green); }
 
 .cols,
 summary {
@@ -346,7 +345,6 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
 .links .btn { padding: 0.75rem 1.2rem; font-size: 0.93rem; }
 .private { color: var(--ink-3); font-size: 0.92rem; }
 
-.list > li.gone { display: none; }
 
 .peek {
   position: fixed;
@@ -367,6 +365,172 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
 .peek.on { opacity: 1; scale: 1; rotate: 0deg; }
 .peek img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 @media (hover: none), (max-width: 900px) { .peek { display: none; } }
+
+.platform { margin-top: var(--section-far); }
+.platform-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-items: end;
+  gap: 1rem 3rem;
+}
+.platform-head h2 { font-size: clamp(2rem, 4.2vw, 3.25rem); }
+.platform-head p { color: var(--ink-2); font-size: 1.05rem; max-width: 58ch; }
+
+/* The shared services hang from one core, the client's project. */
+.core {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: max-content;
+  margin: clamp(2.5rem, 5vw, 3.5rem) auto 0;
+  padding: 0.75rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 700;
+  color: var(--on-green);
+  background: var(--green);
+  box-shadow: 0 10px 30px -8px rgba(0, 168, 107, 0.6);
+  position: relative;
+  z-index: 1;
+}
+.services {
+  list-style: none;
+  margin: 0;
+  padding: 3.75rem 0 0;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+/* Stem from the pill down to the bus line, then one wire per card. */
+.services::before {
+  content: '';
+  position: absolute;
+  top: 1.75rem;
+  left: 12.5%;
+  right: 12.5%;
+  height: 1px;
+  background: var(--hair-strong);
+}
+.services::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 1.75rem;
+  background: var(--hair-strong);
+}
+.service {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.4rem 1.3rem 1.3rem;
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--hair);
+  scroll-margin-top: 8rem;
+  transition: border-color 0.3s ease;
+}
+.service:hover { border-color: var(--hair-strong); }
+.wire {
+  position: absolute;
+  left: 50%;
+  top: calc(-2rem - 1px);
+  height: 2rem;
+  width: 1px;
+  background: var(--hair-strong);
+  transform-origin: top;
+}
+.wire::after {
+  content: '';
+  position: absolute;
+  left: -3px;
+  bottom: -4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 10px var(--green);
+}
+.role { font-size: 0.88rem; font-weight: 700; color: var(--green-light); }
+.service h3 { font-size: 1.4rem; letter-spacing: -0.03em; }
+.service .line { color: var(--ink-2); font-size: 0.95rem; flex: 1; }
+.svc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.svc-link--off { color: var(--ink-3); font-weight: 500; }
+.svc-feats { list-style: none; margin: 0.25rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.svc-feats li {
+  padding: 0.22rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--ink);
+  background: var(--surface-2);
+  border: 1px solid var(--hair);
+}
+
+/* Bastion: the layer every service authenticates through, drawn as a base under them. */
+.service--base {
+  margin-top: clamp(0.75rem, 1.5vw, 1.25rem);
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.4fr) minmax(0, 1.2fr) auto;
+  align-items: center;
+  gap: 1rem 2rem;
+  background:
+    linear-gradient(90deg, rgba(0, 168, 107, 0.12), transparent 60%),
+    var(--surface);
+  border-color: var(--hair-strong);
+}
+.service--base .line { flex: none; }
+.service--base .svc-link { margin-top: 0; }
+
+.tools { margin-top: var(--section-near); }
+.tools-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 0.75rem 3rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--hair);
+}
+.tools-head h2 { font-size: clamp(1.6rem, 3vw, 2.25rem); }
+.tools-head p { color: var(--ink-2); max-width: 46ch; }
+.tool-list { list-style: none; margin: 0; padding: 0; }
+.tool-list > li { border-bottom: 1px solid var(--hair); }
+.tool-list a {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr) minmax(0, 0.8fr) 2.5rem;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.1rem 0.25rem;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 14px;
+  transition: background-color 0.25s ease;
+}
+.tool-list a:hover { background: rgba(0, 168, 107, 0.07); }
+.tool-name { display: grid; gap: 0.15rem; }
+.tool-name strong { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; }
+.tool-name span { color: var(--ink-2); font-size: 0.95rem; }
+.gh {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--hair);
+  color: var(--ink-2);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.tool-list a:hover .gh { color: var(--green-light); border-color: var(--hair-strong); }
 
 .next {
   display: flex;
@@ -389,6 +553,17 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
   .cols { display: none; }
   summary { grid-template-columns: 3.5rem minmax(0, 1fr) 2.5rem; gap: 1rem; }
   .tags { display: none; }
+  .platform-head { grid-template-columns: minmax(0, 1fr); }
+  .services { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .services::before, .services::after, .wire { display: none; }
+  .service--base { grid-template-columns: minmax(0, 1fr); }
+  .core { margin-bottom: 1rem; }
+  .services { padding-top: 0; }
+  .tool-list a { grid-template-columns: 3.5rem minmax(0, 1fr) 2.5rem; gap: 1rem; }
   .detail { grid-template-columns: minmax(0, 1fr); padding-left: 0.25rem; }
+}
+
+@media (max-width: 560px) {
+  .services { grid-template-columns: minmax(0, 1fr); }
 }
 </style>

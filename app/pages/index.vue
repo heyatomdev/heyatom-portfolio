@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { works } from '~/data/works'
+import { projects, works } from '~/data/works'
 import { gsap, magnetic, MOTION_OK, revealLines, ScrollTrigger, SplitText, useMotion } from '~/utils/motion'
 
 useSeoMeta({
@@ -258,7 +258,7 @@ function untilt(e: PointerEvent) {
   <section class="sec wrap" aria-labelledby="picks-title">
     <div class="sec-head">
       <h2 id="picks-title">Cose che ho costruito e che girano davvero.</h2>
-      <NuxtLink to="/works" class="more">Tutti i {{ works.length }} lavori <Icon name="arrow-right" /></NuxtLink>
+      <NuxtLink to="/works" class="more">Tutti i {{ projects.length }} lavori <Icon name="arrow-right" /></NuxtLink>
     </div>
 
     <div class="picks">
@@ -283,10 +283,14 @@ function untilt(e: PointerEvent) {
   </section>
 
   <!-- ── Cosa faccio per te ───────────────────────── -->
-  <section class="sec wrap" aria-labelledby="offer-title">
+  <section class="sec sec--near wrap" aria-labelledby="offer-title">
     <div class="sec-head">
       <h2 id="offer-title">Cosa posso fare per te.</h2>
-      <p>Niente pacchetti né listini: capisco cosa ti serve e ti propongo la strada più semplice che funziona.</p>
+      <p>
+        Niente pacchetti né listini: capisco cosa ti serve e ti propongo la strada più semplice che funziona.
+        E non riparto da zero: accessi, immagini, contenuti, eventi ed email poggiano su una
+        <NuxtLink to="/works#piattaforma">base comune</NuxtLink> già collaudata.
+      </p>
     </div>
     <ul class="offers">
       <li v-for="o in offers" :key="o.title" class="offer">
@@ -304,7 +308,7 @@ function untilt(e: PointerEvent) {
   </section>
 
   <!-- ── Percorso ─────────────────────────────────── -->
-  <section id="percorso" class="sec wrap" aria-labelledby="path-title">
+  <section id="percorso" class="sec sec--far wrap" aria-labelledby="path-title">
     <div class="sec-head">
       <h2 id="path-title">{{ years }} anni di codice, e non solo.</h2>
       <p>Di giorno software sanitario, dove un errore non è un dettaglio. Il resto del tempo community, volontariato e progetti miei.</p>
@@ -340,7 +344,7 @@ function untilt(e: PointerEvent) {
   </section>
 
   <!-- ── Fuori dallo schermo ──────────────────────── -->
-  <section class="sec off" aria-labelledby="off-title">
+  <section class="sec sec--near off" aria-labelledby="off-title">
     <div class="wrap sec-head">
       <h2 id="off-title">Fuori dallo schermo.</h2>
       <p>Montagna, viaggi, gaming. Mi ricaricano, e secondo me si vede nella cura dei dettagli.</p>
@@ -560,6 +564,8 @@ function untilt(e: PointerEvent) {
 
 /* ── Sections ─────────────────────────────────── */
 .sec { padding-top: var(--section); }
+.sec--near { padding-top: var(--section-near); }
+.sec--far { padding-top: var(--section-far); }
 
 .more {
   display: inline-flex;
