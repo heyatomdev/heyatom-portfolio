@@ -57,10 +57,10 @@ const path = [
     text: 'Piattaforma web del network con Nuxt e Node.js, dashboard per team e streamer, strumenti interni.',
   },
   {
-    when: '2015 → 2026',
+    when: '2015 → oggi',
     role: 'Volontario, capo squadra, consigliere',
-    org: 'Protezione Civile Settimo Milanese',
-    text: 'Dal 2022 responsabile della comunicazione pubblica: ho rilanciato i social e costruito da zero il sito del gruppo. Ora sto entrando nel Gruppo Comunale di Milano.',
+    org: 'Protezione Civile',
+    text: 'Dal 2022 responsabile della comunicazione pubblica: ho rilanciato i social e costruito da zero il sito del gruppo.',
   },
 ]
 
@@ -368,7 +368,8 @@ function untilt(e: PointerEvent) {
       </div>
       <div class="close-copy">
         <h2 id="close-title">Hai un progetto in mente? Raccontamelo.</h2>
-        <p>Due righe su cosa ti serve bastano. Rispondo io, a tutti i messaggi, e se non sono la persona giusta te lo dico.</p>
+        <p>Seguo soprattutto no profit e piccole realtà del gaming e del benessere, come palestre, dojo e massaggiatori. Due righe su cosa ti serve bastano: rispondo io, a tutti i messaggi, e se non sono la persona giusta te lo dico.</p>
+        <p class="aside">Non cerco lavoro attivamente, ma se hai una proposta interessante scrivimi pure.</p>
         <a class="mail" href="mailto:hey@heyatom.dev">hey@heyatom.dev</a>
         <div class="actions">
           <a class="btn btn--primary" href="mailto:hey@heyatom.dev?subject=Ciao%20Andrea"><Icon name="mail" /> Scrivimi una mail</a>
@@ -809,6 +810,7 @@ function untilt(e: PointerEvent) {
 
 .close h2 { font-size: clamp(2.2rem, 4.8vw, 4rem); letter-spacing: -0.04em; max-width: 14ch; }
 .close p { margin-top: 1.2rem; color: var(--ink-2); font-size: 1.1rem; max-width: 46ch; }
+.close p.aside { margin-top: 0.8rem; color: var(--ink-3); font-size: 0.95rem; }
 .mail {
   display: inline-block;
   margin-top: 1.8rem;
