@@ -1,4 +1,5 @@
 // Fonte: website4/content/projects/*.md (IT). Rigenera da lì se cambiano.
+import { worksEn } from "./works.en"
 export type WorkKind = "cliente" | "open-source" | "personale"
 
 export interface Work {
@@ -660,3 +661,11 @@ export const platform = ['fileharbor', 'articuno', 'gatherly', 'herald'].map(byS
 // …and the one they all authenticate through.
 export const platformBase = bySlug('bastion')
 export const tools = works.filter(w => w.group === 'tool')
+
+// English text from works.en.ts over the Italian source; stack, links and images stay shared.
+export function localize(w: Work, lang: string): Work {
+  const en = lang === 'en' ? worksEn[w.slug] : undefined
+  if (!en) return w
+  const { images, ...rest } = en
+  return { ...w, ...rest, images: w.images?.map((im, i) => ({ ...im, title: images?.[i] ?? im.title })) }
+}

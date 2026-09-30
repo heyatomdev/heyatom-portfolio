@@ -1,0 +1,193 @@
+{
+  "seo": {
+    "ogImageAlt": "HeyAtom: Andrea Tombolato, siti e web app su misura"
+  },
+  "footer": {
+    "bio": "Andrea Tombolato: sviluppatore, volontario, gamer. HeyAtom sono io.",
+    "language": "Lingua"
+  },
+  "nav": {
+    "path": "Percorso",
+    "contact": "Contatti",
+    "skip": "Vai al contenuto",
+    "main": "Principale",
+    "available": "Disponibile",
+    "writeMe": "Scrivimi"
+  },
+  "common": {
+    "works": "Lavori",
+    "availableFreelance": "Disponibile per progetti freelance",
+    "tellMe": "Raccontami il progetto",
+    "seeAllWorks": "Vedi tutti i lavori",
+    "kind": {
+      "client": "Cliente",
+      "personal": "Personale"
+    },
+    "ongoing": "in corso",
+    "visitSite": "Visita il sito",
+    "code": "Codice",
+    "private": "Progetto privato, niente link pubblico.",
+    "allWorks": "Tutti i lavori",
+    "screenshots": "Schermate",
+    "screenshotOf": "Schermata di {title}"
+  },
+  "home": {
+    "seo": {
+      "description": "Sono Andrea (HeyAtom), sviluppatore full-stack dal 2016. Costruisco siti e web app su misura per associazioni, professionisti e piccole realtà. Parli sempre con me.",
+      "ogDescription": "Siti e web app su misura, costruiti da una persona sola. Vue, Nuxt, Node, NestJS e Java dal 2016."
+    },
+    "picks": {
+      "kaish": "Community e costruttore di build per Dead by Daylight: utenti, ruoli, wiki e traduzione completa.",
+      "sgweb": "Il sito dei corsi di Tai Chi e Qi Gong: sedi, orari e contatto diretto, in italiano e inglese.",
+      "element": "Il sito del network e-sport, con lo stato live degli streamer dalle API di Twitch.",
+      "title": "Cose che ho costruito e che girano davvero.",
+      "all": "Tutti i {n} lavori"
+    },
+    "offers": {
+      "site": {
+        "title": "Un sito per la tua associazione o attività",
+        "text": "Chiaro, veloce, facile da aggiornare. Si legge bene dal telefono ed è pronto per Google."
+      },
+      "app": {
+        "title": "Una web app su misura",
+        "text": "Aree riservate, gestionali, strumenti per la tua community: quello che un sito vetrina non fa."
+      },
+      "tools": {
+        "title": "Collegare i tuoi strumenti",
+        "text": "Far parlare tra loro sistemi che non si parlano, automatizzare i passaggi ripetitivi e farli funzionare senza intoppi."
+      },
+      "title": "Cosa posso fare per te.",
+      "example": "Per esempio",
+      "intro": "Niente pacchetti né listini: capisco cosa ti serve e ti propongo la strada più semplice che funziona. E non riparto da zero: accessi, immagini, contenuti, eventi ed email poggiano su una {link} già collaudata.",
+      "introLink": "base comune"
+    },
+    "path": {
+      "since2016": "2016 → oggi",
+      "medas": "Software in ambito sanitario con Java, Node.js e Vue: dossier online per dare ai pazienti accesso a referti e documentazione clinica.",
+      "since2020": "2020 → oggi",
+      "board": "Consiglio direttivo",
+      "elementBoard": "Gestione di una community gaming no profit: coordinamento del team, decisioni organizzative, nuove iniziative.",
+      "devPm": "Full-stack developer e project manager",
+      "elementDev": "Piattaforma web del network con Nuxt e Node.js, dashboard per team e streamer, strumenti interni.",
+      "since2015": "2015 → oggi",
+      "volunteer": "Volontario, capo squadra, consigliere",
+      "prociv": "Protezione Civile",
+      "procivText": "Dal 2022 responsabile della comunicazione pubblica: ho rilanciato i social e costruito da zero il sito del gruppo.",
+      "intro": "Di giorno software sanitario, dove un errore non è un dettaglio. Il resto del tempo community, volontariato e progetti miei.",
+      "title": "{n} anni di codice, e non solo."
+    },
+    "stack": {
+      "infra": "Infrastruttura",
+      "integrations": "Integrazioni",
+      "title": "Con cosa lavoro",
+      "cv": "Scarica il CV"
+    },
+    "travels": {
+      "edinburgh": {
+        "place": "Edimburgo, Scozia",
+        "alt": "Via di Edimburgo al tramonto, con una cabina telefonica rossa e palazzi in pietra"
+      },
+      "chicago": {
+        "alt": "Aiuola di tulipani davanti all’insegna del Chicago Theatre, tra i grattacieli"
+      },
+      "valsesia": {
+        "place": "Valsesia, Piemonte",
+        "alt": "Vette innevate che si specchiano in un laghetto di montagna"
+      },
+      "lisbon": {
+        "place": "Lisbona, Portogallo",
+        "alt": "Arco di Rua Augusta affacciato su Praça do Comércio, sotto un cielo azzurro"
+      },
+      "dolomites": {
+        "place": "Dolomiti, Trentino",
+        "alt": "Lago verde smeraldo circondato da abeti, con le guglie delle Dolomiti sullo sfondo"
+      },
+      "seville": {
+        "place": "Siviglia, Spagna",
+        "alt": "Plaza de España a Siviglia, con le torri e la balaustra illuminate dal sole"
+      },
+      "london": {
+        "place": "Londra, Regno Unito",
+        "alt": "Il Parlamento di Westminster illuminato di notte, riflesso sul Tamigi"
+      },
+      "bergamo": {
+        "place": "Prealpi Bergamasche",
+        "alt": "Cima rocciosa tra le nuvole sopra pendii verdi"
+      }
+    },
+    "hero": {
+      "lead": "Per associazioni, professionisti e piccole realtà. Sviluppo full-stack dal 2016, dalla prima riga alla messa online.",
+      "leadAgency": "E parli sempre con me, non con un’agenzia.",
+      "someWorks": "Alcuni lavori",
+      "hi": "Ciao, sono Andrea.",
+      "title": "Costruisco {a} app {b}",
+      "titleA": "siti e web",
+      "titleB": "su misura."
+    },
+    "facts": {
+      "label": "In breve",
+      "medas": "Full-stack in Medas Solutions",
+      "element": "Consiglio direttivo Element Gaming",
+      "since2015": "dal 2015",
+      "prociv": "Volontario in Protezione Civile"
+    },
+    "off": {
+      "title": "Fuori dallo schermo.",
+      "text": "Montagna, viaggi, gaming. Mi ricaricano, e secondo me si vede nella cura dei dettagli.",
+      "label": "Foto di viaggio"
+    },
+    "close": {
+      "title": "Hai un progetto in mente? Raccontamelo.",
+      "text": "Lavoro con associazioni, professionisti e piccole realtà. Due righe su cosa ti serve bastano: rispondo a tutti, e rispondo io. Se non sono la persona giusta, te lo dico.",
+      "recruiter": "Sei un recruiter? Non cerco un impiego, ma una proposta interessante la leggo volentieri.",
+      "subject": "Ciao%20Andrea",
+      "mail": "Scrivimi una mail"
+    }
+  },
+  "uses": {
+    "seo": {
+      "description": "Hardware, software e servizi che Andrea Tombolato usa ogni giorno: postazione di lavoro, strumenti di sviluppo, design e produttività.",
+      "ogDescription": "Hardware, software e servizi di tutti i giorni."
+    },
+    "intro": "Hardware, software e servizi che compongono la mia postazione.",
+    "updated": "Aggiornata il",
+    "copyLink": "copia link alla sezione",
+    "copied": "link copiato"
+  },
+  "works": {
+    "seo": {
+      "ogTitle": "Lavori · HeyAtom",
+      "ogImageAlt": "HeyAtom: 9 progetti dal 2016",
+      "description": "{n} progetti di Andrea Tombolato dal 2016 per clienti, associazioni e community, e la base comune su cui costruisco i nuovi: accessi, immagini, contenuti ed eventi.",
+      "ogDescription": "{n} progetti dal 2016 per clienti, associazioni e community."
+    },
+    "introMore": "Più sotto, la piattaforma su cui li costruisco e gli strumenti che ho reso pubblici.",
+    "cols": {
+      "year": "Anno",
+      "project": "Progetto"
+    },
+    "details": "Scheda e schermate",
+    "platform": {
+      "title": "La base comune",
+      "text": "Accessi, immagini, contenuti, eventi, email: servono a quasi tutti i progetti. Li ho scritti una volta, bene, e li riuso per ogni cliente. Così il tempo va sul tuo progetto, non sulla trentesima riscrittura del login.",
+      "core": "Il tuo progetto",
+      "privateCode": "Codice privato"
+    },
+    "tools": {
+      "title": "Strumenti e codice aperto",
+      "text": "Cose che ho scritto per lavorare meglio io, e che chiunque può usare.",
+      "onGithub": "(codice su GitHub)"
+    },
+    "next": "Il prossimo potrebbe essere il tuo.",
+    "intro": "{n} progetti per clienti, associazioni e community, dal 2016 a oggi."
+  },
+  "work": {
+    "notFound": "Progetto non trovato",
+    "about": "Il progetto",
+    "similar": "Progetti simili",
+    "close": "Chiudi",
+    "prev": "Schermata precedente",
+    "next": "Schermata successiva",
+    "screenshotN": "Schermata {n} di {title}"
+  }
+}

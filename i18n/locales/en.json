@@ -1,0 +1,193 @@
+{
+  "seo": {
+    "ogImageAlt": "HeyAtom: Andrea Tombolato, custom websites and web apps"
+  },
+  "footer": {
+    "bio": "Andrea Tombolato: developer, volunteer, gamer. I am HeyAtom.",
+    "language": "Language"
+  },
+  "nav": {
+    "path": "Background",
+    "contact": "Contact",
+    "skip": "Skip to content",
+    "main": "Main",
+    "available": "Available",
+    "writeMe": "Write me"
+  },
+  "common": {
+    "works": "Works",
+    "availableFreelance": "Available for freelance projects",
+    "tellMe": "Tell me about your project",
+    "seeAllWorks": "See all works",
+    "kind": {
+      "client": "Client",
+      "personal": "Personal"
+    },
+    "ongoing": "ongoing",
+    "visitSite": "Visit the site",
+    "code": "Code",
+    "private": "Private project, no public link.",
+    "allWorks": "All works",
+    "screenshots": "Screenshots",
+    "screenshotOf": "Screenshot of {title}"
+  },
+  "home": {
+    "seo": {
+      "description": "I’m Andrea (HeyAtom), a full-stack developer since 2016. I build custom websites and web apps for associations, professionals and small organizations. You always talk to me.",
+      "ogDescription": "Custom websites and web apps, built by one person. Vue, Nuxt, Node, NestJS and Java since 2016."
+    },
+    "picks": {
+      "kaish": "Community and build creator for Dead by Daylight: users, roles, a wiki and full translation.",
+      "sgweb": "The site for Tai Chi and Qi Gong classes: venues, schedules and direct contact, in Italian and English.",
+      "element": "The esports network’s site, with streamers’ live status from the Twitch API.",
+      "title": "Things I built that actually run.",
+      "all": "All {n} works"
+    },
+    "offers": {
+      "site": {
+        "title": "A website for your association or business",
+        "text": "Clear, fast, easy to update. It reads well on a phone and is ready for Google."
+      },
+      "app": {
+        "title": "A custom web app",
+        "text": "Private areas, management tools, tools for your community: what a brochure site can’t do."
+      },
+      "tools": {
+        "title": "Connecting your tools",
+        "text": "Getting systems that don’t talk to each other talking, automating the repetitive steps and keeping them running smoothly."
+      },
+      "title": "What I can do for you.",
+      "example": "For example",
+      "intro": "No packages, no price lists: I figure out what you need and suggest the simplest path that works. And I don’t start from scratch: logins, images, content, events and email sit on a {link} that’s already proven.",
+      "introLink": "shared foundation"
+    },
+    "path": {
+      "since2016": "2016 → now",
+      "medas": "Healthcare software with Java, Node.js and Vue: online records that give patients access to test results and clinical documents.",
+      "since2020": "2020 → now",
+      "board": "Board member",
+      "elementBoard": "Running a non-profit gaming community: team coordination, organizational decisions, new initiatives.",
+      "devPm": "Full-stack developer and project manager",
+      "elementDev": "The network’s web platform with Nuxt and Node.js, dashboards for teams and streamers, internal tools.",
+      "since2015": "2015 → now",
+      "volunteer": "Volunteer, squad leader, board member",
+      "prociv": "Civil Protection",
+      "procivText": "In charge of public communication since 2022: I relaunched our socials and built the group’s site from scratch.",
+      "intro": "By day, healthcare software, where a mistake is never a detail. The rest of the time, community, volunteering and my own projects.",
+      "title": "{n} years of code, and more."
+    },
+    "stack": {
+      "infra": "Infrastructure",
+      "integrations": "Integrations",
+      "title": "What I work with",
+      "cv": "Download my CV"
+    },
+    "travels": {
+      "edinburgh": {
+        "place": "Edinburgh, Scotland",
+        "alt": "An Edinburgh street at sunset, with a red phone box and stone buildings"
+      },
+      "chicago": {
+        "alt": "A tulip bed in front of the Chicago Theatre sign, among the skyscrapers"
+      },
+      "valsesia": {
+        "place": "Valsesia, Piedmont",
+        "alt": "Snowy peaks reflected in a small mountain lake"
+      },
+      "lisbon": {
+        "place": "Lisbon, Portugal",
+        "alt": "The Rua Augusta Arch facing Praça do Comércio, under a blue sky"
+      },
+      "dolomites": {
+        "place": "Dolomites, Trentino",
+        "alt": "An emerald lake ringed by firs, with the Dolomite spires in the background"
+      },
+      "seville": {
+        "place": "Seville, Spain",
+        "alt": "Plaza de España in Seville, its towers and balustrade lit by the sun"
+      },
+      "london": {
+        "place": "London, United Kingdom",
+        "alt": "The Palace of Westminster lit up at night, reflected in the Thames"
+      },
+      "bergamo": {
+        "place": "Bergamo Prealps",
+        "alt": "A rocky summit in the clouds above green slopes"
+      }
+    },
+    "hero": {
+      "lead": "For associations, professionals and small organizations. Full-stack development since 2016, from the first line of code to going live.",
+      "leadAgency": "And you always talk to me, not to an agency.",
+      "someWorks": "Some works",
+      "hi": "Hi, I’m Andrea.",
+      "title": "I build {a} and {b}",
+      "titleA": "custom websites",
+      "titleB": "web apps."
+    },
+    "facts": {
+      "label": "In short",
+      "medas": "Full-stack at Medas Solutions",
+      "element": "Element Gaming board member",
+      "since2015": "since 2015",
+      "prociv": "Civil Protection volunteer"
+    },
+    "off": {
+      "title": "Away from the screen.",
+      "text": "Mountains, travel, gaming. They recharge me, and I think it shows in the attention to detail.",
+      "label": "Travel photos"
+    },
+    "close": {
+      "title": "Got a project in mind? Tell me about it.",
+      "text": "I work with associations, professionals and small organizations. A couple of lines on what you need is enough: I reply to everyone, and I reply myself. If I’m not the right person, I’ll tell you.",
+      "recruiter": "Are you a recruiter? I’m not looking for a job, but I’m happy to read an interesting offer.",
+      "subject": "Hi%20Andrea",
+      "mail": "Send me an email"
+    }
+  },
+  "uses": {
+    "seo": {
+      "description": "Hardware, software and services Andrea Tombolato uses every day: workstation, development tools, design and productivity.",
+      "ogDescription": "Everyday hardware, software and services."
+    },
+    "intro": "The hardware, software and services that make up my setup.",
+    "updated": "Updated",
+    "copyLink": "copy link to section",
+    "copied": "link copied"
+  },
+  "works": {
+    "seo": {
+      "ogTitle": "Works · HeyAtom",
+      "ogImageAlt": "HeyAtom: 9 projects since 2016",
+      "description": "{n} projects by Andrea Tombolato since 2016 for clients, associations and communities, and the shared foundation I build new ones on: logins, images, content and events.",
+      "ogDescription": "{n} projects since 2016 for clients, associations and communities."
+    },
+    "introMore": "Further down, the platform I build them on and the tools I’ve made public.",
+    "cols": {
+      "year": "Year",
+      "project": "Project"
+    },
+    "details": "Details and screenshots",
+    "platform": {
+      "title": "The shared foundation",
+      "text": "Logins, images, content, events, email: almost every project needs them. I wrote them once, properly, and reuse them for every client. That way the time goes into your project, not into rewriting the login for the thirtieth time.",
+      "core": "Your project",
+      "privateCode": "Private code"
+    },
+    "tools": {
+      "title": "Tools and open source",
+      "text": "Things I wrote to work better myself, that anyone can use.",
+      "onGithub": "(code on GitHub)"
+    },
+    "next": "The next one could be yours.",
+    "intro": "{n} projects for clients, associations and communities, from 2016 to today."
+  },
+  "work": {
+    "notFound": "Project not found",
+    "about": "The project",
+    "similar": "Similar projects",
+    "close": "Close",
+    "prev": "Previous screenshot",
+    "next": "Next screenshot",
+    "screenshotN": "Screenshot {n} of {title}"
+  }
+}

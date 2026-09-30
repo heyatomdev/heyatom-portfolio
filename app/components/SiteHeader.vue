@@ -3,6 +3,8 @@ import { gsap, MOTION_OK, ScrollTrigger } from '~/utils/motion'
 
 const available = useRuntimeConfig().public.freelanceAvailable === 'true'
 const route = useRoute()
+const { t } = useI18n()
+const localePath = useLocalePath()
 // Header slides away while reading down, returns on the way up; a hairline tracks page progress.
 const hdr = ref<HTMLElement>()
 const bar = ref<HTMLElement>()
@@ -34,20 +36,20 @@ onBeforeUnmount(() => {
 })
 watch(() => route.fullPath, () => nextTick(() => st?.refresh()))
 
-const anchors = [{ to: '/#percorso', label: 'Percorso' }, { to: '/#contatti', label: 'Contatti' }]
+const anchors = computed(() => [{ to: localePath('/#percorso'), label: t('nav.path') }, { to: localePath('/#contatti'), label: t('nav.contact') }])
 </script>
 
 <template>
-  <a class="skip" href="#main">Vai al contenuto</a>
+  <a class="skip" href="#main">{{ t('nav.skip') }}</a>
   <header ref="hdr" class="hdr">
-    <nav class="pill" aria-label="Principale">
-      <NuxtLink to="/" class="brand" aria-label="HeyAtom, home">
+    <nav class="pill" :aria-label="t('nav.main')">
+      <NuxtLink :to="localePath('/')" class="brand" aria-label="HeyAtom, home">
         <img src="/favicon.svg" alt="" width="36" height="36">
         <span>HeyAtom</span>
       </NuxtLink>
 
       <ul class="links">
-        <li><NuxtLink to="/works" :aria-current="route.path.startsWith('/works') ? 'page' : undefined">Lavori</NuxtLink></li>
+        <li><NuxtLink :to="localePath('/works')" :aria-current="route.path.startsWith(localePath('/works')) ? 'page' : undefined">{{ t('common.works') }}</NuxtLink></li>
         <li v-for="l in anchors" :key="l.to">
           <NuxtLink v-slot="{ href, navigate }" :to="l.to" custom>
             <a :href="href" @click="navigate">{{ l.label }}</a>
@@ -55,11 +57,11 @@ const anchors = [{ to: '/#percorso', label: 'Percorso' }, { to: '/#contatti', la
         </li>
       </ul>
 
-      <span v-if="available && route.path !== '/'" class="avail" title="Disponibile per progetti freelance">
+      <span v-if="available && route.path !== localePath('/')" class="avail" :title="t('common.availableFreelance')">
         <span class="dot" aria-hidden="true" />
-        <span class="avail-txt">Disponibile</span>
+        <span class="avail-txt">{{ t('nav.available') }}</span>
       </span>
-      <a class="btn btn--primary cta" href="mailto:hey@heyatom.dev">Scrivimi</a>
+      <a class="btn btn--primary cta" href="mailto:hey@heyatom.dev">{{ t('nav.writeMe') }}</a>
       <span class="progress" aria-hidden="true"><span ref="bar" /></span>
     </nav>
   </header>
