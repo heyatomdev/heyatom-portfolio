@@ -33,7 +33,7 @@ Una persona sola, non uno studio. "HeyAtom"/"atom" è il nome d'arte (mix nome+c
 - Nuxt 4 + Vuetify 3 + Nuxt Content + i18n; dark theme default, light secondario. Deploy SSR Node.
 - Contenuti in `content/`: `projects/` (15 schede con features, stack, link), `experience/` (timeline lavoro/community/volontariato), `travels/` (foto viaggio con `featured`), `volunteering/`, `uses/`.
 - Pagine: home, `/projects` + `/projects/[slug]`, `/travels`, `/volunteering`, `/uses`, `/contacts`.
-- Vincoli visivi pinnati dall'utente: sfondo scuro `#0d1412`, verde brand `#00a86b` (+ `#007a4d`, `#33bf89`), Manrope + JetBrains Mono. Il restyle non deve allontanarsi da sfondo e colori.
+- Vincoli visivi pinnati dall'utente: sfondo antracite scuro `#1e201e` (scelto il 30/09/2026 al posto del verde-nero `#1e201e`, giudicato troppo spento), verde brand `#00a86b` (+ `#007a4d`, `#33bf89`), Manrope + JetBrains Mono. Il restyle non deve allontanarsi da sfondo e colori; sfondo e testi restano neutri, non tinti di verde.
 - Non decisi: eventuale pagina "servizi"; se e come mostrare fascia di prezzo (oggi nessuna).
 
 ## Brand Commitments

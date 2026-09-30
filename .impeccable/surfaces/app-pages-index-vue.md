@@ -5,7 +5,7 @@ primary_target: "app/pages/index.vue"
 related_targets: ["app/pages/works.vue"]
 ---
 
-Scope: home `/` (Persuade) + works index `/works` (Experience). IT only for now. Code-led (no image generation on this machine). Established world (DESIGN.md: dark #0d1412, green #00a86b family, Manrope + JetBrains Mono, orb + hand mark); surface tournament skipped because the user pinned the first viewport ("persona + prova").
+Scope: home `/` (Persuade) + works index `/works` (Experience). IT only for now. Code-led (no image generation on this machine). Established world (DESIGN.md: dark anthracite #1e201e, green #00a86b family, Manrope + JetBrains Mono, orb + hand mark); surface tournament skipped because the user pinned the first viewport ("persona + prova").
 
 Audience/job: non-technical small client on a phone, deciding on trust in seconds; recruiter on desktop scanning stack and years. Action: write to Andrea (mailto + LinkedIn). Proof: 15 real projects with real screenshots, Medas since 2016, Element Gaming board, Protezione Civile. No testimonials, prices, client counts.
 
@@ -13,7 +13,7 @@ Audience/job: non-technical small client on a phone, deciding on trust in second
 
 THESIS: A one-person workbench, not an agency brochure. The page shows real screenshots of shipped work next to the person from the first viewport; it refuses the category default of hero slogan + three service cards + stats row.
 
-OWN-WORLD: near-black green ground #0d1412 with a faint hex/grid texture, one saturated green used as light (orb glow, primary pill, active rows), surfaces as slightly lifted green-black panes with 1px green hairlines, real 16:9 project screenshots as the only work imagery (personal travel photos allowed in one measured strip, per PRODUCT.md evidence and principle 5), Manrope display tight at -0.03em, JetBrains Mono strictly for years, stack tags and data.
+OWN-WORLD: neutral anthracite ground #1e201e with a faint hex/grid texture, one saturated green used as light (orb glow, primary pill, active rows), surfaces as slightly lifted anthracite panes with 1px green hairlines, real 16:9 project screenshots as the only work imagery (personal travel photos allowed in one measured strip, per PRODUCT.md evidence and principle 5), Manrope display tight at -0.03em, JetBrains Mono strictly for years, stack tags and data.
 
 STORY: Visitor learns in one line that Andrea builds sites and web apps for associations and small businesses, and that they talk to him directly; sees real work immediately; skims the path (2016 → today); leaves with a mailto.
 

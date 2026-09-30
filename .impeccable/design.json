@@ -51,107 +51,107 @@
       },
       "bg": {
         "role": "neutral",
-        "displayName": "Notte Verde",
-        "canonical": "#0d1412",
+        "displayName": "Antracite",
+        "canonical": "#1e201e",
         "tonalRamp": [
-          "#0d1412",
-          "#121c19",
-          "#1d2b27",
-          "#243630",
-          "#8fa89f",
-          "#c5d8d1",
-          "#eaf5f1",
-          "#f4faf8"
+          "#1e201e",
+          "#252725",
+          "#2e312f",
+          "#363936",
+          "#a1a6a2",
+          "#d1d5d2",
+          "#eef1ef",
+          "#f6f8f7"
         ]
       },
       "surface": {
         "role": "neutral",
         "displayName": "Pannello",
-        "canonical": "#121c19",
+        "canonical": "#252725",
         "tonalRamp": [
-          "#0d1412",
-          "#121c19",
-          "#1d2b27",
-          "#243630",
-          "#8fa89f",
-          "#c5d8d1",
-          "#eaf5f1",
-          "#f4faf8"
+          "#1e201e",
+          "#252725",
+          "#2e312f",
+          "#363936",
+          "#a1a6a2",
+          "#d1d5d2",
+          "#eef1ef",
+          "#f6f8f7"
         ]
       },
       "surface-2": {
         "role": "neutral",
         "displayName": "Pannello Rialzato",
-        "canonical": "#1d2b27",
+        "canonical": "#2e312f",
         "tonalRamp": [
-          "#0d1412",
-          "#121c19",
-          "#1d2b27",
-          "#243630",
-          "#8fa89f",
-          "#c5d8d1",
-          "#eaf5f1",
-          "#f4faf8"
+          "#1e201e",
+          "#252725",
+          "#2e312f",
+          "#363936",
+          "#a1a6a2",
+          "#d1d5d2",
+          "#eef1ef",
+          "#f6f8f7"
         ]
       },
       "surface-3": {
         "role": "neutral",
         "displayName": "Pannello Alto",
-        "canonical": "#243630",
+        "canonical": "#363936",
         "tonalRamp": [
-          "#0d1412",
-          "#121c19",
-          "#1d2b27",
-          "#243630",
-          "#8fa89f",
-          "#c5d8d1",
-          "#eaf5f1",
-          "#f4faf8"
+          "#1e201e",
+          "#252725",
+          "#2e312f",
+          "#363936",
+          "#a1a6a2",
+          "#d1d5d2",
+          "#eef1ef",
+          "#f6f8f7"
         ]
       },
       "ink": {
         "role": "neutral",
         "displayName": "Inchiostro",
-        "canonical": "#eaf5f1",
+        "canonical": "#eef1ef",
         "tonalRamp": [
-          "#0d1412",
-          "#121c19",
-          "#1d2b27",
-          "#243630",
-          "#8fa89f",
-          "#c5d8d1",
-          "#eaf5f1",
-          "#f4faf8"
+          "#1e201e",
+          "#252725",
+          "#2e312f",
+          "#363936",
+          "#a1a6a2",
+          "#d1d5d2",
+          "#eef1ef",
+          "#f6f8f7"
         ]
       },
       "ink-2": {
         "role": "neutral",
         "displayName": "Inchiostro Tenue",
-        "canonical": "#c5d8d1",
+        "canonical": "#d1d5d2",
         "tonalRamp": [
-          "#0d1412",
-          "#121c19",
-          "#1d2b27",
-          "#243630",
-          "#8fa89f",
-          "#c5d8d1",
-          "#eaf5f1",
-          "#f4faf8"
+          "#1e201e",
+          "#252725",
+          "#2e312f",
+          "#363936",
+          "#a1a6a2",
+          "#d1d5d2",
+          "#eef1ef",
+          "#f6f8f7"
         ]
       },
       "ink-3": {
         "role": "neutral",
         "displayName": "Inchiostro Spento",
-        "canonical": "#8fa89f",
+        "canonical": "#a1a6a2",
         "tonalRamp": [
-          "#0d1412",
-          "#121c19",
-          "#1d2b27",
-          "#243630",
-          "#8fa89f",
-          "#c5d8d1",
-          "#eaf5f1",
-          "#f4faf8"
+          "#1e201e",
+          "#252725",
+          "#2e312f",
+          "#363936",
+          "#a1a6a2",
+          "#d1d5d2",
+          "#eef1ef",
+          "#f6f8f7"
         ]
       },
       "on-green": {
@@ -327,7 +327,7 @@
       "refersTo": "button-ghost",
       "description": "Pill con hairline forte per l'azione secondaria.",
       "html": "<a class=\"ds-btn-ghost\" href=\"#\">Scarica il CV</a>",
-      "css": ".ds-btn-ghost{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 1.6rem;border-radius:999px;font:600 1rem/1 var(--sans,Manrope,sans-serif);text-decoration:none;color:var(--ink,#eaf5f1);border:1px solid var(--hair-strong,rgba(0,168,107,.38));background:rgba(0,168,107,.05);transition:background-color .2s ease,border-color .2s ease}.ds-btn-ghost:hover{border-color:var(--green,#00a86b);background:rgba(0,168,107,.1)}.ds-btn-ghost:focus-visible{outline:2px solid var(--green-light,#33bf89);outline-offset:3px}"
+      "css": ".ds-btn-ghost{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 1.6rem;border-radius:999px;font:600 1rem/1 var(--sans,Manrope,sans-serif);text-decoration:none;color:var(--ink,#eef1ef);border:1px solid var(--hair-strong,rgba(0,168,107,.38));background:rgba(0,168,107,.05);transition:background-color .2s ease,border-color .2s ease}.ds-btn-ghost:hover{border-color:var(--green,#00a86b);background:rgba(0,168,107,.1)}.ds-btn-ghost:focus-visible{outline:2px solid var(--green-light,#33bf89);outline-offset:3px}"
     },
     {
       "name": "Header Pill",
@@ -335,7 +335,7 @@
       "refersTo": "header-pill",
       "description": "Header sticky in pill, unica superficie in vetro.",
       "html": "<nav class=\"ds-pill\"><a class=\"ds-brand\" href=\"#\">hey<b>atom</b></a><a class=\"ds-link ds-cur\" href=\"#\">Lavori</a><a class=\"ds-link\" href=\"#\">Percorso</a><a class=\"ds-cta\" href=\"#\">Scrivimi</a></nav>",
-      "css": ".ds-pill{display:flex;align-items:center;gap:.5rem;padding:.45rem .45rem .45rem .9rem;border-radius:999px;background:rgba(18,28,25,.72);border:1px solid var(--hair,rgba(0,168,107,.16));backdrop-filter:blur(18px) saturate(1.3);box-shadow:0 10px 30px -12px rgba(0,0,0,.6);font-family:var(--sans,Manrope,sans-serif)}.ds-brand{margin-right:auto;color:var(--ink,#eaf5f1);text-decoration:none;font-weight:600;font-size:1.05rem;letter-spacing:-.02em}.ds-brand b{font-weight:800;color:var(--green-light,#33bf89)}.ds-link{padding:.55rem .9rem;border-radius:999px;color:var(--ink-2,#c5d8d1);text-decoration:none;font-weight:600;font-size:.93rem;transition:background-color .2s ease,color .2s ease}.ds-link:hover,.ds-cur{color:var(--ink,#eaf5f1);background:rgba(0,168,107,.12)}.ds-cta{padding:.7rem 1.2rem;border-radius:999px;background:var(--green,#00a86b);color:var(--on-green,#04140d);font-weight:600;font-size:.93rem;text-decoration:none}.ds-link:focus-visible,.ds-cta:focus-visible{outline:2px solid var(--green-light,#33bf89);outline-offset:3px}"
+      "css": ".ds-pill{display:flex;align-items:center;gap:.5rem;padding:.45rem .45rem .45rem .9rem;border-radius:999px;background:rgba(18,28,25,.72);border:1px solid var(--hair,rgba(0,168,107,.16));backdrop-filter:blur(18px) saturate(1.3);box-shadow:0 10px 30px -12px rgba(0,0,0,.6);font-family:var(--sans,Manrope,sans-serif)}.ds-brand{margin-right:auto;color:var(--ink,#eef1ef);text-decoration:none;font-weight:600;font-size:1.05rem;letter-spacing:-.02em}.ds-brand b{font-weight:800;color:var(--green-light,#33bf89)}.ds-link{padding:.55rem .9rem;border-radius:999px;color:var(--ink-2,#d1d5d2);text-decoration:none;font-weight:600;font-size:.93rem;transition:background-color .2s ease,color .2s ease}.ds-link:hover,.ds-cur{color:var(--ink,#eef1ef);background:rgba(0,168,107,.12)}.ds-cta{padding:.7rem 1.2rem;border-radius:999px;background:var(--green,#00a86b);color:var(--on-green,#04140d);font-weight:600;font-size:.93rem;text-decoration:none}.ds-link:focus-visible,.ds-cta:focus-visible{outline:2px solid var(--green-light,#33bf89);outline-offset:3px}"
     },
     {
       "name": "Filter",
@@ -343,7 +343,7 @@
       "refersTo": "filter",
       "description": "Filtro pill con conteggio mono; attivo pieno verde.",
       "html": "<div class=\"ds-filters\"><button class=\"ds-filter\" aria-pressed=\"true\">Tutti <span>15</span></button><button class=\"ds-filter\" aria-pressed=\"false\">Clienti <span>6</span></button></div>",
-      "css": ".ds-filters{display:flex;gap:.5rem;flex-wrap:wrap}.ds-filter{display:inline-flex;align-items:center;gap:.55rem;padding:.6rem 1rem;border-radius:999px;font:600 .93rem/1 var(--sans,Manrope,sans-serif);color:var(--ink-2,#c5d8d1);background:transparent;border:1px solid var(--hair,rgba(0,168,107,.16));cursor:pointer;transition:background-color .2s ease,color .2s ease,border-color .2s ease}.ds-filter span{font-family:var(--mono,'JetBrains Mono',monospace);font-size:.78rem;color:var(--ink-3,#8fa89f)}.ds-filter:hover{color:var(--ink,#eaf5f1);border-color:var(--hair-strong,rgba(0,168,107,.38))}.ds-filter[aria-pressed=true]{background:var(--green,#00a86b);border-color:var(--green,#00a86b);color:var(--on-green,#04140d)}.ds-filter[aria-pressed=true] span{color:var(--on-green,#04140d)}.ds-filter:focus-visible{outline:2px solid var(--green-light,#33bf89);outline-offset:3px}"
+      "css": ".ds-filters{display:flex;gap:.5rem;flex-wrap:wrap}.ds-filter{display:inline-flex;align-items:center;gap:.55rem;padding:.6rem 1rem;border-radius:999px;font:600 .93rem/1 var(--sans,Manrope,sans-serif);color:var(--ink-2,#d1d5d2);background:transparent;border:1px solid var(--hair,rgba(0,168,107,.16));cursor:pointer;transition:background-color .2s ease,color .2s ease,border-color .2s ease}.ds-filter span{font-family:var(--mono,'JetBrains Mono',monospace);font-size:.78rem;color:var(--ink-3,#a1a6a2)}.ds-filter:hover{color:var(--ink,#eef1ef);border-color:var(--hair-strong,rgba(0,168,107,.38))}.ds-filter[aria-pressed=true]{background:var(--green,#00a86b);border-color:var(--green,#00a86b);color:var(--on-green,#04140d)}.ds-filter[aria-pressed=true] span{color:var(--on-green,#04140d)}.ds-filter:focus-visible{outline:2px solid var(--green-light,#33bf89);outline-offset:3px}"
     },
     {
       "name": "Stack Chip",
@@ -351,7 +351,7 @@
       "refersTo": "chip",
       "description": "Tag di stack in mono dentro il pannello stack.",
       "html": "<span class=\"ds-chip\">Nuxt</span> <span class=\"ds-chip\">NestJS</span> <span class=\"ds-chip\">Java</span>",
-      "css": ".ds-chip{display:inline-block;padding:.28rem .6rem;border-radius:999px;font-family:var(--mono,'JetBrains Mono',monospace);font-size:.78rem;color:var(--ink,#eaf5f1);background:var(--surface-2,#1d2b27);border:1px solid var(--hair,rgba(0,168,107,.16))}"
+      "css": ".ds-chip{display:inline-block;padding:.28rem .6rem;border-radius:999px;font-family:var(--mono,'JetBrains Mono',monospace);font-size:.78rem;color:var(--ink,#eef1ef);background:var(--surface-2,#2e312f);border:1px solid var(--hair,rgba(0,168,107,.16))}"
     },
     {
       "name": "Pick Tile",
@@ -359,14 +359,14 @@
       "refersTo": "pick-tile",
       "description": "Card con screenshot reale 16:9, lift e alone verde in hover.",
       "html": "<a class=\"ds-pick\" href=\"#\"><div class=\"ds-pick-img\"></div><div class=\"ds-pick-body\"><h3>Bastion</h3><p>Microservizio di autenticazione open source.</p><p class=\"ds-meta\">2024 · NestJS · Postgres</p></div></a>",
-      "css": ".ds-pick{display:flex;flex-direction:column;max-width:420px;color:var(--ink,#eaf5f1);text-decoration:none;border-radius:18px;background:var(--surface,#121c19);border:1px solid var(--hair,rgba(0,168,107,.16));overflow:hidden;font-family:var(--sans,Manrope,sans-serif);transition:border-color .3s ease,transform .6s cubic-bezier(.16,1,.3,1),box-shadow .6s cubic-bezier(.16,1,.3,1)}.ds-pick:hover{border-color:var(--hair-strong,rgba(0,168,107,.38));transform:translateY(-4px);box-shadow:0 24px 50px -24px rgba(0,168,107,.45)}.ds-pick:focus-visible{outline:2px solid var(--green-light,#33bf89);outline-offset:3px}.ds-pick-img{aspect-ratio:16/9;background:var(--surface-2,#1d2b27)}.ds-pick-body{padding:1.25rem 1.4rem 1.4rem;display:grid;gap:.5rem}.ds-pick h3{margin:0;font-size:1.35rem;font-weight:700;letter-spacing:-.03em}.ds-pick p{margin:0;color:var(--ink-2,#c5d8d1)}.ds-pick .ds-meta{font-family:var(--mono,'JetBrains Mono',monospace);font-size:.78rem;color:var(--ink-3,#8fa89f)}"
+      "css": ".ds-pick{display:flex;flex-direction:column;max-width:420px;color:var(--ink,#eef1ef);text-decoration:none;border-radius:18px;background:var(--surface,#252725);border:1px solid var(--hair,rgba(0,168,107,.16));overflow:hidden;font-family:var(--sans,Manrope,sans-serif);transition:border-color .3s ease,transform .6s cubic-bezier(.16,1,.3,1),box-shadow .6s cubic-bezier(.16,1,.3,1)}.ds-pick:hover{border-color:var(--hair-strong,rgba(0,168,107,.38));transform:translateY(-4px);box-shadow:0 24px 50px -24px rgba(0,168,107,.45)}.ds-pick:focus-visible{outline:2px solid var(--green-light,#33bf89);outline-offset:3px}.ds-pick-img{aspect-ratio:16/9;background:var(--surface-2,#2e312f)}.ds-pick-body{padding:1.25rem 1.4rem 1.4rem;display:grid;gap:.5rem}.ds-pick h3{margin:0;font-size:1.35rem;font-weight:700;letter-spacing:-.03em}.ds-pick p{margin:0;color:var(--ink-2,#d1d5d2)}.ds-pick .ds-meta{font-family:var(--mono,'JetBrains Mono',monospace);font-size:.78rem;color:var(--ink-3,#a1a6a2)}"
     },
     {
       "name": "Works Ledger Row",
       "kind": "custom",
       "description": "Riga del registro lavori su details nativo: anno mono, nome, stack, cerchio + che ruota.",
       "html": "<details class=\"ds-row\"><summary><span class=\"ds-year\">2024</span><span class=\"ds-name\"><strong>Herald</strong><span>Progetto personale · <em>in corso</em></span></span><span class=\"ds-plus\">+</span></summary><p class=\"ds-desc\">Newsletter multilingua con webhook.</p></details>",
-      "css": ".ds-row{border-bottom:1px solid var(--hair,rgba(0,168,107,.16));font-family:var(--sans,Manrope,sans-serif);color:var(--ink,#eaf5f1)}.ds-row summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:5.5rem minmax(0,1fr) 2.5rem;gap:1.5rem;align-items:center;padding:1.35rem .25rem;border-radius:14px;transition:background-color .25s ease}.ds-row summary::-webkit-details-marker{display:none}.ds-row summary:hover,.ds-row[open] summary{background:rgba(0,168,107,.07)}.ds-row summary:focus-visible{outline:2px solid var(--green-light,#33bf89);outline-offset:-2px}.ds-year{font-family:var(--mono,'JetBrains Mono',monospace);font-size:.9rem;color:var(--green-light,#33bf89)}.ds-name{display:grid;gap:.15rem}.ds-name strong{font-size:1.5rem;letter-spacing:-.03em;transition:transform .4s cubic-bezier(.16,1,.3,1)}.ds-row summary:hover strong{transform:translateX(6px)}.ds-row[open] strong{color:var(--green-light,#33bf89)}.ds-name span{color:var(--ink-3,#8fa89f);font-size:.92rem}.ds-name em{font-style:normal;color:var(--green-light,#33bf89)}.ds-plus{width:2.5rem;height:2.5rem;display:grid;place-items:center;border-radius:50%;border:1px solid var(--hair,rgba(0,168,107,.16));transition:transform .45s cubic-bezier(.16,1,.3,1),background-color .2s ease}.ds-row[open] .ds-plus{transform:rotate(45deg);background:var(--green,#00a86b);border-color:var(--green,#00a86b);color:var(--on-green,#04140d)}.ds-desc{margin:0;padding:.75rem .25rem 2rem 7rem;color:var(--ink-2,#c5d8d1)}"
+      "css": ".ds-row{border-bottom:1px solid var(--hair,rgba(0,168,107,.16));font-family:var(--sans,Manrope,sans-serif);color:var(--ink,#eef1ef)}.ds-row summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:5.5rem minmax(0,1fr) 2.5rem;gap:1.5rem;align-items:center;padding:1.35rem .25rem;border-radius:14px;transition:background-color .25s ease}.ds-row summary::-webkit-details-marker{display:none}.ds-row summary:hover,.ds-row[open] summary{background:rgba(0,168,107,.07)}.ds-row summary:focus-visible{outline:2px solid var(--green-light,#33bf89);outline-offset:-2px}.ds-year{font-family:var(--mono,'JetBrains Mono',monospace);font-size:.9rem;color:var(--green-light,#33bf89)}.ds-name{display:grid;gap:.15rem}.ds-name strong{font-size:1.5rem;letter-spacing:-.03em;transition:transform .4s cubic-bezier(.16,1,.3,1)}.ds-row summary:hover strong{transform:translateX(6px)}.ds-row[open] strong{color:var(--green-light,#33bf89)}.ds-name span{color:var(--ink-3,#a1a6a2);font-size:.92rem}.ds-name em{font-style:normal;color:var(--green-light,#33bf89)}.ds-plus{width:2.5rem;height:2.5rem;display:grid;place-items:center;border-radius:50%;border:1px solid var(--hair,rgba(0,168,107,.16));transition:transform .45s cubic-bezier(.16,1,.3,1),background-color .2s ease}.ds-row[open] .ds-plus{transform:rotate(45deg);background:var(--green,#00a86b);border-color:var(--green,#00a86b);color:var(--on-green,#04140d)}.ds-desc{margin:0;padding:.75rem .25rem 2rem 7rem;color:var(--ink-2,#d1d5d2)}"
     }
   ],
   "narrative": {
