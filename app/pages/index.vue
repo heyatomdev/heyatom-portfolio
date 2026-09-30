@@ -434,7 +434,7 @@ function untilt(e: PointerEvent) {
   gap: 0.55rem;
   margin-bottom: 1.6rem;
   padding: 0.4rem 0.9rem 0.4rem 0.75rem;
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   font-size: 0.88rem;
   font-weight: 600;
   color: var(--green-light);
@@ -463,7 +463,7 @@ function untilt(e: PointerEvent) {
   isolation: isolate;
   color: inherit;
   text-decoration: none;
-  border-radius: 20px;
+  border-radius: var(--r-lg);
 }
 .stage::before {
   content: '';
@@ -480,7 +480,7 @@ function untilt(e: PointerEvent) {
   position: absolute;
   margin: 0;
   width: 78%;
-  border-radius: 14px;
+  border-radius: var(--r-sm);
   overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--hair-strong);
@@ -589,7 +589,7 @@ function untilt(e: PointerEvent) {
   align-items: center;
   color: inherit;
   text-decoration: none;
-  border-radius: 18px;
+  border-radius: var(--r-lg);
   background: var(--surface);
   border: 1px solid var(--hair);
   overflow: hidden;
@@ -699,7 +699,7 @@ function untilt(e: PointerEvent) {
   position: sticky;
   top: 6.5rem;
   padding: 1.6rem;
-  border-radius: 18px;
+  border-radius: var(--r-lg);
   background: var(--surface);
   border: 1px solid var(--hair);
 }
@@ -709,7 +709,7 @@ function untilt(e: PointerEvent) {
 .stack dd { margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .chip {
   padding: 0.28rem 0.6rem;
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   font-size: 0.78rem;
   color: var(--ink);
   background: var(--surface-2);
@@ -748,7 +748,7 @@ function untilt(e: PointerEvent) {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  border-radius: 14px;
+  border-radius: var(--r-sm);
   filter: saturate(0.85);
   transition: filter 0.5s ease;
 }

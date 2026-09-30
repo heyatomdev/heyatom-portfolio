@@ -74,7 +74,7 @@ const anchors = [{ to: '/#percorso', label: 'Percorso' }, { to: '/#contatti', la
   padding: 0.6rem 1rem;
   background: var(--green);
   color: var(--on-green);
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   font-weight: 600;
 }
 .skip:focus { top: 1rem; }
@@ -93,7 +93,7 @@ const anchors = [{ to: '/#percorso', label: 'Percorso' }, { to: '/#contatti', la
   align-items: center;
   gap: 0.5rem;
   padding: 0.45rem 0.45rem 0.45rem 0.9rem;
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   background: rgba(18, 28, 25, 0.72);
   border: 1px solid var(--hair);
   backdrop-filter: blur(18px) saturate(1.3);
@@ -144,7 +144,7 @@ const anchors = [{ to: '/#percorso', label: 'Percorso' }, { to: '/#contatti', la
 .links a {
   display: block;
   padding: 0.55rem 0.9rem;
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   color: var(--ink-2);
   text-decoration: none;
   font-weight: 600;

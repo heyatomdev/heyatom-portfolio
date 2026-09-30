@@ -64,7 +64,7 @@ useMotion(root, (mm, el) => {
 
 <template>
   <div ref="root" class="wrap page">
-    <header class="head" data-intro>
+    <header class="head hexed" data-intro>
       <h1>Uses</h1>
       <p>
         Hardware, software e servizi che compongono la mia postazione.
@@ -139,6 +139,16 @@ useMotion(root, (mm, el) => {
   gap: 0.75rem;
 }
 .group h2 { font-size: 0.88rem; font-weight: 700; color: var(--green-light); letter-spacing: 0; }
+/* Single cell of the site's hex pattern as section marker. */
+.group h2::before {
+  content: '';
+  display: inline-block;
+  width: 0.75em;
+  aspect-ratio: 1.155;
+  margin-right: 0.5em;
+  background: var(--green);
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+}
 .count { font-size: 0.8rem; color: var(--ink-3); }
 .anchor { color: inherit; text-decoration: none; }
 .hash { margin-left: 0.3rem; opacity: 0; color: var(--ink-3); transition: opacity 0.2s ease; }
@@ -153,7 +163,7 @@ li {
   gap: 0.1rem;
   padding: 0.6rem 0.75rem;
   margin: 0 -0.75rem;
-  border-radius: 12px;
+  border-radius: var(--r-sm);
   transition: background-color 0.25s ease;
 }
 li:hover { background: rgba(0, 168, 107, 0.07); }
@@ -182,7 +192,7 @@ li:hover .out { opacity: 1; transform: translate(2px, -2px); }
   display: inline-block;
   margin-left: 0.4rem;
   padding: 0.15rem 0.55rem;
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0;

@@ -101,7 +101,7 @@ useMotion(root, (mm, el) => {
 <template>
   <div ref="root">
   <div class="wrap page">
-    <header class="head" data-intro>
+    <header class="head hexed" data-intro>
       <h1>Lavori</h1>
       <p>
         {{ projects.length }} progetti per clienti, associazioni e community, dal 2016 a oggi.
@@ -156,7 +156,7 @@ useMotion(root, (mm, el) => {
       </li>
     </ul>
 
-    <section id="piattaforma" class="platform" aria-labelledby="platform-title">
+    <section id="piattaforma" class="platform hexed" aria-labelledby="platform-title">
       <div class="platform-head">
         <h2 id="platform-title">La base comune</h2>
         <p>
@@ -217,7 +217,7 @@ useMotion(root, (mm, el) => {
       </ul>
     </section>
 
-    <section class="next" aria-labelledby="next-title">
+    <section class="next hexed" aria-labelledby="next-title">
       <h2 id="next-title">Il prossimo potrebbe essere il tuo.</h2>
       <a class="btn btn--primary" href="/#contatti">Raccontami il progetto <Icon name="arrow-right" /></a>
     </section>
@@ -275,7 +275,7 @@ summary::before {
   content: '';
   position: absolute;
   inset: 0 -1rem;
-  border-radius: 14px;
+  border-radius: var(--r-sm);
   background: rgba(0, 168, 107, 0.07);
   opacity: 0;
   transition: opacity 0.25s ease;
@@ -323,7 +323,7 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
-  border-radius: 14px;
+  border-radius: var(--r-sm);
   border: 1px solid var(--hair-strong);
   background: var(--surface-2);
   box-shadow: 0 24px 50px -24px rgba(0, 0, 0, 0.8);
@@ -341,7 +341,7 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
 }
 .feats li {
   padding: 0.3rem 0.7rem;
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   font-size: 0.85rem;
   color: var(--ink);
   background: var(--surface-2);
@@ -360,7 +360,7 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
   z-index: 40;
   width: 320px;
   pointer-events: none;
-  border-radius: 12px;
+  border-radius: var(--r-sm);
   overflow: hidden;
   border: 1px solid var(--hair-strong);
   box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8);
@@ -373,7 +373,13 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
 .peek img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 @media (hover: none), (max-width: 900px) { .peek { display: none; } }
 
-.platform { margin-top: var(--section-far); }
+.platform {
+  margin-top: var(--section-far);
+  --hex-inset: -20% 55% 30% -10%;
+  --hex-pos: center;
+  --hex-at: 50% 45%;
+  --hex-o: 0.1;
+}
 .platform-head {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
@@ -391,7 +397,7 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
   width: max-content;
   margin: clamp(2.5rem, 5vw, 3.5rem) auto 0;
   padding: 0.75rem 1.4rem;
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   font-weight: 700;
   color: var(--on-green);
   background: var(--green);
@@ -433,7 +439,7 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
   flex-direction: column;
   gap: 0.5rem;
   padding: 1.4rem 1.3rem 1.3rem;
-  border-radius: 18px;
+  border-radius: var(--r-lg);
   background: var(--surface);
   border: 1px solid var(--hair);
   scroll-margin-top: 8rem;
@@ -476,7 +482,7 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
 .svc-feats { list-style: none; margin: 0.25rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem; }
 .svc-feats li {
   padding: 0.22rem 0.6rem;
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   font-size: 0.8rem;
   color: var(--ink);
   background: var(--surface-2);
@@ -520,7 +526,7 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
   padding: 1.1rem 0.25rem;
   color: inherit;
   text-decoration: none;
-  border-radius: 14px;
+  border-radius: var(--r-sm);
   transition: background-color 0.25s ease;
 }
 .tool-list a:hover { background: rgba(0, 168, 107, 0.07); }
@@ -547,11 +553,14 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
   gap: 1.5rem;
   margin: var(--section) 0;
   padding: clamp(2rem, 4vw, 3rem);
-  border-radius: 22px;
+  border-radius: var(--r-lg);
   background:
     radial-gradient(ellipse 70% 120% at 0% 0%, rgba(0, 168, 107, 0.2), transparent 70%),
     var(--surface);
   border: 1px solid var(--hair);
+  overflow: hidden;
+  --hex-inset: -40% 0 -40% 50%;
+  --hex-o: 0.18;
 }
 .next h2 { font-size: clamp(1.6rem, 3.2vw, 2.5rem); max-width: 18ch; }
 

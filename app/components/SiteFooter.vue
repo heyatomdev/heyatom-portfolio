@@ -1,5 +1,5 @@
 <template>
-  <footer class="ftr">
+  <footer class="ftr hexed">
     <div class="wrap row">
       <p>
         <img src="/favicon.svg" alt="" width="22" height="22">
@@ -22,6 +22,9 @@
   padding: 2.25rem 0 2.75rem;
   color: var(--ink-3);
   font-size: 0.92rem;
+  overflow: hidden;
+  --hex-inset: 0 0 0 60%;
+  --hex-o: 0.09;
 }
 .row {
   display: flex;
