@@ -4,7 +4,7 @@ import { gsap, magnetic, MOTION_OK, revealLines, SplitText, useMotion } from '~/
 
 useSeoMeta({
   title: 'Lavori',
-  description: `${projects.length} progetti di Andrea Tombolato dal 2016 per clienti, associazioni e community, costruiti su una piattaforma comune per accessi, immagini, contenuti ed eventi.`,
+  description: `${projects.length} progetti di Andrea Tombolato dal 2016 per clienti, associazioni e community, e la base comune su cui costruisco i nuovi: accessi, immagini, contenuti ed eventi.`,
   ogTitle: 'Lavori · HeyAtom',
   ogDescription: `${projects.length} progetti dal 2016 per clienti, associazioni e community.`,
   ogImage: `${useRuntimeConfig().public.siteUrl}/og-works.jpg`,

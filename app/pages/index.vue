@@ -14,7 +14,7 @@ const bySlug = (s: string) => works.find(w => w.slug === s)!
 const deck = ['element', 'sgweb', 'kaish-dbd'].map(bySlug)
 
 const picks = [
-  { slug: 'kaish-dbd', line: 'Community e build builder per Dead by Daylight: utenti, ruoli, wiki e traduzione completa.' },
+  { slug: 'kaish-dbd', line: 'Community e costruttore di build per Dead by Daylight: utenti, ruoli, wiki e traduzione completa.' },
   { slug: 'sgweb', line: 'Il sito dei corsi di Tai Chi e Qi Gong: sedi, orari e contatto diretto, in italiano e inglese.' },
   { slug: 'element', line: 'Il sito del network e-sport, con lo stato live degli streamer dalle API di Twitch.' },
 ].map(p => ({ ...bySlug(p.slug), line: p.line }))
@@ -22,7 +22,7 @@ const picks = [
 const offers = [
   {
     title: 'Un sito per la tua associazione o attività',
-    text: 'Chiaro, veloce, facile da aggiornare. Si legge bene dal telefono e ti trovano su Google.',
+    text: 'Chiaro, veloce, facile da aggiornare. Si legge bene dal telefono ed è pronto per Google.',
     examples: ['prociv', 'puma-arts'],
   },
   {
@@ -31,9 +31,9 @@ const offers = [
     examples: ['kaish-dbd', 'element'],
   },
   {
-    title: 'API e integrazioni',
-    text: 'Collegare sistemi che non si parlano, automatizzare, e tenere tutto acceso in produzione.',
-    examples: ['alertconnector', 'fileharbor'],
+    title: 'Collegare i tuoi strumenti',
+    text: 'Far parlare tra loro sistemi che non si parlano, automatizzare i passaggi ripetitivi e farli funzionare senza intoppi.',
+    examples: ['beacon', 'alertconnector'],
   },
 ].map(o => ({ ...o, examples: o.examples.map(bySlug) }))
 
@@ -42,13 +42,13 @@ const path = [
     when: '2016 → oggi',
     role: 'Full-stack developer',
     org: 'Medas Solutions',
-    text: 'Software in ambito sanitario con Java, Node.js e Vue: dossier online per dare ai pazienti accesso a referti e documentazione clinica. Sistemi dove continuità e affidabilità non sono negoziabili.',
+    text: 'Software in ambito sanitario con Java, Node.js e Vue: dossier online per dare ai pazienti accesso a referti e documentazione clinica.',
   },
   {
     when: '2020 → oggi',
     role: 'Consiglio direttivo',
     org: 'Element Gaming',
-    text: 'Gestione di una community gaming no-profit: coordinamento del team, decisioni organizzative, nuove iniziative.',
+    text: 'Gestione di una community gaming no profit: coordinamento del team, decisioni organizzative, nuove iniziative.',
   },
   {
     when: '2019 → 2020',
@@ -65,9 +65,10 @@ const path = [
 ]
 
 const stack = [
-  { group: 'Frontend', items: ['Vue', 'Nuxt', 'TypeScript', 'Vuetify', 'Sass'] },
-  { group: 'Backend', items: ['Node.js', 'NestJS', 'Java', 'Grails', 'Prisma', 'PostgreSQL', 'MySQL'] },
-  { group: 'Infrastruttura', items: ['Docker', 'NGINX', 'Git', 'Swagger'] },
+  { group: 'Frontend', items: ['Vue', 'Nuxt', 'TypeScript', 'Vuetify', 'Pinia', 'GSAP'] },
+  { group: 'Backend', items: ['Node.js', 'NestJS', 'Prisma', 'PostgreSQL', 'Java'] },
+  { group: 'Infrastruttura', items: ['Docker', 'NGINX', 'GitHub Actions', 'Prometheus'] },
+  { group: 'Integrazioni', items: ['Stripe', 'Brevo', 'Twitch', 'Discord', 'OAuth'] },
 ]
 
 const travels = [
@@ -218,7 +219,7 @@ function untilt(e: PointerEvent) {
         Costruisco <span class="nw">siti e web</span> app <span class="nw">su misura.</span>
       </h1>
       <p class="lead">
-        Per associazioni, professionisti e piccole realtà. Sviluppo full-stack dal 2016, dalla prima riga al deploy.
+        Per associazioni, professionisti e piccole realtà. Sviluppo full-stack dal 2016, dalla prima riga alla messa online.
         E parli sempre con me, non con un’agenzia.
       </p>
       <div class="actions">
@@ -366,8 +367,8 @@ function untilt(e: PointerEvent) {
       </div>
       <div class="close-copy">
         <h2 id="close-title">Hai un progetto in mente? Raccontamelo.</h2>
-        <p>Seguo soprattutto no profit e piccole realtà del gaming e del benessere, come palestre, dojo e massaggiatori. Due righe su cosa ti serve bastano: rispondo io, a tutti i messaggi, e se non sono la persona giusta te lo dico.</p>
-        <p class="aside">Non cerco lavoro attivamente, ma se hai una proposta interessante scrivimi pure.</p>
+        <p>Lavoro con associazioni, professionisti e piccole realtà. Due righe su cosa ti serve bastano: rispondo a tutti, e rispondo io. Se non sono la persona giusta, te lo dico.</p>
+        <p class="aside">Sei un recruiter? Non cerco un impiego, ma una proposta interessante la leggo volentieri.</p>
         <a class="mail" href="mailto:hey@heyatom.dev">hey@heyatom.dev</a>
         <div class="actions">
           <a class="btn btn--primary" href="mailto:hey@heyatom.dev?subject=Ciao%20Andrea"><Icon name="mail" /> Scrivimi una mail</a>
