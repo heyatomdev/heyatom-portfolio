@@ -203,4 +203,7 @@ const anchors = computed(() => [{ to: localePath('/#percorso'), label: t('nav.pa
   .links li:not(:first-child), .avail { display: none; }
   .links a { padding: 0.55rem 0.7rem; }
 }
+@media (max-width: 480px) {
+  .brand span { display: none; }
+}
 </style>

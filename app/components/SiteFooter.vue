@@ -7,20 +7,20 @@ const switchLocalePath = useSwitchLocalePath()
 <template>
   <footer class="ftr hexed">
     <div class="wrap row">
-      <p>
+      <p class="me">
         <img src="/favicon.svg" alt="" width="22" height="22">
         {{ t('footer.bio') }}
       </p>
+      <div class="lang" role="group" :aria-label="t('footer.language')">
+        <!-- Plain links: a full load renders the page in the new language (GSAP's split text can't be patched live).
+             The cookie goes first, or / would bounce an English visitor back to /en. -->
+        <a v-for="l in ['it', 'en']" :key="l" :href="switchLocalePath(l)" :lang="l" :hreflang="l" :aria-current="locale === l ? 'true' : undefined" @click="setLocaleCookie(l)">{{ l.toUpperCase() }}</a>
+      </div>
       <ul>
         <li><a href="https://github.com/andreacw5" rel="me noopener" target="_blank">GitHub</a></li>
         <li><a href="https://www.linkedin.com/in/atombolato" rel="me noopener" target="_blank">LinkedIn</a></li>
         <li><NuxtLink :to="localePath('/uses')">Uses</NuxtLink></li>
         <li><a href="mailto:hey@heyatom.dev">hey@heyatom.dev</a></li>
-        <li class="lang" role="group" :aria-label="t('footer.language')">
-          <!-- Plain links: a full load renders the page in the new language (GSAP's split text can't be patched live).
-               The cookie goes first, or / would bounce an English visitor back to /en. -->
-          <a v-for="l in ['it', 'en']" :key="l" :href="switchLocalePath(l)" :lang="l" :hreflang="l" :aria-current="locale === l ? 'true' : undefined" @click="setLocaleCookie(l)">{{ l.toUpperCase() }}</a>
-        </li>
       </ul>
       <p class="tag">Code meets personality · {{ new Date().getFullYear() }}</p>
     </div>
@@ -38,19 +38,24 @@ const switchLocalePath = useSwitchLocalePath()
   --hex-o: 0.09;
 }
 .row {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem 2rem;
+  gap: 1.25rem 2rem;
 }
-.row p:first-child { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink-2); }
-ul { display: flex; gap: 1.4rem; list-style: none; margin: 0; padding: 0; }
+.row p { margin: 0; }
+.me { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink-2); }
+ul { display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; list-style: none; margin: 0; padding: 0; }
 a { color: var(--ink-2); text-decoration: none; }
 a:hover { color: var(--green-light); }
-.row p:first-child img { transition: transform 0.5s var(--ease-out); transform-origin: 50% 85%; }
-.row p:first-child:hover img { transform: rotate(-12deg); }
+.me img { transition: transform 0.5s var(--ease-out); transform-origin: 50% 85%; }
+.me:hover img { transform: rotate(-12deg); }
 .tag { font-size: 0.85rem; }
+@media (max-width: 640px) {
+  .row { grid-template-columns: 1fr; }
+  .lang { order: 1; }
+  .tag { order: 2; }
+}
 .lang { display: inline-flex; gap: 0.2rem; }
 .lang a {
   font-weight: 600;
