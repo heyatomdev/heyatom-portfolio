@@ -1,5 +1,5 @@
 // Fonte: website4/content/projects/*.md (IT). Rigenera da lì se cambiano.
-import { worksEn } from "./works.en"
+import { worksEn } from "./works.en.ts"
 export type WorkKind = "cliente" | "open-source" | "personale"
 
 export interface Work {
