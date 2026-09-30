@@ -47,4 +47,17 @@ export const uses: UsesGroup[] = [
       { name: 'Better Stack', url: 'https://betterstack.com/', note: 'Monitoraggio uptime e status page per le mie applicazioni. Mi avvisa appena qualcosa va giù.' },
     ],
   },
+  {
+    title: 'Skill per Claude',
+    items: [
+      { name: 'Caveman', url: 'https://github.com/JuliusBrussee/caveman', tag: 'costi', note: 'Risposte compresse all\'osso: meno token, stessa sostanza tecnica.' },
+      { name: 'Ponytail', url: 'https://github.com/DietrichGebert/ponytail', tag: 'codice', note: 'Spinge verso la soluzione più semplice che funziona: meno codice, meno astrazioni inutili.' },
+      { name: 'graphify', url: 'https://github.com/Graphify-Labs/graphify', tag: 'codice', note: 'Trasforma codebase, documentazione, schemi SQL e config in un knowledge graph interrogabile.' },
+      { name: 'Impeccable', url: 'https://github.com/pbakaus/impeccable', tag: 'design', note: 'Linee guida di design per agenti AI: gerarchia, tipografia, spaziature, accessibilità.' },
+      { name: 'Taste Skill', url: 'https://github.com/Leonxlnx/taste-skill', tag: 'design', note: 'Dà gusto alle interfacce generate, lontano dai layout da template.' },
+      { name: 'Logo Design', url: 'https://github.com/kaankiziltug/logo-design-skill/tree/main', tag: 'design', note: 'Dal brief al logo in SVG, con test di leggibilità e varianti pronte per la consegna.' },
+      { name: 'Stop Slop', url: 'https://github.com/hardikpandya/stop-slop', tag: 'scrittura', note: 'Toglie dai testi i pattern prevedibili della scrittura AI.' },
+      { name: 'Humanizer', url: 'https://github.com/blader/humanizer', tag: 'scrittura', note: 'Riscrive il testo perché suoni come chi scrive, senza cambiarne il senso.' },
+    ],
+  },
 ]

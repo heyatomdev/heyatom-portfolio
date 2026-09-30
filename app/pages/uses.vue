@@ -11,6 +11,19 @@ useSeoMeta({
 
 const updatedLabel = new Date(updated).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })
 const pad = (n: number) => String(n).padStart(2, '0')
+// Stable anchor per group: "Design & produttività" → "design-produttivita".
+const slug = (t: string) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+
+const copied = ref('')
+let copiedTimer: ReturnType<typeof setTimeout> | undefined
+// The href still updates the URL; copying is a bonus where the clipboard is available.
+function copyLink(id: string) {
+  navigator.clipboard?.writeText(`${location.origin}${location.pathname}#${id}`).then(() => {
+    copied.value = id
+    clearTimeout(copiedTimer)
+    copiedTimer = setTimeout(() => { copied.value = '' }, 1800)
+  }).catch(() => {})
+}
 
 const root = ref<HTMLElement>()
 useMotion(root, (mm, el) => {
@@ -59,11 +72,14 @@ useMotion(root, (mm, el) => {
       </p>
     </header>
 
-    <section v-for="(g, n) in uses" :key="g.title" class="group" :aria-labelledby="`g-${n}`">
+    <section v-for="g in uses" :id="slug(g.title)" :key="g.title" class="group" :aria-labelledby="`${slug(g.title)}-h`">
       <span class="rule" aria-hidden="true" />
       <div class="side">
-        <h2 :id="`g-${n}`">{{ g.title }}</h2>
+        <h2 :id="`${slug(g.title)}-h`">
+          <a :href="`#${slug(g.title)}`" class="anchor" :aria-label="`${g.title}, copia link alla sezione`" @click="copyLink(slug(g.title))">{{ g.title }}<span class="hash" aria-hidden="true">#</span></a>
+        </h2>
         <span class="mono count" aria-hidden="true">{{ pad(g.items.length) }}</span>
+        <span class="mono copied" role="status">{{ copied === slug(g.title) ? 'link copiato' : '' }}</span>
       </div>
       <ul>
         <li v-for="i in g.items" :key="i.name">
@@ -124,6 +140,11 @@ useMotion(root, (mm, el) => {
 }
 .group h2 { font-size: 0.88rem; font-weight: 700; color: var(--green-light); letter-spacing: 0; }
 .count { font-size: 0.8rem; color: var(--ink-3); }
+.anchor { color: inherit; text-decoration: none; }
+.hash { margin-left: 0.3rem; opacity: 0; color: var(--ink-3); transition: opacity 0.2s ease; }
+.anchor:hover .hash, .anchor:focus-visible .hash { opacity: 1; }
+.anchor:focus-visible { outline: 2px solid var(--green-light); outline-offset: 3px; border-radius: 4px; }
+.copied { font-size: 0.75rem; color: var(--green-light); }
 
 ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
 li {
