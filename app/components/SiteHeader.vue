@@ -42,8 +42,8 @@ const anchors = [{ to: '/#percorso', label: 'Percorso' }, { to: '/#contatti', la
   <header ref="hdr" class="hdr">
     <nav class="pill" aria-label="Principale">
       <NuxtLink to="/" class="brand" aria-label="HeyAtom, home">
-        <img src="/favicon.svg" alt="" width="30" height="30">
-        <span>hey<b>atom</b></span>
+        <img src="/favicon.svg" alt="" width="36" height="36">
+        <span>HeyAtom</span>
       </NuxtLink>
 
       <ul class="links">
@@ -126,12 +126,11 @@ const anchors = [{ to: '/#percorso', label: 'Percorso' }, { to: '/#contatti', la
   gap: 0.55rem;
   color: var(--ink);
   text-decoration: none;
-  font-weight: 600;
-  font-size: 1.05rem;
+  font-weight: 800;
+  font-size: 1.3rem;
   letter-spacing: -0.02em;
   margin-right: auto;
 }
-.brand b { font-weight: 800; color: var(--green-light); }
 .brand img { transition: transform 0.5s var(--ease-out); transform-origin: 50% 85%; }
 .brand:hover img { transform: rotate(-12deg); }
 

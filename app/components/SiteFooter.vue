@@ -34,5 +34,7 @@
 ul { display: flex; gap: 1.4rem; list-style: none; margin: 0; padding: 0; }
 a { color: var(--ink-2); text-decoration: none; }
 a:hover { color: var(--green-light); }
+.row p:first-child img { transition: transform 0.5s var(--ease-out); transform-origin: 50% 85%; }
+.row p:first-child:hover img { transform: rotate(-12deg); }
 .tag { font-size: 0.85rem; }
 </style>
