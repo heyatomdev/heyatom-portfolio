@@ -35,12 +35,12 @@
   },
   "home": {
     "seo": {
-      "description": "Sono Andrea (HeyAtom), sviluppatore full-stack dal 2016. Costruisco siti e web app su misura per associazioni, professionisti e piccole realtà. Parli sempre con me.",
+      "description": "Sono Andrea (HeyAtom), sviluppatore full-stack dal 2016. Costruisco siti e web app su misura per associazioni, professionisti e piccole realtà.",
       "ogDescription": "Siti e web app su misura, costruiti da una persona sola. Vue, Nuxt, Node, NestJS e Java dal 2016."
     },
     "picks": {
-      "kaish": "Community e costruttore di build per Dead by Daylight: utenti, ruoli, wiki e traduzione completa.",
-      "sgweb": "Il sito dei corsi di Tai Chi e Qi Gong: sedi, orari e contatto diretto, in italiano e inglese.",
+      "kaish": "Il sito dello streamer Kaish79: editor di build per Dead by Daylight, utenti e ruoli, wiki del gioco interamente tradotta.",
+      "sgweb": "Il sito di un insegnante di Tai Chi e Qi Gong: sedi, orari e contatto diretto, in italiano e inglese.",
       "element": "Il sito del network e-sport, con lo stato live degli streamer dalle API di Twitch.",
       "title": "Cose che ho costruito e che girano davvero.",
       "all": "Tutti i {n} lavori"
@@ -56,7 +56,7 @@
       },
       "tools": {
         "title": "Collegare i tuoi strumenti",
-        "text": "Far parlare tra loro sistemi che non si parlano, automatizzare i passaggi ripetitivi e farli funzionare senza intoppi."
+        "text": "Far parlare tra loro sistemi che non si parlano e automatizzare i passaggi ripetitivi."
       },
       "title": "Cosa posso fare per te.",
       "example": "Per esempio",
@@ -68,11 +68,11 @@
       "medas": "Software in ambito sanitario con Java, Node.js e Vue: dossier online per dare ai pazienti accesso a referti e documentazione clinica.",
       "since2020": "2020 → oggi",
       "board": "Consiglio direttivo",
-      "elementBoard": "Gestione di una community gaming no profit: coordinamento del team, decisioni organizzative, nuove iniziative.",
+      "elementBoard": "Direttivo di una community gaming no profit: guido il team di sviluppo dietro al sito e all’infrastruttura e partecipo alle scelte organizzative.",
       "devPm": "Full-stack developer e project manager",
       "elementDev": "Piattaforma web del network con Nuxt e Node.js, dashboard per team e streamer, strumenti interni.",
       "since2015": "2015 → oggi",
-      "volunteer": "Volontario, capo squadra, consigliere",
+      "volunteer": "Consigliere e capo squadra",
       "years": "{n} anno | {n} anni",
       "volunteering": "Volontariato",
       "prociv": "Protezione Civile",
@@ -124,27 +124,26 @@
       "leadAgency": "E parli sempre con me, non con un’agenzia.",
       "someWorks": "Alcuni lavori",
       "hi": "Ciao, sono Andrea.",
-      "title": "Costruisco {a} app {b}",
-      "titleA": "siti e web",
-      "titleB": "su misura."
+      "title": "Costruisco {a} {b}",
+      "titleA": "siti e",
+      "titleB": "web app su misura."
     },
     "facts": {
       "label": "In breve",
       "medas": "Full-stack in Medas Solutions",
       "element": "Consiglio direttivo Element Gaming",
-      "since2015": "dal 2015",
-      "prociv": "Volontario in Protezione Civile"
+         "prociv": "Volontario in Protezione Civile"
     },
     "off": {
       "title": "Fuori dallo schermo.",
-      "text": "Montagna, viaggi, gaming. Mi ricaricano, e secondo me si vede nella cura dei dettagli.",
+      "text": "Montagna, viaggi, gaming. Mi ricaricano.",
       "label": "Foto di viaggio"
     },
     "close": {
       "title": "Hai un progetto in mente? Raccontamelo.",
-      "text": "Lavoro con associazioni, professionisti e piccole realtà. Due righe su cosa ti serve bastano: rispondo a tutti, e rispondo io. Se non sono la persona giusta, te lo dico.",
+      "text": "Due righe su cosa ti serve bastano: rispondo a tutti, e rispondo io. Se non sono la persona giusta, te lo dico.",
       "recruiter": "Sei un recruiter? Non cerco un impiego, ma una proposta interessante la leggo volentieri.",
-      "subject": "Ciao%20Andrea",
+      "subject": "Progetto%20da%20heyatom.dev",
       "mail": "Scrivimi una mail"
     }
   },

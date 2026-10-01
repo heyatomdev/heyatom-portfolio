@@ -35,12 +35,12 @@
   },
   "home": {
     "seo": {
-      "description": "I’m Andrea (HeyAtom), a full-stack developer since 2016. I build custom websites and web apps for associations, professionals and small organizations. You always talk to me.",
+      "description": "I’m Andrea (HeyAtom), a full-stack developer since 2016. I build custom websites and web apps for associations, professionals and small organizations.",
       "ogDescription": "Custom websites and web apps, built by one person. Vue, Nuxt, Node, NestJS and Java since 2016."
     },
     "picks": {
-      "kaish": "Community and build creator for Dead by Daylight: users, roles, a wiki and full translation.",
-      "sgweb": "The site for Tai Chi and Qi Gong classes: venues, schedules and direct contact, in Italian and English.",
+      "kaish": "Streamer Kaish79’s site: a build editor for Dead by Daylight, users and roles, and a fully translated game wiki.",
+      "sgweb": "A Tai Chi and Qi Gong teacher’s site: venues, schedules and direct contact, in Italian and English.",
       "element": "The esports network’s site, with streamers’ live status from the Twitch API.",
       "title": "Things I built that actually run.",
       "all": "All {n} works"
@@ -52,11 +52,11 @@
       },
       "app": {
         "title": "A custom web app",
-        "text": "Private areas, management tools, tools for your community: what a brochure site can’t do."
+        "text": "Members’ areas, back-office apps, tools for your community: what a brochure site can’t do."
       },
       "tools": {
         "title": "Connecting your tools",
-        "text": "Getting systems that don’t talk to each other talking, automating the repetitive steps and keeping them running smoothly."
+        "text": "Getting systems that don’t talk to each other talking, and automating the repetitive steps."
       },
       "title": "What I can do for you.",
       "example": "For example",
@@ -68,11 +68,11 @@
       "medas": "Healthcare software with Java, Node.js and Vue: online records that give patients access to test results and clinical documents.",
       "since2020": "2020 → now",
       "board": "Board member",
-      "elementBoard": "Running a non-profit gaming community: team coordination, organizational decisions, new initiatives.",
+      "elementBoard": "Board of a non-profit gaming community: I lead the dev team behind the site and infrastructure and take part in organizational decisions.",
       "devPm": "Full-stack developer and project manager",
       "elementDev": "The network’s web platform with Nuxt and Node.js, dashboards for teams and streamers, internal tools.",
       "since2015": "2015 → now",
-      "volunteer": "Volunteer, squad leader, board member",
+      "volunteer": "Board member and team leader",
       "years": "{n} year | {n} years",
       "volunteering": "Volunteering",
       "prociv": "Civil Protection",
@@ -132,19 +132,18 @@
       "label": "In short",
       "medas": "Full-stack at Medas Solutions",
       "element": "Element Gaming board member",
-      "since2015": "since 2015",
-      "prociv": "Civil Protection volunteer"
+         "prociv": "Civil Protection volunteer"
     },
     "off": {
       "title": "Away from the screen.",
-      "text": "Mountains, travel, gaming. They recharge me, and I think it shows in the attention to detail.",
+      "text": "Mountains, travel, gaming. They recharge me.",
       "label": "Travel photos"
     },
     "close": {
       "title": "Got a project in mind? Tell me about it.",
-      "text": "I work with associations, professionals and small organizations. A couple of lines on what you need is enough: I reply to everyone, and I reply myself. If I’m not the right person, I’ll tell you.",
+      "text": "A couple of lines on what you need are enough: I reply to everyone, and it’s always me. If I’m not the right person, I’ll tell you.",
       "recruiter": "Are you a recruiter? I’m not looking for a job, but I’m happy to read an interesting offer.",
-      "subject": "Hi%20Andrea",
+      "subject": "Project%20from%20heyatom.dev",
       "mail": "Send me an email"
     }
   },
