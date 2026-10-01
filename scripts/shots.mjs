@@ -1,7 +1,10 @@
-// Screenshots of client sites -> public/shots/<slug>/<n>.webp (stable names, overwrite on rerun).
-// Usage: pnpm shots [slug...]
+// Screenshots of client sites -> public/shots/<slug>/<n>.webp (stable names, overwrite on rerun),
+// plus <n>-<w>.webp for every width in SHOT_WIDTHS (what `img()` serves in srcset).
+// Usage: pnpm shots [slug...]      capture + variants
+//        pnpm shots --resize       variants only, from the <n>.webp already on disk
 import { chromium } from 'playwright'
-import { mkdir, writeFile } from 'node:fs/promises'
+import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
+import { SHOT_WIDTHS } from '../app/utils/img.ts'
 
 const SITES = {
   'kaish-dbd': {
@@ -64,11 +67,46 @@ const SITES = {
   },
 }
 
-const slugs = process.argv.slice(2).length ? process.argv.slice(2) : Object.keys(SITES)
+const resizeOnly = process.argv.includes('--resize')
+const args = process.argv.slice(2).filter(a => a !== '--resize')
+const slugs = args.length ? args : resizeOnly ? await readdir('public/shots') : Object.keys(SITES)
 const browser = await chromium.launch()
 const ctx = await browser.newContext({ viewport: { width: 1440, height: 810 }, deviceScaleFactor: 2, locale: 'it-IT' })
 const page = await ctx.newPage()
 const encoder = await ctx.newPage() // about:blank, no site CSP blocking data: URLs
+
+// Chromium encodes (and resizes) WebP natively, no image lib needed. width 0 = keep size.
+async function toWebp(buf, mime, width = 0) {
+  const b64 = await encoder.evaluate(async ([b64, mime, width]) => {
+    const blob = await (await fetch(`data:${mime};base64,${b64}`)).blob()
+    const bmp = await createImageBitmap(blob, width ? { resizeWidth: width, resizeQuality: 'high' } : {})
+    const c = new OffscreenCanvas(bmp.width, bmp.height)
+    c.getContext('2d').drawImage(bmp, 0, 0)
+    const out = await c.convertToBlob({ type: 'image/webp', quality: 0.85 })
+    const bytes = new Uint8Array(await out.arrayBuffer())
+    let s = ''
+    for (let j = 0; j < bytes.length; j += 0x8000) s += String.fromCharCode(...bytes.subarray(j, j + 0x8000))
+    return btoa(s)
+  }, [buf.toString('base64'), mime, width])
+  return Buffer.from(b64, 'base64')
+}
+
+async function variants(file) {
+  const full = await readFile(file)
+  for (const w of SHOT_WIDTHS) await writeFile(file.replace(/\.webp$/, `-${w}.webp`), await toWebp(full, 'image/webp', w))
+}
+
+if (resizeOnly) {
+  for (const slug of slugs) {
+    for (const f of await readdir(`public/shots/${slug}`)) {
+      if (!/^\d+\.webp$/.test(f)) continue
+      await variants(`public/shots/${slug}/${f}`)
+      console.log(`public/shots/${slug}/${f}  ${SHOT_WIDTHS.join('/')}`)
+    }
+  }
+  await browser.close()
+  process.exit(0)
+}
 
 for (const slug of slugs) {
   const { base, pages, dismiss } = SITES[slug]
@@ -86,19 +124,9 @@ for (const slug of slugs) {
     // autofocused inputs show a focus ring; banner click can scroll the page
     await page.evaluate(() => { document.activeElement?.blur(); scrollTo(0, 0) })
     const png = await page.screenshot({ animations: 'disabled', caret: 'hide' })
-    // Chromium encodes WebP natively, no image lib needed
-    const webp = await encoder.evaluate(async b64 => {
-      const bmp = await createImageBitmap(await (await fetch(`data:image/png;base64,${b64}`)).blob())
-      const c = new OffscreenCanvas(bmp.width, bmp.height)
-      c.getContext('2d').drawImage(bmp, 0, 0)
-      const blob = await c.convertToBlob({ type: 'image/webp', quality: 0.85 })
-      const bytes = new Uint8Array(await blob.arrayBuffer())
-      let s = ''
-      for (let j = 0; j < bytes.length; j += 0x8000) s += String.fromCharCode(...bytes.subarray(j, j + 0x8000))
-      return btoa(s)
-    }, png.toString('base64'))
     const file = `${dir}/${i + 1}.webp`
-    await writeFile(file, Buffer.from(webp, 'base64'))
+    await writeFile(file, await toWebp(png, 'image/png'))
+    await variants(file)
     console.log(`${file}  ${title}`)
   }
 }

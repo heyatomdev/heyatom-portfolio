@@ -222,7 +222,8 @@ img { display: block; max-width: 100%; height: auto; }
 .sec-head p { color: var(--ink-2); max-width: 46ch; font-size: 1.05rem; }
 
 /* ── Motion scaffolding ────────────────────────── */
-/* Intro elements wait for GSAP; the fallback shows them anyway if it never runs. */
+/* Secondary intro elements wait for GSAP; the fallback shows them anyway if it never runs.
+   Never on hero copy or page heads: they are the LCP and must paint with the HTML. */
 .js [data-intro] {
   visibility: hidden;
   animation: intro-fallback 0s 3s forwards;

@@ -39,9 +39,8 @@ useMotion(root, (mm, el) => {
       // Kept split after the intro: the letters hop again on hover.
       const split = SplitText.create(q('.head h1'), { type: 'chars' })
       gsap.timeline({ defaults: { ease: 'expo.out' } })
-        .from(split.chars, { yPercent: 110, rotation: () => gsap.utils.random(-25, 25), autoAlpha: 0, duration: 1.3, ease: 'elastic.out(1, 0.55)', stagger: 0.07 })
-        .from(q('.head p'), { y: 24, autoAlpha: 0, filter: 'blur(10px)', duration: 1.1 }, 0.25)
-      gsap.set(q('.head'), { autoAlpha: 1 })
+        .from(split.chars, { yPercent: 110, rotation: () => gsap.utils.random(-25, 25), duration: 1.3, ease: 'elastic.out(1, 0.55)', stagger: 0.07 })
+        .from(q('.head p'), { y: 24, filter: 'blur(10px)', duration: 1.1 }, 0.25)
 
       const hop = () => gsap.to(split.chars, {
         keyframes: { y: [0, -18, 0], rotation: [0, -8, 0] },
@@ -70,7 +69,7 @@ useMotion(root, (mm, el) => {
 
 <template>
   <div ref="root" class="wrap page">
-    <header class="head hexed" data-intro>
+    <header class="head hexed">
       <h1>Uses</h1>
       <p>
         {{ t('uses.intro') }}

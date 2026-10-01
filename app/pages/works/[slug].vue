@@ -48,9 +48,9 @@ useMotion(root, (mm, el) => {
   const q = gsap.utils.selector(el)
   mm.add(MOTION_OK, () => {
     gsap.timeline({ defaults: { ease: 'expo.out' } })
-      .from(q('.head > *'), { y: 30, autoAlpha: 0, stagger: 0.07, duration: 1.1 })
+      .from(q('.head > *'), { y: 30, stagger: 0.07, duration: 1.1 })
       .fromTo(q('.hero'), { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'expo.inOut' }, 0.2)
-    gsap.set(q('.head, .hero'), { autoAlpha: 1 })
+    gsap.set(q('.hero'), { autoAlpha: 1 })
     q('.body h2, .similar h2').forEach(h => revealLines(h))
     gsap.from(q('.shots li, .sim-list li'), {
       y: 30, autoAlpha: 0, stagger: 0.05, duration: 0.9, ease: 'expo.out',
@@ -64,7 +64,7 @@ useMotion(root, (mm, el) => {
   <div ref="root" class="wrap page">
     <NuxtLink :to="localePath('/works')" class="back mono">← {{ t('common.allWorks') }}</NuxtLink>
 
-    <header class="head hexed" data-intro>
+    <header class="head hexed">
       <p class="meta mono">
         {{ w.year }} · {{ kindLabel[w.kind] }}<template v-if="w.current"> · <em>{{ t('common.ongoing') }}</em></template>
       </p>

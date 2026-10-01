@@ -11,6 +11,8 @@ export default defineNuxtConfig({
     storage: 'cookie',
   },
   css: ['~/assets/main.css'],
+  // Inline every stylesheet, main.css included: one small site, no render-blocking CSS fetch on first paint.
+  features: { inlineStyles: true },
   googleFonts: {
     families: { Manrope: [400, 500, 600, 700, 800], 'JetBrains Mono': [400, 600] },
     display: 'swap',

@@ -81,11 +81,11 @@ useMotion(root, (mm, el) => {
       const split = SplitText.create(q('.head h1'), { type: 'chars', mask: 'chars' })
       gsap.timeline({ defaults: { ease: 'expo.out' }, onComplete: () => split.revert() })
         .from(split.chars, { yPercent: 120, rotation: 12, duration: 1.2, stagger: 0.05 })
-        .from(q('.head p'), { y: 24, autoAlpha: 0, filter: 'blur(10px)', duration: 1.1 }, 0.25)
+        .from(q('.head p'), { y: 24, filter: 'blur(10px)', duration: 1.1 }, 0.25)
         .from(q('.cols'), { autoAlpha: 0, duration: 0.8 }, 0.5)
         .from(q('.list > li'), { y: 34, autoAlpha: 0, stagger: 0.045, duration: 1 }, 0.5)
       // Reveal the containers only now that every intro tween holds its start state (.cols fades itself).
-      gsap.set(q('.head, .list'), { autoAlpha: 1 })
+      gsap.set(q('.list'), { autoAlpha: 1 })
     }))
     revealLines(q('.next h2')[0])
     revealLines(q('.tools h2')[0])
@@ -109,7 +109,7 @@ useMotion(root, (mm, el) => {
 <template>
   <div ref="root">
   <div class="wrap page">
-    <header class="head hexed" data-intro>
+    <header class="head hexed">
       <h1>{{ t('common.works') }}</h1>
       <p>
         {{ t('works.intro', { n: projects.length }) }}

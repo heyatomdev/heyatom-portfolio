@@ -49,15 +49,6 @@ const span = (from: string, to?: string) => {
 
 const path = computed(() => [
   {
-    when: t('home.path.since2016'),
-    span: span('2016-06'),
-    role: 'Full-stack developer',
-    org: 'Medas Solutions',
-    logo: 'medas',
-    url: 'https://medas-solutions.it',
-    text: t('home.path.medas'),
-  },
-  {
     when: t('home.path.since2020'),
     span: span('2020-11'),
     role: t('home.path.board'),
@@ -74,6 +65,15 @@ const path = computed(() => [
     logo: 'element',
     url: 'https://element-gaming.eu',
     text: t('home.path.elementDev'),
+  },
+  {
+    when: t('home.path.since2016'),
+    span: span('2016-06'),
+    role: 'Full-stack developer',
+    org: 'Medas Solutions',
+    logo: 'medas',
+    url: 'https://medas-solutions.it',
+    text: t('home.path.medas'),
   },
 ])
 
@@ -122,20 +122,18 @@ useMotion(root, (mm, el) => {
     try { seen = sessionStorage.getItem('intro') === '1'; sessionStorage.setItem('intro', '1') } catch {}
     const speed = seen ? 2.2 : 1
     gsap.set(shots, { '--in': 1 })
-    gsap.set(h1, { autoAlpha: 0 })
     gsap.set(q('[data-intro]'), { autoAlpha: 1 })
     stage.classList.add('is-intro')
     gsap.timeline({ defaults: { ease: 'expo.out' }, onComplete: () => stage.classList.remove('is-intro') })
-      .from(q('.avail'), { y: 18, autoAlpha: 0, duration: 0.8 })
-      .from(q('.lead'), { y: 26, autoAlpha: 0, filter: 'blur(10px)', duration: 1.1 }, 0.55)
-      .from(q('.hero .actions > *'), { y: 22, autoAlpha: 0, stagger: 0.09, duration: 1 }, 0.7)
+      .from(q('.avail'), { y: 18, duration: 0.8 })
+      .from(q('.lead'), { y: 26, filter: 'blur(10px)', duration: 1.1 }, 0.55)
+      .from(q('.hero .actions > *'), { y: 22, stagger: 0.09, duration: 1 }, 0.7)
       .to(shots, { '--in': 0, duration: 1.4, stagger: 0.15 }, 0.2)
       .from(q('.medal'), { scale: 0, rotation: -120, duration: 1.2, ease: 'back.out(1.7)' }, 0.9)
       .from(q('.facts li'), { y: 22, autoAlpha: 0, stagger: 0.09, duration: 0.9 }, 1)
       .timeScale(speed)
     document.fonts.ready.then(ctx.add(() => {
       const split = SplitText.create(h1, { type: 'lines,words', mask: 'lines', linesClass: 'ln' })
-      gsap.set(h1, { autoAlpha: 1 })
       gsap.from(split.words, { yPercent: 118, duration: 1.2, stagger: 0.05, ease: 'expo.out', onComplete: () => split.revert() }).timeScale(speed)
     }))
 
@@ -237,7 +235,7 @@ function untilt(e: PointerEvent) {
   <div ref="root">
   <!-- ── Hero ─────────────────────────────────────── -->
   <section class="hero wrap" aria-labelledby="hero-title">
-    <div class="hero-copy" data-intro>
+    <div class="hero-copy">
       <p v-if="available" class="avail"><span class="dot" aria-hidden="true" />{{ t('common.availableFreelance') }}</p>
       <h1 id="hero-title">
         <span class="hi">{{ t('home.hero.hi') }}</span>
@@ -259,9 +257,10 @@ function untilt(e: PointerEvent) {
     </div>
 
     <NuxtLink
-      :to="localePath('/works')" class="stage" data-intro :aria-label="`${t('home.hero.someWorks')}: ${[...deck].reverse().map(w => w.title).join(', ')}. ${t('common.seeAllWorks')}`"
+      :to="localePath('/works')" class="stage" data-intro
       @pointermove="tilt" @pointerleave="untilt"
     >
+      <span class="sr-only">{{ t('home.hero.someWorks') }}:</span>
       <figure v-for="(w, i) in deck" :key="w.slug" class="shot" :class="`shot--${i}`">
         <img
           :src="img(w.preview, 960)" :srcset="srcset(w.preview, [640, 960, 1280])" sizes="(max-width: 900px) 80vw, 34vw"
@@ -273,12 +272,13 @@ function untilt(e: PointerEvent) {
         <span class="medal-ring" />
         <img src="/favicon.svg" alt="" width="64" height="64">
       </span>
+      <span class="sr-only">{{ t('common.seeAllWorks') }}</span>
     </NuxtLink>
 
     <ul class="facts" data-intro :aria-label="t('home.facts.label')">
       <li><span class="mono">{{ t('home.path.since2016') }}</span>{{ t('home.facts.medas') }}</li>
       <li><span class="mono">{{ t('home.path.since2020') }}</span>{{ t('home.facts.element') }}</li>
-      <li><span class="mono">{{ t('home.facts.since2015') }}</span>{{ t('home.facts.prociv') }}</li>
+      <li><span class="mono">{{ t('home.path.since2015') }}</span>{{ t('home.facts.prociv') }}</li>
     </ul>
   </section>
 
