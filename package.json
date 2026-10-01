@@ -1,6 +1,6 @@
 {
   "name": "heyatom-portfolio",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Portfolio di Andrea Tombolato (HeyAtom). Nuxt 4.",
   "author": "Andrea Tombolato <hey@heyatom.dev> (https://heyatom.dev)",

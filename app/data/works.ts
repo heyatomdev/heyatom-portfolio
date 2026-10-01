@@ -402,14 +402,20 @@ export const works: Work[] = [
     "year": 2023,
     "current": true,
     "kind": "cliente",
-    "client": "Studio Arte Puma",
-    "description": "Il sito dell'artista Emanuele Puma: opere, progetti e collaborazioni, con una galleria di immagini ottimizzate che si sfoglia bene anche dal telefono.",
-    "features": [],
+    "client": "Emanuele Puma",
+    "description": "La vetrina di Emanuele Puma, pittore e scultore. Le opere sono disposte come un percorso: dalla pittura figurativa all'astratto, dalle copie dei maestri in grafite e pastello fino alla terracotta. Pensato per chi arriva dalla bio di Instagram con il telefono: la prima schermata mostra già un quadro e ogni opera ha la sua pagina con tecnica e misure.",
+    "features": [
+      "Galleria a percorso per categoria",
+      "Pagina per ogni opera con tecnica e misure",
+      "Immagini ridimensionate al volo",
+      "Pagine prerenderizzate",
+      "Contatto diretto via email e Instagram"
+    ],
     "stack": [
       "Nuxt",
-      "Node.js",
-      "Vuetify",
-      "NGINX"
+      "GSAP",
+      "FileHarbor",
+      "Docker"
     ],
     "website": "https://studioartepuma.it/",
     "github": "https://github.com/andreacw5/puma-arts",
@@ -422,6 +428,10 @@ export const works: Work[] = [
       {
         "image": "/shots/puma-arts/2.webp",
         "title": "Su di me"
+      },
+      {
+        "image": "/shots/puma-arts/3.webp",
+        "title": "Dettaglio opera"
       }
     ]
   },

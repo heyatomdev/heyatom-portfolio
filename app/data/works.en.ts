@@ -70,8 +70,9 @@ export const worksEn: Record<string, WorkEn> = {
     features: ['Nuxt 4 and Vuetify 3', 'Internationalization', 'Pre-configured UI', 'SEO and bots', 'Modular architecture'],
   },
   'puma-arts': {
-    description: 'The site of artist Emanuele Puma: works, projects and collaborations, with a gallery of optimized images that browses well on a phone too.',
-    images: ['Homepage', 'About me'],
+    description: 'The showcase of Emanuele Puma, painter and sculptor. The works are laid out as a journey: from figurative painting to abstraction, from copies of the masters in graphite and pastel to terracotta. Built for people coming from his Instagram bio on a phone: the first screen already shows a painting, and every work has its own page with technique and size.',
+    features: ['Gallery laid out as a journey by category', 'A page for every work with technique and size', 'Images resized on the fly', 'Prerendered pages', 'Direct contact by email and Instagram'],
+    images: ['Homepage', 'About me', 'Artwork detail'],
   },
   'ziplink': {
     line: 'URL shortener with custom codes, click counts and a documented API.',

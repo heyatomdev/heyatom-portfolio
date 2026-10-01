@@ -62,7 +62,8 @@ const SITES = {
     base: 'https://studioartepuma.it',
     pages: [
       ['/', 'Homepage'],
-      ['/about', 'Su di me'],
+      ['/chi-sono', 'Su di me'],
+      ['/opere/audrey-hepburn', 'Dettaglio opera'],
     ],
   },
 }
