@@ -102,9 +102,9 @@ export const worksEn: Record<string, WorkEn> = {
     features: ['Client management', 'Session planning', 'Exercise assignment', 'Progress tracking', 'Built-in chat'],
   },
   'alirdb': {
-    description: 'Portal for the ALIR community’s Arma 3 players: each one checks their vehicles, weapons, roles, jobs and in-game balance in real time, read from the dedicated server’s API.',
-    features: ['Personal data dashboard', 'Vehicle tracking', 'Roles and specializations', 'In-game bank accounts'],
-    images: ['Homepage', 'Player profile', 'Player vehicles', 'Players by faction'],
+    description: 'Public database of the ALIR community’s Altis Life server on Arma 3. From the browser anyone looks up a player by name, alias or Steam ID and sees their money, ranks, vehicles, gang and charges, read from the server’s API. Staff used it for checks without opening the database.',
+    features: ['Search by name, alias or Steam ID', 'Profiles with money, ranks and vehicles', 'Gangs with member limit check', 'Criminal record and bounties', 'Lists of police, medics and donors'],
+    images: ['Homepage', 'Player profile', 'Player vehicles', 'Players by faction', 'Criminal record', 'Gang members', 'Donor list'],
   },
   'alircommunity': {
     description: 'Site and forum of the ALIR community, for the Arma 3 Altis Life server: discussions, player support, and user and content management.',

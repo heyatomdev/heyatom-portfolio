@@ -589,7 +589,6 @@ export const works: Work[] = [
       "Vuetify",
       "NGINX"
     ],
-    "website": "https://procivsettimomi.it",
     "github": "https://github.com/prociv-sm/website",
     "preview": "https://fileharbor.heyatom.dev/v2/images/3e7de746-fc49-4d59-83e2-12ef0fdedabe",
     "images": [
@@ -645,12 +644,13 @@ export const works: Work[] = [
     "current": false,
     "kind": "cliente",
     "client": "ALIR Community",
-    "description": "Portale per i giocatori della community ALIR su Arma 3: ognuno consulta in tempo reale i propri veicoli, armi, ruoli, incarichi e il saldo in gioco, letti dall'API del server dedicato.",
+    "description": "Database pubblico del server Altis Life della community ALIR su Arma 3. Dal browser chiunque cerca un giocatore per nome, alias o Steam ID e ne vede patrimonio, gradi, veicoli, gang e capi d'accusa, letti dall'API del server. Lo staff lo usava per i controlli senza aprire il database.",
     "features": [
-      "Dashboard dati personali",
-      "Monitoraggio veicoli",
-      "Ruoli e specializzazioni",
-      "Conti bancari in-game"
+      "Ricerca per nome, alias o Steam ID",
+      "Schede con patrimonio, gradi e veicoli",
+      "Gang con controllo del limite membri",
+      "Fedina penale e taglie",
+      "Elenchi di agenti, medici e donatori"
     ],
     "stack": [
       "HTML5",
@@ -658,23 +658,35 @@ export const works: Work[] = [
       "JavaScript"
     ],
     "github": "https://github.com/andreacw5/ALIRDB",
-    "preview": "https://fileharbor.heyatom.dev/v2/images/6dc7d8e3-1298-4510-8650-f23dfb36e534",
+    "preview": "/shots/alirdb/2.webp",
     "images": [
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/ba35ea74-37ea-4183-93c3-22fc2fc1e901",
+        "image": "/shots/alirdb/1.webp",
         "title": "Homepage"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/d461d7e8-4620-44ce-8bb6-c84346af8f96",
+        "image": "/shots/alirdb/2.webp",
         "title": "Scheda del giocatore"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/04f8e603-874e-4951-b0ce-0942c9578652",
+        "image": "/shots/alirdb/3.webp",
         "title": "Veicoli del giocatore"
       },
       {
-        "image": "https://fileharbor.heyatom.dev/v2/images/46397a26-b684-4e5e-9b2b-ac9899937e03",
+        "image": "/shots/alirdb/4.webp",
         "title": "Giocatori per fazione"
+      },
+      {
+        "image": "/shots/alirdb/5.webp",
+        "title": "Fedina penale"
+      },
+      {
+        "image": "/shots/alirdb/6.webp",
+        "title": "Membri della gang"
+      },
+      {
+        "image": "/shots/alirdb/7.webp",
+        "title": "Elenco donatori"
       }
     ]
   },

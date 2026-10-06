@@ -58,6 +58,20 @@ const SITES = {
     base: 'https://links.element-gaming.eu',
     pages: [['/', 'Homepage']],
   },
+  // ALIRDB revived locally: `python3 server.py` in the ALIRDB repo. Single-page app, so each shot runs
+  // a setup script (third field) that drives the UI into the view to capture.
+  'alirdb': {
+    base: 'http://localhost:8000',
+    pages: [
+      ['/viewer.html', 'Homepage'],
+      ['/viewer.html', 'Scheda del giocatore', `$('#searchinput').val('Cola'); searchByPlayer('name')`],
+      ['/viewer.html', 'Veicoli del giocatore', `searchByPlayer('playerid', '76561198012345678'); setTimeout(showUserVehicle, 500)`],
+      ['/viewer.html', 'Giocatori per fazione', `showFactionList('cop')`],
+      ['/viewer.html', 'Fedina penale', `searchByPlayer('playerid', '76561198012345678'); setTimeout(showUserWanted, 500)`],
+      ['/viewer.html', 'Membri della gang', `searchByGang('Cartello di Kavala')`],
+      ['/donor.html', 'Elenco donatori', `showDonorList('2')`],
+    ],
+  },
   'puma-arts': {
     base: 'https://studioartepuma.it',
     pages: [
@@ -111,14 +125,17 @@ if (resizeOnly) {
 
 for (const slug of slugs) {
   const { base, pages, dismiss } = SITES[slug]
+  // site down (or ALIRDB not running locally): keep the shots already on disk
+  if (!await fetch(base).catch(() => null)) { console.warn(`skip ${slug}: ${base} unreachable`); continue }
   const dir = `public/shots/${slug}`
   await mkdir(dir, { recursive: true })
-  for (const [i, [path, title]] of pages.entries()) {
+  for (const [i, [path, title, setup]] of pages.entries()) {
     await page.goto(base + path, { waitUntil: 'load' })
     await page.evaluate(() => document.fonts.ready)
     // cookie banner: declined once, the choice sticks for the rest of the context
     const banner = dismiss && page.getByRole('button', { name: dismiss })
     if (banner && await banner.isVisible()) await banner.click()
+    if (setup) { await page.evaluate(setup); await page.waitForTimeout(1000) }
     // no networkidle: site polls forever (live streams, queues)
     await page.addStyleTag({ content: '::-webkit-scrollbar{display:none}' })
     await page.waitForTimeout(1500)
