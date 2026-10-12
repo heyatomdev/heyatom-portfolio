@@ -1,0 +1,37 @@
+<!doctype html><meta charset="utf-8">
+<!-- Pannello Twitch "Partner" per canale cliente, nello stile del suo canale. 640x256 (2x del pannello 320x128). -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,800&family=JetBrains+Mono:wght@700&display=block"><style>
+*{margin:0;box-sizing:border-box}
+:root{--bg:#121212;--ink:#f2f0ec;--fire:#ff4d12}
+html,body{width:640px;height:256px;overflow:hidden;background:var(--bg);color:var(--ink)}
+body::before{content:"";position:absolute;inset:0;
+ background:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px) 0 0/8px 8px,
+            linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px) 0 0/8px 8px}
+.glow{position:absolute;right:-42px;top:-22px;width:300px;height:300px;border-radius:50%;
+ background:radial-gradient(circle,rgba(255,77,18,.38),rgba(255,77,18,.08) 45%,transparent 68%)}
+.ring{position:absolute;right:6px;top:8px;width:240px;height:240px}
+.logo{position:absolute;right:76px;top:78px;width:100px;height:100px}
+.logo{overflow:visible}
+.c{position:absolute;left:40px;top:46px}
+.tag{display:inline-block;background:var(--fire);color:var(--bg);
+ font-family:"JetBrains Mono";font-weight:700;font-size:21px;letter-spacing:.3em;padding:6px 6px 6px 16px}
+h1{margin-top:10px;font-family:"Barlow Condensed";font-style:italic;font-weight:800;font-size:72px;line-height:.9;letter-spacing:.01em;text-transform:uppercase}
+.sub{margin-top:12px;font-family:"JetBrains Mono";font-weight:700;font-size:15px;letter-spacing:.06em;color:rgba(242,240,236,.6)}
+.sub b{color:var(--fire)}
+.bar{position:absolute;left:0;right:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--fire),#ff8a3d 60%,var(--fire))}
+</style>
+<div class="glow"></div>
+<svg class="ring" viewBox="0 0 240 240" fill="none" stroke="#f2f0ec">
+ <circle cx="120" cy="120" r="112" stroke-opacity=".35" stroke-width="1.5" stroke-dasharray="150 20 60 20"/>
+ <circle cx="120" cy="120" r="96" stroke-opacity=".18" stroke-dasharray="1 5"/>
+ <circle cx="120" cy="120" r="74" stroke-opacity=".12"/>
+ <path d="M120 2v10M120 228v10M2 120h10M228 120h10" stroke-width="2" stroke-opacity=".8"/>
+ <path d="M120 22v5M120 213v5M22 120h5M213 120h5" stroke-opacity=".4"/>
+</svg>
+<svg class="logo" viewBox="0 0 1080 1080"><path fill="#ff4d12" transform="translate(70 60)" d="M1037.1 449.6 820 789.1l-87.6 169.1c-8 15.4-21.8 27.1-38.3 32.4l-269.8 86.3c-13.8 4.5-28.8 4.1-42.5-.8l-236.6-85.8c-13.9-5.1-25.5-15.3-32.1-28.6L46.9 829.8c-4.5-8.9-6.6-18.9-6.1-28.9l12.3-253.7 15.7-436c.2-4.8 2.1-9.2 5.5-12.6l8.6-8.6c8-8 18.7-12.5 30-12.6l23.5-.3c7.1 0 13.5-4.1 16.7-10.5l30.6-62.2c1.6-3.3 5.4-4.9 8.9-3.8l62.1 19.3c7.4 2.3 12.9 8.6 14.1 16.3l82.5 489.6c1.5 8.6-4.4 16.8-13 18.4l-71.6 12.6c-7 1.3-13.1 5.4-16.7 11.5l-10.7 18.1c-5.8 9.7 2.4 21.8 13.6 20l141.1-23c5.8-1 11.8-1 17.6 0l141.1 23c11.2 1.8 19.3-10.2 13.6-20l-10.7-18.1c-3.6-6.1-9.8-10.3-16.7-11.5l-71.6-12.6c-8.6-1.5-14.4-9.7-13-18.4L536.6 36c1.3-7.4 6.6-13.6 13.8-15.8l59.7-18.7c5.1-1.6 10.5.7 12.9 5.5l29.8 60.7c2.9 5.7 8.7 9.5 15.1 9.5l44.9.4c4.9 0 9.3 2.7 11.8 6.8l9.9 16.6c1.2 2 1.9 4.4 2 6.7l15.7 433.5c.1 4 2.1 7.8 5.3 10.1 5.2 3.7 12.3 3.2 16.9-1.3l137.4-137.4c2.7-2.7 6.5-4 10.2-3.8l94.2 7.4c3.6.3 7 2.1 9.2 5l10.7 13.9c3.4 4.4 3.6 10.3.6 15Z"/><path fill="#f2f0ec" d="M1037.1 449.6 820 789.1l-87.6 169.1c-8 15.4-21.8 27.1-38.3 32.4l-269.8 86.3c-13.8 4.5-28.8 4.1-42.5-.8l-236.6-85.8c-13.9-5.1-25.5-15.3-32.1-28.6L46.9 829.8c-4.5-8.9-6.6-18.9-6.1-28.9l12.3-253.7 15.7-436c.2-4.8 2.1-9.2 5.5-12.6l8.6-8.6c8-8 18.7-12.5 30-12.6l23.5-.3c7.1 0 13.5-4.1 16.7-10.5l30.6-62.2c1.6-3.3 5.4-4.9 8.9-3.8l62.1 19.3c7.4 2.3 12.9 8.6 14.1 16.3l82.5 489.6c1.5 8.6-4.4 16.8-13 18.4l-71.6 12.6c-7 1.3-13.1 5.4-16.7 11.5l-10.7 18.1c-5.8 9.7 2.4 21.8 13.6 20l141.1-23c5.8-1 11.8-1 17.6 0l141.1 23c11.2 1.8 19.3-10.2 13.6-20l-10.7-18.1c-3.6-6.1-9.8-10.3-16.7-11.5l-71.6-12.6c-8.6-1.5-14.4-9.7-13-18.4L536.6 36c1.3-7.4 6.6-13.6 13.8-15.8l59.7-18.7c5.1-1.6 10.5.7 12.9 5.5l29.8 60.7c2.9 5.7 8.7 9.5 15.1 9.5l44.9.4c4.9 0 9.3 2.7 11.8 6.8l9.9 16.6c1.2 2 1.9 4.4 2 6.7l15.7 433.5c.1 4 2.1 7.8 5.3 10.1 5.2 3.7 12.3 3.2 16.9-1.3l137.4-137.4c2.7-2.7 6.5-4 10.2-3.8l94.2 7.4c3.6.3 7 2.1 9.2 5l10.7 13.9c3.4 4.4 3.6 10.3.6 15Z"/></svg>
+<div class="c">
+ <div class="tag">PARTNER</div>
+ <h1>heyatom.dev</h1>
+ <div class="sub"><b>&gt;</b> siti &amp; web app su misura</div>
+</div>
+<div class="bar"></div>
