@@ -21,13 +21,20 @@ const services = computed(() => platform.map(loc))
 const base = computed(() => loc(platformBase))
 const toolList = computed(() => tools.map(loc))
 
-// Open the row targeted by the URL hash (links from the home page).
+// Open the row targeted by the URL hash (links from the home page),
+// or, back from a project page, the row it was opened from (focus returns to it).
 const open = ref<string | null>(null)
+const lastOpen = useState<string | null>('works-open', () => null)
 onMounted(() => {
-  const slug = location.hash.slice(1)
+  const back = !!history.state?.forward && lastOpen.value
+  const slug = location.hash.slice(1) || back || ''
   if (projects.some(w => w.slug === slug)) {
     open.value = slug
-    nextTick(() => document.getElementById(slug)?.scrollIntoView({ block: 'center' }))
+    nextTick(() => {
+      const li = document.getElementById(slug)
+      li?.scrollIntoView({ block: 'center' })
+      if (back) li?.querySelector('summary')?.focus({ preventScroll: true })
+    })
   }
 })
 const motion = () => matchMedia(MOTION_OK).matches
@@ -36,10 +43,11 @@ function toggle(slug: string, e: Event) {
   const details = e.target as HTMLDetailsElement
   if (details.open) {
     open.value = slug
+    lastOpen.value = slug
     if (motion()) {
       gsap.timeline({ defaults: { ease: 'expo.out' } })
         .fromTo(details.querySelector('.detail img'), { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1, ease: 'expo.inOut' })
-        .from(details.querySelectorAll('.info > *'), { x: 24, autoAlpha: 0, stagger: 0.06, duration: 0.8 }, 0.2)
+        .from(details.querySelectorAll('.info > *'), { x: 24, opacity: 0, stagger: 0.06, duration: 0.8 }, 0.2)
     }
   }
   else if (open.value === slug) open.value = null
@@ -82,8 +90,8 @@ useMotion(root, (mm, el) => {
       gsap.timeline({ defaults: { ease: 'expo.out' }, onComplete: () => split.revert() })
         .from(split.chars, { yPercent: 120, rotation: 12, duration: 1.2, stagger: 0.05 })
         .from(q('.head p'), { y: 24, filter: 'blur(10px)', duration: 1.1 }, 0.25)
-        .from(q('.cols'), { autoAlpha: 0, duration: 0.8 }, 0.5)
-        .from(q('.list > li'), { y: 34, autoAlpha: 0, stagger: 0.045, duration: 1 }, 0.5)
+        .from(q('.cols'), { opacity: 0, duration: 0.8 }, 0.5)
+        .from(q('.list > li'), { y: 34, opacity: 0, stagger: 0.045, duration: 1 }, 0.5)
       // Reveal the containers only now that every intro tween holds its start state (.cols fades itself).
       gsap.set(q('.list'), { autoAlpha: 1 })
     }))
@@ -91,13 +99,13 @@ useMotion(root, (mm, el) => {
     revealLines(q('.tools h2')[0])
     revealLines(q('.platform h2')[0])
     gsap.timeline({ scrollTrigger: { trigger: q('.platform')[0], start: 'top 75%' } })
-      .from(q('.platform-head p'), { y: 24, autoAlpha: 0, duration: 0.9, ease: 'expo.out' })
-      .from(q('.core'), { scale: 0.8, autoAlpha: 0, duration: 1, ease: 'expo.out' }, 0.1)
+      .from(q('.platform-head p'), { y: 24, opacity: 0, duration: 0.9, ease: 'expo.out' })
+      .from(q('.core'), { scale: 0.8, opacity: 0, duration: 1, ease: 'expo.out' }, 0.1)
       .from(q('.wire'), { scaleY: 0, duration: 0.7, ease: 'expo.inOut', stagger: 0.08 }, 0.35)
-      .from(q('.services .service'), { y: 40, autoAlpha: 0, duration: 1, ease: 'expo.out', stagger: 0.09 }, 0.5)
-      .from(q('.service--base'), { y: 30, autoAlpha: 0, scaleX: 0.94, duration: 1.1, ease: 'expo.out' }, 0.85)
+      .from(q('.services .service'), { y: 40, opacity: 0, duration: 1, ease: 'expo.out', stagger: 0.09 }, 0.5)
+      .from(q('.service--base'), { y: 30, opacity: 0, scaleX: 0.94, duration: 1.1, ease: 'expo.out' }, 0.85)
     gsap.from(q('.tools-head p, .tool-list > li'), {
-      y: 24, autoAlpha: 0, stagger: 0.08, duration: 0.9, ease: 'expo.out',
+      y: 24, opacity: 0, stagger: 0.08, duration: 0.9, ease: 'expo.out',
       scrollTrigger: { trigger: q('.tools')[0], start: 'top 85%' },
     })
     const off = magnetic(q('.next .btn')[0] as HTMLElement, 0.25)
@@ -127,7 +135,7 @@ useMotion(root, (mm, el) => {
           <summary @pointerenter="peek = w" @pointerleave="peek = null">
             <span class="mono year">{{ w.year }}</span>
             <span class="name">
-              <strong>{{ w.title }}</strong>
+              <h2 class="title">{{ w.title }}</h2>
               <span class="client">{{ w.client }}<template v-if="w.current"> · <em>{{ t('common.ongoing') }}</em></template></span>
             </span>
             <span class="mono tags">{{ w.stack.slice(0, 3).join(' · ') }}</span>
@@ -148,12 +156,12 @@ useMotion(root, (mm, el) => {
               <p class="mono stackfull">{{ w.stack.join(' · ') }}</p>
               <div class="links">
                 <NuxtLink class="btn btn--primary" :to="localePath(`/works/${w.slug}`)">
-                  {{ t('works.details') }} <Icon name="arrow-right" />
+                  {{ t('works.details') }}<span class="sr-only">: {{ w.title }}</span> <Icon name="arrow-right" />
                 </NuxtLink>
-                <a v-if="w.website" class="btn btn--ghost" :href="w.website" target="_blank" rel="noopener">
-                  {{ t('common.visitSite') }} <Icon name="arrow-up-right" />
+                <a v-if="w.website" class="btn btn--ghost" :href="w.website">
+                  {{ t('common.visitSite') }}<span class="sr-only">: {{ w.title }}</span> <Icon name="arrow-up-right" />
                 </a>
-                <a v-if="w.github" class="btn btn--ghost" :href="w.github" target="_blank" rel="noopener">
+                <a v-if="w.github" class="btn btn--ghost" :href="w.github">
                   <Icon name="github" /> {{ t('common.code') }}
                 </a>
                 <span v-if="!w.website && !w.github" class="private">{{ t('common.private') }}</span>
@@ -183,7 +191,7 @@ useMotion(root, (mm, el) => {
             <li v-for="f in p.features" :key="f">{{ f }}</li>
           </ul>
           <p class="mono stackfull">{{ p.stack.join(' · ') }}</p>
-          <a v-if="p.github" class="svc-link" :href="p.github" target="_blank" rel="noopener">
+          <a v-if="p.github" class="svc-link" :href="p.github">
             <Icon name="github" :size="16" /> {{ t('common.code') }}
           </a>
           <span v-else class="svc-link svc-link--off">{{ t('works.platform.privateCode') }}</span>
@@ -210,7 +218,7 @@ useMotion(root, (mm, el) => {
       </div>
       <ul class="tool-list">
         <li v-for="tl in toolList" :id="tl.slug" :key="tl.slug">
-          <a :href="tl.github" target="_blank" rel="noopener">
+          <a :href="tl.github">
             <span class="mono year">{{ tl.year }}</span>
             <span class="tool-name">
               <strong>{{ tl.title }}</strong>
@@ -266,7 +274,7 @@ summary {
   gap: 1.5rem;
   align-items: center;
 }
-.cols { padding: 0 0.25rem 0.75rem; font-size: 0.72rem; color: var(--ink-3); border-bottom: 1px solid var(--hair); }
+.cols { padding: 0 0.25rem 0.75rem; font-size: 0.8rem; color: var(--ink-3); border-bottom: 1px solid var(--hair); }
 
 .list { list-style: none; margin: 0; padding: 0; position: relative; }
 .list > li { border-bottom: 1px solid var(--hair); scroll-margin-top: 8rem; }
@@ -294,15 +302,15 @@ summary:focus-visible { outline-offset: -2px; }
 
 .year { color: var(--green-light); font-size: 0.9rem; }
 .name { display: grid; gap: 0.15rem; }
-.name strong {
+.name .title {
   font-size: clamp(1.25rem, 2.3vw, 1.75rem);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.15;
   transition: transform 0.4s var(--ease-out), color 0.2s ease;
 }
-summary:hover strong { transform: translateX(6px); }
-details[open] strong { color: var(--green-light); }
+summary:hover .title { transform: translateX(6px); }
+details[open] .title { color: var(--green-light); }
 .client { color: var(--ink-3); font-size: 0.92rem; font-weight: 500; }
 .client em { font-style: normal; color: var(--green-light); white-space: nowrap; }
 .tags { color: var(--ink-3); font-size: 0.8rem; }
@@ -354,7 +362,7 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
   background: var(--surface-2);
   border: 1px solid var(--hair);
 }
-.stackfull { font-size: 0.78rem; color: var(--ink-3); }
+.stackfull { font-size: 0.8rem; color: var(--ink-3); }
 .links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.25rem; }
 .links .btn { padding: 0.75rem 1.2rem; font-size: 0.93rem; }
 .private { color: var(--ink-3); font-size: 0.92rem; }

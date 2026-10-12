@@ -102,7 +102,7 @@ body::before {
   border: 2px solid var(--bg);
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
   margin: 0;
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -121,6 +121,8 @@ a {
 a:hover { color: var(--ink); }
 
 [id] { scroll-margin-top: 6rem; }
+/* Focus moved by Tab or after a route change never lands under the sticky header. */
+html { scroll-padding-top: 6rem; }
 
 /* Scattered cards and pinned strips must never widen the mobile layout viewport. */
 main { overflow-x: clip; }
@@ -132,6 +134,8 @@ img { display: block; max-width: 100%; height: auto; }
   outline-offset: 3px;
   border-radius: 6px;
 }
+/* Landing points focused by script (plugins/focus.client.ts) are not controls. */
+[tabindex='-1']:focus { outline: none; }
 
 .wrap {
   width: 100%;
@@ -204,7 +208,7 @@ img { display: block; max-width: 100%; height: auto; }
 
 .btn--ghost {
   color: var(--ink);
-  border-color: var(--hair-strong);
+  border-color: var(--green-light); /* --hair-strong is under 3:1 for a control edge */
   background: rgba(0, 168, 107, 0.05);
 }
 .btn--ghost:hover { color: var(--ink); border-color: var(--green); background: rgba(0, 168, 107, 0.1); }

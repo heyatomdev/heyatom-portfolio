@@ -13,23 +13,25 @@ const hdr = ref<HTMLElement>()
 const bar = ref<HTMLElement>()
 let st: ScrollTrigger | undefined
 let hidden = false
+let motionOk: MediaQueryList | undefined
 function slide(hide: boolean) {
   if (hide === hidden) return
   hidden = hide
-  gsap.to(hdr.value!, { yPercent: hide ? -130 : 0, duration: 0.6, ease: 'expo.out' })
+  // Reduced motion: still out of the way while reading (it eats the screen at high zoom), just without the slide.
+  gsap.to(hdr.value!, { yPercent: hide ? -130 : 0, duration: motionOk?.matches ? 0.6 : 0, ease: 'expo.out' })
 }
 // Keyboard focus inside the header always brings it back.
 const reveal = () => slide(false)
 onMounted(() => {
   const setBar = gsap.quickSetter(bar.value!, 'scaleX')
-  const motionOk = matchMedia(MOTION_OK)
+  motionOk = matchMedia(MOTION_OK)
   hdr.value!.addEventListener('focusin', reveal)
   st = ScrollTrigger.create({
     start: 0,
     end: 'max',
     onUpdate: (self) => {
       setBar(self.progress)
-      slide(motionOk.matches && self.direction === 1 && self.scroll() > 240)
+      slide(self.direction === 1 && self.scroll() > 240)
     },
   })
 })
@@ -94,6 +96,8 @@ const anchors = computed(() => [{ to: localePath('/#percorso'), label: t('nav.pa
   z-index: 50;
   padding: 0.9rem var(--gutter) 0;
 }
+/* Short viewports (landscape phones, 400% zoom): a fixed bar would cover a third of the screen. */
+@media (max-height: 500px) { .hdr { position: static; } }
 
 .pill {
   max-width: var(--max);
@@ -108,6 +112,7 @@ const anchors = computed(() => [{ to: localePath('/#percorso'), label: t('nav.pa
   backdrop-filter: blur(18px) saturate(1.3);
   -webkit-backdrop-filter: blur(18px) saturate(1.3);
   box-shadow: 0 10px 30px -12px rgb(0 0 0 / calc(0.6 * var(--shade)));
+  flex-wrap: wrap; /* enlarged text: wrap instead of pushing the CTA off screen */
 }
 
 .pill { position: relative; }
@@ -162,6 +167,10 @@ const anchors = computed(() => [{ to: localePath('/#percorso'), label: t('nav.pa
 }
 .links a:hover,
 .links a[aria-current='page'] { color: var(--ink); background: rgba(0, 168, 107, 0.12); }
+/* Windows high contrast drops the tint: mark the current page with a line instead. */
+@media (forced-colors: active) {
+  .links a[aria-current='page'] { text-decoration: underline 2px; text-underline-offset: 0.35em; }
+}
 
 .avail {
   display: inline-flex;
@@ -196,6 +205,8 @@ const anchors = computed(() => [{ to: localePath('/#percorso'), label: t('nav.pa
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 .theme:hover { color: var(--ink); background: rgba(0, 168, 107, 0.12); }
+.theme { font-size: 1rem; }
+.theme svg { width: 1.15em; height: 1.15em; } /* scales with enlarged text */
 
 .cta { padding: 0.7rem 1.2rem; font-size: 0.93rem; box-shadow: none; }
 

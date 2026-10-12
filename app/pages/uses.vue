@@ -58,9 +58,9 @@ useMotion(root, (mm, el) => {
       count.textContent = pad(0)
       gsap.timeline({ scrollTrigger: { trigger: g, start: 'top 82%' } })
         .from(s('.rule'), { scaleX: 0, duration: 1.1, ease: 'expo.inOut' })
-        .from(s('h2'), { x: -30, autoAlpha: 0, duration: 0.9, ease: 'expo.out' }, 0.2)
+        .from(s('h2'), { x: -30, opacity: 0, duration: 0.9, ease: 'expo.out' }, 0.2)
         .to(n, { v: s('li').length, duration: 0.9, ease: 'power2.out', snap: { v: 1 }, onUpdate: () => { count.textContent = pad(n.v) } }, 0.2)
-        .from(s('li'), { y: 34, rotation: 1.5, autoAlpha: 0, duration: 0.9, ease: 'expo.out', stagger: 0.06 }, 0.3)
+        .from(s('li'), { y: 34, rotation: 1.5, opacity: 0, duration: 0.9, ease: 'expo.out', stagger: 0.06 }, 0.3)
         .from(s('.tag'), { scale: 0, rotation: -20, duration: 0.6, ease: 'back.out(3)', stagger: 0.06 }, 0.6)
     }
   })
@@ -70,7 +70,7 @@ useMotion(root, (mm, el) => {
 <template>
   <div ref="root" class="wrap page">
     <header class="head hexed">
-      <h1>Uses</h1>
+      <h1 lang="en">Uses</h1>
       <p>
         {{ t('uses.intro') }}
         <span class="mono">{{ t('uses.updated') }} <time :datetime="updated">{{ updatedLabel }}</time></span>
@@ -81,7 +81,7 @@ useMotion(root, (mm, el) => {
       <span class="rule" aria-hidden="true" />
       <div class="side">
         <h2 :id="`${slug(g.title)}-h`">
-          <a :href="`#${slug(g.title)}`" class="anchor" :aria-label="`${g.label}, ${t('uses.copyLink')}`" @click="copyLink(slug(g.title))">{{ g.label }}<span class="hash" aria-hidden="true">#</span></a>
+          <a :href="`#${slug(g.title)}`" class="anchor" :title="t('uses.copyLink')" @click="copyLink(slug(g.title))">{{ g.label }}<span class="hash" aria-hidden="true">#</span></a>
         </h2>
         <span class="mono count" aria-hidden="true">{{ pad(g.items.length) }}</span>
         <span class="mono copied" role="status">{{ copied === slug(g.title) ? t('uses.copied') : '' }}</span>
@@ -89,7 +89,7 @@ useMotion(root, (mm, el) => {
       <ul>
         <li v-for="i in g.items" :key="i.name">
           <strong>
-            <a v-if="i.url" :href="i.url" target="_blank" rel="noopener">{{ i.name }}<Icon name="arrow-up-right" :size="16" class="out" /></a>
+            <a v-if="i.url" :href="i.url">{{ i.name }}<Icon name="arrow-up-right" :size="16" class="out" /></a>
             <template v-else>{{ i.name }}</template>
             <span v-if="i.tag" class="tag">{{ i.tag }}</span>
           </strong>
@@ -159,7 +159,7 @@ useMotion(root, (mm, el) => {
 .hash { margin-left: 0.3rem; opacity: 0; color: var(--ink-3); transition: opacity 0.2s ease; }
 .anchor:hover .hash, .anchor:focus-visible .hash { opacity: 1; }
 .anchor:focus-visible { outline: 2px solid var(--green-light); outline-offset: 3px; border-radius: 4px; }
-.copied { font-size: 0.75rem; color: var(--green-light); }
+.copied { font-size: 0.8rem; color: var(--green-light); }
 
 ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
 li {
@@ -198,7 +198,7 @@ li:hover .out { opacity: 1; transform: translate(2px, -2px); }
   margin-left: 0.4rem;
   padding: 0.15rem 0.55rem;
   border-radius: var(--r-sm);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: 0;
   vertical-align: middle;

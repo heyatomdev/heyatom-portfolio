@@ -51,6 +51,7 @@ useSeoMeta({
 </script>
 
 <template>
+  <NuxtRouteAnnouncer />
   <SiteHeader />
   <main id="main">
     <NuxtPage />

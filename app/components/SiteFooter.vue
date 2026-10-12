@@ -15,16 +15,16 @@ const switchLocalePath = useSwitchLocalePath()
         <!-- Plain links: a full load renders the page in the new language (GSAP's split text can't be patched live).
              The cookie goes first, or / would bounce an English visitor back to /en.
              Hash dropped: the server never sees it, so keeping it would break hydration. -->
-        <a v-for="l in ['it', 'en']" :key="l" :href="switchLocalePath(l).split('#')[0]" :lang="l" :hreflang="l" :aria-current="locale === l ? 'true' : undefined" @click="setLocaleCookie(l)">{{ l.toUpperCase() }}</a>
+        <a v-for="l in ['it', 'en']" :key="l" :href="switchLocalePath(l).split('#')[0]" :lang="l" :hreflang="l" :aria-current="locale === l ? 'true' : undefined" :aria-label="l === 'it' ? 'Italiano' : 'English'" @click="setLocaleCookie(l)">{{ l.toUpperCase() }}</a>
       </div>
       <ul>
-        <li><a href="https://github.com/andreacw5" rel="me noopener" target="_blank">GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/atombolato" rel="me noopener" target="_blank">LinkedIn</a></li>
-        <li><NuxtLink :to="localePath('/uses')">Uses</NuxtLink></li>
-        <li><a href="https://status.heyatom.dev/en" rel="noopener" target="_blank">Status</a></li>
+        <li><a href="https://github.com/andreacw5" rel="me">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/atombolato" rel="me">LinkedIn</a></li>
+        <li><NuxtLink :to="localePath('/uses')" lang="en">Uses</NuxtLink></li>
+        <li><a href="https://status.heyatom.dev/en">Status</a></li>
         <li><a href="mailto:hey@heyatom.dev">hey@heyatom.dev</a></li>
       </ul>
-      <p class="tag">Code meets personality · {{ new Date().getFullYear() }}</p>
+      <p class="tag"><span lang="en">Code meets personality</span> · {{ new Date().getFullYear() }}</p>
     </div>
   </footer>
 </template>
@@ -55,8 +55,6 @@ a:hover { color: var(--green-light); }
 .tag { font-size: 0.85rem; }
 @media (max-width: 640px) {
   .row { grid-template-columns: 1fr; }
-  .lang { order: 1; }
-  .tag { order: 2; }
 }
 .lang { display: inline-flex; gap: 0.2rem; }
 .lang a {

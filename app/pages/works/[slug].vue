@@ -53,7 +53,7 @@ useMotion(root, (mm, el) => {
     gsap.set(q('.hero'), { autoAlpha: 1 })
     q('.body h2, .similar h2').forEach(h => revealLines(h))
     gsap.from(q('.shots li, .sim-list li'), {
-      y: 30, autoAlpha: 0, stagger: 0.05, duration: 0.9, ease: 'expo.out',
+      y: 30, opacity: 0, stagger: 0.05, duration: 0.9, ease: 'expo.out',
       scrollTrigger: { trigger: q('.shots, .sim-list')[0], start: 'top 85%' },
     })
   })
@@ -62,7 +62,7 @@ useMotion(root, (mm, el) => {
 
 <template>
   <div ref="root" class="wrap page">
-    <NuxtLink :to="localePath('/works')" class="back mono">← {{ t('common.allWorks') }}</NuxtLink>
+    <NuxtLink :to="localePath('/works')" class="back mono"><span aria-hidden="true">←</span> {{ t('common.allWorks') }}</NuxtLink>
 
     <header class="head hexed">
       <p class="meta mono">
@@ -71,10 +71,10 @@ useMotion(root, (mm, el) => {
       <h1>{{ w.title }}</h1>
       <p class="client">{{ w.client }}</p>
       <div class="links">
-        <a v-if="w.website" class="btn btn--primary" :href="w.website" target="_blank" rel="noopener">
+        <a v-if="w.website" class="btn btn--primary" :href="w.website">
           {{ t('common.visitSite') }} <Icon name="arrow-up-right" />
         </a>
-        <a v-if="w.github" class="btn btn--ghost" :href="w.github" target="_blank" rel="noopener">
+        <a v-if="w.github" class="btn btn--ghost" :href="w.github">
           <Icon name="github" /> {{ t('common.code') }}
         </a>
         <span v-if="!w.website && !w.github" class="private">{{ t('common.private') }}</span>
@@ -95,8 +95,8 @@ useMotion(root, (mm, el) => {
           <li v-for="f in w.features" :key="f">{{ f }}</li>
         </ul>
       </section>
-      <aside>
-        <p class="label mono">Stack</p>
+      <aside aria-labelledby="stack-label">
+        <p id="stack-label" class="label mono">Stack</p>
         <ul class="stack">
           <li v-for="s in w.stack" :key="s" class="mono">{{ s }}</li>
         </ul>
@@ -104,10 +104,10 @@ useMotion(root, (mm, el) => {
     </div>
 
     <section v-if="shots.length" class="gallery" aria-labelledby="shots-title">
-      <h2 id="shots-title">{{ t('common.screenshots') }} <span class="mono count">{{ shots.length }}</span></h2>
+      <h2 id="shots-title">{{ t('common.screenshots') }} <span class="mono count" aria-hidden="true">{{ shots.length }}</span></h2>
       <ul class="shots">
         <li v-for="(s, i) in shots" :key="s.image">
-          <button type="button" @click="show(i)">
+          <button type="button" :aria-label="t('work.enlarge', { title: s.title || t('work.screenshotN', { n: i + 1, title: w.title }) })" @click="show(i)">
             <img :src="img(s.image, 640)" :alt="s.title || `${t('work.screenshotN', { n: i + 1, title: w.title })}`" width="640" height="400" loading="lazy">
             <span v-if="s.title">{{ s.title }}</span>
           </button>
@@ -135,7 +135,7 @@ useMotion(root, (mm, el) => {
     <dialog v-if="shots.length" ref="box" class="box" :aria-label="t('common.screenshots')" @keydown="key" @click.self="box?.close()">
       <figure>
         <img :src="img(shots[at]!.image, 1920)" :alt="shots[at]!.title || `${t('work.screenshotN', { n: at + 1, title: w.title })}`">
-        <figcaption class="mono">
+        <figcaption class="mono" aria-live="polite">
           <span v-if="shots[at]!.title">{{ shots[at]!.title }}</span>
           <span class="n">{{ at + 1 }} / {{ shots.length }}</span>
         </figcaption>
@@ -209,9 +209,9 @@ aside {
   background: var(--surface);
   border: 1px solid var(--hair);
 }
-.label { font-size: 0.75rem; color: var(--ink-3); }
+.label { font-size: 0.8rem; color: var(--ink-3); }
 .stack { margin-top: 0.75rem; }
-.stack li { font-size: 0.78rem; }
+.stack li { font-size: 0.8rem; }
 
 .gallery { margin-top: var(--section-near); }
 .count { font-size: 0.9rem; color: var(--green-light); vertical-align: super; font-weight: 400; }
@@ -271,7 +271,7 @@ aside {
 .sim-list img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--r-sm); margin-bottom: 0.6rem; }
 .sim-list .year { font-size: 0.8rem; color: var(--green-light); }
 .sim-list strong { font-size: 1.25rem; letter-spacing: -0.02em; }
-.sim-list .tags { font-size: 0.78rem; color: var(--ink-3); }
+.sim-list .tags { font-size: 0.8rem; color: var(--ink-3); }
 
 .box {
   width: 100vw;

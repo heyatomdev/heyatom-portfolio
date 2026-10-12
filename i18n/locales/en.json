@@ -122,7 +122,6 @@
     "hero": {
       "lead": "For associations, professionals and small organizations. Full-stack development since 2016, from the first line of code to going live.",
       "leadAgency": "And you always talk to me, not to an agency.",
-      "someWorks": "Some works",
       "hi": "Hi, I’m Andrea.",
       "title": "I build {a} and {b}",
       "titleA": "custom websites",
@@ -191,6 +190,7 @@
     "close": "Close",
     "prev": "Previous screenshot",
     "next": "Next screenshot",
-    "screenshotN": "Screenshot {n} of {title}"
+    "screenshotN": "Screenshot {n} of {title}",
+    "enlarge": "Enlarge: {title}"
   }
 }

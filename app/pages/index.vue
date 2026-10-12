@@ -70,6 +70,7 @@ const path = computed(() => [
     when: t('home.path.since2016'),
     span: span('2016-06'),
     role: 'Full-stack developer',
+    lang: 'en',
     org: 'Medas Solutions',
     logo: 'medas',
     url: 'https://medas-solutions.it',
@@ -124,13 +125,14 @@ useMotion(root, (mm, el) => {
     gsap.set(shots, { '--in': 1 })
     gsap.set(q('[data-intro]'), { autoAlpha: 1 })
     stage.classList.add('is-intro')
-    gsap.timeline({ defaults: { ease: 'expo.out' }, onComplete: () => stage.classList.remove('is-intro') })
-      .from(q('.avail'), { y: 18, duration: 0.8 })
+    const intro = gsap.timeline({ defaults: { ease: 'expo.out' }, onComplete: () => stage.classList.remove('is-intro') })
+    if (available) intro.from(q('.avail'), { y: 18, duration: 0.8 }, 0) // v-if: no target when not freelancing
+    intro
       .from(q('.lead'), { y: 26, filter: 'blur(10px)', duration: 1.1 }, 0.55)
       .from(q('.hero .actions > *'), { y: 22, stagger: 0.09, duration: 1 }, 0.7)
       .to(shots, { '--in': 0, duration: 1.4, stagger: 0.15 }, 0.2)
       .from(q('.medal'), { scale: 0, rotation: -120, duration: 1.2, ease: 'back.out(1.7)' }, 0.9)
-      .from(q('.facts li'), { y: 22, autoAlpha: 0, stagger: 0.09, duration: 0.9 }, 1)
+      .from(q('.facts li'), { y: 22, opacity: 0, stagger: 0.09, duration: 0.9 }, 1)
       .timeScale(speed)
     document.fonts.ready.then(ctx.add(() => {
       const split = SplitText.create(h1, { type: 'lines,words', mask: 'lines', linesClass: 'ln' })
@@ -149,7 +151,7 @@ useMotion(root, (mm, el) => {
     // Section headings: lines rise out of a mask; the intro paragraph follows.
     q('.sec-head h2, .close h2').forEach(h => revealLines(h))
     q('.sec-head p').forEach(p => gsap.from(p, {
-      y: 24, autoAlpha: 0, duration: 1, ease: 'expo.out', delay: 0.15,
+      y: 24, opacity: 0, duration: 1, ease: 'expo.out', delay: 0.15,
       scrollTrigger: { trigger: p, start: 'top 90%' },
     }))
 
@@ -158,14 +160,14 @@ useMotion(root, (mm, el) => {
       gsap.timeline({ scrollTrigger: { trigger: p, start: 'top 85%' } })
         .fromTo(p.querySelector('.pick-img'), { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'expo.inOut' })
         .from(p.querySelector('.pick-img img'), { scale: 1.35, duration: 1.8, ease: 'expo.out', clearProps: 'scale' }, 0.1)
-        .from(p.querySelectorAll('.pick-body > *'), { y: 20, autoAlpha: 0, stagger: 0.08, duration: 0.9, ease: 'expo.out' }, 0.55)
+        .from(p.querySelectorAll('.pick-body > *'), { y: 20, opacity: 0, stagger: 0.08, duration: 0.9, ease: 'expo.out' }, 0.55)
     })
 
     // Offers: the rule draws across, then the row fills in.
     q('.offer').forEach((o) => {
       gsap.timeline({ scrollTrigger: { trigger: o, start: 'top 88%' } })
         .from(o.querySelector('.rule'), { scaleX: 0, duration: 1.2, ease: 'expo.inOut' })
-        .from(o.querySelectorAll(':scope > h3, :scope > p'), { y: 24, autoAlpha: 0, stagger: 0.08, duration: 0.9, ease: 'expo.out' }, 0.25)
+        .from(o.querySelectorAll(':scope > h3, :scope > p'), { y: 24, opacity: 0, stagger: 0.08, duration: 0.9, ease: 'expo.out' }, 0.25)
     })
 
     // Path: a green line follows the scroll; each step lights up as it is reached.
@@ -175,17 +177,17 @@ useMotion(root, (mm, el) => {
     })
     q('.path > li').forEach(li => ScrollTrigger.create({ trigger: li, start: 'top 65%', toggleClass: { targets: li, className: 'on' } }))
     gsap.from(q('.volunteer-title, .volunteer-card'), {
-      y: 24, autoAlpha: 0, stagger: 0.1, duration: 0.9, ease: 'expo.out',
+      y: 24, opacity: 0, stagger: 0.1, duration: 0.9, ease: 'expo.out',
       scrollTrigger: { trigger: q('.volunteer')[0], start: 'top 88%' },
     })
     gsap.from(q('.chip'), {
-      scale: 0.6, autoAlpha: 0, duration: 0.6, ease: 'back.out(2)', stagger: { each: 0.025, from: 'random' },
+      scale: 0.6, opacity: 0, duration: 0.6, ease: 'back.out(2)', stagger: { each: 0.025, from: 'random' },
       scrollTrigger: { trigger: q('.stack')[0], start: 'top 80%' },
     })
 
     // Close: the bubble leans toward the pointer.
-    gsap.from(q('.orb'), { scale: 0.7, autoAlpha: 0, rotation: -30, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: q('.close')[0], start: 'top 75%' } })
-    gsap.from(q('.mail, .close .actions > *'), { y: 24, autoAlpha: 0, stagger: 0.08, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: q('.mail')[0], start: 'top 92%' } })
+    gsap.from(q('.orb'), { scale: 0.7, opacity: 0, rotation: -30, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: q('.close')[0], start: 'top 75%' } })
+    gsap.from(q('.mail, .close .actions > *'), { y: 24, opacity: 0, stagger: 0.08, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: q('.mail')[0], start: 'top 92%' } })
 
     const offs = [
       magnetic(q('.orb')[0] as HTMLElement, 0.18),
@@ -219,7 +221,7 @@ useMotion(root, (mm, el) => {
 // Hero deck: tilt toward the pointer, fan out on hover.
 function tilt(e: PointerEvent) {
   const el = e.currentTarget as HTMLElement
-  if (e.pointerType !== 'mouse') return
+  if (e.pointerType !== 'mouse' || !matchMedia(MOTION_OK).matches) return
   const r = el.getBoundingClientRect()
   el.style.setProperty('--px', ((e.clientX - r.left) / r.width - 0.5).toFixed(3))
   el.style.setProperty('--py', ((e.clientY - r.top) / r.height - 0.5).toFixed(3))
@@ -256,11 +258,11 @@ function untilt(e: PointerEvent) {
       </div>
     </div>
 
+    <!-- Same target as the "see all works" button: a pointer shortcut, kept out of focus and the a11y tree. -->
     <NuxtLink
-      :to="localePath('/works')" class="stage" data-intro
+      :to="localePath('/works')" class="stage" data-intro aria-hidden="true" tabindex="-1"
       @pointermove="tilt" @pointerleave="untilt"
     >
-      <span class="sr-only">{{ t('home.hero.someWorks') }}:</span>
       <figure v-for="(w, i) in deck" :key="w.slug" class="shot" :class="`shot--${i}`">
         <img
           :src="img(w.preview, 960)" :srcset="srcset(w.preview, [640, 960, 1280])" sizes="(max-width: 900px) 80vw, 34vw"
@@ -272,7 +274,6 @@ function untilt(e: PointerEvent) {
         <span class="medal-ring" />
         <img src="/favicon.svg" alt="" width="64" height="64">
       </span>
-      <span class="sr-only">{{ t('common.seeAllWorks') }}</span>
     </NuxtLink>
 
     <ul class="facts" data-intro :aria-label="t('home.facts.label')">
@@ -292,13 +293,13 @@ function untilt(e: PointerEvent) {
     <div class="picks">
       <a
         v-for="p in picks" :key="p.slug" class="pick"
-        :href="p.website || p.github" target="_blank" rel="noopener"
+        :href="p.website || p.github"
       >
         <div class="pick-img">
           <img
             :src="img(p.preview, 960)" :srcset="srcset(p.preview, [640, 960, 1280])"
             sizes="(max-width: 900px) 92vw, 680px"
-            :alt="`${t('common.screenshotOf', { title: p.title })}`" width="1280" height="720" loading="lazy"
+            alt="" width="1280" height="720" loading="lazy"
           >
         </div>
         <div class="pick-body">
@@ -349,8 +350,8 @@ function untilt(e: PointerEvent) {
             <div class="step">
               <span class="logo" :style="{ '--logo': `url(/assets/logos/${p.logo}.svg)` }" aria-hidden="true" />
               <div>
-                <h3>{{ p.role }}</h3>
-                <a class="org" :href="p.url" target="_blank" rel="noopener">{{ p.org }} <Icon name="arrow-up-right" :size="14" /></a>
+                <h3 :lang="p.lang">{{ p.role }}</h3>
+                <a class="org" :href="p.url">{{ p.org }} <Icon name="arrow-up-right" :size="14" /></a>
                 <p>{{ p.text }}</p>
               </div>
             </div>
@@ -364,7 +365,7 @@ function untilt(e: PointerEvent) {
             <div class="step">
               <span class="logo logo--icon" aria-hidden="true"><Icon name="shield" /></span>
               <div>
-                <h3>{{ volunteering.role }}</h3>
+                <h4>{{ volunteering.role }}</h4>
                 <span class="org">{{ volunteering.org }}</span>
                 <p>{{ volunteering.text }}</p>
               </div>
@@ -419,8 +420,8 @@ function untilt(e: PointerEvent) {
         <a class="mail" href="mailto:hey@heyatom.dev">hey@heyatom.dev</a>
         <div class="actions">
           <a class="btn btn--primary" :href="`mailto:hey@heyatom.dev?subject=${t('home.close.subject')}`"><Icon name="mail" /> {{ t('home.close.mail') }}</a>
-          <a class="btn btn--ghost" href="https://www.linkedin.com/in/atombolato" target="_blank" rel="noopener"><Icon name="linkedin" /> LinkedIn</a>
-          <a class="btn btn--ghost" href="https://github.com/andreacw5" target="_blank" rel="noopener"><Icon name="github" /> GitHub</a>
+          <a class="btn btn--ghost" href="https://www.linkedin.com/in/atombolato"><Icon name="linkedin" /> LinkedIn</a>
+          <a class="btn btn--ghost" href="https://github.com/andreacw5"><Icon name="github" /> GitHub</a>
         </div>
       </div>
     </div>
@@ -450,8 +451,10 @@ function untilt(e: PointerEvent) {
   line-height: 1.02;
   text-wrap: wrap; /* balance re-breaks lines after the split reverts */
 }
-/* Keeps "siti e web" together in both the split and settled layouts (SplitText drops &nbsp;). */
+/* Keeps "siti e web" together in both the split and settled layouts (SplitText drops &nbsp;).
+   Not on narrow screens / high zoom, where the phrase is wider than the column and would be clipped. */
 .nw { white-space: nowrap; }
+@media (max-width: 560px) { .nw { white-space: normal; } }
 .hi {
   display: block;
   color: var(--green-light);
@@ -521,8 +524,8 @@ function untilt(e: PointerEvent) {
   background: radial-gradient(closest-side, rgba(0, 168, 107, 0.3), rgba(0, 168, 107, 0.06) 60%, transparent);
   filter: blur(20px);
 }
-.stage:hover,
-.stage:focus-visible { --fan: 1; }
+.stage:hover { --fan: 1; }
+@media (prefers-reduced-motion: reduce) { .stage:hover { --fan: 0; } }
 
 .shot {
   position: absolute;
@@ -661,7 +664,7 @@ function untilt(e: PointerEvent) {
 .pick h3 svg { display: inline; margin-left: 0.3em; vertical-align: -0.05em; color: var(--green-light); transition: transform 0.35s var(--ease-out); }
 .pick:hover h3 svg { transform: translate(3px, -3px); }
 .pick p { color: var(--ink-2); max-width: 52ch; }
-.pick .meta { color: var(--ink-3); font-size: 0.78rem; margin-top: 0.25rem; }
+.pick .meta { color: var(--ink-3); font-size: 0.8rem; margin-top: 0.25rem; }
 
 /* Offers: plain rows, no card grid */
 .offers { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); }
@@ -748,7 +751,7 @@ function untilt(e: PointerEvent) {
   transition: color 0.4s ease;
 }
 .js .path li:not(.on) .span { color: var(--ink-3); }
-.path h3, .volunteer-card h3 { font-size: 1.2rem; letter-spacing: -0.02em; line-height: 1.3; }
+.path h3, .volunteer-card h4 { font-size: 1.2rem; letter-spacing: -0.02em; line-height: 1.3; }
 .path p, .volunteer-card p { color: var(--ink-2); margin-top: 0.45rem; max-width: 60ch; }
 .step { position: relative; isolation: isolate; }
 /* Company mark as a faint watermark behind the text. */
@@ -783,13 +786,13 @@ function untilt(e: PointerEvent) {
 .org:hover { color: var(--green-light); }
 .org svg { transition: transform 0.35s var(--ease-out); }
 .org:hover svg { transform: translate(2px, -2px); }
-.path h3, .volunteer-card h3 { transition: color 0.3s ease; }
+.path h3, .volunteer-card h4 { transition: color 0.3s ease; }
 .chip { transition: border-color 0.2s ease, color 0.2s ease, translate 0.3s var(--ease-out); }
 .volunteer-card { transition: border-color 0.3s ease; }
 
 @media (hover: hover) {
   .path li:hover .logo, .volunteer-card:hover .logo { opacity: 0.14; color: var(--green-light); scale: 1.08; rotate: -4deg; }
-  .path li:hover h3, .volunteer-card:hover h3 { color: var(--green-light); }
+  .path li:hover h3, .volunteer-card:hover h4 { color: var(--green-light); }
   .path li:hover::before { scale: 1.3; }
   .volunteer-card:hover { border-color: var(--hair-strong); }
   .chip:hover { border-color: var(--green); color: var(--green-light); translate: 0 -2px; }
@@ -822,7 +825,7 @@ function untilt(e: PointerEvent) {
 .chip {
   padding: 0.28rem 0.6rem;
   border-radius: var(--r-sm);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: var(--ink);
   background: var(--surface-2);
   border: 1px solid var(--hair);
@@ -865,7 +868,7 @@ function untilt(e: PointerEvent) {
   transition: filter 0.5s ease;
 }
 .strip li:hover img { filter: saturate(1.05); }
-.strip .mono { font-size: 0.76rem; color: var(--ink-3); }
+.strip .mono { font-size: 0.8rem; color: var(--ink-3); }
 
 /* Close */
 .close {

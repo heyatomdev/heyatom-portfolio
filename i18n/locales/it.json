@@ -122,7 +122,6 @@
     "hero": {
       "lead": "Per associazioni, professionisti e piccole realtà. Sviluppo full-stack dal 2016, dalla prima riga alla messa online.",
       "leadAgency": "E parli sempre con me, non con un’agenzia.",
-      "someWorks": "Alcuni lavori",
       "hi": "Ciao, sono Andrea.",
       "title": "Costruisco {a} {b}",
       "titleA": "siti e",
@@ -191,6 +190,7 @@
     "close": "Chiudi",
     "prev": "Schermata precedente",
     "next": "Schermata successiva",
-    "screenshotN": "Schermata {n} di {title}"
+    "screenshotN": "Schermata {n} di {title}",
+    "enlarge": "Ingrandisci: {title}"
   }
 }
