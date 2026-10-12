@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/google-fonts', '@nuxtjs/i18n', '@nuxtjs/sitemap', '@nuxtjs/color-mode'],
   // Dark by default whatever the OS says; the header toggle overrides it and the cookie keeps SSR in sync.
   colorMode: {
-    preference: 'dark',
+    preference: 'system', // follow the OS; dark when it has no preference or JS is off
     fallback: 'dark',
     dataValue: 'theme',
     classSuffix: '',

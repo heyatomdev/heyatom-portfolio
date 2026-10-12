@@ -28,7 +28,7 @@ scripts/shots.mjs         # screenshot siti cliente (Playwright)
 
 - **Stile**: CSS scoped nei componenti + token da `main.css`. Mai colori hardcoded: usare `var(--green)`, `var(--ink-2)`, ecc. Ogni token nuovo va definito sia in `:root` (dark, default) sia in `:root[data-theme='light']`.
 - **Vincoli di brand fissati**: sfondo `#1e201e`, verde `#00a86b` / `#007a4d` / `#33bf89`, Manrope + JetBrains Mono. Neutri non tinti di verde. Prima di toccare UI leggere `DESIGN.md`.
-- **Tema**: dark di default a prescindere dall'OS (`@nuxtjs/color-mode`, attributo `data-theme`, cookie). Il light usa `--green-light: #007a4d` per il contrasto.
+- **Tema**: segue l'OS, dark se non c'è preferenza (`@nuxtjs/color-mode` `preference: 'system'`, attributo `data-theme`, cookie). Il light usa `--green-light: #007a4d` per il contrasto.
 - **i18n**: IT default su `/`, EN su `/en` (`prefix_except_default`). Ogni stringa UI va in **entrambi** `it.json` e `en.json`. Link interni con `useLocalePath()`.
 - **Progetti**: `works.ts` è la fonte italiana (commento in testa: generato da `website4`); le traduzioni stanno in `works.en.ts` e passano da `localize(w, locale)`. Non mettere testo EN in `works.ts`. `images` in `works.en.ts` = titoli galleria nello stesso ordine dell'IT.
 - **Motion**: sempre via `useMotion(root, (mm, el) => …)` di `utils/motion.ts`, che scopa a `gsap.matchMedia` e fa revert all'unmount. Animazioni dentro `mm.add(MOTION_OK, …)` per rispettare `prefers-reduced-motion`. La classe `js` su `<html>` (settata in `app.vue`) nasconde gli elementi `[data-intro]` solo se ci sarà motion. **Mai** `data-intro` né `autoAlpha: 0` su hero copy e `.head` delle pagine: sono l'LCP, devono dipingersi con l'HTML; lì si anima solo `y`/`blur`.

@@ -152,7 +152,7 @@ Densità media e ritmo lungo: sezioni separate da grandi vuoti verticali, conten
 
 Rifiuti confermati: niente kicker/eyebrow sopra i titoli, niente testo in gradiente, niente card in vetro come decorazione.
 
-Il tema è **dark di default** a prescindere dall'OS; un tema chiaro si attiva dal pulsante nell'header (`@nuxtjs/color-mode`, attributo `data-theme` su `<html>`, preferenza in cookie). `theme-color` segue il tema (`#1e201e` / `#f3f5f3`).
+Il tema segue la preferenza dell'OS (`prefers-color-scheme`), **dark** se non ce n'è una; il pulsante nel footer, accanto alla lingua, la sovrascrive (`@nuxtjs/color-mode`, attributo `data-theme` su `<html>`, preferenza in cookie). `theme-color` segue il tema (`#1e201e` / `#f3f5f3`).
 
 **Key Characteristics:**
 - Fondo `bg` con griglia verde 56px (`grid`, 10% dark, 7% light), fissa, mascherata in un'ellisse dall'alto.
@@ -233,7 +233,7 @@ Composizioni ricorrenti:
 
 Responsive:
 - **≤900px**: tutto a una colonna. Il mazzo si centra a `min(86%, 520px)`; pick, offerte, percorso e chiusura si impilano; lo stack perde lo sticky; l'orb scende a 180px. Nel registro e negli strumenti spariscono intestazioni di colonna e colonna stack (griglia 3.5rem / nome / 2.5rem), il dettaglio perde il rientro, il peek si spegne (anche con `hover: none`). Base comune a 2 colonne senza fili, Bastion impilato. Dettaglio progetto e `/uses` a una colonna; i "simili" in colonna; le frecce del lightbox scendono in basso.
-- **≤760px**: l'header mostra solo "Lavori", il pulsante tema e il CTA; ancore e badge disponibilità spariscono.
+- **≤760px**: l'header mostra solo "Lavori" e il CTA; ancore e badge disponibilità spariscono.
 - **≤640px**: footer a una colonna.
 - **≤560px**: fatti, percorso e volontariato a una colonna, base comune a una colonna, la striscia smette di sfalsare, i bottoni della chiusura vanno a tutta larghezza.
 - **≤480px**: nell'header resta solo la mano del marchio, senza la scritta.
@@ -261,7 +261,7 @@ Profondità ibrida: pannelli tonali (`surface` su `bg`) con hairline verde, più
 ## Shapes
 
 Angoli stretti, in eco con il piccolo arrotondamento delle celle di `hex.svg`. Due raggi:
-- **`--r-sm` (10px):** tutto ciò che si clicca (bottoni, link del nav, pulsante tema, skip link, header, righe di registro, strumenti e `/uses` in hover, lingua nel footer), chip, pillole feature, tag, badge disponibilità, pill "Il tuo progetto", e le immagini (screenshot del mazzo, registro, peek, galleria, foto di viaggio, lightbox).
+- **`--r-sm` (10px):** tutto ciò che si clicca (bottoni, link del nav, pulsante tema nel footer, skip link, header, righe di registro, strumenti e `/uses` in hover, lingua nel footer), chip, pillole feature, tag, badge disponibilità, pill "Il tuo progetto", e le immagini (screenshot del mazzo, registro, peek, galleria, foto di viaggio, lightbox).
 - **`--r-lg` (14px):** i pannelli (pick, stack, volontariato, card della base comune, banda "next", aside del dettaglio, card "simili"), lo stage del mazzo e lo screenshot grande del dettaglio.
 
 I cerchi sono riservati a punti (disponibilità, nodi del percorso e dei fili), al "+" del registro, all'icona GitHub degli strumenti e ai bottoni del lightbox. Il marchio vive in un **fumetto**: cerchio con un angolo a 10% (orb `50% 50% 10% 50%`, medaglia `50% 50% 50% 10%`), con anelli hairline che ne seguono la forma e un solo arco in `green-light` (l'orb ha un secondo anello tratteggiato con l'arco in basso). L'esagono compare come texture (`/assets/hex.svg`) tramite la utility `.hexed` di `main.css` (opacità 7–18%, maschera radiale regolata con le variabili `--hex-*`) in testate, base comune, banda "next" e footer; nella chiusura della home al 12%, sfumato da destra. Una singola cella esagonale piena `green` marca i gruppi di `/uses`.
@@ -289,7 +289,7 @@ Rettangoli pieni e sicuri a 10px, con una freccia che scivola.
 - **Banda next** (`/works`): `surface` con alone radiale verde dall'angolo in alto a sinistra, esagoni al 18% a destra, `--r-lg`, titolo a sinistra e CTA primario a destra.
 
 ### Navigation
-- **Header:** sticky, centrato a `max`, fondo `glass` con il vetro, hairline, `--r-sm`, ombra header. A sinistra il marchio (favicon 36px + "HeyAtom" 800 1.3rem `ink`; la mano ruota di -12° in hover), poi link (600 0.93rem, `ink-2`; hover e pagina corrente con fondo verde al 12% e `ink`), badge "Disponibile" con punto che pulsa tre volte (fuori dalla home, solo se `freelanceAvailable`), pulsante tema (quadrato 2.5rem, icona sole/luna 18px), CTA primario compatto "Scrivimi". Sul bordo inferiore, una hairline di 2px in gradiente `green-dark` → `green-light` segna l'avanzamento della pagina.
+- **Header:** sticky, centrato a `max`, fondo `glass` con il vetro, hairline, `--r-sm`, ombra header. A sinistra il marchio (favicon 36px + "HeyAtom" 800 1.3rem `ink`; la mano ruota di -12° in hover), poi link (600 0.93rem, `ink-2`; hover e pagina corrente con fondo verde al 12% e `ink`), badge "Disponibile" con punto che pulsa tre volte (fuori dalla home, solo se `freelanceAvailable`), CTA primario compatto "Scrivimi". Sul bordo inferiore, una hairline di 2px in gradiente `green-dark` → `green-light` segna l'avanzamento della pagina.
 - **Skip link:** `green`, `--r-sm`, entra da sopra al focus.
 - **Footer:** hairline superiore, esagoni a destra, griglia a due colonne: marchio 22px (ruota in hover) + frase in `ink-2`; selettore lingua IT/EN (600, `ink-3`, la corrente in `ink` con bordo `hair`); link GitHub, LinkedIn, Uses, Status e mail in `ink-2` → `green-light`; tagline "Code meets personality · anno" in `ink-3` 0.85rem.
 

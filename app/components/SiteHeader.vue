@@ -5,9 +5,6 @@ const available = useRuntimeConfig().public.freelanceAvailable === 'true'
 const route = useRoute()
 const { t } = useI18n()
 const localePath = useLocalePath()
-const colorMode = useColorMode()
-const light = computed(() => colorMode.value === 'light')
-const toggleTheme = () => { colorMode.preference = light.value ? 'dark' : 'light' }
 // Header slides away while reading down, returns on the way up; a hairline tracks page progress.
 const hdr = ref<HTMLElement>()
 const bar = ref<HTMLElement>()
@@ -66,10 +63,6 @@ const anchors = computed(() => [{ to: localePath('/#percorso'), label: t('nav.pa
         <span class="dot" aria-hidden="true" />
         <span class="avail-txt">{{ t('nav.available') }}</span>
       </span>
-      <button type="button" class="theme" :aria-label="t(light ? 'nav.toDark' : 'nav.toLight')" :title="t(light ? 'nav.toDark' : 'nav.toLight')" @click="toggleTheme">
-        <svg v-if="light" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z" /></svg>
-        <svg v-else viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
-      </button>
       <a class="btn btn--primary cta" href="mailto:hey@heyatom.dev">{{ t('nav.writeMe') }}</a>
       <span class="progress" aria-hidden="true"><span ref="bar" /></span>
     </nav>
@@ -190,23 +183,6 @@ const anchors = computed(() => [{ to: localePath('/#percorso'), label: t('nav.pa
   animation: ring 2.4s var(--ease-out) 3;
 }
 @keyframes ring { 70%, 100% { box-shadow: 0 0 0 8px rgba(0, 168, 107, 0); } }
-
-.theme {
-  display: grid;
-  place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  padding: 0;
-  border: 0;
-  border-radius: var(--r-sm);
-  background: none;
-  color: var(--ink-2);
-  cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-.theme:hover { color: var(--ink); background: rgba(0, 168, 107, 0.12); }
-.theme { font-size: 1rem; }
-.theme svg { width: 1.15em; height: 1.15em; } /* scales with enlarged text */
 
 .cta { padding: 0.7rem 1.2rem; font-size: 0.93rem; box-shadow: none; }
 
