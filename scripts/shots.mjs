@@ -72,6 +72,17 @@ const SITES = {
       ['/donor.html', 'Elenco donatori', `showDonorList('2')`],
     ],
   },
+  'beacon': {
+    base: 'https://beacon.heyatom.dev/it',
+    dark: true, // theme from prefers-color-scheme, no toggle
+    pages: [
+      ['', 'Homepage'],
+      ['/teams', 'Elenco dei team'],
+      ['/t/kaish-dbd', 'Pagina del team'],
+      ['/c/kaish_dbd', 'Pagina del creator'],
+      ['/panel', 'Pannello Twitch'],
+    ],
+  },
   'puma-arts': {
     base: 'https://studioartepuma.it',
     pages: [
@@ -124,7 +135,8 @@ if (resizeOnly) {
 }
 
 for (const slug of slugs) {
-  const { base, pages, dismiss } = SITES[slug]
+  const { base, pages, dismiss, dark } = SITES[slug]
+  await page.emulateMedia({ colorScheme: dark ? 'dark' : 'light' })
   // site down (or ALIRDB not running locally): keep the shots already on disk
   if (!await fetch(base).catch(() => null)) { console.warn(`skip ${slug}: ${base} unreachable`); continue }
   const dir = `public/shots/${slug}`

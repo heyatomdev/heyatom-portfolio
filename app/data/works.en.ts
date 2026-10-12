@@ -44,8 +44,9 @@ export const worksEn: Record<string, WorkEn> = {
   },
   'beacon': {
     client: personal,
-    description: 'Keeps an eye on Twitch channels and sends an alert when someone goes live, switches game or the viewer count changes: notifications go to Discord or any other system, with automatic retries if something doesn’t get through. Every stream is saved, so the stats can be read over time too.',
-    features: ['Live monitoring', 'Multi-platform notifications', 'Stream statistics', 'Protected API'],
+    description: 'The live page of a streamer team, on Twitch and Kick. You create the team, paste the channels and share the link: whoever opens it sees right away who is live, and the team can get Discord alerts when someone goes on air, switches game or ends the stream. Creators sign in with Twitch and find on one screen every team they appear in and the stats of their streams; they can leave or block a team, and pick which one shows in the panel under their Twitch channel. Official Twitch teams update on their own every night. Teams, creators, games and stats can also be read from a public API with no key: DBD Builds uses it to show Kaish’s teams.',
+    features: ['Teams with Twitch and Kick channels', 'Who is live, checked every 5 minutes', 'Discord alerts per team', 'Creator area with stats and games', 'Panel for Twitch channels', 'Synced Twitch teams', 'Organizations with multiple teams and invites', 'Public read API, no key needed', 'Italian and English'],
+    images: ['Homepage', 'Team directory', 'Team page', 'Creator page', 'Twitch panel'],
   },
   'kaish-dbd': {
     description: 'The site of streamer Kaish79, built around a build creator for Dead by Daylight. Users sign up, create and share their own builds; Kaish features the best ones from the admin panel and sees how often they get opened. Around it, a complete game wiki, fully translated.',

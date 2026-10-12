@@ -215,22 +215,51 @@ export const works: Work[] = [
     "current": true,
     "kind": "personale",
     "client": "Progetto personale",
-    "description": "Tiene d'occhio i canali Twitch e avvisa quando qualcuno va in live, cambia gioco o cambiano gli spettatori: le notifiche arrivano su Discord o su qualsiasi altro sistema, con nuovi tentativi automatici se qualcosa non passa. Ogni live resta salvata, così le statistiche si leggono anche nel tempo.",
+    "description": "La pagina live di un team di streamer, su Twitch e Kick. Crei il team, incolli i canali e condividi il link: chi lo apre vede subito chi è in live, e il team può ricevere gli avvisi su Discord quando qualcuno va in onda, cambia gioco o chiude. I creator entrano con Twitch e trovano su una sola schermata i team in cui compaiono e le statistiche delle loro live; possono uscire da un team o bloccarlo, e scegliere quale mostrare nel pannello sotto il proprio canale Twitch. I team ufficiali di Twitch si aggiornano da soli ogni notte. Team, creator, giochi e statistiche si leggono anche da un'API pubblica senza chiave: è quella che usa DBD Builds per mostrare i team di Kaish.",
     "features": [
-      "Monitoraggio live",
-      "Notifiche multi-piattaforma",
-      "Statistiche delle live",
-      "API protetta"
+      "Team con canali Twitch e Kick",
+      "Chi è in live, controllato ogni 5 minuti",
+      "Avvisi Discord per ogni team",
+      "Area creator con statistiche e giochi",
+      "Pannello per i canali Twitch",
+      "Team Twitch sincronizzati",
+      "Organizzazioni con più team e inviti",
+      "API pubblica in lettura, senza chiave",
+      "Italiano e inglese"
     ],
     "stack": [
+      "Nuxt",
       "NestJS",
       "Prisma",
       "TypeScript",
       "PostgreSQL",
       "Twitch API",
-      "Swagger"
+      "Kick API"
     ],
-    "preview": "https://fileharbor.heyatom.dev/v2/images/94ba2630-6a1f-47b6-a5b5-bb194fa9d7fe"
+    "website": "https://beacon.heyatom.dev/it",
+    "preview": "/shots/beacon/1.webp",
+    "images": [
+      {
+        "image": "/shots/beacon/1.webp",
+        "title": "Homepage"
+      },
+      {
+        "image": "/shots/beacon/2.webp",
+        "title": "Elenco dei team"
+      },
+      {
+        "image": "/shots/beacon/3.webp",
+        "title": "Pagina del team"
+      },
+      {
+        "image": "/shots/beacon/4.webp",
+        "title": "Pagina del creator"
+      },
+      {
+        "image": "/shots/beacon/5.webp",
+        "title": "Pannello Twitch"
+      }
+    ]
   },
   {
     "slug": "kaish-dbd",
