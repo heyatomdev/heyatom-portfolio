@@ -27,7 +27,7 @@ scripts/shots.mjs         # screenshot siti cliente (Playwright)
 ## Regole
 
 - **Stile**: CSS scoped nei componenti + token da `main.css`. Mai colori hardcoded: usare `var(--green)`, `var(--ink-2)`, ecc. Ogni token nuovo va definito sia in `:root` (dark, default) sia in `:root[data-theme='light']`.
-- **Vincoli di brand fissati**: sfondo `#1e201e`, verde `#00a86b` / `#007a4d` / `#33bf89`, Manrope + JetBrains Mono. Neutri non tinti di verde. Prima di toccare UI leggere `DESIGN.md`.
+- **Vincoli di brand fissati**: sfondo `#1e201e`, verde `#00a86b` / `#007a4d` / `#33bf89`, Manrope + JetBrains Mono. Neutri non tinti di verde. Prima di toccare UI leggere `docs/DESIGN.md`.
 - **Tema**: segue l'OS, dark se non c'è preferenza (`@nuxtjs/color-mode` `preference: 'system'`, attributo `data-theme`, cookie). Il light usa `--green-light: #007a4d` per il contrasto.
 - **i18n**: IT default su `/`, EN su `/en` (`prefix_except_default`). Ogni stringa UI va in **entrambi** `it.json` e `en.json`. Link interni con `useLocalePath()`.
 - **Progetti**: `works.ts` è la fonte italiana (commento in testa: generato da `website4`); le traduzioni stanno in `works.en.ts` e passano da `localize(w, locale)`. Non mettere testo EN in `works.ts`. `images` in `works.en.ts` = titoli galleria nello stesso ordine dell'IT.
@@ -50,6 +50,6 @@ Nessun lint, test o typecheck: il check è `pnpm build` (lo stesso della CI). Pe
 
 ## Doc collegati
 
-- `DESIGN.md` — design system (fonte per token e componenti)
-- `PRODUCT.md` — utenti, posizionamento, vincoli di brand, principi
+- `docs/DESIGN.md` — design system (fonte per token e componenti)
+- `docs/PRODUCT.md` — utenti, posizionamento, vincoli di brand, principi
 - `og/README.md` — immagini di share

@@ -67,5 +67,5 @@ Dettagli e requisiti in [`og/README.md`](og/README.md).
 
 ## Design
 
-- [`DESIGN.md`](DESIGN.md) — token, tipografia, componenti, motion, do/don't.
-- [`PRODUCT.md`](PRODUCT.md) — utenti, posizionamento, vincoli di brand.
+- [`docs/DESIGN.md`](docs/DESIGN.md) — token, tipografia, componenti, motion, do/don't.
+- [`docs/PRODUCT.md`](docs/PRODUCT.md) — utenti, posizionamento, vincoli di brand.
