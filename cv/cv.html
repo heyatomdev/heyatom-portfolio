@@ -1,0 +1,121 @@
+<!doctype html><html lang="it"><meta charset="utf-8"><title>Andrea Tombolato · CV</title>
+<style>
+/* Local single-file latin fonts: Google's split subsets break text extraction in some PDF readers. */
+@font-face{font-family:Manrope;font-weight:500;src:url(fonts/Manrope-normal-500-latin.woff2)}
+@font-face{font-family:Manrope;font-weight:600;src:url(fonts/Manrope-normal-600-latin.woff2)}
+@font-face{font-family:Manrope;font-weight:700;src:url(fonts/Manrope-normal-700-latin.woff2)}
+@font-face{font-family:Manrope;font-weight:800;src:url(fonts/Manrope-normal-800-latin.woff2)}
+@font-face{font-family:"JetBrains Mono";font-weight:400;src:url(fonts/JetBrains_Mono-normal-400-latin.woff2)}
+@page{size:A4;margin:15mm 16mm}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font:500 9.6pt/1.5 Manrope,sans-serif;font-kerning:none;font-variant-ligatures:none;color:#2b2e2c;-webkit-print-color-adjust:exact}
+a{color:inherit;text-decoration:none}
+.mono{font-family:"JetBrains Mono",monospace;font-size:8pt;color:#6b706c}
+header{padding-bottom:12pt;border-bottom:2px solid #00a86b}
+h1{font-weight:800;font-size:26pt;line-height:1;letter-spacing:-.02em;word-spacing:.08em;color:#1e201e}
+.role{margin-top:4pt;font-weight:700;font-size:11pt;color:#007a4d}
+.contacts{margin-top:8pt;display:flex;flex-wrap:wrap;gap:3pt 14pt}
+.summary{margin-top:12pt;font-size:10.2pt;line-height:1.55;color:#1e201e}
+section{margin-top:15pt}
+h2{font-family:"JetBrains Mono",monospace;font-weight:400;font-size:8.4pt;letter-spacing:.02em;text-transform:uppercase;color:#007a4d;
+ display:flex;align-items:center;gap:8pt;margin-bottom:8pt}
+h2::after{content:"";flex:1;height:1px;background:#cfe9dd}
+.item{break-inside:avoid}
+.item+.item{margin-top:10pt}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:12pt}
+h3{font-weight:700;font-size:10.8pt;letter-spacing:-.01em;color:#1e201e}
+h3 span{font-weight:500;color:#6b706c}
+.stack{margin-top:1pt}
+p,ul{margin-top:4pt}
+ul{padding-left:11pt}
+li{margin-top:2pt}
+li::marker{color:#00a86b}
+b{font-weight:700;color:#1e201e}
+.note{font-size:9pt;color:#6b706c;margin:-3pt 0 8pt}
+.skills p{margin-top:3pt}
+.skills .k{font-family:"JetBrains Mono",monospace;font-size:8pt;color:#6b706c}
+.skills b{color:#007a4d}
+.more{margin-top:10pt;font-size:9pt;color:#6b706c}
+.more a{color:#007a4d;font-weight:600}
+</style>
+<header>
+  <h1>Andrea Tombolato</h1>
+  <div class="role">Full-stack Developer</div>
+  <div class="contacts mono">
+    <span>Settimo Milanese (MI)</span>
+    <a href="mailto:andreacw96@gmail.com">andreacw96@gmail.com</a>
+    <a href="https://linkedin.com/in/atombolato">linkedin.com/in/atombolato</a>
+    <a href="https://andreatombolato.dev">andreatombolato.dev</a>
+  </div>
+  <p class="summary">Full-stack developer. Dal 2016 lavoro in Medas su Meview, il portale paziente con cui decine di ospedali e laboratori in Italia pubblicano referti e raccolgono consensi agli esami. Uso Java e Vue/Nuxt, su dati sanitari soggetti a GDPR e integrazioni con i sistemi ospedalieri. Fuori dal lavoro sviluppo progetti personali, il principale è DBD Builds.</p>
+</header>
+
+<section>
+  <h2>Esperienza</h2>
+  <div class="item">
+    <div class="head"><h3>Full-stack Developer <span>· Medas Solutions Srl</span></h3><span class="mono">Milano · 06/2016 – oggi</span></div>
+    <ul>
+      <li>Sviluppo Meview, portale paziente usato da decine di strutture ospedaliere e laboratori in tutta Italia per la consultazione dei referti di esami medici e di laboratorio.</li>
+      <li>Realizzo i flussi dei consensi informati lato portale: compilazione, firma e produzione dei documenti.</li>
+      <li>Integro il portale con le applicazioni degli altri team: autenticazione (SPID, CIE, strong authentication), firma digitale e Integration Center, che lo collega ai sistemi ospedalieri tramite HL7.</li>
+      <li>Stack Java e Vue.js, con migrazione in corso del prodotto a Quarkus e Nuxt.</li>
+      <li>Mi occupo di manutenzione evolutiva, debugging e ottimizzazione delle prestazioni del prodotto in produzione.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Progetti personali</h2>
+  <p class="note">Progetti gratuiti, sviluppati nel tempo libero.</p>
+  <div class="item">
+    <div class="head"><h3>DBD Builds <span>· <a href="https://dbd-builds.it">dbd-builds.it</a></span></h3><span class="mono">2025 – oggi</span></div>
+    <div class="stack mono">NestJS · Prisma · PostgreSQL · Nuxt · Vuetify · TypeScript</div>
+    <p>Sito per la community dello streamer Kaish_DBD dedicato a Dead by Daylight, progettato e sviluppato da solo: gli utenti creano e condividono build, con la wiki del gioco tradotta. <b>Oltre 500 build pubblicate e circa 1.000 visitatori al mese.</b></p>
+    <ul>
+      <li>Costruttore di build, registrazione utenti e ruoli, pannello admin con build in evidenza e metriche di visualizzazione.</li>
+      <li>API NestJS, frontend Nuxt e bot dedicato.</li>
+    </ul>
+  </div>
+  <div class="item">
+    <div class="head"><h3>Tai Chi Sesto <span>· <a href="https://taichisesto.it">taichisesto.it</a></span></h3><span class="mono">2026</span></div>
+    <div class="stack mono">Nuxt · Vuetify · TypeScript</div>
+    <p>Sito bilingue per i corsi di Tai Chi e Qi Gong a Sesto San Giovanni, con sedi, orari e insegnanti. Ho curato SEO e anteprime di condivisione.</p>
+  </div>
+  <div class="item">
+    <div class="head"><h3>Servizi backend riusabili</h3><span class="mono">2023 – oggi</span></div>
+    <div class="stack mono">NestJS · Prisma · PostgreSQL · Docker</div>
+    <p>Servizi di autenticazione, contenuti, file ed email che fanno da base ai miei progetti. Una parte è open source.</p>
+  </div>
+  <p class="more">Altri progetti su <a href="https://andreatombolato.dev">andreatombolato.dev</a></p>
+</section>
+
+<section class="item">
+  <h2>Competenze</h2>
+  <div class="skills">
+    <p><span class="k">Principali:</span> <b>Java, NestJS, Nuxt / Vue.js, TypeScript</b></p>
+    <p><span class="k">Backend:</span> Quarkus, Gradle, Node.js, Prisma, REST, OAuth / JWT</p>
+    <p><span class="k">Frontend:</span> JavaScript, HTML, CSS, Vuetify, web design responsivo</p>
+    <p><span class="k">Database:</span> PostgreSQL, SQL</p>
+    <p><span class="k">DevOps:</span> Docker, Linux (Ubuntu), Git, GitHub Actions, NGINX</p>
+    <p><span class="k">Dominio:</span> Dati sanitari e GDPR, consensi informati, integrazione HL7</p>
+    <p><span class="k">Lingue:</span> Italiano (madrelingua), inglese (B1, lettura e scrittura tecnica)</p>
+  </div>
+</section>
+
+<section class="item">
+  <h2>Formazione</h2>
+  <div class="head"><h3>Diploma tecnico in elettronica e telecomunicazioni <span>· IIS Galilei Luxemburg, Milano</span></h3><span class="mono">2015</span></div>
+</section>
+
+<section>
+  <h2>Attività associative e volontariato</h2>
+  <div class="item">
+    <div class="head"><h3>Technical Manager e membro del direttivo <span>· Element Gaming A.S.D.</span></h3><span class="mono">dal 02/2019</span></div>
+    <p>Coordinamento dello sviluppo volontario e sito del network (<a href="https://element-gaming.eu">element-gaming.eu</a>, 2019 – 2024).</p>
+  </div>
+  <div class="item">
+    <div class="head"><h3>Protezione Civile</h3><span class="mono">dal 2014</span></div>
+    <p>Volontario a Milano dal 05/2026. In precedenza Capo Squadra a Settimo Milanese dal 2014 al 2026: coordinamento delle squadre in emergenza, formazione dei volontari, rapporti con gli enti locali. Certificazioni: rischio idrogeologico e alluvionale (Regione Lombardia, 2023), radiocomunicazioni in emergenza (2019).</p>
+  </div>
+</section>
+</html>

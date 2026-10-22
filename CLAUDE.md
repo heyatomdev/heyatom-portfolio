@@ -21,6 +21,7 @@ app/
 i18n/locales/{it,en}.json # testi UI
 server/api/__sitemap__/   # URL /works/<slug> per la sitemap
 og/                       # sorgenti HTML delle og image + render.sh
+cv/                       # cv.html + render.sh → public/assets/cv-tombolato.pdf
 scripts/shots.mjs         # screenshot siti cliente (Playwright)
 ```
 
