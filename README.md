@@ -59,6 +59,17 @@ og/render.sh [home|works|work]   # immagini Open Graph 1200×630 → public/og*.
 
 Dettagli e requisiti in [`og/README.md`](og/README.md).
 
+## CV
+
+Il PDF scaricabile dalla home (`public/assets/cv-tombolato.pdf`) si genera da `cv/cv.html`:
+
+```bash
+cv/render.sh                                                        # cv/cv.html → public/assets/cv-tombolato.pdf (A4)
+uvx --from pdfminer.six pdf2txt.py public/assets/cv-tombolato.pdf   # controllo del testo estratto (ATS/AI)
+```
+
+Si modifica solo `cv/cv.html`, poi si rigenera. Font locali in `cv/fonts/`; stesso Chrome headless di `og/render.sh`.
+
 ## Deploy
 
 - `Dockerfile` multi-stage: build con pnpm, immagine finale con solo `.output`, utente non root, porta 3000.

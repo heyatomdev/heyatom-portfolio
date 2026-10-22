@@ -45,6 +45,13 @@ scripts/shots.mjs         # screenshot siti cliente (Playwright)
 3. OG: `og/render.sh work`; se cambia il numero di progetti aggiornare il testo in `og/works.html` e rigenerare `works`.
 4. Sitemap: automatica.
 
+## Quando aggiorni il CV
+
+1. Testo in `cv/cv.html` (unica fonte; il PDF linkato dalla home è `public/assets/cv-tombolato.pdf`). Il CV lo legge anche il datore di lavoro attuale: niente che sembri freelance o secondo lavoro.
+2. `cv/render.sh` stampa il PDF A4 con chrome-headless-shell (come `og/render.sh`).
+3. Controllare che resti leggibile da ATS/AI: `uvx --from pdfminer.six pdf2txt.py public/assets/cv-tombolato.pdf` deve dare testo pulito, in ordine, senza parole spezzate.
+4. Vincoli di layout per l'estrazione: font locali in `cv/fonts/` (mai Google Fonts, i subset spezzano il testo), niente `letter-spacing` largo, niente colonne/griglie che separano etichetta e valore (le competenze sono righe `Etichetta: valori`).
+
 ## Verifica
 
 Nessun lint, test o typecheck: il check è `pnpm build` (lo stesso della CI). Per vedere modifiche UI usare il preview `portfolio` di `.claude/launch.json` (porta 3210), controllando dark e light, IT e EN, mobile.
