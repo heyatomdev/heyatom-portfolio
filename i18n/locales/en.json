@@ -181,5 +181,17 @@
     "enlarge": "Enlarge: {title}",
     "ask": "Need something like this?",
     "askSubject": "Something like {title}"
+  },
+  "error": {
+    "home": "Back to home",
+    "works": "See the work",
+    "notFound": {
+      "title": "Nothing here.",
+      "text": "The page you’re looking for doesn’t exist or has moved. Maybe the link was old, or there’s a typo."
+    },
+    "generic": {
+      "title": "Something broke.",
+      "text": "That’s on me, not you. Try again in a moment; if it keeps happening, write me and I’ll fix it."
+    }
   }
 }

@@ -181,5 +181,17 @@
     "enlarge": "Ingrandisci: {title}",
     "ask": "Ti serve qualcosa di simile?",
     "askSubject": "Qualcosa come {title}"
+  },
+  "error": {
+    "home": "Torna alla home",
+    "works": "Vedi i lavori",
+    "notFound": {
+      "title": "Qui non c’è niente.",
+      "text": "La pagina che cerchi non esiste o è stata spostata. Magari il link era vecchio, o c’è un errore di battitura."
+    },
+    "generic": {
+      "title": "Qualcosa si è rotto.",
+      "text": "È un errore mio, non tuo. Riprova tra poco; se continua, scrivimi e lo sistemo."
+    }
   }
 }
