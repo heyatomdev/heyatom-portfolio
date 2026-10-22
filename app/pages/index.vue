@@ -26,17 +26,17 @@ const offers = computed(() => [
   {
     title: t('home.offers.site.title'),
     text: t('home.offers.site.text'),
-    examples: ['prociv', 'puma-arts'],
+    examples: ['sgweb', 'puma-arts'],
   },
   {
     title: t('home.offers.app.title'),
     text: t('home.offers.app.text'),
-    examples: ['kaish-dbd', 'beacon'],
+    examples: ['kaish-dbd', 'gymtrack'],
   },
   {
     title: t('home.offers.tools.title'),
     text: t('home.offers.tools.text'),
-    examples: ['beacon', 'alertconnector'],
+    examples: ['prociv', 'beacon'],
   },
 ].map(o => ({ ...o, examples: o.examples.map(bySlug) })))
 
@@ -47,7 +47,18 @@ const span = (from: string, to?: string) => {
   return t('home.path.years', Math.max(1, Math.floor(((end[0]! - fy!) * 12 + end[1]! - fm!) / 12)))
 }
 
+// Main credential first: ten years at Medas, then the community roles.
 const path = computed(() => [
+  {
+    when: t('home.path.since2016'),
+    span: span('2016-06'),
+    role: 'Full-stack developer',
+    lang: 'en',
+    org: 'Medas Solutions',
+    logo: 'medas',
+    url: 'https://medas-solutions.it',
+    text: t('home.path.medas'),
+  },
   {
     when: t('home.path.since2020'),
     span: span('2020-11'),
@@ -66,16 +77,6 @@ const path = computed(() => [
     url: 'https://element-gaming.eu',
     text: t('home.path.elementDev'),
   },
-  {
-    when: t('home.path.since2016'),
-    span: span('2016-06'),
-    role: 'Full-stack developer',
-    lang: 'en',
-    org: 'Medas Solutions',
-    logo: 'medas',
-    url: 'https://medas-solutions.it',
-    text: t('home.path.medas'),
-  },
 ])
 
 const volunteering = computed(() => ({
@@ -93,15 +94,13 @@ const stack = computed(() => [
   { group: t('home.stack.integrations'), items: ['Stripe', 'Brevo', 'Twitch', 'Discord', 'OAuth'] },
 ])
 
+// Five photos: the strip is a breath between path and close, never heavier than the work.
 const travels = computed(() => [
   { src: 'https://fileharbor.heyatom.dev/v2/images/f4a215ed-406d-4532-8f4f-67cc3fa132f6', place: t('home.travels.edinburgh.place'), year: 2022, alt: t('home.travels.edinburgh.alt') },
   { src: 'https://fileharbor.heyatom.dev/v2/images/b6e3fce0-4b4a-49c5-a636-c8d5d5954335', place: 'Chicago, USA', year: 2022, alt: t('home.travels.chicago.alt') },
   { src: 'https://fileharbor.heyatom.dev/v2/images/085153e2-9300-4168-ae78-c12ddb247064', place: t('home.travels.valsesia.place'), year: 2023, alt: t('home.travels.valsesia.alt') },
   { src: 'https://fileharbor.heyatom.dev/v2/images/821de266-6804-4f06-9576-6febd993396c', place: t('home.travels.lisbon.place'), year: 2019, alt: t('home.travels.lisbon.alt') },
   { src: 'https://fileharbor.heyatom.dev/v2/images/0056c6b0-0b84-4b19-8af9-4571e4e1e53c', place: t('home.travels.dolomites.place'), year: 2018, alt: t('home.travels.dolomites.alt') },
-  { src: 'https://fileharbor.heyatom.dev/v2/images/243e5eef-2a2b-4b38-a694-11cefd754e74', place: t('home.travels.seville.place'), year: 2019, alt: t('home.travels.seville.alt') },
-  { src: 'https://fileharbor.heyatom.dev/v2/images/8ab40bb6-4e37-4c3b-b12b-726e913e477d', place: t('home.travels.london.place'), year: 2014, alt: t('home.travels.london.alt') },
-  { src: 'https://fileharbor.heyatom.dev/v2/images/07dc987f-631e-49c2-87dd-c7602fc58243', place: t('home.travels.bergamo.place'), year: 2023, alt: t('home.travels.bergamo.alt') },
 ])
 
 const years = new Date().getFullYear() - 2016
@@ -226,7 +225,7 @@ function untilt(e: PointerEvent) {
     <div class="hero-copy">
       <p v-if="available" class="avail"><span class="dot" aria-hidden="true" />{{ t('common.availableFreelance') }}</p>
       <h1 id="hero-title">
-        <span class="hi">{{ t('home.hero.hi') }}</span>
+        <span class="hi">{{ t('home.hero.hi') }}</span>{{ ' ' }}
         <i18n-t keypath="home.hero.title" scope="global">
           <template #a><span class="nw">{{ t('home.hero.titleA') }}</span></template>
           <template #b><span class="nw">{{ t('home.hero.titleB') }}</span></template>
@@ -277,10 +276,7 @@ function untilt(e: PointerEvent) {
     </div>
 
     <div class="picks">
-      <a
-        v-for="p in picks" :key="p.slug" class="pick"
-        :href="p.website || p.github"
-      >
+      <NuxtLink v-for="p in picks" :key="p.slug" class="pick" :to="localePath(`/works/${p.slug}`)">
         <div class="pick-img">
           <img
             :src="img(p.preview, 960)" :srcset="srcset(p.preview, [640, 960, 1280])"
@@ -289,11 +285,11 @@ function untilt(e: PointerEvent) {
           >
         </div>
         <div class="pick-body">
-          <h3>{{ p.title }}<Icon name="arrow-up-right" :size="20" /></h3>
+          <h3>{{ p.title }}<Icon name="arrow-right" :size="20" /></h3>
           <p>{{ p.line }}</p>
           <p class="mono meta">{{ p.year }} · {{ p.stack.slice(0, 3).join(' · ') }}</p>
         </div>
-      </a>
+      </NuxtLink>
     </div>
   </section>
 
@@ -329,8 +325,10 @@ function untilt(e: PointerEvent) {
 
     <div class="path-grid">
       <div>
+        <!-- The track sits beside the list, not in it: an <ol> takes only <li> children (and :first-child must hit the first step). -->
+        <div class="path-box">
+        <span class="path-track" aria-hidden="true"><span class="path-progress" /></span>
         <ol class="path">
-          <span class="path-track" aria-hidden="true"><span class="path-progress" /></span>
           <li v-for="p in path" :key="p.role + p.org">
             <span class="mono when">{{ p.when }}<span class="span">{{ p.span }}</span></span>
             <div class="step">
@@ -343,6 +341,7 @@ function untilt(e: PointerEvent) {
             </div>
           </li>
         </ol>
+        </div>
 
         <div class="volunteer">
           <h3 class="volunteer-title">{{ t('home.path.volunteering') }}</h3>
@@ -437,10 +436,10 @@ function untilt(e: PointerEvent) {
   line-height: 1.02;
   text-wrap: wrap; /* balance re-breaks lines after the split reverts */
 }
-/* Keeps "siti e web" together in both the split and settled layouts (SplitText drops &nbsp;).
-   Not on narrow screens / high zoom, where the phrase is wider than the column and would be clipped. */
+/* Keeps "siti e" and "su misura." together in both the split and settled layouts (SplitText drops &nbsp;).
+   Both halves stay short (under 11ch), so they fit the narrowest column at the minimum size too:
+   the old nowrap "web app su misura." ran under the deck at desktop widths. */
 .nw { white-space: nowrap; }
-@media (max-width: 560px) { .nw { white-space: normal; } }
 .hi {
   display: block;
   color: var(--green-light);
@@ -472,10 +471,10 @@ function untilt(e: PointerEvent) {
   margin-bottom: 1.6rem;
   padding: 0.4rem 0.9rem 0.4rem 0.75rem;
   border-radius: var(--r-sm);
-  font-size: 0.88rem;
+  font-size: var(--text-sm);
   font-weight: 600;
   color: var(--green-light);
-  background: rgba(0, 168, 107, 0.08);
+  background: rgb(var(--green-rgb) / 0.08);
   border: 1px solid var(--hair-strong);
 }
 .dot {
@@ -507,7 +506,7 @@ function untilt(e: PointerEvent) {
   position: absolute;
   inset: 4% 2% 0;
   z-index: -1;
-  background: radial-gradient(closest-side, rgba(0, 168, 107, 0.3), rgba(0, 168, 107, 0.06) 60%, transparent);
+  background: radial-gradient(closest-side, rgb(var(--green-rgb) / 0.3), rgb(var(--green-rgb) / 0.06) 60%, transparent);
   filter: blur(20px);
 }
 .stage:hover { --fan: 1; }
@@ -541,7 +540,7 @@ function untilt(e: PointerEvent) {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.6rem 0.85rem;
-  font-size: 0.82rem;
+  font-size: var(--text-sm);
   font-weight: 600;
   color: var(--ink);
   background: var(--surface);
@@ -563,19 +562,19 @@ function untilt(e: PointerEvent) {
   display: grid;
   place-items: center;
   border-radius: 50% 50% 50% 10%;
-  background: radial-gradient(circle at 35% 28%, rgba(0, 168, 107, 0.28), var(--surface) 65%);
+  background: radial-gradient(circle at 35% 28%, rgb(var(--green-rgb) / 0.28), var(--surface) 65%);
   border: 1px solid var(--hair-strong);
-  box-shadow: 0 18px 40px -12px rgb(0 0 0 / calc(0.7 * var(--shade))), inset 0 2px 24px rgba(0, 168, 107, 0.18);
+  box-shadow: 0 18px 40px -12px rgb(0 0 0 / calc(0.7 * var(--shade))), inset 0 2px 24px rgb(var(--green-rgb) / 0.18);
   translate: calc(var(--px) * 18px) calc(var(--py) * 18px - var(--scatter) * 160px);
   transition: translate 0.9s var(--ease-out);
 }
-.medal img { width: 52%; filter: drop-shadow(0 4px 14px rgba(0, 168, 107, 0.55)); transform-origin: 52% 88%; }
+.medal img { width: 52%; filter: drop-shadow(0 4px 14px rgb(var(--green-rgb) / 0.55)); transform-origin: 52% 88%; }
 .stage:hover .medal img { animation: wave 1.3s ease-in-out; }
 .medal-ring {
   position: absolute;
   inset: -9%;
   border-radius: inherit;
-  border: 1px solid rgba(0, 168, 107, 0.2);
+  border: 1px solid rgb(var(--green-rgb) / 0.2);
   border-top-color: var(--green-light);
 }
 @keyframes wave {
@@ -596,7 +595,7 @@ function untilt(e: PointerEvent) {
   gap: 1rem 2rem;
 }
 .facts li { display: flex; flex-direction: column; gap: 0.2rem; font-weight: 600; color: var(--ink); }
-.facts .mono { font-size: 0.8rem; font-weight: 400; color: var(--green-light); }
+.facts .mono { font-size: var(--text-xs); font-weight: 400; color: var(--green-light); }
 
 /* Hero intro: pure CSS so it plays with the server HTML instead of waiting for hydration.
    Offsets in seconds from first paint; `.intro-seen` (app.vue) replays it faster later in the session. */
@@ -656,7 +655,7 @@ function untilt(e: PointerEvent) {
   color: inherit;
   border-color: var(--hair-strong);
   transform: translateY(-4px);
-  box-shadow: 0 24px 50px -24px rgba(0, 168, 107, 0.45);
+  box-shadow: 0 24px 50px -24px rgb(var(--green-rgb) / 0.45);
 }
 .pick:first-child { grid-column: 1 / -1; }
 .pick:not(:first-child) { flex-direction: column; align-items: stretch; }
@@ -668,9 +667,9 @@ function untilt(e: PointerEvent) {
 .pick-body { flex: 1; padding: 2rem clamp(1.4rem, 3.5vw, 3.25rem); display: grid; gap: 0.6rem; align-content: center; }
 .pick h3 { font-size: clamp(1.4rem, 2.2vw, 1.9rem); }
 .pick h3 svg { display: inline; margin-left: 0.3em; vertical-align: -0.05em; color: var(--green-light); transition: transform 0.35s var(--ease-out); }
-.pick:hover h3 svg { transform: translate(3px, -3px); }
+.pick:hover h3 svg { transform: translateX(4px); }
 .pick p { color: var(--ink-2); max-width: 52ch; }
-.pick .meta { color: var(--ink-3); font-size: 0.8rem; margin-top: 0.25rem; }
+.pick .meta { color: var(--ink-3); font-size: var(--text-xs); margin-top: 0.25rem; }
 
 /* Offers: plain rows, no card grid */
 .offers { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); }
@@ -693,8 +692,8 @@ function untilt(e: PointerEvent) {
 }
 .offer h3 { font-size: clamp(1.35rem, 2.3vw, 1.9rem); letter-spacing: -0.03em; }
 .offer p { color: var(--ink-2); }
-.ex { font-size: 0.95rem; }
-.ex-label { display: block; color: var(--ink-3); font-size: 0.82rem; font-weight: 600; margin-bottom: 0.2rem; }
+.ex { font-size: var(--text-label); }
+.ex-label { display: block; color: var(--ink-3); font-size: var(--text-sm); font-weight: 600; margin-bottom: 0.2rem; }
 
 /* Path + stack */
 .path-grid {
@@ -703,7 +702,8 @@ function untilt(e: PointerEvent) {
   gap: clamp(2rem, 5vw, 5rem);
   align-items: start;
 }
-.path { list-style: none; margin: 0; padding: 0 0 0 1.75rem; position: relative; }
+.path-box { position: relative; }
+.path { list-style: none; margin: 0; padding: 0 0 0 1.75rem; }
 .path-track {
   position: absolute;
   left: 0.3rem;
@@ -718,7 +718,7 @@ function untilt(e: PointerEvent) {
   inset: 0;
   border-radius: inherit;
   background: linear-gradient(180deg, var(--green-light), var(--green));
-  box-shadow: 0 0 12px rgba(0, 168, 107, 0.6);
+  box-shadow: 0 0 12px rgb(var(--green-rgb) / 0.6);
   transform-origin: top;
 }
 .path li { position: relative; }
@@ -735,7 +735,7 @@ function untilt(e: PointerEvent) {
   transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, scale 0.3s var(--ease-out);
 }
 .path li:first-child::before { top: 0.55rem; }
-.path li.on::before { background: var(--green); border-color: var(--green-light); box-shadow: 0 0 0 5px rgba(0, 168, 107, 0.15); }
+.path li.on::before { background: var(--green); border-color: var(--green-light); box-shadow: 0 0 0 5px rgb(var(--green-rgb) / 0.15); }
 .path li .when { transition: color 0.4s ease; }
 
 .js .path li:not(.on) .when { color: var(--ink-3); }
@@ -747,7 +747,7 @@ function untilt(e: PointerEvent) {
   border-top: 1px solid var(--hair);
 }
 .path li:first-child { border-top: 0; padding-top: 0.2rem; }
-.when { color: var(--green-light); font-size: 0.85rem; padding-top: 0.3rem; }
+.when { color: var(--green-light); font-size: var(--text-sm); padding-top: 0.3rem; }
 .span {
   display: block;
   margin-top: 0.35rem;
@@ -757,7 +757,7 @@ function untilt(e: PointerEvent) {
   transition: color 0.4s ease;
 }
 .js .path li:not(.on) .span { color: var(--ink-3); }
-.path h3, .volunteer-card h4 { font-size: 1.2rem; letter-spacing: -0.02em; line-height: 1.3; }
+.path h3, .volunteer-card h4 { font-size: var(--text-lg); letter-spacing: -0.02em; line-height: 1.3; }
 .path p, .volunteer-card p { color: var(--ink-2); margin-top: 0.45rem; max-width: 60ch; }
 .step { position: relative; isolation: isolate; }
 /* Company mark as a faint watermark behind the text. */
@@ -805,7 +805,7 @@ function untilt(e: PointerEvent) {
 }
 
 .volunteer { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
-.volunteer-title { font-size: 0.85rem; font-weight: 700; color: var(--ink-3); margin-bottom: 1rem; }
+.volunteer-title { font-size: var(--text-sm); font-weight: 700; color: var(--ink-3); margin-bottom: 1rem; }
 .volunteer-card {
   display: grid;
   grid-template-columns: 9.5rem minmax(0, 1fr);
@@ -824,14 +824,14 @@ function untilt(e: PointerEvent) {
   background: var(--surface);
   border: 1px solid var(--hair);
 }
-.stack h3 { font-size: 1.15rem; letter-spacing: -0.02em; }
+.stack h3 { font-size: var(--text-lg); letter-spacing: -0.02em; }
 .stack dl { margin: 1.2rem 0 1.5rem; display: grid; gap: 1.1rem; }
-.stack dt { font-size: 0.85rem; font-weight: 700; color: var(--ink-3); margin-bottom: 0.45rem; }
+.stack dt { font-size: var(--text-sm); font-weight: 700; color: var(--ink-3); margin-bottom: 0.45rem; }
 .stack dd { margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .chip {
   padding: 0.28rem 0.6rem;
   border-radius: var(--r-sm);
-  font-size: 0.8rem;
+  font-size: var(--text-xs);
   color: var(--ink);
   background: var(--surface-2);
   border: 1px solid var(--hair);
@@ -874,7 +874,7 @@ function untilt(e: PointerEvent) {
   transition: filter 0.5s ease;
 }
 .strip li:hover img { filter: saturate(1.05); }
-.strip .mono { font-size: 0.8rem; color: var(--ink-3); }
+.strip .mono { font-size: var(--text-xs); color: var(--ink-3); }
 
 /* Close */
 .close {
@@ -884,7 +884,7 @@ function untilt(e: PointerEvent) {
   overflow: hidden;
   border-top: 1px solid var(--hair);
   background:
-    radial-gradient(ellipse 60% 70% at 18% 50%, rgba(0, 168, 107, 0.16), transparent 70%),
+    radial-gradient(ellipse 60% 70% at 18% 50%, rgb(var(--green-rgb) / 0.16), transparent 70%),
     var(--bg);
 }
 .close::after {
@@ -916,20 +916,20 @@ function untilt(e: PointerEvent) {
   place-items: center;
   border-radius: 50% 50% 10% 50%;
   background:
-    radial-gradient(circle at 35% 28%, rgba(0, 168, 107, 0.2), var(--glass) 60%),
+    radial-gradient(circle at 35% 28%, rgb(var(--green-rgb) / 0.2), var(--glass) 60%),
     linear-gradient(160deg, var(--surface), var(--surface-3));
   border: 1px solid var(--hair-strong);
-  box-shadow: inset 0 2px 30px rgba(0, 168, 107, 0.14), 0 40px 80px -20px rgb(0 0 0 / calc(0.6 * var(--shade))), 0 0 80px rgba(0, 168, 107, 0.16);
+  box-shadow: inset 0 2px 30px rgb(var(--green-rgb) / 0.14), 0 40px 80px -20px rgb(0 0 0 / calc(0.6 * var(--shade))), 0 0 80px rgb(var(--green-rgb) / 0.16);
 }
-.orb img { width: 42%; filter: drop-shadow(0 6px 22px rgba(0, 168, 107, 0.55)); transform-origin: 52% 88%; }
+.orb img { width: 42%; filter: drop-shadow(0 6px 22px rgb(var(--green-rgb) / 0.55)); transform-origin: 52% 88%; }
 .orb:hover img { animation: wave 1.3s ease-in-out; }
 .orb-ring { position: absolute; border-radius: inherit; pointer-events: none; }
-.orb-ring--a { inset: -8%; border: 1px solid rgba(0, 168, 107, 0.2); border-top-color: var(--green-light); }
-.orb-ring--b { inset: 5%; border: 1px dashed rgba(0, 168, 107, 0.16); border-bottom-color: rgba(0, 168, 107, 0.5); }
+.orb-ring--a { inset: -8%; border: 1px solid rgb(var(--green-rgb) / 0.2); border-top-color: var(--green-light); }
+.orb-ring--b { inset: 5%; border: 1px dashed rgb(var(--green-rgb) / 0.16); border-bottom-color: rgb(var(--green-rgb) / 0.5); }
 
 .close h2 { font-size: clamp(2.2rem, 4.8vw, 4rem); letter-spacing: -0.04em; max-width: 14ch; }
-.close p { margin-top: 1.2rem; color: var(--ink-2); font-size: 1.1rem; max-width: 46ch; }
-.close p.aside { margin-top: 0.8rem; color: var(--ink-3); font-size: 0.95rem; }
+.close p { margin-top: 1.2rem; color: var(--ink-2); font-size: var(--text-md); max-width: 46ch; }
+.close p.aside { margin-top: 0.8rem; color: var(--ink-3); font-size: var(--text-label); }
 .mail {
   display: inline-block;
   margin-top: 1.8rem;
@@ -945,6 +945,12 @@ function untilt(e: PointerEvent) {
 }
 .mail:hover { color: var(--ink); text-decoration-color: var(--green); }
 .close .actions { margin-top: 1.8rem; }
+
+/* Touch: standalone text links get a 44px tall hit area; inline links in sentences stay as they are. */
+@media (pointer: coarse) {
+  .more, a.org { padding-block: 0.6rem; }
+  .ex a { display: inline-block; padding-block: 0.6rem; }
+}
 
 /* ── Responsive ───────────────────────────────── */
 @media (max-width: 900px) {

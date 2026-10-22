@@ -21,10 +21,15 @@ const toggleTheme = () => { colorMode.preference = light.value ? 'dark' : 'light
                Hash dropped: the server never sees it, so keeping it would break hydration. -->
           <a v-for="l in ['it', 'en']" :key="l" :href="switchLocalePath(l).split('#')[0]" :lang="l" :hreflang="l" :aria-current="locale === l ? 'true' : undefined" :aria-label="l === 'it' ? 'Italiano' : 'English'" @click="setLocaleCookie(l)">{{ l.toUpperCase() }}</a>
         </div>
-        <button type="button" class="theme" :aria-label="t(light ? 'nav.toDark' : 'nav.toLight')" :title="t(light ? 'nav.toDark' : 'nav.toLight')" @click="toggleTheme">
-          <svg v-if="light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z" /></svg>
-          <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
-        </button>
+        <!-- The server can't know the OS theme on a first visit (no cookie yet): render the toggle on the client only,
+             or a light visitor would get the "switch to light" icon and label. The placeholder keeps the row from shifting. -->
+        <ClientOnly>
+          <template #fallback><span class="theme" aria-hidden="true" /></template>
+          <button type="button" class="theme" :aria-label="t(light ? 'nav.toDark' : 'nav.toLight')" :title="t(light ? 'nav.toDark' : 'nav.toLight')" @click="toggleTheme">
+            <svg v-if="light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z" /></svg>
+            <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
+          </button>
+        </ClientOnly>
       </div>
       <ul>
         <li><a href="https://github.com/andreacw5" rel="me">GitHub</a></li>
@@ -43,7 +48,7 @@ const toggleTheme = () => { colorMode.preference = light.value ? 'dark' : 'light
   border-top: 1px solid var(--hair);
   padding: 2.25rem 0 2.75rem;
   color: var(--ink-3);
-  font-size: 0.92rem;
+  font-size: var(--text-label);
   overflow: hidden;
   --hex-inset: 0 0 0 60%;
   --hex-o: 0.09;
@@ -61,7 +66,7 @@ a { color: var(--ink-2); text-decoration: none; }
 a:hover { color: var(--green-light); }
 .me img { transition: transform 0.5s var(--ease-out); transform-origin: 50% 85%; }
 .me:hover img { transform: rotate(-12deg); }
-.tag { font-size: 0.85rem; }
+.tag { font-size: var(--text-sm); }
 @media (max-width: 640px) {
   .row { grid-template-columns: 1fr; }
 }
@@ -91,4 +96,10 @@ a:hover { color: var(--green-light); }
 }
 .theme:hover { color: var(--green-light); border-color: var(--hair); }
 .theme svg { width: 1.1em; height: 1.1em; } /* scales with enlarged text */
+/* Touch: 44px targets; the text links grow in height only, so the row keeps its rhythm. */
+@media (pointer: coarse) {
+  .lang a, .theme { display: inline-grid; place-items: center; min-width: 44px; min-height: 44px; }
+  ul { row-gap: 0; }
+  ul a { display: inline-block; padding-block: 0.75rem; }
+}
 </style>

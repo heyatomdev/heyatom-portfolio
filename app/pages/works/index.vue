@@ -11,7 +11,7 @@ useSeoMeta({
   ogTitle: () => t('works.seo.ogTitle'),
   ogDescription: () => t('works.seo.ogDescription', { n: projects.length }),
   ogImage: `${useRuntimeConfig().public.siteUrl}/og-works.jpg`,
-  ogImageAlt: () => t('works.seo.ogImageAlt'),
+  ogImageAlt: () => t('works.seo.ogImageAlt', { n: projects.length }),
 })
 
 const kindLabel = computed(() => ({ 'cliente': t('common.kind.client'), 'open-source': 'Open source', 'personale': t('common.kind.personal') }))
@@ -95,7 +95,7 @@ useMotion(root, (mm, el) => {
       // Reveal the containers only now that every intro tween holds its start state (.cols fades itself).
       gsap.set(q('.list'), { autoAlpha: 1 })
     }))
-    revealLines(q('.next h2')[0])
+    revealLines(q('.cta-band h2')[0])
     revealLines(q('.tools h2')[0])
     revealLines(q('.platform h2')[0])
     gsap.timeline({ scrollTrigger: { trigger: q('.platform')[0], start: 'top 75%' } })
@@ -108,7 +108,7 @@ useMotion(root, (mm, el) => {
       y: 24, opacity: 0, stagger: 0.08, duration: 0.9, ease: 'expo.out',
       scrollTrigger: { trigger: q('.tools')[0], start: 'top 85%' },
     })
-    const off = magnetic(q('.next .btn')[0] as HTMLElement, 0.25)
+    const off = magnetic(q('.cta-band .btn')[0] as HTMLElement, 0.25)
     return off
   })
 })
@@ -133,6 +133,8 @@ useMotion(root, (mm, el) => {
       <li v-for="w in list" :id="w.slug" :key="w.slug">
         <details :open="open === w.slug" @toggle="toggle(w.slug, $event)">
           <summary @pointerenter="peek = w" @pointerleave="peek = null">
+            <!-- Touch screens have no peek: a small screenshot keeps the proof visible before opening. -->
+            <img class="thumb" :src="img(w.preview!, 640)" alt="" width="640" height="360" loading="lazy">
             <span class="mono year">{{ w.year }}</span>
             <span class="name">
               <h2 class="title">{{ w.title }}</h2>
@@ -232,7 +234,7 @@ useMotion(root, (mm, el) => {
       </ul>
     </section>
 
-    <section class="next hexed" aria-labelledby="next-title">
+    <section class="cta-band hexed" aria-labelledby="next-title">
       <h2 id="next-title">{{ t('works.next') }}</h2>
       <a class="btn btn--primary" :href="localePath('/#contatti')">{{ t('common.tellMe') }} <Icon name="arrow-right" /></a>
     </section>
@@ -262,7 +264,7 @@ useMotion(root, (mm, el) => {
 }
 .head p {
   color: var(--ink-2);
-  font-size: 1.1rem;
+  font-size: var(--text-md);
   max-width: 46ch;
 }
 
@@ -274,7 +276,7 @@ summary {
   gap: 1.5rem;
   align-items: center;
 }
-.cols { padding: 0 0.25rem 0.75rem; font-size: 0.8rem; color: var(--ink-3); border-bottom: 1px solid var(--hair); }
+.cols { padding: 0 0.25rem 0.75rem; font-size: var(--text-xs); color: var(--ink-3); border-bottom: 1px solid var(--hair); }
 
 .list { list-style: none; margin: 0; padding: 0; position: relative; }
 .list > li { border-bottom: 1px solid var(--hair); scroll-margin-top: 8rem; }
@@ -291,7 +293,7 @@ summary::before {
   position: absolute;
   inset: 0 -1rem;
   border-radius: var(--r-sm);
-  background: rgba(0, 168, 107, 0.07);
+  background: rgb(var(--green-rgb) / 0.07);
   opacity: 0;
   transition: opacity 0.25s ease;
   z-index: -1;
@@ -300,7 +302,8 @@ summary:hover::before,
 details[open] summary::before { opacity: 1; }
 summary:focus-visible { outline-offset: -2px; }
 
-.year { color: var(--green-light); font-size: 0.9rem; }
+.thumb { display: none; }
+.year { color: var(--green-light); font-size: var(--text-sm); }
 .name { display: grid; gap: 0.15rem; }
 .name .title {
   font-size: clamp(1.25rem, 2.3vw, 1.75rem);
@@ -311,9 +314,9 @@ summary:focus-visible { outline-offset: -2px; }
 }
 summary:hover .title { transform: translateX(6px); }
 details[open] .title { color: var(--green-light); }
-.client { color: var(--ink-3); font-size: 0.92rem; font-weight: 500; }
+.client { color: var(--ink-3); font-size: var(--text-label); font-weight: 500; }
 .client em { font-style: normal; color: var(--green-light); white-space: nowrap; }
-.tags { color: var(--ink-3); font-size: 0.8rem; }
+.tags { color: var(--ink-3); font-size: var(--text-xs); }
 
 .plus {
   width: 2.5rem;
@@ -344,7 +347,7 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
   box-shadow: 0 24px 50px -24px rgb(0 0 0 / calc(0.8 * var(--shade)));
 }
 .info { display: grid; gap: 1rem; align-content: start; }
-.kind { font-size: 0.88rem; font-weight: 700; color: var(--green-light); }
+.kind { font-size: var(--text-sm); font-weight: 700; color: var(--green-light); }
 .desc { color: var(--ink-2); max-width: 62ch; }
 .feats {
   list-style: none;
@@ -357,15 +360,15 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
 .feats li {
   padding: 0.3rem 0.7rem;
   border-radius: var(--r-sm);
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
   color: var(--ink);
   background: var(--surface-2);
   border: 1px solid var(--hair);
 }
-.stackfull { font-size: 0.8rem; color: var(--ink-3); }
+.stackfull { font-size: var(--text-xs); color: var(--ink-3); }
 .links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.25rem; }
-.links .btn { padding: 0.75rem 1.2rem; font-size: 0.93rem; }
-.private { color: var(--ink-3); font-size: 0.92rem; }
+.links .btn { padding: 0.75rem 1.2rem; font-size: var(--text-label); }
+.private { color: var(--ink-3); font-size: var(--text-label); }
 
 
 .peek {
@@ -402,7 +405,7 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
   gap: 1rem 3rem;
 }
 .platform-head h2 { font-size: clamp(2rem, 4.2vw, 3.25rem); }
-.platform-head p { color: var(--ink-2); font-size: 1.05rem; max-width: 58ch; }
+.platform-head p { color: var(--ink-2); font-size: var(--text-md); max-width: 58ch; }
 
 /* The shared services hang from one core, the client's project. */
 .core {
@@ -416,7 +419,7 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
   font-weight: 700;
   color: var(--on-green);
   background: var(--green);
-  box-shadow: 0 10px 30px -8px rgba(0, 168, 107, 0.6);
+  box-shadow: 0 10px 30px -8px rgb(var(--green-rgb) / 0.6);
   position: relative;
   z-index: 1;
 }
@@ -481,15 +484,15 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
   background: var(--green);
   box-shadow: 0 0 10px var(--green);
 }
-.role { font-size: 0.88rem; font-weight: 700; color: var(--green-light); }
-.service h3 { font-size: 1.4rem; letter-spacing: -0.03em; }
-.service .line { color: var(--ink-2); font-size: 0.95rem; flex: 1; }
+.role { font-size: var(--text-sm); font-weight: 700; color: var(--green-light); }
+.service h3 { font-size: var(--text-xl); letter-spacing: -0.03em; }
+.service .line { color: var(--ink-2); font-size: var(--text-label); flex: 1; }
 .svc-link {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
   margin-top: 0.5rem;
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
   font-weight: 600;
   text-decoration: none;
 }
@@ -498,7 +501,7 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
 .svc-feats li {
   padding: 0.22rem 0.6rem;
   border-radius: var(--r-sm);
-  font-size: 0.8rem;
+  font-size: var(--text-xs);
   color: var(--ink);
   background: var(--surface-2);
   border: 1px solid var(--hair);
@@ -512,7 +515,7 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
   align-items: center;
   gap: 1rem 2rem;
   background:
-    linear-gradient(90deg, rgba(0, 168, 107, 0.12), transparent 60%),
+    linear-gradient(90deg, rgb(var(--green-rgb) / 0.12), transparent 60%),
     var(--surface);
   border-color: var(--hair-strong);
 }
@@ -544,10 +547,10 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
   border-radius: var(--r-sm);
   transition: background-color 0.25s ease;
 }
-.tool-list a:hover { background: rgba(0, 168, 107, 0.07); }
+.tool-list a:hover { background: rgb(var(--green-rgb) / 0.07); }
 .tool-name { display: grid; gap: 0.15rem; }
-.tool-name strong { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; }
-.tool-name span { color: var(--ink-2); font-size: 0.95rem; }
+.tool-name strong { font-size: var(--text-lg); font-weight: 700; letter-spacing: -0.02em; }
+.tool-name span { color: var(--ink-2); font-size: var(--text-label); }
 .gh {
   width: 2.5rem;
   height: 2.5rem;
@@ -560,29 +563,31 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
 }
 .tool-list a:hover .gh { color: var(--green-light); border-color: var(--hair-strong); }
 
-.next {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  margin: var(--section) 0;
-  padding: clamp(2rem, 4vw, 3rem);
-  border-radius: var(--r-lg);
-  background:
-    radial-gradient(ellipse 70% 120% at 0% 0%, rgba(0, 168, 107, 0.2), transparent 70%),
-    var(--surface);
-  border: 1px solid var(--hair);
-  overflow: hidden;
-  --hex-inset: -40% 0 -40% 50%;
-  --hex-o: 0.18;
-}
-.next h2 { font-size: clamp(1.6rem, 3.2vw, 2.5rem); max-width: 18ch; }
+.cta-band { margin: var(--section) 0; }
 
 @media (max-width: 900px) {
   .head { grid-template-columns: minmax(0, 1fr); }
   .cols { display: none; }
-  summary { grid-template-columns: 3.5rem minmax(0, 1fr) 2.5rem; gap: 1rem; }
+  summary {
+    grid-template-columns: 6.5rem minmax(0, 1fr) 2.5rem;
+    grid-template-areas: 'thumb year plus' 'thumb name plus';
+    gap: 0.15rem 1rem;
+    padding-block: 1rem;
+  }
+  .thumb {
+    grid-area: thumb;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: top;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--hair-strong);
+    background: var(--surface-2);
+  }
+  .year { grid-area: year; font-size: var(--text-xs); }
+  .name { grid-area: name; }
+  .plus { grid-area: plus; }
   .tags { display: none; }
   .platform-head { grid-template-columns: minmax(0, 1fr); }
   .services { grid-template-columns: repeat(2, minmax(0, 1fr)); }

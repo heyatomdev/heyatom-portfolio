@@ -24,10 +24,10 @@ export const worksEn: Record<string, WorkEn> = {
   },
   'articuno': {
     role: 'Content and comments',
-    line: 'Articles, categories and translations, with automatically moderated comments: banned words, reports, shadow bans.',
+    line: 'Articles, categories and translations, with automatically moderated comments: banned words, reports, muted users.',
     client: oss,
     description: 'Multi-tenant CMS microservice built with NestJS, Prisma and PostgreSQL. It manages articles, comments and users with full tenant isolation, automatic moderation through a banned-words list and report thresholds, and asynchronous webhook delivery with the outbox pattern and exactly-once semantics.',
-    features: ['Multilingual articles', 'Automatic moderation', 'Signed webhooks'],
+    features: ['Multilingual articles', 'Automatic moderation', 'Notifications to other systems'],
     images: ['Homepage', 'Article list', 'Article detail', 'Translating an article in the editor', 'Category list', 'Category detail', 'Tag list', 'Banned words'],
   },
   'gatherly': {
@@ -35,7 +35,7 @@ export const worksEn: Record<string, WorkEn> = {
     line: 'Events, recurring and multilingual too, with categories, tags and participants, even without an account.',
     client: oss,
     description: 'Open source multi-tenant event manager built with NestJS 10, Prisma ORM and PostgreSQL. Each client only reaches its own events through a token, with support for recurring events following the RFC 5545 standard and automatic cleanup of past events.',
-    features: ['Standard iCal recurrence', 'Multilingual events', 'Participants with or without an account'],
+    features: ['Recurring events, calendar-ready', 'Multilingual events', 'Participants with or without an account'],
   },
   'sgweb': {
     description: 'The site for Federico Liuzzi’s Tai Chi and Qi Gong classes in Sesto San Giovanni and Cinisello Balsamo; he teaches in the Lo Spazio del Tao lineage. It introduces the practice, the venues with schedules and directions, the teachers, and lets you write to Federico directly by email or WhatsApp.',

@@ -2,6 +2,8 @@
   --green: #00a86b;
   --green-dark: #007a4d;
   --green-light: #33bf89;
+  /* --green as channels, for tints and glows: rgb(var(--green-rgb) / 0.1). Same in both themes, like --green. */
+  --green-rgb: 0 168 107;
   --bg: #1e201e;
   --surface: #252725;
   --surface-2: #2e312f;
@@ -20,6 +22,14 @@
   --shade: 1;
   /* Background grid lines: a dark ground needs more alpha to show at all. */
   --grid: rgba(0, 168, 107, 0.1);
+
+  /* Fixed type steps below the fluid display sizes (those stay as clamp() in each component). */
+  --text-xs: 0.8rem;     /* mono data, captions, meta */
+  --text-sm: 0.875rem;   /* labels, group names, small UI */
+  --text-label: 0.94rem; /* nav, compact buttons, secondary copy */
+  --text-md: 1.1rem;     /* page intros, client line, long descriptions */
+  --text-lg: 1.2rem;     /* title-sm: path steps, panels, list items */
+  --text-xl: 1.35rem;    /* brand, platform cards */
 
   --sans: 'Manrope', system-ui, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
@@ -197,21 +207,21 @@ img { display: block; max-width: 100%; height: auto; }
 .btn--primary {
   background: var(--green);
   color: var(--on-green);
-  box-shadow: 0 8px 24px -6px rgba(0, 168, 107, 0.55);
+  box-shadow: 0 8px 24px -6px rgb(var(--green-rgb) / 0.55);
 }
 .btn--primary:hover {
   color: var(--on-green);
   translate: 0 -2px;
-  box-shadow: 0 14px 34px -8px rgba(0, 168, 107, 0.7);
+  box-shadow: 0 14px 34px -8px rgb(var(--green-rgb) / 0.7);
 }
 .btn--primary:active { background: var(--green-dark); translate: 0 0; }
 
 .btn--ghost {
   color: var(--ink);
   border-color: var(--green-light); /* --hair-strong is under 3:1 for a control edge */
-  background: rgba(0, 168, 107, 0.05);
+  background: rgb(var(--green-rgb) / 0.05);
 }
-.btn--ghost:hover { color: var(--ink); border-color: var(--green); background: rgba(0, 168, 107, 0.1); }
+.btn--ghost:hover { color: var(--ink); border-color: var(--green); background: rgb(var(--green-rgb) / 0.1); }
 
 /* ── Section heading ───────────────────────────── */
 .sec-head {
@@ -223,7 +233,26 @@ img { display: block; max-width: 100%; height: auto; }
   margin-bottom: clamp(2rem, 4vw, 3.25rem);
 }
 .sec-head h2 { font-size: clamp(2rem, 4.2vw, 3.25rem); max-width: 18ch; }
-.sec-head p { color: var(--ink-2); max-width: 46ch; font-size: 1.05rem; }
+.sec-head p { color: var(--ink-2); max-width: 46ch; font-size: var(--text-md); }
+
+/* ── Closing band: one ask at the end of an inner page (/works, project pages) ── */
+.cta-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: clamp(2rem, 4vw, 3rem);
+  border-radius: var(--r-lg);
+  background:
+    radial-gradient(ellipse 70% 120% at 0% 0%, rgb(var(--green-rgb) / 0.2), transparent 70%),
+    var(--surface);
+  border: 1px solid var(--hair);
+  overflow: hidden;
+  --hex-inset: -40% 0 -40% 50%;
+  --hex-o: 0.18;
+}
+.cta-band h2 { font-size: clamp(1.6rem, 3.2vw, 2.5rem); max-width: 18ch; }
 
 /* ── Motion scaffolding ────────────────────────── */
 /* Secondary intro elements wait for GSAP; the fallback shows them anyway if it never runs.

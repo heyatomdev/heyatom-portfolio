@@ -38,7 +38,8 @@ onBeforeUnmount(() => {
 })
 watch(() => route.fullPath, () => nextTick(() => st?.refresh()))
 
-const anchors = computed(() => [{ to: localePath('/#percorso'), label: t('nav.path') }, { to: localePath('/#contatti'), label: t('nav.contact') }])
+// No "Contatti" anchor: the "Scrivimi" CTA next to it is the contact, two entries read as two different things.
+const anchors = computed(() => [{ to: localePath('/#percorso'), label: t('nav.path') }])
 </script>
 
 <template>
@@ -134,7 +135,7 @@ const anchors = computed(() => [{ to: localePath('/#percorso'), label: t('nav.pa
   color: var(--ink);
   text-decoration: none;
   font-weight: 800;
-  font-size: 1.3rem;
+  font-size: var(--text-xl);
   letter-spacing: -0.02em;
   margin-right: auto;
 }
@@ -155,11 +156,11 @@ const anchors = computed(() => [{ to: localePath('/#percorso'), label: t('nav.pa
   color: var(--ink-2);
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.93rem;
+  font-size: var(--text-label);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 .links a:hover,
-.links a[aria-current='page'] { color: var(--ink); background: rgba(0, 168, 107, 0.12); }
+.links a[aria-current='page'] { color: var(--ink); background: rgb(var(--green-rgb) / 0.12); }
 /* Windows high contrast drops the tint: mark the current page with a line instead. */
 @media (forced-colors: active) {
   .links a[aria-current='page'] { text-decoration: underline 2px; text-underline-offset: 0.35em; }
@@ -170,7 +171,7 @@ const anchors = computed(() => [{ to: localePath('/#percorso'), label: t('nav.pa
   align-items: center;
   gap: 0.45rem;
   padding: 0 0.6rem 0 0.9rem;
-  font-size: 0.82rem;
+  font-size: var(--text-sm);
   font-weight: 600;
   color: var(--green-light);
 }
@@ -179,12 +180,18 @@ const anchors = computed(() => [{ to: localePath('/#percorso'), label: t('nav.pa
   height: 8px;
   border-radius: 50%;
   background: var(--green);
-  box-shadow: 0 0 0 0 rgba(0, 168, 107, 0.6);
+  box-shadow: 0 0 0 0 rgb(var(--green-rgb) / 0.6);
   animation: ring 2.4s var(--ease-out) 3;
 }
-@keyframes ring { 70%, 100% { box-shadow: 0 0 0 8px rgba(0, 168, 107, 0); } }
+@keyframes ring { 70%, 100% { box-shadow: 0 0 0 8px rgb(var(--green-rgb) / 0); } }
 
-.cta { padding: 0.7rem 1.2rem; font-size: 0.93rem; box-shadow: none; }
+.cta { padding: 0.7rem 1.2rem; font-size: var(--text-label); box-shadow: none; }
+
+/* Touch: every control reaches 44px without changing the desktop bar. */
+@media (pointer: coarse) {
+  .brand, .links a, .cta { min-height: 44px; }
+  .links a { display: flex; align-items: center; }
+}
 
 @media (max-width: 760px) {
   .links li:not(:first-child), .avail { display: none; }
