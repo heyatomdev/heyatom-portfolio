@@ -9,6 +9,9 @@ const src = projects.find(p => p.slug === route.params.slug)
 if (!src) throw createError({ statusCode: 404, statusMessage: t('work.notFound'), fatal: true })
 const w = computed(() => localize(src, locale.value))
 
+// The ask at the end of the page names the project, so the mail starts from what convinced them.
+const ask = computed(() => `mailto:hey@heyatom.dev?subject=${encodeURIComponent(t('work.askSubject', { title: src.title }))}`)
+
 const kindLabel = computed(() => ({ 'cliente': t('common.kind.client'), 'open-source': 'Open source', 'personale': t('common.kind.personal') }))
 
 useSeoMeta({
@@ -33,8 +36,11 @@ const similar = projects
 const shots = computed(() => w.value.images ?? [])
 const box = ref<HTMLDialogElement>()
 const at = ref(0)
+// The full-size image is only requested once the lightbox is first opened.
+const opened = ref(false)
 function show(i: number) {
   at.value = i
+  opened.value = true
   box.value?.showModal()
 }
 const step = (d: number) => { at.value = (at.value + d + shots.value.length) % shots.value.length }
@@ -49,9 +55,9 @@ useMotion(root, (mm, el) => {
   mm.add(MOTION_OK, () => {
     gsap.timeline({ defaults: { ease: 'expo.out' } })
       .from(q('.head > *'), { y: 30, stagger: 0.07, duration: 1.1 })
-      .fromTo(q('.hero'), { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'expo.inOut' }, 0.2)
-    gsap.set(q('.hero'), { autoAlpha: 1 })
-    q('.body h2, .similar h2').forEach(h => revealLines(h))
+      // The screenshot is the LCP: it paints with the HTML and only settles in place.
+      .from(q('.hero'), { y: 40, duration: 1.2 }, 0.15)
+    q('.body h2, .similar h2, .cta-band h2').forEach(h => revealLines(h))
     gsap.from(q('.shots li, .sim-list li'), {
       y: 30, opacity: 0, stagger: 0.05, duration: 0.9, ease: 'expo.out',
       scrollTrigger: { trigger: q('.shots, .sim-list')[0], start: 'top 85%' },
@@ -82,7 +88,7 @@ useMotion(root, (mm, el) => {
     </header>
 
     <img
-      class="hero" data-intro
+      class="hero"
       :src="img(w.preview!, 1280)" :srcset="srcset(w.preview!, [640, 960, 1280, 1920])" sizes="(max-width: 1240px) 92vw, 1150px"
       :alt="`${t('common.screenshotOf', { title: w.title })}`" width="1920" height="1080" fetchpriority="high"
     >
@@ -132,9 +138,14 @@ useMotion(root, (mm, el) => {
       </ul>
     </section>
 
+    <section class="cta-band hexed" aria-labelledby="ask-title">
+      <h2 id="ask-title">{{ t('work.ask') }}</h2>
+      <a class="btn btn--primary" :href="ask"><Icon name="mail" /> {{ t('home.close.mail') }}</a>
+    </section>
+
     <dialog v-if="shots.length" ref="box" class="box" :aria-label="t('common.screenshots')" @keydown="key" @click.self="box?.close()">
       <figure>
-        <img :src="img(shots[at]!.image, 1920)" :alt="shots[at]!.title || `${t('work.screenshotN', { n: at + 1, title: w.title })}`">
+        <img v-if="opened" :src="img(shots[at]!.image, 1920)" :alt="shots[at]!.title || `${t('work.screenshotN', { n: at + 1, title: w.title })}`">
         <figcaption class="mono" aria-live="polite">
           <span v-if="shots[at]!.title">{{ shots[at]!.title }}</span>
           <span class="n">{{ at + 1 }} / {{ shots.length }}</span>
@@ -158,11 +169,11 @@ useMotion(root, (mm, el) => {
 <style scoped>
 .page { padding-top: clamp(2rem, 6vh, 4rem); }
 
-.back { display: inline-block; font-size: 0.85rem; color: var(--ink-3); text-decoration: none; margin-bottom: 2rem; }
+.back { display: inline-block; font-size: var(--text-sm); color: var(--ink-3); text-decoration: none; margin-bottom: 2rem; }
 .back:hover { color: var(--green-light); }
 
 .head { display: grid; gap: 0.75rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
-.meta { font-size: 0.85rem; color: var(--green-light); }
+.meta { font-size: var(--text-sm); color: var(--green-light); }
 .meta em { font-style: normal; }
 .head h1 {
   font-size: clamp(3rem, 8vw, 5.5rem);
@@ -170,10 +181,10 @@ useMotion(root, (mm, el) => {
   letter-spacing: -0.05em;
   line-height: 0.95;
 }
-.client { color: var(--ink-2); font-size: 1.1rem; }
+.client { color: var(--ink-2); font-size: var(--text-md); }
 .links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.75rem; }
-.links .btn { padding: 0.75rem 1.2rem; font-size: 0.93rem; }
-.private { color: var(--ink-3); font-size: 0.92rem; }
+.links .btn { padding: 0.75rem 1.2rem; font-size: var(--text-label); }
+.private { color: var(--ink-3); font-size: var(--text-label); }
 
 .hero {
   width: 100%;
@@ -192,12 +203,12 @@ useMotion(root, (mm, el) => {
   margin-top: var(--section-near);
 }
 .body h2, .gallery h2, .similar h2 { font-size: clamp(1.6rem, 3vw, 2.25rem); margin-bottom: 1.25rem; }
-.desc { color: var(--ink-2); font-size: 1.08rem; max-width: 65ch; }
+.desc { color: var(--ink-2); font-size: var(--text-md); max-width: 65ch; }
 .feats, .stack { list-style: none; margin: 1.5rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .feats li, .stack li {
   padding: 0.3rem 0.75rem;
   border-radius: var(--r-sm);
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
   color: var(--ink);
   background: var(--surface-2);
   border: 1px solid var(--hair);
@@ -209,12 +220,12 @@ aside {
   background: var(--surface);
   border: 1px solid var(--hair);
 }
-.label { font-size: 0.8rem; color: var(--ink-3); }
+.label { font-size: var(--text-xs); color: var(--ink-3); }
 .stack { margin-top: 0.75rem; }
-.stack li { font-size: 0.8rem; }
+.stack li { font-size: var(--text-xs); }
 
 .gallery { margin-top: var(--section-near); }
-.count { font-size: 0.9rem; color: var(--green-light); vertical-align: super; font-weight: 400; }
+.count { font-size: var(--text-sm); color: var(--green-light); vertical-align: super; font-weight: 400; }
 .shots {
   list-style: none;
   margin: 0;
@@ -243,9 +254,11 @@ aside {
 }
 .shots button:hover img { translate: 0 -4px; border-color: var(--hair-strong); box-shadow: 0 24px 40px -24px rgb(0 0 0 / calc(0.9 * var(--shade))); }
 .shots button:focus-visible { outline: 2px solid var(--green-light); outline-offset: 3px; }
-.shots span { font-size: 0.88rem; color: var(--ink-3); padding-inline: 0.25rem; }
+.shots span { font-size: var(--text-sm); color: var(--ink-3); padding-inline: 0.25rem; }
 
-.similar { margin: var(--section) 0; padding-top: var(--section-near); border-top: 1px solid var(--hair); }
+.similar { margin-top: var(--section); padding-top: var(--section-near); border-top: 1px solid var(--hair); }
+.cta-band { margin: var(--section-near) 0 var(--section); }
+
 .sim-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 1rem; }
 .more { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 600; text-decoration: none; }
 .sim-list {
@@ -269,9 +282,9 @@ aside {
 }
 .sim-list a:hover { border-color: var(--hair-strong); translate: 0 -4px; }
 .sim-list img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--r-sm); margin-bottom: 0.6rem; }
-.sim-list .year { font-size: 0.8rem; color: var(--green-light); }
-.sim-list strong { font-size: 1.25rem; letter-spacing: -0.02em; }
-.sim-list .tags { font-size: 0.8rem; color: var(--ink-3); }
+.sim-list .year { font-size: var(--text-xs); color: var(--green-light); }
+.sim-list strong { font-size: var(--text-lg); letter-spacing: -0.02em; }
+.sim-list .tags { font-size: var(--text-xs); color: var(--ink-3); }
 
 .box {
   width: 100vw;
@@ -285,7 +298,8 @@ aside {
   color: var(--ink);
 }
 .box[open] { display: grid; place-items: center; }
-.box::backdrop { background: rgba(10, 12, 10, 0.94); backdrop-filter: blur(6px); }
+/* Page ground, nearly opaque: the caption and buttons use the theme ink, so the backdrop follows the theme too. */
+.box::backdrop { background: color-mix(in srgb, var(--bg) 94%, transparent); backdrop-filter: blur(6px); }
 .box figure { margin: 0; display: grid; gap: 0.9rem; justify-items: center; pointer-events: none; }
 .box figure img {
   max-width: min(100%, 1600px);
@@ -294,7 +308,7 @@ aside {
   border-radius: var(--r-sm);
   pointer-events: auto;
 }
-.box figcaption { display: flex; gap: 1rem; font-size: 0.85rem; color: var(--ink-2); }
+.box figcaption { display: flex; gap: 1rem; font-size: var(--text-sm); color: var(--ink-2); }
 .box .n { color: var(--ink-3); }
 .nav {
   position: fixed;
@@ -314,6 +328,11 @@ aside {
 .prev, .next { top: 50%; translate: 0 -50%; }
 .prev { left: 1rem; rotate: 180deg; }
 .next { right: 1rem; }
+
+@media (pointer: coarse) {
+  .back, .more { padding-block: 0.6rem; }
+  .back { margin-bottom: 1.4rem; }
+}
 
 @media (max-width: 900px) {
   .body { grid-template-columns: minmax(0, 1fr); }

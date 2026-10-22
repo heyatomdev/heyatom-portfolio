@@ -8,7 +8,6 @@
   },
   "nav": {
     "path": "Percorso",
-    "contact": "Contatti",
     "skip": "Vai al contenuto",
     "main": "Principale",
     "available": "Disponibile",
@@ -105,33 +104,21 @@
       "dolomites": {
         "place": "Dolomiti, Trentino",
         "alt": "Lago verde smeraldo circondato da abeti, con le guglie delle Dolomiti sullo sfondo"
-      },
-      "seville": {
-        "place": "Siviglia, Spagna",
-        "alt": "Plaza de España a Siviglia, con le torri e la balaustra illuminate dal sole"
-      },
-      "london": {
-        "place": "Londra, Regno Unito",
-        "alt": "Il Parlamento di Westminster illuminato di notte, riflesso sul Tamigi"
-      },
-      "bergamo": {
-        "place": "Prealpi Bergamasche",
-        "alt": "Cima rocciosa tra le nuvole sopra pendii verdi"
       }
     },
     "hero": {
       "lead": "Per associazioni, professionisti e piccole realtà. Sviluppo full-stack dal 2016, dalla prima riga alla messa online.",
       "leadAgency": "E parli sempre con me, non con un’agenzia.",
       "hi": "Ciao, sono Andrea.",
-      "title": "Costruisco {a} {b}",
+      "title": "Costruisco {a} web app {b}",
       "titleA": "siti e",
-      "titleB": "web app su misura."
+      "titleB": "su misura."
     },
     "facts": {
       "label": "In breve",
       "medas": "Full-stack in Medas Solutions",
       "element": "Consiglio direttivo Element Gaming",
-         "prociv": "Volontario in Protezione Civile"
+      "prociv": "Volontario in Protezione Civile"
     },
     "off": {
       "title": "Fuori dallo schermo.",
@@ -159,7 +146,7 @@
   "works": {
     "seo": {
       "ogTitle": "Lavori · HeyAtom",
-      "ogImageAlt": "HeyAtom: 9 progetti dal 2016",
+      "ogImageAlt": "HeyAtom: {n} progetti dal 2016",
       "description": "{n} progetti di Andrea Tombolato dal 2016 per clienti, associazioni e community, e la base comune su cui costruisco i nuovi: accessi, immagini, contenuti ed eventi.",
       "ogDescription": "{n} progetti dal 2016 per clienti, associazioni e community."
     },
@@ -191,6 +178,8 @@
     "prev": "Schermata precedente",
     "next": "Schermata successiva",
     "screenshotN": "Schermata {n} di {title}",
-    "enlarge": "Ingrandisci: {title}"
+    "enlarge": "Ingrandisci: {title}",
+    "ask": "Ti serve qualcosa di simile?",
+    "askSubject": "Qualcosa come {title}"
   }
 }

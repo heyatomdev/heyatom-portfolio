@@ -9,7 +9,7 @@ web
 ## Users
 
 - **Piccoli clienti diretti** (primario): associazioni, professionisti, piccole realtà locali che cercano una persona affidabile per un sito, una web app o un'integrazione. Arrivano da passaparola, LinkedIn o da un progetto visto in giro. Job: capire in pochi secondi cosa fa Andrea, se è la persona giusta, e scrivergli una mail.
-- **Recruiter e tech lead** (secondario): valutano il profilo per collaborazioni o assunzioni. Job: leggere esperienza, stack, progetti reali; proseguire su LinkedIn/GitHub.
+- **Recruiter e tech lead** (secondario): valutano il profilo. Andrea **non cerca un impiego** (deciso il 22/10/2026: solo freelance); il sito lo dice apertamente nella chiusura della home, lasciando aperta una proposta interessante. Job: leggere esperienza, stack, progetti reali; proseguire su LinkedIn/GitHub.
 - Colleghi dev, community gaming e non-profit: pubblico terziario, non guida decisioni.
 
 ## Product Purpose
@@ -24,13 +24,13 @@ Una persona sola, non uno studio. "HeyAtom"/"atom" è il nome d'arte (mix nome+c
 
 - Il visitatore cliente spesso non è tecnico: legge da telefono, confronta con 2-3 nomi ricevuti per passaparola, decide in base a fiducia percepita e chiarezza.
 - Il recruiter legge da desktop, scorre veloce, cerca stack, anni, contesto lavorativo.
-- Canale di conversione unico: `mailto:hey@heyatom.dev` (CTA in header e banda di chiusura della home). Nessun form, nessun booking, nessun preventivo online, nessun listino.
+- Canale di conversione unico: `mailto:hey@heyatom.dev` (CTA in header, banda di chiusura della home e in fondo a ogni progetto). Nessun form, nessun booking, nessun preventivo online, nessun listino.
 - Bilingue IT (default) / EN.
 - Flag `NUXT_PUBLIC_FREELANCE_AVAILABLE` governa il badge disponibilità freelance.
 
 ## Capabilities and Constraints
 
-- Nuxt 4 + CSS puro con token + GSAP + `@nuxtjs/i18n`; niente Vuetify, niente CMS. Dark default (a prescindere dall'OS), light via toggle in header. Deploy SSR Node in Docker.
+- Nuxt 4 + CSS puro con token + GSAP + `@nuxtjs/i18n`; niente Vuetify, niente CMS. Il tema segue l'OS (dark se non c'è preferenza), toggle nel footer. Deploy SSR Node in Docker.
 - Contenuti in `app/data/`: `works.ts` (progetti IT, fonte) + `works.en.ts` (override EN), `uses.ts`. Percorso, volontariato, stack e viaggi della home sono in `app/pages/index.vue` + `i18n/locales/*.json`.
 - Pagine: home (hero, offerte, percorso, stack, viaggi, chiusura), `/works` + `/works/[slug]`, `/uses`. Viaggi e volontariato vivono come sezioni della home, non come pagine.
 - Vincoli visivi pinnati dall'utente: sfondo antracite scuro `#1e201e` (scelto il 30/09/2026 al posto del precedente verde-nero, giudicato troppo spento), verde brand `#00a86b` (+ `#007a4d`, `#33bf89`), Manrope + JetBrains Mono. Il restyle non deve allontanarsi da sfondo e colori; sfondo e testi restano neutri, non tinti di verde.

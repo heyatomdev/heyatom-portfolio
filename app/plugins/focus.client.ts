@@ -20,7 +20,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     if (hydrated) land()
     hydrated = true
   })
-  // Same page, new hash (header "Percorso"/"Contatti"): no page:finish fires.
+  // Same page, new hash (header "Percorso", hero CTA): no page:finish fires.
   router.afterEach((to, from) => {
     if (hydrated && to.path === from.path && to.hash && to.hash !== from.hash) nextTick(land)
   })

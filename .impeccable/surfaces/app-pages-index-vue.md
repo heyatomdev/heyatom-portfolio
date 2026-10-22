@@ -2,7 +2,7 @@
 version: 1
 slug: "app-pages-index-vue"
 primary_target: "app/pages/index.vue"
-related_targets: ["app/pages/works.vue"]
+related_targets: ["app/pages/works/index.vue"]
 ---
 
 Scope: home `/` (Persuade) + works index `/works` (Experience). IT only for now. Code-led (no image generation on this machine). Established world (DESIGN.md: dark anthracite #1e201e, green #00a86b family, Manrope + JetBrains Mono, orb + hand mark); surface tournament skipped because the user pinned the first viewport ("persona + prova").

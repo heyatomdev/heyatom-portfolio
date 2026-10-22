@@ -8,7 +8,6 @@
   },
   "nav": {
     "path": "Background",
-    "contact": "Contact",
     "skip": "Skip to content",
     "main": "Main",
     "available": "Available",
@@ -105,33 +104,21 @@
       "dolomites": {
         "place": "Dolomites, Trentino",
         "alt": "An emerald lake ringed by firs, with the Dolomite spires in the background"
-      },
-      "seville": {
-        "place": "Seville, Spain",
-        "alt": "Plaza de España in Seville, its towers and balustrade lit by the sun"
-      },
-      "london": {
-        "place": "London, United Kingdom",
-        "alt": "The Palace of Westminster lit up at night, reflected in the Thames"
-      },
-      "bergamo": {
-        "place": "Bergamo Prealps",
-        "alt": "A rocky summit in the clouds above green slopes"
       }
     },
     "hero": {
       "lead": "For associations, professionals and small organizations. Full-stack development since 2016, from the first line of code to going live.",
       "leadAgency": "And you always talk to me, not to an agency.",
       "hi": "Hi, I’m Andrea.",
-      "title": "I build {a} and {b}",
-      "titleA": "custom websites",
+      "title": "I build custom {a} and {b}",
+      "titleA": "websites",
       "titleB": "web apps."
     },
     "facts": {
       "label": "In short",
       "medas": "Full-stack at Medas Solutions",
       "element": "Element Gaming board member",
-         "prociv": "Civil Protection volunteer"
+      "prociv": "Civil Protection volunteer"
     },
     "off": {
       "title": "Away from the screen.",
@@ -159,7 +146,7 @@
   "works": {
     "seo": {
       "ogTitle": "Works · HeyAtom",
-      "ogImageAlt": "HeyAtom: 9 projects since 2016",
+      "ogImageAlt": "HeyAtom: {n} projects since 2016",
       "description": "{n} projects by Andrea Tombolato since 2016 for clients, associations and communities, and the shared foundation I build new ones on: logins, images, content and events.",
       "ogDescription": "{n} projects since 2016 for clients, associations and communities."
     },
@@ -191,6 +178,8 @@
     "prev": "Previous screenshot",
     "next": "Next screenshot",
     "screenshotN": "Screenshot {n} of {title}",
-    "enlarge": "Enlarge: {title}"
+    "enlarge": "Enlarge: {title}",
+    "ask": "Need something like this?",
+    "askSubject": "Something like {title}"
   }
 }

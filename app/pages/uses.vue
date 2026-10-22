@@ -118,8 +118,8 @@ useMotion(root, (mm, el) => {
   width: max-content;
   cursor: default;
 }
-.head p { color: var(--ink-2); font-size: 1.1rem; max-width: 46ch; }
-.head .mono { display: block; margin-top: 0.5rem; font-size: 0.8rem; color: var(--ink-3); }
+.head p { color: var(--ink-2); font-size: var(--text-md); max-width: 46ch; }
+.head .mono { display: block; margin-top: 0.5rem; font-size: var(--text-xs); color: var(--ink-3); }
 
 .group {
   position: relative;
@@ -143,7 +143,7 @@ useMotion(root, (mm, el) => {
   align-items: baseline;
   gap: 0.75rem;
 }
-.group h2 { font-size: 0.88rem; font-weight: 700; color: var(--green-light); letter-spacing: 0; }
+.group h2 { font-size: var(--text-sm); font-weight: 700; color: var(--green-light); letter-spacing: 0; }
 /* Single cell of the site's hex pattern as section marker. */
 .group h2::before {
   content: '';
@@ -154,12 +154,13 @@ useMotion(root, (mm, el) => {
   background: var(--green);
   clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
 }
-.count { font-size: 0.8rem; color: var(--ink-3); }
+.count { font-size: var(--text-xs); color: var(--ink-3); }
 .anchor { color: inherit; text-decoration: none; }
 .hash { margin-left: 0.3rem; opacity: 0; color: var(--ink-3); transition: opacity 0.2s ease; }
 .anchor:hover .hash, .anchor:focus-visible .hash { opacity: 1; }
 .anchor:focus-visible { outline: 2px solid var(--green-light); outline-offset: 3px; border-radius: 4px; }
-.copied { font-size: 0.8rem; color: var(--green-light); }
+@media (pointer: coarse) { .anchor { display: inline-block; padding-block: 0.6rem; } }
+.copied { font-size: var(--text-xs); color: var(--green-light); }
 
 ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
 li {
@@ -171,10 +172,10 @@ li {
   border-radius: var(--r-sm);
   transition: background-color 0.25s ease;
 }
-li:hover { background: rgba(0, 168, 107, 0.07); }
+li:hover { background: rgb(var(--green-rgb) / 0.07); }
 li strong {
   display: block;
-  font-size: 1.1rem;
+  font-size: var(--text-md);
   font-weight: 700;
   letter-spacing: -0.02em;
   transition: transform 0.4s var(--ease-out), color 0.2s ease;
@@ -192,13 +193,13 @@ li:has(a:focus-visible) { outline: 2px solid var(--green-light); outline-offset:
   transition: opacity 0.2s ease, transform 0.4s var(--ease-out);
 }
 li:hover .out { opacity: 1; transform: translate(2px, -2px); }
-.note { color: var(--ink-2); font-size: 0.95rem; max-width: 62ch; }
+.note { color: var(--ink-2); font-size: var(--text-label); max-width: 62ch; }
 .tag {
   display: inline-block;
   margin-left: 0.4rem;
   padding: 0.15rem 0.55rem;
   border-radius: var(--r-sm);
-  font-size: 0.8rem;
+  font-size: var(--text-xs);
   font-weight: 500;
   letter-spacing: 0;
   vertical-align: middle;

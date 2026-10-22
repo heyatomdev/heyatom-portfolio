@@ -66,7 +66,7 @@ typography:
     lineHeight: 1.6
   label:
     fontFamily: "Manrope, system-ui, sans-serif"
-    fontSize: "0.93rem"
+    fontSize: "0.94rem"
     fontWeight: 600
     lineHeight: 1
   mono:
@@ -181,6 +181,7 @@ Neutri antracite con un solo accento saturo, il verde, che si comporta come luce
 - **Inchiostro Spento** (`ink-3`): metadati, cliente, organizzazione, etichette di gruppo, footer.
 - **Su Verde** (`on-green`): testo su qualsiasi fondo `green`.
 - **Hairline** (`hair`) e **Hairline Forte** (`hair-strong`): tutti i bordi e i divisori; la forte per hover, screenshot, bottone ghost, fili della base comune.
+- **Canali del verde** (`green-rgb`, `0 168 107`): unica via per tinte e aloni in trasparenza, `rgb(var(--green-rgb) / 0.07)`. Nessun `rgba(0, 168, 107, …)` scritto a mano nei componenti.
 
 ### Tema chiaro
 Stessa struttura, valori invertiti: `bg #f3f5f3`, `surface #ffffff`, `surface-2 #eaeeeb`, `surface-3 #dfe4e0`, `ink #151816`, `ink-2 #3a403c`, `ink-3 #5c635e`, hairline sul verde profondo (`rgba(0,122,77,0.18)` / `0.42`), `glass` bianco al 72%. `green-light` diventa `#007a4d` perché `#33bf89` su fondo chiaro non passa il contrasto. `--shade` scende da 1 a 0.25 e attenua tutte le ombre nere.
@@ -203,25 +204,27 @@ Stessa struttura, valori invertiti: `bg #f3f5f3`, `surface #ffffff`, `surface-2 
 - **Display Index** (800, `clamp(3.5rem, 9vw, 6rem)`, 0.9, -0.05em): h1 delle pagine indice (`/works`, `/uses`), una parola. Il dettaglio progetto usa `clamp(3rem, 8vw, 5.5rem)`, 0.95.
 - **Headline** (700, `clamp(2rem, 4.2vw, 3.25rem)`, 1.08, -0.03em, max 18ch): h2 di sezione, sempre una frase intera con punto. La banda di chiusura sale a `clamp(2.2rem, 4.8vw, 4rem)`, -0.04em, max 14ch.
 - **Headline sm** (700, `clamp(1.6rem, 3vw, 2.25rem)`): h2 secondari (strumenti, sezioni del dettaglio progetto). La banda "next" usa `clamp(1.6rem, 3.2vw, 2.5rem)`.
-- **Title** (700, -0.03em): pick `clamp(1.4rem, 2.2vw, 1.9rem)`, offerte `clamp(1.35rem, 2.3vw, 1.9rem)`, nomi nel registro `clamp(1.25rem, 2.3vw, 1.75rem)`, card della base comune 1.4rem.
-- **Title sm** (700, 1.1–1.25rem, -0.02em): voci del percorso e volontariato (1.2rem), pannello stack (1.15rem), strumenti (1.15rem), voci di `/uses` (1.1rem), card "simili" (1.25rem).
-- **Lead** (450, `clamp(1.06rem, 1.4vw, 1.2rem)`, max 44ch, `ink-2`); testo dei sec-head 1.05rem max 46ch; intro delle pagine indice 1.1rem max 46ch.
+- **Title** (700, -0.03em): pick `clamp(1.4rem, 2.2vw, 1.9rem)`, offerte `clamp(1.35rem, 2.3vw, 1.9rem)`, nomi nel registro `clamp(1.25rem, 2.3vw, 1.75rem)`, card della base comune `--text-xl`.
+- **Title sm** (700, `--text-md`–`--text-lg`, -0.02em): voci del percorso e volontariato, pannello stack, strumenti, card "simili" (`--text-lg`), voci di `/uses` (`--text-md`).
+- **Lead** (450, `clamp(1.06rem, 1.4vw, 1.2rem)`, max 44ch, `ink-2`); testo dei sec-head e intro delle pagine indice `--text-md` max 46ch.
 - **Body** (450, 1rem, 1.6): paragrafi in `ink-2`, max 52–65ch; `text-wrap: pretty` sui paragrafi, `balance` sui titoli.
-- **Label** (600, 0.93rem, line-height 1): nav, bottoni compatti. I bottoni pieni usano 600 1rem. Etichette di gruppo 700 0.85–0.88rem (`ink-3`, o `green-light` per ruolo, tipo e gruppi di `/uses`).
-- **Mono** (400, 0.72–0.9rem, letter-spacing 0, cifre tabulari): anni, intervalli ("2016 → oggi"), stack separati da " · ", intestazioni di colonna del registro, luogo e anno dei viaggi, contatori, data di aggiornamento di `/uses`. Sempre in sentence case.
+- **Label** (600, 0.94rem, line-height 1): nav, bottoni compatti. I bottoni pieni usano 600 1rem. Etichette di gruppo 700 `--text-sm` (`ink-3`, o `green-light` per ruolo, tipo e gruppi di `/uses`).
+- **Mono** (400, `--text-xs`–`--text-sm`, letter-spacing 0, cifre tabulari): anni, intervalli ("2016 → oggi"), stack separati da " · ", intestazioni di colonna del registro, luogo e anno dei viaggi, contatori, data di aggiornamento di `/uses`. Sempre in sentence case.
+
+**Passi fissi** (token in `main.css`, uguali nei due temi): `--text-xs` 0.8rem (mono, meta, didascalie), `--text-sm` 0.875rem (etichette, gruppi, piccola UI), `--text-label` 0.94rem (nav, bottoni compatti, testo secondario), `--text-md` 1.1rem (intro, cliente, descrizioni lunghe), `--text-lg` 1.2rem (title sm), `--text-xl` 1.35rem (marchio, card della base comune). Ogni `font-size` fisso usa uno di questi; i titoli fluidi restano `clamp()` nel componente.
 
 ### Named Rules
 **The Mono per i Dati Rule.** JetBrains Mono solo per anni, tag di stack, conteggi e dati tabellari. Mai per titoli, kicker, CTA o frasi; mai maiuscolo con tracking. Eccezioni volute: il link "← Tutti i lavori" e l'etichetta "Stack" nel dettaglio progetto, le didascalie del lightbox.
 
-**The Titolo Stretto Rule.** Ogni titolo Manrope va da 700 a 800 con tracking negativo (da -0.02em a -0.05em, più grande più stretto). Nessun titolo leggero, nessun tracking positivo. Unica eccezione: i nomi di gruppo di `/uses`, che sono etichette (0.88rem, tracking 0).
+**The Titolo Stretto Rule.** Ogni titolo Manrope va da 700 a 800 con tracking negativo (da -0.02em a -0.05em, più grande più stretto). Nessun titolo leggero, nessun tracking positivo. Unica eccezione: i nomi di gruppo di `/uses`, che sono etichette (`--text-sm`, tracking 0).
 
 ## Layout
 
 Contenitore unico: larghezza massima `max` (1240px) centrata, padding laterale `gutter`. Le sezioni si separano in alto (`padding-top` o `margin-top`), senza fondi alternati, con tre passi scelti per significato: `section-near` tra blocchi dello stesso discorso, `section` di default, `section-far` quando cambia argomento.
 
-- **Home:** hero → lavori scelti `section` → offerte `near` (sempre lavoro) → percorso `far` (si passa alla persona) → viaggi `near` → chiusura `section`. Ogni sezione apre con un sec-head: h2 a sinistra, eventuale frase o link "Vedi tutti" allineati in basso a destra, `flex-wrap`.
+- **Home:** hero → lavori scelti `section` (ogni pick porta a `/works/<slug>`, non al sito esterno) → offerte `near` (sempre lavoro) → percorso `far` (si passa alla persona) → viaggi `near` → chiusura `section`. Ogni sezione apre con un sec-head: h2 a sinistra, eventuale frase o link "Vedi tutti" allineati in basso a destra, `flex-wrap`.
 - **`/works`:** testata a due colonne (h1 / intro allineati in basso) → registro → base comune `far` → strumenti `near` (sempre il mio codice) → banda "next" `section`.
-- **`/works/[slug]`:** link indietro, testata (meta, h1, cliente, bottoni), screenshot 16:9 a tutta larghezza, corpo 1.6fr / 1fr (descrizione + aside stack) `near`, galleria `near`, "simili" `section` con hairline superiore.
+- **`/works/[slug]`:** link indietro, testata (meta, h1, cliente, bottoni), screenshot 16:9 a tutta larghezza, corpo 1.6fr / 1fr (descrizione + aside stack) `near`, galleria `near`, "simili" `section` con hairline superiore, banda di richiesta "Ti serve qualcosa di simile?" `near` con mailto che cita il progetto nell'oggetto.
 - **`/uses`:** testata come `/works`, poi un gruppo per categoria: griglia 0.8fr / 2fr, nome del gruppo sticky a `top: 7rem` a sinistra, voci a destra.
 
 Composizioni ricorrenti:
@@ -229,14 +232,15 @@ Composizioni ricorrenti:
 - **Pick**: tre progetti su griglia a 2 colonne. Il primo a tutta riga (screenshot 16:9 al 56%, testo centrato), gli altri due affiancati sotto (screenshot 16:9 sopra, testo sotto). Mai celle che allungano lo screenshot oltre il 16:9.
 - **Righe**: offerte (tre colonne 1.1/1/0.7 su baseline), percorso (colonna data 9.5rem + contenuto), registro lavori (5.5rem anno / nome / stack 0.8fr / 2.5rem "+"), strumenti (stessa griglia, riga intera come link a GitHub, una frase al posto del cliente, icona GitHub al posto del "+", senza screenshot né dettaglio), voci di `/uses`. Ogni riga è chiusa da hairline. `/works` ha tre parti, guidate dal campo `group` in `works.ts`: il registro (progetti senza `group`, niente filtri), la **base comune** (`group: 'platform'`: FileHarbor, Articuno, Gatherly, Herald come quattro card appese con fili verticali a una pill verde "Il tuo progetto", e Bastion come banda larga sotto di loro, perché tutti si autenticano lì) e **strumenti e codice aperto** (`group: 'tool'`).
 - **Percorso + stack**: 1.7fr / 1fr, il pannello stack è sticky a `top: 6.5rem`. Sotto il percorso, il volontariato sta a parte in una card con la sua etichetta.
-- **Striscia viaggi**: scroller orizzontale con snap, colonne `clamp(220px, 22vw, 300px)` (`clamp(260px, 24vw, 360px)` quando è pinnata), foto 4:5, pari sfalsate di 2.5rem.
+- **Striscia viaggi**: cinque foto, scroller orizzontale con snap, colonne `clamp(220px, 22vw, 300px)` (`clamp(260px, 24vw, 360px)` quando è pinnata), foto 4:5, pari sfalsate di 2.5rem.
 
 Responsive:
-- **≤900px**: tutto a una colonna. Il mazzo si centra a `min(86%, 520px)`; pick, offerte, percorso e chiusura si impilano; lo stack perde lo sticky; l'orb scende a 180px. Nel registro e negli strumenti spariscono intestazioni di colonna e colonna stack (griglia 3.5rem / nome / 2.5rem), il dettaglio perde il rientro, il peek si spegne (anche con `hover: none`). Base comune a 2 colonne senza fili, Bastion impilato. Dettaglio progetto e `/uses` a una colonna; i "simili" in colonna; le frecce del lightbox scendono in basso.
+- **≤900px**: tutto a una colonna. Il mazzo si centra a `min(86%, 520px)`; pick, offerte, percorso e chiusura si impilano; lo stack perde lo sticky; l'orb scende a 180px. Nel registro spariscono intestazioni di colonna e colonna stack: la riga diventa miniatura 16:9 da 6.5rem / anno sopra il nome / "+" (al posto del peek, che si spegne anche con `hover: none`), il dettaglio perde il rientro. Negli strumenti griglia 3.5rem / nome / 2.5rem. Base comune a 2 colonne senza fili, Bastion impilato. Dettaglio progetto e `/uses` a una colonna; i "simili" in colonna; le frecce del lightbox scendono in basso.
 - **≤760px**: l'header mostra solo "Lavori" e il CTA; ancore e badge disponibilità spariscono.
 - **≤640px**: footer a una colonna.
 - **≤560px**: fatti, percorso e volontariato a una colonna, base comune a una colonna, la striscia smette di sfalsare, i bottoni della chiusura vanno a tutta larghezza.
 - **≤480px**: nell'header resta solo la mano del marchio, senza la scritta.
+- **`pointer: coarse`**: header (marchio, link, CTA), lingua e tema nel footer arrivano a 44px; i link testuali isolati (footer, "Tutti i lavori", organizzazioni, esempi delle offerte, "← Tutti i lavori", ancore di `/uses`) crescono solo in altezza. I link dentro le frasi restano come sono.
 
 **The Righe non Card Rule.** Elenchi di cose omogenee (servizi, esperienze, progetti, strumenti) sono righe separate da hairline, non griglie di card. Le card esistono solo dove c'è un'immagine da mostrare (pick, "simili"), un blocco laterale (stack, aside del dettaglio, volontariato) o un diagramma (base comune).
 
@@ -256,7 +260,7 @@ Profondità ibrida: pannelli tonali (`surface` su `bg`) con hairline verde, più
 ### Named Rules
 **The Ombra Nera, Alone Verde Rule.** Le ombre strutturali sono nere e a spread negativo; l'alone verde appartiene solo al CTA primario, alla pill "Il tuo progetto", alla pick in hover, all'orb/medaglia e ai piccoli punti luminosi.
 
-**The Un Solo Vetro Rule.** Il `backdrop-filter` (blur 18px, saturate 1.3) esiste solo sull'header sticky, perché scorre sopra il contenuto. Nessun'altra superficie è in vetro; l'unica altra sfocatura è il `::backdrop` del lightbox (blur 6px su nero al 94%), che non è una superficie.
+**The Un Solo Vetro Rule.** Il `backdrop-filter` (blur 18px, saturate 1.3) esiste solo sull'header sticky, perché scorre sopra il contenuto. Nessun'altra superficie è in vetro; l'unica altra sfocatura è il `::backdrop` del lightbox (blur 6px sul `bg` del tema al 94%), che non è una superficie.
 
 ## Shapes
 
@@ -273,33 +277,33 @@ Rettangoli pieni e sicuri a 10px, con una freccia che scivola.
 - **Shape:** `--r-sm`, `inline-flex`, gap 0.6rem, bordo 1px trasparente.
 - **Primary:** fondo `green`, testo `on-green`, 600 1rem/1, padding 0.95rem 1.6rem, glow primario.
 - **Hover / Focus:** lift -2px e glow più ampio (0.35s `ease-out`), l'icona trasla di 4px a destra; `:active` torna a 0 e scende a `green-dark`. Focus globale: outline 2px `green-light`, offset 3px, radius 6px.
-- **Ghost:** testo `ink`, bordo `hair-strong`, fondo verde al 5%; in hover bordo `green` e fondo al 10%.
-- **Compatto:** nell'header e nei link di registro e dettaglio padding 0.7–0.75rem × 1.2rem, 0.93rem; nell'header senza glow.
+- **Ghost:** testo `ink`, bordo `green-light` (`hair-strong` resta sotto 3:1 come bordo di un controllo), fondo verde al 5%; in hover bordo `green` e fondo al 10%.
+- **Compatto:** nell'header e nei link di registro e dettaglio padding 0.7–0.75rem × 1.2rem, `--text-label`; nell'header senza glow.
 - **Link freccia** ("Vedi tutti i lavori", "Tutti i lavori"): testo 600 `green-light` senza sottolineatura, freccia che trasla di 4px.
 
 ### Chips
-- **Stack chip:** mono 0.78rem, `ink` su `surface-2`, hairline, `--r-sm`, padding 0.28rem 0.6rem. Raggruppati sotto un'etichetta 700 0.85rem `ink-3`. In hover bordo `green`, testo `green-light`, lift 2px.
-- **Feature pill:** stessa forma in Manrope 0.85rem (0.8rem nelle card della base comune), padding 0.3rem 0.7rem.
-- **Tag di `/uses`:** 0.75rem 500 `ink-2` su `surface-2`; in hover della riga ruota di -6° e diventa `green` pieno.
+- **Stack chip:** mono `--text-xs`, `ink` su `surface-2`, hairline, `--r-sm`, padding 0.28rem 0.6rem. Raggruppati sotto un'etichetta 700 `--text-sm` `ink-3`. In hover bordo `green`, testo `green-light`, lift 2px.
+- **Feature pill:** stessa forma in Manrope `--text-sm` (`--text-xs` nelle card della base comune), padding 0.3rem 0.7rem.
+- **Tag di `/uses`:** `--text-xs` 500 `ink-2` su `surface-2`; in hover della riga ruota di -6° e diventa `green` pieno.
 
 ### Cards / Containers
 - **Pick:** `surface`, hairline, `--r-lg`, immagine 16:9 (la principale al 56% della larghezza), corpo con titolo + freccia `arrow-up-right` in `green-light`, descrizione `ink-2`, meta mono `ink-3` "anno · stack". Hover: bordo forte, lift -4px, glow pick, immagine scale 1.035, freccia in diagonale.
 - **Pannello stack:** `surface`, hairline, `--r-lg`, padding 1.6rem, sticky; chiude con il bottone **primario** "Scarica il CV" a tutta larghezza, icona download.
 - **Card volontariato:** `surface`, hairline, `--r-lg`, padding 1.4rem, stessa griglia data/contenuto del percorso, icona scudo come filigrana.
-- **Banda next** (`/works`): `surface` con alone radiale verde dall'angolo in alto a sinistra, esagoni al 18% a destra, `--r-lg`, titolo a sinistra e CTA primario a destra.
+- **Banda di richiesta** (`.cta-band` in `main.css`; `/works` e dettaglio progetto): `surface` con alone radiale verde dall'angolo in alto a sinistra, esagoni al 18% a destra, `--r-lg`, titolo a sinistra e CTA primario a destra. Il margine lo decide la pagina.
 
 ### Navigation
-- **Header:** sticky, centrato a `max`, fondo `glass` con il vetro, hairline, `--r-sm`, ombra header. A sinistra il marchio (favicon 36px + "HeyAtom" 800 1.3rem `ink`; la mano ruota di -12° in hover), poi link (600 0.93rem, `ink-2`; hover e pagina corrente con fondo verde al 12% e `ink`), badge "Disponibile" con punto che pulsa tre volte (fuori dalla home, solo se `freelanceAvailable`), CTA primario compatto "Scrivimi". Sul bordo inferiore, una hairline di 2px in gradiente `green-dark` → `green-light` segna l'avanzamento della pagina.
+- **Header:** sticky, centrato a `max`, fondo `glass` con il vetro, hairline, `--r-sm`, ombra header. A sinistra il marchio (favicon 36px + "HeyAtom" 800 `--text-xl` `ink`; la mano ruota di -12° in hover), poi link "Lavori" e "Percorso" (600 `--text-label`, `ink-2`; niente "Contatti": il contatto è il CTA; hover e pagina corrente con fondo verde al 12% e `ink`), badge "Disponibile" con punto che pulsa tre volte (fuori dalla home, solo se `freelanceAvailable`), CTA primario compatto "Scrivimi". Sul bordo inferiore, una hairline di 2px in gradiente `green-dark` → `green-light` segna l'avanzamento della pagina.
 - **Skip link:** `green`, `--r-sm`, entra da sopra al focus.
 - **Footer:** hairline superiore, esagoni a destra, griglia a due colonne: marchio 22px (ruota in hover) + frase in `ink-2`; selettore lingua IT/EN (600, `ink-3`, la corrente in `ink` con bordo `hair`); link GitHub, LinkedIn, Uses, Status e mail in `ink-2` → `green-light`; tagline "Code meets personality · anno" in `ink-3` 0.85rem.
 
 ### Mazzo + medaglia (hero)
-Tre screenshot reali 16:9 in figure `surface` con hairline forte e `--r-sm`, didascalia con titolo 600 0.82rem e anno mono `green-light`. Sono disposti ruotati (-7°, 5°, -3°) su uno stage con alone radiale verde sfocato; la medaglia a fumetto con la mano siede in alto a destra con anello ad arco. Lo stage è un unico link a `/works`. Sopra l'h1, se `freelanceAvailable`, un badge `--r-sm` con bordo forte, fondo verde all'8% e punto luminoso.
+Tre screenshot reali 16:9 in figure `surface` con hairline forte e `--r-sm`, didascalia con titolo 600 `--text-sm` e anno mono `green-light`. Sono disposti ruotati (-7°, 5°, -3°) su uno stage con alone radiale verde sfocato; la medaglia a fumetto con la mano siede in alto a destra con anello ad arco. Lo stage è un unico link a `/works`. Sopra l'h1, se `freelanceAvailable`, un badge `--r-sm` con bordo forte, fondo verde all'8% e punto luminoso.
 
 ### Offerte, percorso, striscia
-- **Offerta:** riga a tre colonne su baseline: titolo, descrizione `ink-2`, esempi linkati con etichetta 600 0.82rem `ink-3`. Chiusa da una regola in gradiente `green` → `hair`.
-- **Percorso:** traccia verticale 2px `hair` a sinistra con la linea di avanzamento verde; ogni tappa ha un nodo circolare che si accende. Colonna data: intervallo mono 0.85rem `green-light` e durata ("9 anni") in Manrope 600 1rem `ink-2` (entrambi `ink-3` finché la tappa non è accesa). Contenuto: title sm, organizzazione linkata 600 `ink-3` con freccia, paragrafo `ink-2` max 60ch, logo dell'azienda in filigrana a destra (7rem, 5%; in hover 14% `green-light`, scala 1.08 e -4°).
-- **Striscia viaggi:** foto 4:5 `--r-sm` a saturazione 0.85 (1.05 in hover), didascalia mono 0.76rem "luogo · anno" in `ink-3`.
+- **Offerta:** riga a tre colonne su baseline: titolo, descrizione `ink-2`, esempi linkati con etichetta 600 `--text-sm` `ink-3`. Chiusa da una regola in gradiente `green` → `hair`.
+- **Percorso:** prima Medas (la credenziale principale), poi i ruoli in Element Gaming. Traccia verticale 2px `hair` a sinistra, accanto alla lista (non dentro l'`<ol>`) con la linea di avanzamento verde; ogni tappa ha un nodo circolare che si accende. Colonna data: intervallo mono 0.85rem `green-light` e durata ("9 anni") in Manrope 600 1rem `ink-2` (entrambi `ink-3` finché la tappa non è accesa). Contenuto: title sm, organizzazione linkata 600 `ink-3` con freccia, paragrafo `ink-2` max 60ch, logo dell'azienda in filigrana a destra (7rem, 5%; in hover 14% `green-light`, scala 1.08 e -4°).
+- **Striscia viaggi:** foto 4:5 `--r-sm` a saturazione 0.85 (1.05 in hover), didascalia mono `--text-xs` "luogo · anno" in `ink-3`.
 
 ### Banda di chiusura con orb
 Hairline superiore, alone radiale verde a sinistra, esagoni a destra al 12%. Orb a fumetto (max 340px) con gradiente `glass` → `surface` → `surface-3`, due anelli, mano con drop-shadow verde che saluta in hover. Accanto: headline di chiusura, paragrafo 1.1rem, nota per i recruiter in `ink-3` 0.95rem, l'indirizzo mail come testo gigante `green-light` (`clamp(1.5rem, 3.4vw, 2.6rem)`, 700) con sottolineatura `hair-strong` da 2px, poi primario "Scrivimi una mail" e ghost LinkedIn e GitHub.
@@ -317,9 +321,9 @@ Pill `green` "Il tuo progetto" (700, `--r-sm`, glow pill) al centro; da lì uno 
 Riga intera come link a GitHub con la griglia del registro: anno mono, nome title sm + frase `ink-2`, stack mono, cerchio con icona GitHub che in hover diventa `green-light`. Hover: fondo verde al 7%.
 
 ### Dettaglio progetto (`/works/[slug]`)
-- **Testata:** link mono "← Tutti i lavori" in `ink-3`, meta mono `green-light` "anno · tipo · in corso", h1, cliente `ink-2` 1.1rem, bottoni compatti (primario "Visita il sito", ghost "Codice", o nota "privato"), esagoni in trasparenza.
+- **Testata:** link mono "← Tutti i lavori" in `ink-3`, meta mono `green-light` "anno · tipo · in corso", h1, cliente `ink-2` `--text-md`, bottoni compatti (primario "Visita il sito", ghost "Codice", o nota "privato"), esagoni in trasparenza.
 - **Screenshot:** 16:9 a tutta larghezza, `--r-lg`, hairline forte.
-- **Corpo:** descrizione 1.08rem max 65ch con feature pill; aside `surface` `--r-lg` con etichetta mono "Stack" e chip.
+- **Corpo:** descrizione `--text-md` max 65ch con feature pill; aside `surface` `--r-lg` con etichetta mono "Stack" e chip.
 - **Galleria:** griglia `auto-fill` da 260px, miniature 16:10 allineate in alto, `--r-sm`, titolo sotto in `ink-3`; in hover salgono di 4px. Il click apre un `<dialog>` a tutto schermo con l'immagine, didascalia mono e contatore, bottoni circolari (chiudi, precedente, successivo; frecce da tastiera).
 - **Simili:** tre card `surface` `--r-lg` con screenshot 16:9, anno mono, titolo, stack; lift di 4px in hover.
 
@@ -346,7 +350,7 @@ Eccezioni alla curva unica, volute: `back.out` per la medaglia (1.7), i chip (2)
 - **Chiusura:** l'orb entra da scala 0.7 e -30°, poi mail e bottoni. Orb (0.18) e tutti i CTA primari (0.25) sono magnetici.
 - **Header:** si nasconde scendendo oltre 240px, torna salendo o quando riceve il focus da tastiera; barra di avanzamento in `quickSetter`.
 - **`/works`:** "Lavori" lettera per lettera (yPercent 120, rotazione 12°), intro con blur, righe in cascata; apertura riga con clip-path orizzontale sullo screenshot e info da destra; peek con `quickTo`. Base comune: la pill appare, i fili scendono in sequenza, le quattro card salgono, poi la banda di Bastion si allarga sotto.
-- **`/works/[slug]`:** testata in cascata, screenshot rivelato con clip-path orizzontale, `revealLines` sugli h2, miniature e "simili" in cascata.
+- **`/works/[slug]`:** testata in cascata, screenshot (l'LCP) dipinto subito e solo assestato in `y`, `revealLines` sugli h2, miniature e "simili" in cascata.
 - **`/uses`:** "Uses" lettera per lettera con rotazioni casuali ed elastico; in hover le lettere saltano di nuovo. Ogni gruppo: regola, nome da sinistra, contatore da 00, voci in cascata, tag a pop.
 - **Pagine:** transizione `page` out-in (opacity e 14px, senza blur; uscita 0.2s).
 - **Reduced motion:** nessuna animazione GSAP, niente `html.js`, contenuto statico, peek senza inseguimento; CSS azzera durata e delay.

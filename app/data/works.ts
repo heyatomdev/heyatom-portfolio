@@ -83,7 +83,7 @@ export const works: Work[] = [
     "slug": "articuno",
     "group": "platform",
     "role": "Contenuti e commenti",
-    "line": "Articoli, categorie e traduzioni, con commenti moderati in automatico: parole vietate, segnalazioni, shadow ban.",
+    "line": "Articoli, categorie e traduzioni, con commenti moderati in automatico: parole vietate, segnalazioni, utenti silenziati.",
     "title": "Articuno",
     "year": 2026,
     "current": true,
@@ -93,7 +93,7 @@ export const works: Work[] = [
     "features": [
       "Articoli multilingua",
       "Moderazione automatica",
-      "Webhook firmati"
+      "Avvisi verso altri sistemi"
     ],
     "stack": [
       "NestJS",
@@ -150,7 +150,7 @@ export const works: Work[] = [
     "client": "Progetto open source",
     "description": "Event manager multi-tenant open source costruito con NestJS 10, Prisma ORM e PostgreSQL. Ogni client accede esclusivamente ai propri eventi tramite token, con supporto a eventi ricorrenti secondo lo standard RFC 5545 e pulizia automatica degli eventi passati.",
     "features": [
-      "Ricorrenze standard iCal",
+      "Eventi ricorrenti, anche in calendario",
       "Eventi multilingua",
       "Partecipanti con o senza account"
     ],
