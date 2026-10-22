@@ -12,7 +12,8 @@ useHead(() => ({
   htmlAttrs: i18nHead.value.htmlAttrs,
   meta: [...(i18nHead.value.meta ?? []), { name: 'theme-color', content: colorMode.value === 'light' ? '#f3f5f3' : '#1e201e' }],
   script: [{
-    innerHTML: 'if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("js")',
+    // `intro-seen`: later page loads in the session replay the home intro faster.
+    innerHTML: 'var d=document.documentElement;if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("js");try{if(sessionStorage.getItem("intro"))d.classList.add("intro-seen");sessionStorage.setItem("intro","1")}catch(e){}',
     tagPosition: 'head',
   }],
   link: [...(i18nHead.value.link ?? []), { rel: 'canonical', href: url.value }, { rel: 'preload', as: 'image', href: '/assets/hex.svg' }],

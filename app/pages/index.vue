@@ -14,12 +14,12 @@ useSeoMeta({
 
 const bySlug = (s: string) => works.find(w => w.slug === s)!
 // Last slot is dealt in front.
-const deck = ['element', 'sgweb', 'kaish-dbd'].map(bySlug)
+const deck = ['beacon', 'sgweb', 'kaish-dbd'].map(bySlug)
 
 const picks = computed(() => [
   { slug: 'kaish-dbd', line: t('home.picks.kaish') },
   { slug: 'sgweb', line: t('home.picks.sgweb') },
-  { slug: 'element', line: t('home.picks.element') },
+  { slug: 'beacon', line: t('home.picks.beacon') },
 ].map(p => ({ ...bySlug(p.slug), line: p.line })))
 
 const offers = computed(() => [
@@ -31,7 +31,7 @@ const offers = computed(() => [
   {
     title: t('home.offers.app.title'),
     text: t('home.offers.app.text'),
-    examples: ['kaish-dbd', 'element'],
+    examples: ['kaish-dbd', 'beacon'],
   },
   {
     title: t('home.offers.tools.title'),
@@ -108,32 +108,18 @@ const years = new Date().getFullYear() - 2016
 const available = useRuntimeConfig().public.freelanceAvailable === 'true'
 
 const root = ref<HTMLElement>()
+// Coming back to home within the app replays the intro faster too.
+onBeforeUnmount(() => document.documentElement.classList.add('intro-seen'))
 
 useMotion(root, (mm, el) => {
   const q = gsap.utils.selector(el)
 
   mm.add(MOTION_OK, (ctx) => {
     const stage = q('.stage')[0] as HTMLElement
-    const shots = q('.shot')
 
-    // Focal moment: the deck is dealt at once; the headline joins word by word as soon as fonts are in.
-    // Second visit in a session plays the same sequence at double speed.
+    // The rest of the hero intro is CSS (see "Hero intro" below); the headline joins word by word as soon as fonts are in.
     const h1 = q('#hero-title')[0] as HTMLElement
-    let seen = false
-    try { seen = sessionStorage.getItem('intro') === '1'; sessionStorage.setItem('intro', '1') } catch {}
-    const speed = seen ? 2.2 : 1
-    gsap.set(shots, { '--in': 1 })
-    gsap.set(q('[data-intro]'), { autoAlpha: 1 })
-    stage.classList.add('is-intro')
-    const intro = gsap.timeline({ defaults: { ease: 'expo.out' }, onComplete: () => stage.classList.remove('is-intro') })
-    if (available) intro.from(q('.avail'), { y: 18, duration: 0.8 }, 0) // v-if: no target when not freelancing
-    intro
-      .from(q('.lead'), { y: 26, filter: 'blur(10px)', duration: 1.1 }, 0.55)
-      .from(q('.hero .actions > *'), { y: 22, stagger: 0.09, duration: 1 }, 0.7)
-      .to(shots, { '--in': 0, duration: 1.4, stagger: 0.15 }, 0.2)
-      .from(q('.medal'), { scale: 0, rotation: -120, duration: 1.2, ease: 'back.out(1.7)' }, 0.9)
-      .from(q('.facts li'), { y: 22, opacity: 0, stagger: 0.09, duration: 0.9 }, 1)
-      .timeScale(speed)
+    const speed = document.documentElement.classList.contains('intro-seen') ? 2.2 : 1
     document.fonts.ready.then(ctx.add(() => {
       const split = SplitText.create(h1, { type: 'lines,words', mask: 'lines', linesClass: 'ln' })
       gsap.from(split.words, { yPercent: 118, duration: 1.2, stagger: 0.05, ease: 'expo.out', onComplete: () => split.revert() }).timeScale(speed)
@@ -260,7 +246,7 @@ function untilt(e: PointerEvent) {
 
     <!-- Same target as the "see all works" button: a pointer shortcut, kept out of focus and the a11y tree. -->
     <NuxtLink
-      :to="localePath('/works')" class="stage" data-intro aria-hidden="true" tabindex="-1"
+      :to="localePath('/works')" class="stage" aria-hidden="true" tabindex="-1"
       @pointermove="tilt" @pointerleave="untilt"
     >
       <figure v-for="(w, i) in deck" :key="w.slug" class="shot" :class="`shot--${i}`">
@@ -276,7 +262,7 @@ function untilt(e: PointerEvent) {
       </span>
     </NuxtLink>
 
-    <ul class="facts" data-intro :aria-label="t('home.facts.label')">
+    <ul class="facts" :aria-label="t('home.facts.label')">
       <li><span class="mono">{{ t('home.path.since2016') }}</span>{{ t('home.facts.medas') }}</li>
       <li><span class="mono">{{ t('home.path.since2020') }}</span>{{ t('home.facts.element') }}</li>
       <li><span class="mono">{{ t('home.path.since2015') }}</span>{{ t('home.facts.prociv') }}</li>
@@ -547,7 +533,6 @@ function untilt(e: PointerEvent) {
     scale(calc(1 - var(--in) * 0.08));
   transition: transform 0.9s var(--ease-out), box-shadow 0.6s var(--ease-out);
 }
-.stage.is-intro .shot,
 .stage.is-scrub .shot,
 .stage.is-scrub .medal { transition: none; }
 .shot img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
@@ -564,9 +549,9 @@ function untilt(e: PointerEvent) {
 }
 .shot figcaption .mono { color: var(--green-light); font-weight: 400; }
 
-.shot--0 { --dx: -4%; --dy: -6%; --r: -7deg; --lift: -260px; top: 4%; left: 0; }
-.shot--1 { --dx: 5%; --dy: -2%; --r: 5deg; --lift: -90px; top: 16%; right: 0; }
-.shot--2 { --dx: 0%; --dy: 6%; --r: -3deg; --lift: 140px; bottom: 6%; left: 11%; z-index: 2; }
+.shot--0 { --dx: -4%; --dy: -6%; --r: -7deg; --lift: -260px; --i: 0; top: 4%; left: 0; }
+.shot--1 { --dx: 5%; --dy: -2%; --r: 5deg; --lift: -90px; --i: 1; top: 16%; right: 0; }
+.shot--2 { --dx: 0%; --dy: 6%; --r: -3deg; --lift: 140px; --i: 2; bottom: 6%; left: 11%; z-index: 2; }
 
 .medal {
   position: absolute;
@@ -612,6 +597,27 @@ function untilt(e: PointerEvent) {
 }
 .facts li { display: flex; flex-direction: column; gap: 0.2rem; font-weight: 600; color: var(--ink); }
 .facts .mono { font-size: 0.8rem; font-weight: 400; color: var(--green-light); }
+
+/* Hero intro: pure CSS so it plays with the server HTML instead of waiting for hydration.
+   Offsets in seconds from first paint; `.intro-seen` (app.vue) replays it faster later in the session. */
+@property --in { syntax: '<number>'; inherits: false; initial-value: 0; }
+.hero { --k: 1; }
+.intro-seen .hero { --k: 0.45; }
+.hero .actions > :nth-child(2), .facts li:nth-child(2) { --i: 1; }
+.facts li:nth-child(3) { --i: 2; }
+@media (prefers-reduced-motion: no-preference) {
+  .avail { animation: rise calc(0.8s * var(--k)) var(--ease-out) backwards; }
+  .lead { animation: rise-blur calc(1.1s * var(--k)) var(--ease-out) calc(0.55s * var(--k)) backwards; }
+  .hero .actions > * { animation: rise calc(1s * var(--k)) var(--ease-out) calc((0.7s + var(--i, 0) * 0.09s) * var(--k)) backwards; }
+  .shot { animation: deal calc(1.4s * var(--k)) var(--ease-out) calc((0.2s + var(--i) * 0.15s) * var(--k)) backwards; }
+  .medal { animation: medal calc(1.2s * var(--k)) cubic-bezier(0.34, 1.56, 0.64, 1) calc(0.9s * var(--k)) backwards; }
+  .facts li { animation: rise-fade calc(0.9s * var(--k)) var(--ease-out) calc((1s + var(--i, 0) * 0.09s) * var(--k)) backwards; }
+}
+@keyframes deal { from { --in: 1; } }
+@keyframes rise { from { translate: 0 22px; } }
+@keyframes rise-blur { from { translate: 0 26px; filter: blur(10px); } }
+@keyframes rise-fade { from { translate: 0 22px; opacity: 0; } }
+@keyframes medal { from { scale: 0; rotate: -120deg; } }
 
 /* ── Sections ─────────────────────────────────── */
 .sec { padding-top: var(--section); }

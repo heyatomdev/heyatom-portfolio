@@ -41,7 +41,7 @@
     "picks": {
       "kaish": "Il sito dello streamer Kaish79: editor di build per Dead by Daylight, utenti e ruoli, wiki del gioco interamente tradotta.",
       "sgweb": "Il sito di un insegnante di Tai Chi e Qi Gong: sedi, orari e contatto diretto, in italiano e inglese.",
-      "element": "Il sito del network e-sport, con lo stato live degli streamer dalle API di Twitch.",
+      "beacon": "La pagina live di un team di streamer, su Twitch e Kick: chi è in onda, avvisi su Discord e statistiche per i creator.",
       "title": "Cose che ho costruito e che girano davvero.",
       "all": "Tutti i {n} lavori"
     },
