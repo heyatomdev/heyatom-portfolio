@@ -373,8 +373,8 @@
     "files": {
       "title": "The files.",
       "body": "SVG vectors, ready for web and print.",
-      "mark": "Mark",
-      "logo": "Logo"
+      "logo": "Logo",
+      "icon": "Icon"
     }
   }
 }

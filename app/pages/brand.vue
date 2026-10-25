@@ -81,7 +81,7 @@ const iconVariants = [
 const donts = ['stretch', 'rotate', 'recolor', 'effects', 'busy'] as const
 
 const files = computed(() => [
-  { label: t('brand.files.mark'), items: iconVariants.map(v => v.file) },
+  { label: t('brand.files.icon'), items: iconVariants.map(v => v.file) },
   { label: t('brand.files.logo'), items: ['logo-dark', 'logo-light', 'logo-black', 'logo-white', 'logo-stacked-dark', 'logo-stacked-light', 'logo-stacked-black', 'logo-stacked-white'] },
 ])
 
@@ -184,8 +184,13 @@ useMotion(root, (mm, el) => {
       </div>
       <ul class="icon-set">
         <li v-for="v in iconVariants" :key="v.file" class="reveal">
-          <span class="ground" :style="{ background: v.ground }"><img :src="`/brand/heyatom-${v.file}.svg`" :alt="t(`brand.icon.variants.${v.file}`)" width="96" height="96"></span>
-          <span class="mono">{{ t(`brand.icon.variants.${v.file}`) }}</span>
+          <a :href="`/brand/heyatom-${v.file}.svg`" download>
+            <span class="ground" :style="{ background: v.ground }">
+              <img :src="`/brand/heyatom-${v.file}.svg`" alt="" width="96" height="96">
+              <Icon name="download" :size="16" class="dl" />
+            </span>
+            <span class="mono">{{ t(`brand.icon.variants.${v.file}`) }}</span>
+          </a>
         </li>
       </ul>
       <div class="icons reveal">
@@ -467,7 +472,7 @@ h3 { font-size: var(--text-lg); margin-bottom: 0.35rem; }
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 1.5rem 1rem;
 }
-.icon-set li { display: grid; gap: 0.75rem; }
+.icon-set a { display: grid; gap: 0.75rem; color: inherit; text-decoration: none; }
 .ground {
   display: grid;
   place-items: center;
@@ -475,7 +480,26 @@ h3 { font-size: var(--text-lg); margin-bottom: 0.35rem; }
   border-radius: var(--r-lg);
   border: 1px solid var(--hair);
 }
+.ground { position: relative; transition: translate 0.35s var(--ease-out), border-color 0.2s ease; }
 .ground img { width: 50%; height: auto; }
+/* Download cue: hidden until hover or keyboard focus. */
+.ground .dl {
+  position: absolute;
+  right: 0.6rem;
+  bottom: 0.6rem;
+  margin: 0;
+  padding: 0.3rem;
+  box-sizing: content-box;
+  border-radius: var(--r-sm);
+  background: var(--glass);
+  color: var(--ink);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.icon-set a:hover .ground, .icon-set a:focus-visible .ground { translate: 0 -4px; border-color: var(--green); }
+.icon-set a:hover .dl, .icon-set a:focus-visible .dl { opacity: 1; }
+.icon-set a:hover .mono { color: var(--green-light); }
+@media (hover: none) { .ground .dl { opacity: 1; } }
 .icon-set .mono { font-size: var(--text-xs); color: var(--ink-3); }
 .icons { display: flex; align-items: end; flex-wrap: wrap; gap: 1.5rem; }
 .tab { display: grid; gap: 0.5rem; margin-left: auto; }

@@ -373,8 +373,8 @@
     "files": {
       "title": "I file.",
       "body": "Vettoriali SVG, pronti per web e stampa.",
-      "mark": "Segno",
-      "logo": "Logo"
+      "logo": "Logo",
+      "icon": "Icona"
     }
   }
 }
