@@ -14,6 +14,8 @@ app/
   data/works.ts           # progetti IT (fonte) + projects/platform/platformBase/tools/localize
   data/works.en.ts        # override EN per slug
   data/uses.ts            # /uses, EN inline nel campo `en`
+  data/editions.ts        # edizioni speciali della mano + finestre di date
+  composables/useMark.ts  # mano del giorno (edizione o favicon)
   pages/                  # index, uses, works/index, works/[slug]
   utils/motion.ts         # gsap + useMotion, revealLines, magnetic
   utils/img.ts            # img/srcset per FileHarbor (?width=N)
@@ -49,6 +51,8 @@ scripts/shots.mjs         # screenshot siti cliente (Playwright)
 ## Quando cambi il marchio
 
 Il kit di `/brand` (`public/brand/*.svg`) è generato, non disegnato a mano: mano da `public/favicon.svg`, scritta "HeyAtom" in Manrope 800 da `cv/fonts/` convertita in tracciati. Dopo aver cambiato favicon o font: `uvx --with fonttools --with brotli python brand/render.py`.
+
+Edizioni speciali (Pride, Halloween, Natale): disegnate in `brand/render.py`, date in `app/data/editions.ts`. `useMark()` sceglie la mano del giorno lato server; header, footer, home e favicon la usano, quindi la mano non va mai scritta come `/favicon.svg` fisso nei componenti.
 
 ## Quando aggiorni il CV
 

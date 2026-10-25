@@ -46,7 +46,6 @@ export default defineNuxtConfig({
       meta: [
         { name: 'color-scheme', content: 'dark light' },
       ],
-      link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
     },
   },
 })

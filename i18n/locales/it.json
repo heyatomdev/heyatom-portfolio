@@ -230,6 +230,23 @@
         "mark-black": "Nera · un colore"
       }
     },
+    "editions": {
+      "title": "Edizioni speciali.",
+      "body": "Per qualche giorno la mano si veste per l'occasione. Cambia solo il segno, nel favicon, nell'header e nella home; scritta, verde e testi restano uguali. Si attivano da sole in base alla data.",
+      "live": "Attiva ora",
+      "pride": {
+        "name": "Pride",
+        "when": "1–30 giugno"
+      },
+      "halloween": {
+        "name": "Halloween",
+        "when": "24 ottobre – 1 novembre"
+      },
+      "natale": {
+        "name": "Natale",
+        "when": "8 dicembre – 6 gennaio"
+      }
+    },
     "color": {
       "title": "Il colore.",
       "body": "Un solo verde su neutri antracite. Il verde si comporta come luce: riempie poco e illumina il resto.",
@@ -381,7 +398,8 @@
         "light": "Su fondi chiari",
         "black": "Nero · un colore",
         "white": "Bianco · su jade o foto"
-      }
+      },
+      "editions": "Edizioni speciali"
     }
   }
 }

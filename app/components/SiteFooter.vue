@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const { t, locale, setLocaleCookie } = useI18n()
 const localePath = useLocalePath()
+const mark = useMark()
 const switchLocalePath = useSwitchLocalePath()
 const colorMode = useColorMode()
 const light = computed(() => colorMode.value === 'light')
@@ -11,7 +12,7 @@ const toggleTheme = () => { colorMode.preference = light.value ? 'dark' : 'light
   <footer class="ftr hexed">
     <div class="wrap row">
       <p class="me">
-        <img src="/favicon.svg" alt="" width="22" height="22">
+        <img :src="mark" alt="" width="22" height="22">
         {{ t('footer.bio') }}
       </p>
       <div class="prefs">

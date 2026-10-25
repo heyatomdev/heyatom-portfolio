@@ -230,6 +230,23 @@
         "mark-black": "Black · one colour"
       }
     },
+    "editions": {
+      "title": "Special editions.",
+      "body": "For a few days the hand dresses up for the occasion. Only the mark changes, in the favicon, the header and the home page; wordmark, green and copy stay the same. They switch on by themselves based on the date.",
+      "live": "Live now",
+      "pride": {
+        "name": "Pride",
+        "when": "1–30 June"
+      },
+      "halloween": {
+        "name": "Halloween",
+        "when": "24 October – 1 November"
+      },
+      "natale": {
+        "name": "Christmas",
+        "when": "8 December – 6 January"
+      }
+    },
     "color": {
       "title": "The colour.",
       "body": "One green on charcoal neutrals. Green behaves like light: it fills little and lights up the rest.",
@@ -381,7 +398,8 @@
         "light": "On light grounds",
         "black": "Black · one colour",
         "white": "White · on jade or photos"
-      }
+      },
+      "editions": "Special editions"
     }
   }
 }

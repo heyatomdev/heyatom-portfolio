@@ -6,6 +6,8 @@ const { t } = useI18n()
 // hreflang alternates, og:locale and <html lang> for the current locale.
 const i18nHead = useLocaleHead({ seo: true })
 const colorMode = useColorMode()
+// Favicon follows the seasonal edition (app/data/editions.ts).
+const mark = useMark()
 
 // Hide intro elements before first paint only when motion will reveal them.
 useHead(() => ({
@@ -16,7 +18,7 @@ useHead(() => ({
     innerHTML: 'var d=document.documentElement;if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("js");try{if(sessionStorage.getItem("intro"))d.classList.add("intro-seen");sessionStorage.setItem("intro","1")}catch(e){}',
     tagPosition: 'head',
   }],
-  link: [...(i18nHead.value.link ?? []), { rel: 'canonical', href: url.value }, { rel: 'preload', as: 'image', href: '/assets/hex.svg' }],
+  link: [...(i18nHead.value.link ?? []), { rel: 'icon', type: 'image/svg+xml', href: mark.value }, { rel: 'canonical', href: url.value }, { rel: 'preload', as: 'image', href: '/assets/hex.svg' }],
 }))
 
 // Structured data: one Person for the whole site.

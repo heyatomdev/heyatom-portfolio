@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { editions, editionSrc } from '~/data/editions'
 import { gsap, MOTION_OK, useMotion } from '~/utils/motion'
 
 const { t, tm, rt } = useI18n()
@@ -78,6 +79,9 @@ const iconVariants = [
   { file: 'mark-black', ground: '#f3f5f3' },
 ]
 
+// The edition running today, if any, gets a "live" badge.
+const mark = useMark()
+
 const donts = ['stretch', 'rotate', 'recolor', 'effects', 'busy'] as const
 
 // Each file previewed on the ground it is meant for, same grounds as the icon set.
@@ -87,6 +91,7 @@ const files = computed(() => [
   { key: 'icon', label: t('brand.files.icon'), items: iconVariants.map(v => ({ ...v, label: t(`brand.icon.variants.${v.file}`) })) },
   { key: 'h', label: t('brand.files.logoH'), items: logos('logo') },
   { key: 'v', label: t('brand.files.logoV'), items: logos('logo-stacked') },
+  { key: 'ed', label: t('brand.files.editions'), items: editions.map(e => ({ file: `edition-${e.id}`, ground: '#1e201e', label: t(`brand.editions.${e.id}.name`) })) },
 ])
 
 const root = ref<HTMLElement>()
@@ -204,6 +209,28 @@ useMotion(root, (mm, el) => {
           <span class="mono">{{ t('brand.icon.tab') }}</span>
         </div>
       </div>
+    </section>
+
+    <section id="edizioni" class="sec">
+      <div class="sec-head">
+        <h2>{{ t('brand.editions.title') }}</h2>
+        <p>{{ t('brand.editions.body') }}</p>
+      </div>
+      <ul class="editions">
+        <li v-for="e in editions" :key="e.id" class="reveal">
+          <a :href="editionSrc(e.id)" download class="edition">
+            <span class="ground ground--ed">
+              <img :src="editionSrc(e.id)" alt="" width="120" height="120">
+              <span v-if="mark === editionSrc(e.id)" class="live mono"><span class="dot" />{{ t('brand.editions.live') }}</span>
+              <Icon name="download" :size="16" class="dl" />
+            </span>
+            <span class="ed-meta">
+              <strong>{{ t(`brand.editions.${e.id}.name`) }}</strong>
+              <span class="mono">{{ t(`brand.editions.${e.id}.when`) }}</span>
+            </span>
+          </a>
+        </li>
+      </ul>
     </section>
 
     <section id="colore" class="sec">
@@ -502,6 +529,31 @@ h3 { font-size: var(--text-lg); margin-bottom: 0.35rem; }
 }
 .icon-set a:hover .ground, .icon-set a:focus-visible .ground { translate: 0 -4px; border-color: var(--green); }
 .icon-set a:hover .dl, .icon-set a:focus-visible .dl { opacity: 1; }
+
+.editions { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.edition { display: grid; gap: 0.75rem; color: inherit; text-decoration: none; }
+.ground--ed { aspect-ratio: 4 / 3; background: #1e201e; }
+.ground--ed img { width: 34%; }
+.edition:hover .ground, .edition:focus-visible .ground { translate: 0 -4px; border-color: var(--green); }
+.edition:hover .dl, .edition:focus-visible .dl { opacity: 1; }
+.ed-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.ed-meta strong { font-size: var(--text-lg); letter-spacing: -0.02em; }
+.ed-meta .mono { font-size: var(--text-xs); color: var(--ink-3); }
+.live {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: var(--r-sm);
+  border: 1px solid rgba(0, 168, 107, 0.38);
+  background: rgba(0, 168, 107, 0.12);
+  color: #33bf89;
+  font-size: var(--text-xs);
+}
+.live .dot { width: 0.45rem; aspect-ratio: 1; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); }
 .icon-set a:hover .mono { color: var(--green-light); }
 @media (hover: none) { .ground .dl { opacity: 1; } }
 .icon-set .mono { font-size: var(--text-xs); color: var(--ink-3); }
@@ -707,6 +759,8 @@ h3 { font-size: var(--text-lg); margin-bottom: 0.35rem; }
 .files h3 { font-size: var(--text-xs); font-weight: 400; color: var(--ink-3); margin-bottom: 0.75rem; }
 .files ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
 .files--icon ul { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.files--ed ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.files--ed .preview img { max-height: 3.25rem; }
 .file {
   display: grid;
   height: 100%;
@@ -747,6 +801,7 @@ h3 { font-size: var(--text-lg); margin-bottom: 0.35rem; }
   .sw { min-height: 6rem; }
   .shapes, .donts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .icon-set { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .editions { grid-template-columns: minmax(0, 1fr); }
   .files ul, .files--icon ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .scale li, .voice li { grid-template-columns: minmax(0, 1fr); }
   .tab { margin-left: 0; }

@@ -67,4 +67,32 @@ for stacked in (False, True):
     for name, hand_fill, text_fill in [('dark', JADE, INK), ('light', JADE, BG), ('black', BLACK, BLACK), ('white', WHITE, WHITE)]:
         svg(f'logo{"-stacked" if stacked else ""}-{name}', *lockup(hand_fill, text_fill, stacked))
 
+# Special editions (app/data/editions.ts): same hand, dressed for the date. Everything is clipped to the hand.
+CLIP = f'<defs><clipPath id="h"><path d="{hand}"/></clipPath></defs>'
+clip = lambda body: f'<g clip-path="url(#h)">{body}</g>'
+
+# Pride: the six-stripe rainbow filling the hand.
+rainbow = ['#e40303', '#ff8c00', '#ffed00', '#008026', '#24408e', '#732982']
+pride = clip(''.join(f'<rect y="{i * 180}" width="1080" height="181" fill="{c}"/>' for i, c in enumerate(rainbow)))
+
+# Halloween: mummy. Jade hand in slanted bandages, two eyes peeking through the wide one.
+wrap = ''.join(f'<rect x="-300" y="{y}" width="1700" height="70" transform="rotate(-12 540 540)"/>' for y in (60, 230, 400, 900))
+halloween = f'<path fill="{JADE}" d="{hand}"/>' + clip(
+    f'<g fill="{INK}">{wrap}<rect x="-300" y="600" width="1700" height="260" transform="rotate(-12 540 540)"/></g>'
+    f'<g fill="{BG}"><circle cx="330" cy="740" r="48"/><circle cx="530" cy="700" r="48"/></g>')
+
+
+# Christmas: snow on the fingertips and the thumb's flat top, with drips. The green-dark pass underneath
+# outlines the snow from outside only, so it still reads on light grounds.
+def drips(y, x0, x1, step):
+    return ''.join(f'<circle cx="{x}" cy="{y + (12 if i % 2 else 0)}" r="{30 if i % 2 else 24}"/>' for i, x in enumerate(range(x0, x1, step)))
+
+
+snow = f'<rect width="760" height="175"/>{drips(175, 20, 760, 72)}<path d="M850 0H1080V488H850Z"/>{drips(488, 860, 1080, 60)}'
+natale = f'<path fill="{JADE}" d="{hand}"/>' + clip(
+    f'<g fill="#007a4d" stroke="#007a4d" stroke-width="20">{snow}</g><g fill="{WHITE}">{snow}</g>')
+
+for name, body in [('pride', pride), ('halloween', halloween), ('natale', natale)]:
+    svg(f'edition-{name}', '0 0 1080 1080', CLIP + body)
+
 print('\n'.join(sorted(p.name for p in OUT.glob('*.svg'))))

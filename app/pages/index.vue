@@ -4,6 +4,7 @@ import { gsap, magnetic, MOTION_OK, revealLines, ScrollTrigger, SplitText, useMo
 
 const { t } = useI18n()
 const localePath = useLocalePath()
+const mark = useMark()
 
 useSeoMeta({
   title: 'Andrea Tombolato, full-stack developer',
@@ -257,7 +258,7 @@ function untilt(e: PointerEvent) {
       </figure>
       <span class="medal" aria-hidden="true">
         <span class="medal-ring" />
-        <img src="/favicon.svg" alt="" width="64" height="64">
+        <img :src="mark" alt="" width="64" height="64">
       </span>
     </NuxtLink>
 
@@ -396,7 +397,7 @@ function untilt(e: PointerEvent) {
       <div class="orb" aria-hidden="true">
         <span class="orb-ring orb-ring--a" />
         <span class="orb-ring orb-ring--b" />
-        <img src="/favicon.svg" alt="" width="120" height="120">
+        <img :src="mark" alt="" width="120" height="120">
       </div>
       <div class="close-copy">
         <h2 id="close-title">{{ t('home.close.title') }}</h2>
