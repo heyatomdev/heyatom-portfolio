@@ -193,5 +193,72 @@
       "title": "Qualcosa si è rotto.",
       "text": "È un errore mio, non tuo. Riprova tra poco; se continua, scrivimi e lo sistemo."
     }
+  },
+  "brand": {
+    "seo": {
+      "description": "Il brand di HeyAtom: segno, logo, colori, tipografia e file da scaricare.",
+      "ogDescription": "Segno, logo, colori e kit da scaricare."
+    },
+    "intro": "Come si usa il segno di HeyAtom: una mano che saluta, un verde, due font. Qui trovi le regole e i file.",
+    "download": "Scarica il kit",
+    "mark": {
+      "title": "Il segno",
+      "body": "Il saluto vulcaniano di Star Trek: apertura, rispetto e un tocco nerd. «Hey» è il saluto, «Atom» il metodo: progetti costruiti un pezzo alla volta.",
+      "small": "Il segno funziona da solo dove il logo completo non ci sta: favicon, avatar, angolo di un video."
+    },
+    "logo": {
+      "title": "Logo",
+      "body": "Segno più logotipo in Manrope ExtraBold. L'orizzontale è la versione di riferimento, il verticale serve nei formati quadrati.",
+      "h": "Orizzontale",
+      "v": "Verticale",
+      "space": "Area di rispetto",
+      "spaceBody": "X è metà dell'altezza delle maiuscole. Tra segno e scritta c'è X, attorno al logo almeno 2X.",
+      "min": "Dimensioni minime",
+      "minBody": "Logo da 96 px di larghezza, segno da 16 px."
+    },
+    "icon": {
+      "title": "Icona",
+      "body": "Per app, profili social e schermata home: mano bianca su quadrato arrotondato, gradiente principale o jade pieno. Angoli sempre tondi.",
+      "tab": "Scheda del browser"
+    },
+    "color": {
+      "title": "Colore",
+      "body": "Un solo colore pieno, il jade, usato come luce sul fondo antracite. Il resto della palette serve ai materiali, non al sito.",
+      "core": "Jade",
+      "neutral": "Neutri",
+      "extended": "Palette estesa",
+      "extendedNote": "Solo per materiali e grafiche, mai insieme al jade come secondo accento.",
+      "copy": "Copia",
+      "copied": "Copiato",
+      "gradient": "Gradiente principale",
+      "gradientBody": "45°, dal #00432B al 70% al #00A86B pieno dal 65%. È l'unico gradiente ammesso sul segno."
+    },
+    "type": {
+      "title": "Tipografia",
+      "body": "Manrope per tutto quello che si legge, JetBrains Mono per dati, date ed etichette tecniche.",
+      "display": "Titoli · ExtraBold 800",
+      "text": "Testo · 450",
+      "mono": "Dati · Mono 400",
+      "sample": "Code meets personality"
+    },
+    "shape": {
+      "title": "Forme e pattern",
+      "body": "Forme piene e tonde, niente spigoli vivi. Il pattern a esagoni sta solo dietro ai titoli, tra il 10 e il 20% di opacità."
+    },
+    "dont": {
+      "title": "Da non fare",
+      "stretch": "Deformare",
+      "rotate": "Ruotare",
+      "recolor": "Ricolorare",
+      "busy": "Fondo che non contrasta",
+      "effects": "Ombre ed effetti"
+    },
+    "files": {
+      "title": "File",
+      "body": "Vettoriali SVG, pronti per web e stampa.",
+      "mark": "Segno",
+      "logo": "Logo",
+      "icon": "Icona"
+    }
   }
 }

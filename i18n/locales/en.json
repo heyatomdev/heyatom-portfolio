@@ -193,5 +193,72 @@
       "title": "Something broke.",
       "text": "That’s on me, not you. Try again in a moment; if it keeps happening, write me and I’ll fix it."
     }
+  },
+  "brand": {
+    "seo": {
+      "description": "The HeyAtom brand: mark, logo, colours, type and downloadable files.",
+      "ogDescription": "Mark, logo, colours and a kit to download."
+    },
+    "intro": "How to use the HeyAtom mark: a hand saying hi, one green, two typefaces. Rules and files are below.",
+    "download": "Download the kit",
+    "mark": {
+      "title": "The mark",
+      "body": "The Vulcan salute from Star Trek: openness, respect and a nerdy touch. “Hey” is the greeting, “Atom” the method: projects built one piece at a time.",
+      "small": "The mark stands alone wherever the full logo won't fit: favicons, avatars, the corner of a video."
+    },
+    "logo": {
+      "title": "Logo",
+      "body": "Mark plus logotype in Manrope ExtraBold. The horizontal lockup is the default; the stacked one is for square formats.",
+      "h": "Horizontal",
+      "v": "Stacked",
+      "space": "Clear space",
+      "spaceBody": "X is half the cap height. X between mark and name, at least 2X around the logo.",
+      "min": "Minimum sizes",
+      "minBody": "Logo 96 px wide, mark 16 px."
+    },
+    "icon": {
+      "title": "Icon",
+      "body": "For apps, social profiles and home screens: white hand on a rounded square, main gradient or flat jade. Corners always round.",
+      "tab": "Browser tab"
+    },
+    "color": {
+      "title": "Colour",
+      "body": "One solid colour, jade, used as light on the charcoal ground. The rest of the palette is for printed and social material, not the site.",
+      "core": "Jade",
+      "neutral": "Neutrals",
+      "extended": "Extended palette",
+      "extendedNote": "Material and graphics only, never next to jade as a second accent.",
+      "copy": "Copy",
+      "copied": "Copied",
+      "gradient": "Main gradient",
+      "gradientBody": "45°, from #00432B at 70% to solid #00A86B from 65%. The only gradient allowed on the mark."
+    },
+    "type": {
+      "title": "Type",
+      "body": "Manrope for everything you read, JetBrains Mono for data, dates and technical labels.",
+      "display": "Headings · ExtraBold 800",
+      "text": "Text · 450",
+      "mono": "Data · Mono 400",
+      "sample": "Code meets personality"
+    },
+    "shape": {
+      "title": "Shapes and pattern",
+      "body": "Solid, rounded shapes, no sharp corners. The hex pattern only sits behind headings, at 10 to 20% opacity."
+    },
+    "dont": {
+      "title": "Don't",
+      "stretch": "Stretch",
+      "rotate": "Rotate",
+      "recolor": "Recolour",
+      "busy": "Low-contrast ground",
+      "effects": "Shadows and effects"
+    },
+    "files": {
+      "title": "Files",
+      "body": "SVG vectors, ready for web and print.",
+      "mark": "Mark",
+      "logo": "Logo",
+      "icon": "Icon"
+    }
   }
 }

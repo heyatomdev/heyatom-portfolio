@@ -35,6 +35,7 @@ const toggleTheme = () => { colorMode.preference = light.value ? 'dark' : 'light
         <li><a href="https://github.com/andreacw5" rel="me">GitHub</a></li>
         <li><a href="https://www.linkedin.com/in/atombolato" rel="me">LinkedIn</a></li>
         <li><NuxtLink :to="localePath('/uses')" lang="en">Uses</NuxtLink></li>
+        <li><NuxtLink :to="localePath('/brand')">Brand</NuxtLink></li>
         <li><a href="https://status.heyatom.dev/en">Status</a></li>
         <li><a href="mailto:hey@heyatom.dev">hey@heyatom.dev</a></li>
       </ul>
