@@ -117,7 +117,10 @@ useMotion(root, (mm, el) => {
       <div>
         <h1>Brand</h1>
         <p>{{ t('brand.intro') }}</p>
-        <a class="btn btn--primary" href="#file"><Icon name="download" />{{ t('brand.download') }}</a>
+        <div class="actions">
+          <a class="btn btn--primary" href="#file"><Icon name="download" />{{ t('brand.download') }}</a>
+          <a class="btn btn--ghost" href="/brand/heyatom-brand.pdf" download>{{ t('brand.pdf') }}</a>
+        </div>
       </div>
       <span class="bubble bubble--hero hero-mark" aria-hidden="true"><img src="/brand/heyatom-mark.svg" alt=""></span>
     </header>
@@ -414,6 +417,7 @@ useMotion(root, (mm, el) => {
   line-height: 0.9;
 }
 .head p { margin: 1.25rem 0 2rem; color: var(--ink-2); font-size: var(--text-md); max-width: 46ch; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 
 .sec { padding-top: var(--section); }
 h3 { font-size: var(--text-lg); margin-bottom: 0.35rem; }

@@ -24,6 +24,7 @@ i18n/locales/{it,en}.json # testi UI
 server/api/__sitemap__/   # URL /works/<slug> per la sitemap
 og/                       # sorgenti HTML delle og image + render.sh
 brand/render.py           # genera il kit SVG in public/brand/ (pagina /brand)
+brand/guide.html + pdf.sh  # guida di brand → public/brand/heyatom-brand.pdf
 cv/                       # cv.html + render.sh → public/assets/cv-tombolato.pdf
 scripts/shots.mjs         # screenshot siti cliente (Playwright)
 ```
@@ -51,6 +52,8 @@ scripts/shots.mjs         # screenshot siti cliente (Playwright)
 ## Quando cambi il marchio
 
 Il kit di `/brand` (`public/brand/*.svg`) è generato, non disegnato a mano: mano da `public/favicon.svg`, scritta "HeyAtom" in Manrope 800 da `cv/fonts/` convertita in tracciati. Dopo aver cambiato favicon o font: `uvx --with fonttools --with brotli python brand/render.py`.
+
+La guida in PDF (`public/brand/heyatom-brand.pdf`, linkata da `/brand`) ha come sorgente `brand/guide.html`, solo in italiano: quando cambiano marchio, token o regole di `/brand`, aggiornarla e lanciare `brand/pdf.sh` (dopo `render.py` se sono cambiati gli SVG).
 
 Edizioni speciali (Pride, Halloween, Natale): disegnate in `brand/render.py`, date in `app/data/editions.ts`. `useMark()` sceglie la mano del giorno lato server; header, footer, home e favicon la usano, quindi la mano non va mai scritta come `/favicon.svg` fisso nei componenti.
 
