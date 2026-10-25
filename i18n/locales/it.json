@@ -196,69 +196,185 @@
   },
   "brand": {
     "seo": {
-      "description": "Il brand di HeyAtom: segno, logo, colori, tipografia e file da scaricare.",
+      "description": "Il brand di HeyAtom: segno, logo, colori, tipografia, forme, movimento, voce e file da scaricare.",
       "ogDescription": "Segno, logo, colori e kit da scaricare."
     },
-    "intro": "Come si usa il segno di HeyAtom: una mano che saluta, un verde, due font. Qui trovi le regole e i file.",
+    "intro": "Una mano che saluta, un verde, due font. Qui ci sono le regole con cui è fatto questo sito e i file per usare il marchio altrove.",
     "download": "Scarica il kit",
     "mark": {
-      "title": "Il segno",
-      "body": "Il saluto vulcaniano di Star Trek: apertura, rispetto e un tocco nerd. «Hey» è il saluto, «Atom» il metodo: progetti costruiti un pezzo alla volta.",
-      "small": "Il segno funziona da solo dove il logo completo non ci sta: favicon, avatar, angolo di un video."
+      "title": "Il segno.",
+      "body": "Il saluto vulcaniano: un ciao, detto da nerd. La mano vive da sola o dentro il fumetto, un cerchio con un angolo al 10%.",
+      "alone": "Da solo",
+      "bubble": "Nel fumetto",
+      "small": "Il segno regge da solo dove il logo non ci sta: favicon, avatar, header sotto i 480 px."
     },
     "logo": {
-      "title": "Logo",
-      "body": "Segno più logotipo in Manrope ExtraBold. L'orizzontale è la versione di riferimento, il verticale serve nei formati quadrati.",
+      "title": "Il logo.",
+      "body": "Segno più HeyAtom in Manrope ExtraBold, in tracciati. L'orizzontale è quello di default, il verticale è per i formati quadrati.",
       "h": "Orizzontale",
       "v": "Verticale",
       "space": "Area di rispetto",
-      "spaceBody": "X è metà dell'altezza delle maiuscole. Tra segno e scritta c'è X, attorno al logo almeno 2X.",
+      "spaceBody": "X è metà dell'altezza delle maiuscole. Tra mano e scritta c'è X, attorno al logo almeno 2X.",
       "min": "Dimensioni minime",
-      "minBody": "Logo da 96 px di larghezza, segno da 16 px."
+      "minBody": "Logo da 96 px di larghezza, segno da 16 px. Sotto i 480 px di schermo l'header tiene solo la mano."
     },
     "icon": {
-      "title": "Icona",
-      "body": "Per app, profili social e schermata home: mano bianca su quadrato arrotondato, gradiente principale o jade pieno. Angoli sempre tondi.",
-      "tab": "Scheda del browser"
+      "title": "L'icona.",
+      "body": "La mano da sola, senza riquadri né fumetti, su qualsiasi fondo. Jade di default; sui fondi dove non regge, la variante chiara o scura dello stesso verde.",
+      "tab": "Scheda del browser",
+      "variants": {
+        "mark": "Jade · default",
+        "mark-green-light": "green-light · fondi scuri",
+        "mark-green-dark": "green-dark · fondi chiari",
+        "mark-white": "Bianca · su jade o foto",
+        "mark-black": "Nera · un colore"
+      }
     },
     "color": {
-      "title": "Colore",
-      "body": "Un solo colore pieno, il jade, usato come luce sul fondo antracite. Il resto della palette serve ai materiali, non al sito.",
-      "core": "Jade",
-      "neutral": "Neutri",
-      "extended": "Palette estesa",
-      "extendedNote": "Solo per materiali e grafiche, mai insieme al jade come secondo accento.",
+      "title": "Il colore.",
+      "body": "Un solo verde su neutri antracite. Il verde si comporta come luce: riempie poco e illumina il resto.",
+      "brand": "Verde",
+      "dark": "Tema scuro · default",
+      "light": "Tema chiaro",
       "copy": "Copia",
       "copied": "Copiato",
-      "gradient": "Gradiente principale",
-      "gradientBody": "45°, dal #00432B al 70% al #00A86B pieno dal 65%. È l'unico gradiente ammesso sul segno."
+      "roles": {
+        "green": "Bottone primario, piccoli segni",
+        "greenDark": "Stato premuto, scrollbar",
+        "greenLight": "Link, date, focus",
+        "bg": "Fondo pagina",
+        "surface": "Pannelli",
+        "surface2": "Chip, tag",
+        "ink": "Titoli",
+        "ink2": "Paragrafi",
+        "ink3": "Metadati",
+        "onGreen": "Testo su verde"
+      },
+      "rules": [
+        [
+          "Il verde come luce",
+          "Il verde pieno solo sul bottone primario e sui piccoli segni. Altrove è testo, hairline o alone. Mai fondo di sezione."
+        ],
+        [
+          "Hairline verdi",
+          "Ogni separazione è una linea da 1 px nel verde al 16%. Niente bordi grigi."
+        ],
+        [
+          "Neutri neutri",
+          "Fondo e testi grigi senza tinta: il verde resta l'unico colore."
+        ],
+        [
+          "Due temi",
+          "Segue il sistema, scuro di default. Sul chiaro il verde dei testi scende a #007A4D per il contrasto."
+        ]
+      ]
     },
     "type": {
-      "title": "Tipografia",
-      "body": "Manrope per tutto quello che si legge, JetBrains Mono per dati, date ed etichette tecniche.",
-      "display": "Titoli · ExtraBold 800",
-      "text": "Testo · 450",
-      "mono": "Dati · Mono 400",
-      "sample": "Code meets personality"
+      "title": "La tipografia.",
+      "body": "Manrope per tutto quello che si legge, JetBrains Mono solo per i dati.",
+      "scale": {
+        "display": "Display",
+        "headline": "Headline",
+        "title": "Title",
+        "lead": "Lead",
+        "body": "Body",
+        "label": "Label",
+        "mono": "Mono"
+      },
+      "sample": "Code meets personality",
+      "rules": [
+        [
+          "Titolo stretto",
+          "Titoli da 700 a 800 con tracking negativo, più grande più stretto. Mai leggeri."
+        ],
+        [
+          "Mono per i dati",
+          "Anni, stack, conteggi. Mai titoli, kicker o frasi, mai maiuscolo spaziato."
+        ]
+      ]
     },
     "shape": {
-      "title": "Forme e pattern",
-      "body": "Forme piene e tonde, niente spigoli vivi. Il pattern a esagoni sta solo dietro ai titoli, tra il 10 e il 20% di opacità."
+      "title": "Forme e profondità.",
+      "body": "Angoli stretti, ombre nere morbide, il verde solo come luce emessa.",
+      "r10": "10 px · cose che si cliccano, chip, immagini",
+      "r14": "14 px · pannelli",
+      "circle": "Cerchi · solo punti e bottoni icona",
+      "hex": "Esagoni · solo texture, dal 7 al 18%",
+      "shadow": "Ombra nera",
+      "shadowBody": "Spread negativo, solo su ciò che si solleva.",
+      "glow": "Alone verde",
+      "glowBody": "Solo CTA primario e punti luminosi.",
+      "glass": "Un solo vetro",
+      "glassBody": "Il blur esiste solo sull'header."
+    },
+    "ui": {
+      "title": "I componenti.",
+      "body": "Pochi pezzi, sempre gli stessi.",
+      "primary": "Scrivimi",
+      "ghost": "Vedi i lavori",
+      "link": "Tutti i lavori",
+      "meta": "2026 · Nuxt · NestJS"
+    },
+    "motion": {
+      "title": "Il movimento.",
+      "body": "Ricco ma mai sopra il contenuto. Con riduzione del movimento attiva il sito è statico.",
+      "items": [
+        [
+          "expo.out",
+          "Una curva per quasi tutto, cubic-bezier(0.16, 1, 0.3, 1)."
+        ],
+        [
+          "Via useMotion",
+          "Ogni animazione passa da gsap.matchMedia e si revoca all'unmount."
+        ],
+        [
+          "LCP fermo",
+          "Hero e testate si animano solo in posizione e blur, mai in opacità."
+        ]
+      ],
+      "try": "Passa sopra la mano"
+    },
+    "voice": {
+      "title": "La voce.",
+      "body": "Una persona, non un'azienda. Prima persona, tu al lettore, tono caldo e diretto.",
+      "yes": "Sì",
+      "no": "No",
+      "pairs": [
+        [
+          "Costruisco siti e web app su misura.",
+          "Realizziamo soluzioni digitali innovative."
+        ],
+        [
+          "Raccontami il progetto.",
+          "Contatta il nostro team."
+        ],
+        [
+          "Dal 2016, in ambito sanitario.",
+          "Anni di esperienza al servizio del cliente."
+        ]
+      ]
     },
     "dont": {
-      "title": "Da non fare",
+      "title": "Da non fare.",
       "stretch": "Deformare",
       "rotate": "Ruotare",
       "recolor": "Ricolorare",
+      "effects": "Ombre ed effetti",
       "busy": "Fondo che non contrasta",
-      "effects": "Ombre ed effetti"
+      "list": [
+        "Testo in gradiente",
+        "Kicker in mono maiuscolo sopra i titoli",
+        "Pill da 999 px o raggi diversi da 10/14 px",
+        "Vetro fuori dall'header",
+        "Nuove tinte o colori semantici",
+        "Griglie di card per elenchi omogenei: sono righe"
+      ]
     },
     "files": {
-      "title": "File",
+      "title": "I file.",
       "body": "Vettoriali SVG, pronti per web e stampa.",
       "mark": "Segno",
-      "logo": "Logo",
-      "icon": "Icona"
+      "logo": "Logo"
     }
   }
 }

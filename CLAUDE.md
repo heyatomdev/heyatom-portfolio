@@ -21,6 +21,7 @@ app/
 i18n/locales/{it,en}.json # testi UI
 server/api/__sitemap__/   # URL /works/<slug> per la sitemap
 og/                       # sorgenti HTML delle og image + render.sh
+brand/render.py           # genera il kit SVG in public/brand/ (pagina /brand)
 cv/                       # cv.html + render.sh → public/assets/cv-tombolato.pdf
 scripts/shots.mjs         # screenshot siti cliente (Playwright)
 ```
@@ -44,6 +45,10 @@ scripts/shots.mjs         # screenshot siti cliente (Playwright)
 2. Screenshot: `pnpm shots <slug>` (aggiungere il sito in `SITES` di `scripts/shots.mjs`) oppure upload su FileHarbor.
 3. OG: `og/render.sh work`; se cambia il numero di progetti aggiornare il testo in `og/works.html` e rigenerare `works`.
 4. Sitemap: automatica.
+
+## Quando cambi il marchio
+
+Il kit di `/brand` (`public/brand/*.svg`) è generato, non disegnato a mano: mano da `public/favicon.svg`, scritta "HeyAtom" in Manrope 800 da `cv/fonts/` convertita in tracciati. Dopo aver cambiato favicon o font: `uvx --with fonttools --with brotli python brand/render.py`.
 
 ## Quando aggiorni il CV
 

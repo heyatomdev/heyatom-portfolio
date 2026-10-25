@@ -196,69 +196,185 @@
   },
   "brand": {
     "seo": {
-      "description": "The HeyAtom brand: mark, logo, colours, type and downloadable files.",
+      "description": "The HeyAtom brand: mark, logo, colour, type, shapes, motion, voice and downloadable files.",
       "ogDescription": "Mark, logo, colours and a kit to download."
     },
-    "intro": "How to use the HeyAtom mark: a hand saying hi, one green, two typefaces. Rules and files are below.",
+    "intro": "A hand saying hi, one green, two typefaces. These are the rules this site is built with, plus the files to use the mark elsewhere.",
     "download": "Download the kit",
     "mark": {
-      "title": "The mark",
-      "body": "The Vulcan salute from Star Trek: openness, respect and a nerdy touch. “Hey” is the greeting, “Atom” the method: projects built one piece at a time.",
-      "small": "The mark stands alone wherever the full logo won't fit: favicons, avatars, the corner of a video."
+      "title": "The mark.",
+      "body": "The Vulcan salute: a hello, nerd style. The hand lives alone or inside the bubble, a circle with one corner at 10%.",
+      "alone": "Alone",
+      "bubble": "In the bubble",
+      "small": "The mark stands alone where the logo won't fit: favicons, avatars, the header below 480 px."
     },
     "logo": {
-      "title": "Logo",
-      "body": "Mark plus logotype in Manrope ExtraBold. The horizontal lockup is the default; the stacked one is for square formats.",
+      "title": "The logo.",
+      "body": "Mark plus HeyAtom in Manrope ExtraBold, outlined. Horizontal is the default, stacked is for square formats.",
       "h": "Horizontal",
       "v": "Stacked",
       "space": "Clear space",
-      "spaceBody": "X is half the cap height. X between mark and name, at least 2X around the logo.",
+      "spaceBody": "X is half the cap height. X between hand and name, at least 2X around the logo.",
       "min": "Minimum sizes",
-      "minBody": "Logo 96 px wide, mark 16 px."
+      "minBody": "Logo 96 px wide, mark 16 px. Below 480 px screens the header keeps only the hand."
     },
     "icon": {
-      "title": "Icon",
-      "body": "For apps, social profiles and home screens: white hand on a rounded square, main gradient or flat jade. Corners always round.",
-      "tab": "Browser tab"
+      "title": "The icon.",
+      "body": "The hand alone, no frame and no bubble, on any ground. Jade by default; where it doesn't hold up, the light or dark step of the same green.",
+      "tab": "Browser tab",
+      "variants": {
+        "mark": "Jade · default",
+        "mark-green-light": "green-light · dark grounds",
+        "mark-green-dark": "green-dark · light grounds",
+        "mark-white": "White · on jade or photos",
+        "mark-black": "Black · one colour"
+      }
     },
     "color": {
-      "title": "Colour",
-      "body": "One solid colour, jade, used as light on the charcoal ground. The rest of the palette is for printed and social material, not the site.",
-      "core": "Jade",
-      "neutral": "Neutrals",
-      "extended": "Extended palette",
-      "extendedNote": "Material and graphics only, never next to jade as a second accent.",
+      "title": "The colour.",
+      "body": "One green on charcoal neutrals. Green behaves like light: it fills little and lights up the rest.",
+      "brand": "Green",
+      "dark": "Dark theme · default",
+      "light": "Light theme",
       "copy": "Copy",
       "copied": "Copied",
-      "gradient": "Main gradient",
-      "gradientBody": "45°, from #00432B at 70% to solid #00A86B from 65%. The only gradient allowed on the mark."
+      "roles": {
+        "green": "Primary button, small marks",
+        "greenDark": "Pressed state, scrollbar",
+        "greenLight": "Links, dates, focus",
+        "bg": "Page ground",
+        "surface": "Panels",
+        "surface2": "Chips, tags",
+        "ink": "Headings",
+        "ink2": "Paragraphs",
+        "ink3": "Metadata",
+        "onGreen": "Text on green"
+      },
+      "rules": [
+        [
+          "Green as light",
+          "Solid green only on the primary button and small marks. Elsewhere it's text, hairline or glow. Never a section background."
+        ],
+        [
+          "Green hairlines",
+          "Every divider is a 1 px line in green at 16%. No grey borders."
+        ],
+        [
+          "Neutral neutrals",
+          "Ground and text are untinted greys: green stays the only colour."
+        ],
+        [
+          "Two themes",
+          "Follows the system, dark by default. On light, text green drops to #007A4D for contrast."
+        ]
+      ]
     },
     "type": {
-      "title": "Type",
-      "body": "Manrope for everything you read, JetBrains Mono for data, dates and technical labels.",
-      "display": "Headings · ExtraBold 800",
-      "text": "Text · 450",
-      "mono": "Data · Mono 400",
-      "sample": "Code meets personality"
+      "title": "The type.",
+      "body": "Manrope for everything you read, JetBrains Mono for data only.",
+      "scale": {
+        "display": "Display",
+        "headline": "Headline",
+        "title": "Title",
+        "lead": "Lead",
+        "body": "Body",
+        "label": "Label",
+        "mono": "Mono"
+      },
+      "sample": "Code meets personality",
+      "rules": [
+        [
+          "Tight headings",
+          "Headings from 700 to 800 with negative tracking, tighter as they grow. Never light."
+        ],
+        [
+          "Mono for data",
+          "Years, stacks, counts. Never headings, kickers or sentences, never spaced caps."
+        ]
+      ]
     },
     "shape": {
-      "title": "Shapes and pattern",
-      "body": "Solid, rounded shapes, no sharp corners. The hex pattern only sits behind headings, at 10 to 20% opacity."
+      "title": "Shapes and depth.",
+      "body": "Tight corners, soft black shadows, green only as emitted light.",
+      "r10": "10 px · clickable things, chips, images",
+      "r14": "14 px · panels",
+      "circle": "Circles · dots and icon buttons only",
+      "hex": "Hexagons · texture only, 7 to 18%",
+      "shadow": "Black shadow",
+      "shadowBody": "Negative spread, only on what actually lifts.",
+      "glow": "Green glow",
+      "glowBody": "Primary CTA and glowing dots only.",
+      "glass": "One glass",
+      "glassBody": "Blur exists only on the header."
+    },
+    "ui": {
+      "title": "The components.",
+      "body": "Few pieces, always the same.",
+      "primary": "Write me",
+      "ghost": "See the work",
+      "link": "All work",
+      "meta": "2026 · Nuxt · NestJS"
+    },
+    "motion": {
+      "title": "The motion.",
+      "body": "Rich but never above the content. With reduced motion on, the site is static.",
+      "items": [
+        [
+          "expo.out",
+          "One curve for almost everything, cubic-bezier(0.16, 1, 0.3, 1)."
+        ],
+        [
+          "Through useMotion",
+          "Every animation goes through gsap.matchMedia and is reverted on unmount."
+        ],
+        [
+          "Still LCP",
+          "Hero and page heads animate only position and blur, never opacity."
+        ]
+      ],
+      "try": "Hover the hand"
+    },
+    "voice": {
+      "title": "The voice.",
+      "body": "A person, not a company. First person, “you” to the reader, warm and direct.",
+      "yes": "Yes",
+      "no": "No",
+      "pairs": [
+        [
+          "I build custom websites and web apps.",
+          "We deliver innovative digital solutions."
+        ],
+        [
+          "Tell me about the project.",
+          "Contact our team."
+        ],
+        [
+          "Since 2016, in healthcare.",
+          "Years of experience serving our clients."
+        ]
+      ]
     },
     "dont": {
-      "title": "Don't",
+      "title": "Don't.",
       "stretch": "Stretch",
       "rotate": "Rotate",
       "recolor": "Recolour",
+      "effects": "Shadows and effects",
       "busy": "Low-contrast ground",
-      "effects": "Shadows and effects"
+      "list": [
+        "Gradient text",
+        "Mono uppercase kickers above headings",
+        "999 px pills or radii other than 10/14 px",
+        "Glass outside the header",
+        "New tints or semantic colours",
+        "Card grids for uniform lists: they're rows"
+      ]
     },
     "files": {
-      "title": "Files",
+      "title": "The files.",
       "body": "SVG vectors, ready for web and print.",
       "mark": "Mark",
-      "logo": "Logo",
-      "icon": "Icon"
+      "logo": "Logo"
     }
   }
 }
