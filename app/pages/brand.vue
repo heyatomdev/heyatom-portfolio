@@ -80,9 +80,13 @@ const iconVariants = [
 
 const donts = ['stretch', 'rotate', 'recolor', 'effects', 'busy'] as const
 
+// Each file previewed on the ground it is meant for, same grounds as the icon set.
+const logoGrounds = { dark: '#1e201e', light: '#f3f5f3', black: '#f3f5f3', white: '#00a86b' }
+const logos = (prefix: string) => Object.entries(logoGrounds).map(([k, ground]) => ({ file: `${prefix}-${k}`, ground, label: t(`brand.files.variants.${k}`) }))
 const files = computed(() => [
-  { label: t('brand.files.icon'), items: iconVariants.map(v => v.file) },
-  { label: t('brand.files.logo'), items: ['logo-dark', 'logo-light', 'logo-black', 'logo-white', 'logo-stacked-dark', 'logo-stacked-light', 'logo-stacked-black', 'logo-stacked-white'] },
+  { key: 'icon', label: t('brand.files.icon'), items: iconVariants.map(v => ({ ...v, label: t(`brand.icon.variants.${v.file}`) })) },
+  { key: 'h', label: t('brand.files.logoH'), items: logos('logo') },
+  { key: 'v', label: t('brand.files.logoV'), items: logos('logo-stacked') },
 ])
 
 const root = ref<HTMLElement>()
@@ -347,19 +351,19 @@ useMotion(root, (mm, el) => {
         <h2>{{ t('brand.files.title') }}</h2>
         <p>{{ t('brand.files.body') }}</p>
       </div>
-      <div class="files">
-        <div v-for="g in files" :key="g.label" class="reveal">
-          <h3 class="mono">{{ g.label }}</h3>
-          <ul>
-            <li v-for="f in g.items" :key="f">
-              <a :href="`/brand/heyatom-${f}.svg`" download>
-                <span class="thumb" :class="{ 'thumb--light': /logo.*light|black|green-dark/.test(f) }"><img :src="`/brand/heyatom-${f}.svg`" alt=""></span>
-                <span class="mono">heyatom-{{ f }}.svg</span>
-                <Icon name="download" :size="16" class="dl" />
-              </a>
-            </li>
-          </ul>
-        </div>
+      <div v-for="g in files" :key="g.key" class="files" :class="`files--${g.key}`">
+        <h3 class="mono">{{ g.label }}</h3>
+        <ul>
+          <li v-for="f in g.items" :key="f.file" class="reveal">
+            <a :href="`/brand/heyatom-${f.file}.svg`" download class="file" :title="`heyatom-${f.file}.svg`">
+              <span class="preview" :style="{ background: f.ground }"><img :src="`/brand/heyatom-${f.file}.svg`" alt=""></span>
+              <span class="file-meta">
+                <span class="file-name">{{ f.label }}</span>
+                <span class="file-dl mono"><Icon name="download" :size="14" />SVG</span>
+              </span>
+            </a>
+          </li>
+        </ul>
       </div>
     </section>
   </div>
@@ -699,50 +703,57 @@ h3 { font-size: var(--text-lg); margin-bottom: 0.35rem; }
   font-size: var(--text-label);
 }
 
-.files { display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem 2rem; }
-.files h3 { font-size: var(--text-xs); font-weight: 400; color: var(--ink-3); margin-bottom: 0.6rem; }
-.files ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
-.files a {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.45rem;
-  border-radius: var(--r-sm);
-  color: var(--ink-2);
-  text-decoration: none;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-.files a:hover { background: rgb(var(--green-rgb) / 0.08); color: var(--ink); }
-.files .mono { font-size: var(--text-xs); overflow-wrap: anywhere; }
-.thumb {
+.files + .files { margin-top: 2.25rem; }
+.files h3 { font-size: var(--text-xs); font-weight: 400; color: var(--ink-3); margin-bottom: 0.75rem; }
+.files ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.files--icon ul { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.file {
   display: grid;
-  place-items: center;
-  flex: none;
-  width: 3.25rem;
-  height: 2.25rem;
-  padding: 0.3rem;
-  border-radius: 6px;
+  height: 100%;
+  border-radius: var(--r-lg);
+  background: var(--surface);
   border: 1px solid var(--hair);
-  background: #1e201e;
+  overflow: hidden;
+  color: var(--ink);
+  text-decoration: none;
+  transition: translate 0.35s var(--ease-out), border-color 0.2s ease;
 }
-.thumb--light { background: #f3f5f3; }
-.thumb img { max-width: 100%; max-height: 1.65rem; } /* box height minus padding: % heights do not resolve in a grid cell */
-.dl { margin-left: auto; flex: none; opacity: 0.5; }
-.files a:hover .dl { opacity: 1; }
+.file:hover, .file:focus-visible { translate: 0 -4px; border-color: var(--green); color: var(--ink); }
+.preview { display: grid; place-items: center; aspect-ratio: 4 / 3; padding: 1.25rem; }
+.preview img { width: 80%; max-height: 3.5rem; object-fit: contain; }
+.files--v .preview img { max-height: 5.5rem; }
+.files--icon .preview img { max-height: 3.25rem; }
+.file-meta { display: flex; align-items: center; gap: 0.75rem; padding: 0.8rem 0.9rem; border-top: 1px solid var(--hair); }
+.file-name { min-width: 0; font-size: var(--text-sm); font-weight: 600; line-height: 1.3; }
+.file-dl {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex: none;
+  margin-left: auto;
+  padding: 0.3rem 0.55rem;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--hair-strong);
+  font-size: var(--text-xs);
+  color: var(--green-light);
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.file:hover .file-dl, .file:focus-visible .file-dl { background: var(--green); border-color: var(--green); color: var(--on-green); }
 
 @media (max-width: 900px) {
-  .head, .grid-2, .grid-3, .files, .motion, .rules-list, .dont-list, .depth { grid-template-columns: minmax(0, 1fr); }
+  .head, .grid-2, .grid-3, .motion, .rules-list, .dont-list, .depth { grid-template-columns: minmax(0, 1fr); }
   .bubble--hero { width: 160px; justify-self: start; }
   .brand-sw { grid-template-columns: minmax(0, 1fr); }
   .sw { min-height: 6rem; }
   .shapes, .donts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .icon-set { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .files ul, .files--icon ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .scale li, .voice li { grid-template-columns: minmax(0, 1fr); }
   .tab { margin-left: 0; }
   .theme button { grid-template-columns: 1.5rem minmax(0, 1fr) auto; }
   .theme .role { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .wave img, .sw { transition: none; }
+  .wave img, .sw, .file, .file-dl { transition: none; }
 }
 </style>

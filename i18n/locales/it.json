@@ -373,8 +373,15 @@
     "files": {
       "title": "I file.",
       "body": "Vettoriali SVG, pronti per web e stampa.",
-      "logo": "Logo",
-      "icon": "Icona"
+      "icon": "Icona",
+      "logoH": "Logo orizzontale",
+      "logoV": "Logo verticale",
+      "variants": {
+        "dark": "Su fondi scuri",
+        "light": "Su fondi chiari",
+        "black": "Nero · un colore",
+        "white": "Bianco · su jade o foto"
+      }
     }
   }
 }

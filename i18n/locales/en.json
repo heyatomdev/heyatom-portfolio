@@ -373,8 +373,15 @@
     "files": {
       "title": "The files.",
       "body": "SVG vectors, ready for web and print.",
-      "logo": "Logo",
-      "icon": "Icon"
+      "icon": "Icon",
+      "logoH": "Horizontal logo",
+      "logoV": "Stacked logo",
+      "variants": {
+        "dark": "On dark grounds",
+        "light": "On light grounds",
+        "black": "Black · one colour",
+        "white": "White · on jade or photos"
+      }
     }
   }
 }
