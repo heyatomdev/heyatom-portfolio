@@ -12,10 +12,11 @@ useSeoMeta({
 })
 
 // Same values as main.css: the swatches show the tokens on their own grounds, whatever theme the visitor is on.
+// ink: dark text holds on the two lighter greens, green-dark needs the light one (4.7:1).
 const brand = [
-  { name: 'green', hex: '#00A86B', role: 'green' },
-  { name: 'green-dark', hex: '#007A4D', role: 'greenDark' },
-  { name: 'green-light', hex: '#33BF89', role: 'greenLight' },
+  { name: 'green', hex: '#00A86B', role: 'green', ink: '#04140d' },
+  { name: 'green-dark', hex: '#007A4D', role: 'greenDark', ink: '#eef1ef' },
+  { name: 'green-light', hex: '#33BF89', role: 'greenLight', ink: '#04140d' },
 ]
 const themes = [
   {
@@ -48,8 +49,8 @@ const themes = [
 
 // Type scale from DESIGN.md; the sample renders with the spec it names.
 const scale = [
-  { key: 'display', spec: '800 · clamp(2.7–5rem) · -0.04em', style: 'font-size: clamp(2.2rem, 5.8vw, 5rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.02' },
-  { key: 'headline', spec: '700 · clamp(2–3.25rem) · -0.03em', style: 'font-size: clamp(1.8rem, 4.2vw, 3.25rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.08' },
+  { key: 'display', spec: '800 · clamp(2.7–5rem) · -0.04em', style: 'font-size: clamp(2.7rem, 5.8vw, 5rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.02' },
+  { key: 'headline', spec: '700 · clamp(2–3.25rem) · -0.03em', style: 'font-size: clamp(2rem, 4.2vw, 3.25rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.08' },
   { key: 'title', spec: '700 · clamp(1.25–1.9rem) · -0.03em', style: 'font-size: clamp(1.25rem, 2.3vw, 1.9rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15' },
   { key: 'lead', spec: '450 · clamp(1.06–1.2rem) · 1.6', style: 'font-size: clamp(1.06rem, 1.4vw, 1.2rem); font-weight: 450; line-height: 1.6' },
   { key: 'body', spec: '450 · 1rem · 1.6', style: 'font-size: 1rem; font-weight: 450; line-height: 1.6' },
@@ -60,15 +61,21 @@ const scale = [
 // vue-i18n hands arrays back as compiled messages: rt() turns each one into text.
 const list = (key: string) => (tm(key) as unknown[]).map(i => Array.isArray(i) ? i.map(x => rt(x)) : rt(i as never))
 
-const copied = ref('')
+// Keyed by swatch, not by hex: the same hex shows up in more than one place.
+const copied = ref<{ id: string, hex: string, ok: boolean }>()
 let copiedTimer: ReturnType<typeof setTimeout> | undefined
-function copy(hex: string) {
-  navigator.clipboard?.writeText(hex).then(() => {
-    copied.value = hex
+function copy(id: string, hex: string) {
+  const done = (ok: boolean) => {
+    copied.value = { id, hex, ok }
     clearTimeout(copiedTimer)
-    copiedTimer = setTimeout(() => { copied.value = '' }, 1600)
-  }).catch(() => {})
+    copiedTimer = setTimeout(() => { copied.value = undefined }, 1600)
+  }
+  // No clipboard outside a secure context: say so instead of failing silently.
+  if (!navigator.clipboard) return done(false)
+  navigator.clipboard.writeText(hex).then(() => done(true), () => done(false))
 }
+const hexLabel = (id: string, hex: string) =>
+  copied.value?.id === id ? t(copied.value.ok ? 'brand.color.copied' : 'brand.color.copyFailed') : hex
 
 // The icon is the hand alone; each colour shown on the ground it is meant for.
 const iconVariants = [
@@ -79,8 +86,17 @@ const iconVariants = [
   { file: 'mark-black', ground: '#f3f5f3' },
 ]
 
-// The edition running today, if any, gets a "live" badge.
+// The hand of the day: hero and tab demo wear the running edition, which also gets a "live" badge.
 const mark = useMark()
+const waved = ref(false)
+
+// Page index in three layers: what you use, how you use it, how the site is built.
+const toc = [
+  { key: 'brand', items: [['segno', 'mark'], ['logo', 'logo'], ['icona', 'icon'], ['edizioni', 'editions'], ['file', 'files']] },
+  { key: 'rules', items: [['colore', 'color'], ['tipografia', 'type'], ['voce', 'voice'], ['no', 'dont']] },
+  { key: 'hood', items: [['forme', 'shape'], ['componenti', 'ui'], ['movimento', 'motion']] },
+]
+const tocLabel = (k: string) => t(`brand.${k}.title`).replace(/\.$/, '')
 
 const donts = ['stretch', 'rotate', 'recolor', 'effects', 'busy'] as const
 
@@ -102,7 +118,7 @@ useMotion(root, (mm, el) => {
     gsap.from(q('.head h1, .head p'), { y: 24, filter: 'blur(10px)', duration: 1.1, ease: 'expo.out', stagger: 0.12 })
     gsap.from(q('.hero-mark'), { scale: 0.6, rotation: -30, duration: 1.2, ease: 'back.out(1.7)', delay: 0.2 })
     for (const s of q('.sec')) {
-      gsap.from(gsap.utils.selector(s)('.sec-head, .reveal'), {
+      gsap.from(gsap.utils.selector(s)('.sec-head, .hood-title, .reveal'), {
         y: 34, opacity: 0, duration: 0.9, ease: 'expo.out', stagger: 0.07,
         scrollTrigger: { trigger: s, start: 'top 80%' },
       })
@@ -118,12 +134,21 @@ useMotion(root, (mm, el) => {
         <h1>Brand</h1>
         <p>{{ t('brand.intro') }}</p>
         <div class="actions">
-          <a class="btn btn--primary" href="#file"><Icon name="download" />{{ t('brand.download') }}</a>
+          <a class="btn btn--primary" href="/brand/heyatom-brand-kit.zip" download><Icon name="download" />{{ t('brand.download') }}</a>
           <a class="btn btn--ghost" href="/brand/heyatom-brand.pdf" download>{{ t('brand.pdf') }}</a>
         </div>
       </div>
-      <span class="bubble bubble--hero hero-mark" aria-hidden="true"><img src="/brand/heyatom-mark.svg" alt=""></span>
+      <span class="bubble bubble--hero hero-mark" aria-hidden="true"><img :src="mark" alt=""></span>
     </header>
+
+    <nav class="toc" :aria-label="t('brand.toc.label')">
+      <div v-for="g in toc" :key="g.key">
+        <span class="toc-group">{{ t(`brand.toc.${g.key}`) }}</span>
+        <ul>
+          <li v-for="[id, k] in g.items" :key="id"><a :href="`#${id}`">{{ tocLabel(k) }}</a></li>
+        </ul>
+      </div>
+    </nav>
 
     <section id="segno" class="sec">
       <div class="sec-head">
@@ -196,19 +221,16 @@ useMotion(root, (mm, el) => {
       </div>
       <ul class="icon-set">
         <li v-for="v in iconVariants" :key="v.file" class="reveal">
-          <a :href="`/brand/heyatom-${v.file}.svg`" download>
-            <span class="ground" :style="{ background: v.ground }">
-              <img :src="`/brand/heyatom-${v.file}.svg`" alt="" width="96" height="96">
-              <Icon name="download" :size="16" class="dl" />
-            </span>
-            <span class="mono">{{ t(`brand.icon.variants.${v.file}`) }}</span>
-          </a>
+          <span class="ground" :style="{ background: v.ground }">
+            <img :src="`/brand/heyatom-${v.file}.svg`" :alt="t(`brand.icon.variants.${v.file}`)" width="96" height="96">
+          </span>
+          <span class="mono">{{ t(`brand.icon.variants.${v.file}`) }}</span>
         </li>
       </ul>
       <div class="icons reveal">
         <img v-for="s in [64, 40, 24, 16]" :key="s" src="/brand/heyatom-mark.svg" alt="" :width="s" :height="s">
         <div class="tab">
-          <span class="tab-pill"><img src="/favicon.svg" alt="" width="16" height="16">HeyAtom</span>
+          <span class="tab-pill"><img :src="mark" alt="" width="16" height="16">HeyAtom</span>
           <span class="mono">{{ t('brand.icon.tab') }}</span>
         </div>
       </div>
@@ -221,19 +243,40 @@ useMotion(root, (mm, el) => {
       </div>
       <ul class="editions">
         <li v-for="e in editions" :key="e.id" class="reveal">
-          <a :href="editionSrc(e.id)" download class="edition">
-            <span class="ground ground--ed">
-              <img :src="editionSrc(e.id)" alt="" width="120" height="120">
-              <span v-if="mark === editionSrc(e.id)" class="live mono"><span class="dot" />{{ t('brand.editions.live') }}</span>
-              <Icon name="download" :size="16" class="dl" />
-            </span>
-            <span class="ed-meta">
-              <strong>{{ t(`brand.editions.${e.id}.name`) }}</strong>
-              <span class="mono">{{ t(`brand.editions.${e.id}.when`) }}</span>
-            </span>
-          </a>
+          <span class="ground ground--ed">
+            <img :src="editionSrc(e.id)" :alt="t(`brand.editions.${e.id}.name`)" width="120" height="120">
+            <span v-if="mark === editionSrc(e.id)" class="live mono"><span class="dot" />{{ t('brand.editions.live') }}</span>
+          </span>
+          <span class="ed-meta">
+            <strong>{{ t(`brand.editions.${e.id}.name`) }}</strong>
+            <span class="mono">{{ t(`brand.editions.${e.id}.when`) }}</span>
+          </span>
         </li>
       </ul>
+    </section>
+
+    <section id="file" class="sec">
+      <div class="sec-head">
+        <h2>{{ t('brand.files.title') }}</h2>
+        <p>{{ t('brand.files.body') }}</p>
+      </div>
+      <div class="files-grid">
+        <div v-for="g in files" :key="g.key" class="files reveal">
+          <h3>{{ g.label }}</h3>
+          <ul>
+            <li v-for="f in g.items" :key="f.file">
+              <a :href="`/brand/heyatom-${f.file}.svg`" download class="file">
+                <span class="preview" :class="`preview--${g.key}`" :style="{ background: f.ground }"><img :src="`/brand/heyatom-${f.file}.svg`" alt=""></span>
+                <span class="file-meta">
+                  <span class="file-name">{{ f.label }}</span>
+                  <span class="mono">heyatom-{{ f.file }}.svg</span>
+                </span>
+                <span class="file-dl mono"><Icon name="download" :size="14" />SVG</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <section id="colore" class="sec">
@@ -243,24 +286,24 @@ useMotion(root, (mm, el) => {
       </div>
       <div class="brand-sw reveal">
         <button
-          v-for="c in brand" :key="c.hex" type="button" class="sw" :style="{ background: c.hex }"
-          :aria-label="`${t('brand.color.copy')} ${c.name} ${c.hex}`" @click="copy(c.hex)"
+          v-for="c in brand" :key="c.hex" type="button" class="sw" :style="{ background: c.hex, color: c.ink }"
+          :aria-label="`${t('brand.color.copy')} ${c.name} ${c.hex}`" @click="copy(`brand-${c.name}`, c.hex)"
         >
           <span class="sw-name">{{ c.name }}</span>
-          <span class="mono">{{ copied === c.hex ? t('brand.color.copied') : c.hex }}</span>
+          <span class="mono">{{ hexLabel(`brand-${c.name}`, c.hex) }}</span>
           <span class="sw-role">{{ t(`brand.color.roles.${c.role}`) }}</span>
         </button>
       </div>
       <div class="grid-2">
         <div v-for="th in themes" :key="th.key" class="theme reveal" :style="{ background: th.bg, color: th.ink, '--th-hair': th.hair }">
-          <h3 class="mono">{{ t(`brand.color.${th.key}`) }}</h3>
+          <h3>{{ t(`brand.color.${th.key}`) }}</h3>
           <ul>
             <li v-for="c in th.tokens" :key="c.name">
-              <button type="button" :aria-label="`${t('brand.color.copy')} ${c.name} ${c.hex}`" @click="copy(c.hex)">
+              <button type="button" :aria-label="`${t('brand.color.copy')} ${c.name} ${c.hex}`" @click="copy(`${th.key}-${c.name}`, c.hex)">
                 <span class="dot" :style="{ background: c.hex }" />
                 <span class="tk">{{ c.name }}</span>
                 <span class="role">{{ t(`brand.color.roles.${c.role}`) }}</span>
-                <span class="mono">{{ copied === c.hex ? t('brand.color.copied') : c.hex }}</span>
+                <span class="mono">{{ hexLabel(`${th.key}-${c.name}`, c.hex) }}</span>
               </button>
             </li>
           </ul>
@@ -269,7 +312,7 @@ useMotion(root, (mm, el) => {
       <ul class="rules-list">
         <li v-for="[h, b] in list('brand.color.rules')" :key="h" class="reveal"><strong>{{ h }}</strong><span>{{ b }}</span></li>
       </ul>
-      <p class="sr-only" role="status">{{ copied ? `${t('brand.color.copied')} ${copied}` : '' }}</p>
+      <p class="sr-only" role="status">{{ copied ? (copied.ok ? `${t('brand.color.copied')} ${copied.hex}` : t('brand.color.copyFailed')) : '' }}</p>
     </section>
 
     <section id="tipografia" class="sec">
@@ -286,66 +329,6 @@ useMotion(root, (mm, el) => {
       <ul class="rules-list">
         <li v-for="[h, b] in list('brand.type.rules')" :key="h" class="reveal"><strong>{{ h }}</strong><span>{{ b }}</span></li>
       </ul>
-    </section>
-
-    <section id="forme" class="sec">
-      <div class="sec-head">
-        <h2>{{ t('brand.shape.title') }}</h2>
-        <p>{{ t('brand.shape.body') }}</p>
-      </div>
-      <div class="shapes">
-        <div class="panel reveal shape-cell"><span class="shape shape--r10" /><span class="mono">{{ t('brand.shape.r10') }}</span></div>
-        <div class="panel reveal shape-cell"><span class="shape shape--r14" /><span class="mono">{{ t('brand.shape.r14') }}</span></div>
-        <div class="panel reveal shape-cell"><span class="shape-dots"><span /><span /><span /></span><span class="mono">{{ t('brand.shape.circle') }}</span></div>
-        <div class="panel reveal shape-cell hexed hex-cell"><span class="shape shape--hex" /><span class="mono">{{ t('brand.shape.hex') }}</span></div>
-      </div>
-      <div class="depth">
-        <div class="depth-cell reveal">
-          <span class="lift" />
-          <h3>{{ t('brand.shape.shadow') }}</h3>
-          <p>{{ t('brand.shape.shadowBody') }}</p>
-        </div>
-        <div class="depth-cell reveal">
-          <span class="btn btn--primary" aria-hidden="true">{{ t('brand.ui.primary') }}</span>
-          <h3>{{ t('brand.shape.glow') }}</h3>
-          <p>{{ t('brand.shape.glowBody') }}</p>
-        </div>
-        <div class="depth-cell reveal">
-          <span class="glass" aria-hidden="true"><img src="/favicon.svg" alt="" width="22" height="22">HeyAtom</span>
-          <h3>{{ t('brand.shape.glass') }}</h3>
-          <p>{{ t('brand.shape.glassBody') }}</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="componenti" class="sec">
-      <div class="sec-head">
-        <h2>{{ t('brand.ui.title') }}</h2>
-        <p>{{ t('brand.ui.body') }}</p>
-      </div>
-      <div class="panel ui reveal">
-        <a class="btn btn--primary" href="mailto:hey@heyatom.dev"><Icon name="mail" />{{ t('brand.ui.primary') }}</a>
-        <NuxtLink class="btn btn--ghost" :to="$localePath('/works')">{{ t('brand.ui.ghost') }}</NuxtLink>
-        <NuxtLink class="arrow" :to="$localePath('/works')">{{ t('brand.ui.link') }}<Icon name="arrow-right" :size="16" /></NuxtLink>
-        <span class="chips"><span class="chip mono">Nuxt</span><span class="chip mono">NestJS</span><span class="chip mono">Prisma</span></span>
-        <span class="mono meta">{{ t('brand.ui.meta') }}</span>
-      </div>
-    </section>
-
-    <section id="movimento" class="sec">
-      <div class="sec-head">
-        <h2>{{ t('brand.motion.title') }}</h2>
-        <p>{{ t('brand.motion.body') }}</p>
-      </div>
-      <div class="motion">
-        <ul class="rules-list rules-list--1">
-          <li v-for="[h, b] in list('brand.motion.items')" :key="h" class="reveal"><strong class="mono">{{ h }}</strong><span>{{ b }}</span></li>
-        </ul>
-        <div class="panel wave reveal">
-          <span class="bubble bubble--sm"><img src="/brand/heyatom-mark.svg" alt=""></span>
-          <span class="mono">{{ t('brand.motion.try') }}</span>
-        </div>
-      </div>
     </section>
 
     <section id="voce" class="sec">
@@ -368,32 +351,76 @@ useMotion(root, (mm, el) => {
       <ul class="donts">
         <li v-for="d in donts" :key="d" class="reveal">
           <div class="dont" :class="`dont--${d}`"><img src="/brand/heyatom-mark.svg" alt=""></div>
-          <span><Icon name="plus" :size="16" class="x-icon" />{{ t(`brand.dont.${d}`) }}</span>
+          <span><Icon name="plus" :size="16" class="x-icon" /><s>{{ t(`brand.dont.${d}`) }}</s></span>
         </li>
       </ul>
       <ul class="dont-list">
-        <li v-for="d in list('brand.dont.list')" :key="String(d)" class="reveal"><Icon name="plus" :size="16" class="x-icon" />{{ d }}</li>
+        <li v-for="d in list('brand.dont.list')" :key="String(d)" class="reveal"><Icon name="plus" :size="16" class="x-icon" /><s>{{ d }}</s></li>
       </ul>
     </section>
 
-    <section id="file" class="sec">
+    <section id="cofano" class="sec hood">
       <div class="sec-head">
-        <h2>{{ t('brand.files.title') }}</h2>
-        <p>{{ t('brand.files.body') }}</p>
+        <h2>{{ t('brand.hood.title') }}</h2>
+        <p>{{ t('brand.hood.body') }}</p>
       </div>
-      <div v-for="g in files" :key="g.key" class="files" :class="`files--${g.key}`">
-        <h3 class="mono">{{ g.label }}</h3>
-        <ul>
-          <li v-for="f in g.items" :key="f.file" class="reveal">
-            <a :href="`/brand/heyatom-${f.file}.svg`" download class="file" :title="`heyatom-${f.file}.svg`">
-              <span class="preview" :style="{ background: f.ground }"><img :src="`/brand/heyatom-${f.file}.svg`" alt=""></span>
-              <span class="file-meta">
-                <span class="file-name">{{ f.label }}</span>
-                <span class="file-dl mono"><Icon name="download" :size="14" />SVG</span>
-              </span>
-            </a>
-          </li>
+    </section>
+
+    <section id="forme" class="sec sec--hood">
+      <h3 class="hood-title">{{ t('brand.shape.title') }} <span>{{ t('brand.shape.body') }}</span></h3>
+      <div class="shapes">
+        <div class="panel reveal shape-cell"><span class="shape shape--r10" /><span class="mono">{{ t('brand.shape.r10') }}</span></div>
+        <div class="panel reveal shape-cell"><span class="shape shape--r14" /><span class="mono">{{ t('brand.shape.r14') }}</span></div>
+        <div class="panel reveal shape-cell"><span class="shape-dots"><span /><span /><span /></span><span class="mono">{{ t('brand.shape.circle') }}</span></div>
+        <div class="panel reveal shape-cell hexed hex-cell"><span class="shape shape--hex" /><span class="mono">{{ t('brand.shape.hex') }}</span></div>
+      </div>
+      <div class="depth">
+        <div class="depth-cell reveal">
+          <span class="lift" />
+          <h4>{{ t('brand.shape.shadow') }}</h4>
+          <p>{{ t('brand.shape.shadowBody') }}</p>
+        </div>
+        <div class="depth-cell reveal">
+          <span class="btn btn--primary" aria-hidden="true">{{ t('brand.ui.primary') }}</span>
+          <h4>{{ t('brand.shape.glow') }}</h4>
+          <p>{{ t('brand.shape.glowBody') }}</p>
+        </div>
+        <div class="depth-cell reveal">
+          <span class="glass" aria-hidden="true"><img :src="mark" alt="" width="22" height="22">HeyAtom</span>
+          <h4>{{ t('brand.shape.glass') }}</h4>
+          <p>{{ t('brand.shape.glassBody') }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="componenti" class="sec sec--hood">
+      <h3 class="hood-title">{{ t('brand.ui.title') }} <span>{{ t('brand.ui.body') }}</span></h3>
+      <div class="panel ui reveal" aria-hidden="true">
+        <span class="btn btn--primary"><Icon name="mail" />{{ t('brand.ui.primary') }}</span>
+        <span class="btn btn--ghost">{{ t('brand.ui.ghost') }}</span>
+        <span class="arrow">{{ t('brand.ui.link') }}<Icon name="arrow-right" :size="16" /></span>
+        <span class="chips"><span class="chip mono">Nuxt</span><span class="chip mono">NestJS</span><span class="chip mono">Prisma</span></span>
+        <span class="mono meta">{{ t('brand.ui.meta') }}</span>
+      </div>
+    </section>
+
+    <section id="movimento" class="sec sec--hood">
+      <h3 class="hood-title">{{ t('brand.motion.title') }} <span>{{ t('brand.motion.body') }}</span></h3>
+      <div class="motion">
+        <ul class="rules-list rules-list--1">
+          <li v-for="[h, b] in list('brand.motion.items')" :key="h" class="reveal"><strong class="mono">{{ h }}</strong><span>{{ b }}</span></li>
         </ul>
+        <button type="button" class="panel wave reveal" :class="{ waved }" :aria-pressed="waved" @click="waved = !waved">
+          <span class="bubble bubble--sm"><img src="/brand/heyatom-mark.svg" alt=""></span>
+          <span class="mono">{{ t('brand.motion.try') }}</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="cta-band hexed reveal">
+        <h2>{{ t('brand.close.title') }}</h2>
+        <a class="btn btn--primary" :href="`mailto:hey@heyatom.dev?subject=${encodeURIComponent(t('brand.close.subject'))}`"><Icon name="mail" />{{ t('brand.close.mail') }}</a>
       </div>
     </section>
   </div>
@@ -418,6 +445,19 @@ useMotion(root, (mm, el) => {
 }
 .head p { margin: 1.25rem 0 2rem; color: var(--ink-2); font-size: var(--text-md); max-width: 46ch; }
 .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+/* Page index: three layers, rows of plain links, not cards. */
+.toc {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem 2.5rem;
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+.toc > div { padding-top: 0.9rem; border-top: 1px solid var(--hair); }
+.toc-group { display: block; margin-bottom: 0.5rem; font-size: var(--text-sm); font-weight: 600; color: var(--ink-3); }
+.toc ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; }
+.toc a { font-size: var(--text-label); font-weight: 600; color: var(--ink); text-decoration: none; }
+.toc a:hover, .toc a:focus-visible { color: var(--green-light); }
 
 .sec { padding-top: var(--section); }
 h3 { font-size: var(--text-lg); margin-bottom: 0.35rem; }
@@ -488,9 +528,9 @@ h3 { font-size: var(--text-lg); margin-bottom: 0.35rem; }
 }
 .space-in { position: relative; background: var(--surface); outline: 1px dashed var(--green); }
 .space-in img { height: var(--h); width: auto; }
-.x { position: absolute; font-size: 0.7rem; color: var(--green-light); }
-.x--top { top: 0.3rem; left: 50%; translate: -50% 0; }
-.x--left { left: 0.35rem; top: 50%; translate: 0 -50%; }
+.x { position: absolute; font-size: var(--text-xs); color: var(--green-light); }
+.x--top { top: 0.2rem; left: 50%; translate: -50% 0; }
+.x--left { left: 0.25rem; top: 50%; translate: 0 -50%; }
 /* Gap between mark and name: the mark ends at ~17.5% of the lockup width. */
 .x--gap { left: 20%; bottom: -1.3rem; }
 .mins { display: flex; align-items: center; gap: 2rem; min-height: calc(clamp(2.2rem, 5vw, 3rem) * 2.26 + 1.5rem); }
@@ -507,39 +547,21 @@ h3 { font-size: var(--text-lg); margin-bottom: 0.35rem; }
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 1.5rem 1rem;
 }
-.icon-set a { display: grid; gap: 0.75rem; color: inherit; text-decoration: none; }
+.icon-set li { display: grid; gap: 0.75rem; align-content: start; }
 .ground {
   display: grid;
   place-items: center;
+  position: relative;
   aspect-ratio: 1;
   border-radius: var(--r-lg);
   border: 1px solid var(--hair);
 }
-.ground { position: relative; transition: translate 0.35s var(--ease-out), border-color 0.2s ease; }
 .ground img { width: 50%; height: auto; }
-/* Download cue: hidden until hover or keyboard focus. */
-.ground .dl {
-  position: absolute;
-  right: 0.6rem;
-  bottom: 0.6rem;
-  margin: 0;
-  padding: 0.3rem;
-  box-sizing: content-box;
-  border-radius: var(--r-sm);
-  background: var(--glass);
-  color: var(--ink);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-.icon-set a:hover .ground, .icon-set a:focus-visible .ground { translate: 0 -4px; border-color: var(--green); }
-.icon-set a:hover .dl, .icon-set a:focus-visible .dl { opacity: 1; }
 
 .editions { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
-.edition { display: grid; gap: 0.75rem; color: inherit; text-decoration: none; }
+.editions li { display: grid; gap: 0.75rem; }
 .ground--ed { aspect-ratio: 4 / 3; background: #1e201e; }
 .ground--ed img { width: 34%; }
-.edition:hover .ground, .edition:focus-visible .ground { translate: 0 -4px; border-color: var(--green); }
-.edition:hover .dl, .edition:focus-visible .dl { opacity: 1; }
 .ed-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
 .ed-meta strong { font-size: var(--text-lg); letter-spacing: -0.02em; }
 .ed-meta .mono { font-size: var(--text-xs); color: var(--ink-3); }
@@ -558,8 +580,6 @@ h3 { font-size: var(--text-lg); margin-bottom: 0.35rem; }
   font-size: var(--text-xs);
 }
 .live .dot { width: 0.45rem; aspect-ratio: 1; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); }
-.icon-set a:hover .mono { color: var(--green-light); }
-@media (hover: none) { .ground .dl { opacity: 1; } }
 .icon-set .mono { font-size: var(--text-xs); color: var(--ink-3); }
 .icons { display: flex; align-items: end; flex-wrap: wrap; gap: 1.5rem; }
 .tab { display: grid; gap: 0.5rem; margin-left: auto; }
@@ -593,10 +613,10 @@ h3 { font-size: var(--text-lg); margin-bottom: 0.35rem; }
 }
 .sw:hover { translate: 0 -4px; }
 .sw .mono { font-size: var(--text-xs); font-weight: 400; }
-.sw-role { font-size: var(--text-sm); font-weight: 500; opacity: 0.8; }
+.sw-role { font-size: var(--text-sm); font-weight: 500; }
 
 .theme { padding: clamp(1.2rem, 2.5vw, 1.75rem); border-radius: var(--r-lg); border: 1px solid var(--th-hair); }
-.theme h3 { font-size: var(--text-xs); font-weight: 400; opacity: 0.7; margin-bottom: 0.5rem; }
+.theme h3 { font-size: var(--text-sm); font-weight: 600; opacity: 0.75; margin-bottom: 0.5rem; }
 .theme ul { list-style: none; margin: 0; padding: 0; }
 .theme li + li { border-top: 1px solid var(--th-hair); }
 .theme button {
@@ -701,10 +721,10 @@ h3 { font-size: var(--text-lg); margin-bottom: 0.35rem; }
 .meta { font-size: var(--text-xs); color: var(--ink-3); }
 
 .motion { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 1rem 2.5rem; }
-.wave { display: grid; place-items: center; gap: 1rem; }
+.wave { display: grid; place-items: center; gap: 1rem; width: 100%; font: inherit; color: inherit; cursor: pointer; }
 .wave .mono { font-size: var(--text-xs); color: var(--ink-3); }
 .wave img { transition: rotate 0.6s var(--ease-out); transform-origin: 50% 90%; }
-.wave:hover img { rotate: -14deg; }
+.wave:hover img, .wave.waved img { rotate: -14deg; }
 
 .voice { list-style: none; margin: 0; padding: 0; }
 .voice li {
@@ -724,8 +744,9 @@ h3 { font-size: var(--text-lg); margin-bottom: 0.35rem; }
 .donts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1rem; }
 .donts li { display: grid; gap: 0.6rem; font-size: var(--text-sm); color: var(--ink-2); }
 .donts li > span { display: inline-flex; align-items: center; gap: 0.35rem; }
-/* The one non-token colour on the page: the "no" mark has to read as wrong, not as brand. */
-.x-icon { rotate: 45deg; color: #e5484d; flex: none; }
+/* A "no" is a struck-through line in ink-3, like the voice pairs: no warning red. */
+.x-icon { rotate: 45deg; color: var(--ink-3); flex: none; }
+.donts s, .dont-list s { text-decoration-thickness: 1px; text-decoration-color: var(--ink-3); }
 .dont {
   display: grid;
   place-items: center;
@@ -759,36 +780,36 @@ h3 { font-size: var(--text-lg); margin-bottom: 0.35rem; }
   font-size: var(--text-label);
 }
 
-.files + .files { margin-top: 2.25rem; }
-.files h3 { font-size: var(--text-xs); font-weight: 400; color: var(--ink-3); margin-bottom: 0.75rem; }
-.files ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
-.files--icon ul { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-.files--ed ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.files--ed .preview img { max-height: 3.25rem; }
+/* Files are rows: thumb on its ground, name, filename, format. */
+.files-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem; align-items: start; }
+.files h3 { font-size: var(--text-sm); font-weight: 600; color: var(--ink-3); margin-bottom: 0.5rem; }
+.files ul { list-style: none; margin: 0; padding: 0; }
+.files li { border-top: 1px solid var(--hair); }
 .file {
   display: grid;
-  height: 100%;
-  border-radius: var(--r-lg);
-  background: var(--surface);
-  border: 1px solid var(--hair);
-  overflow: hidden;
+  grid-template-columns: 4.75rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 0;
   color: var(--ink);
   text-decoration: none;
-  transition: translate 0.35s var(--ease-out), border-color 0.2s ease;
 }
-.file:hover, .file:focus-visible { translate: 0 -4px; border-color: var(--green); color: var(--ink); }
-.preview { display: grid; place-items: center; aspect-ratio: 4 / 3; padding: 1.25rem; }
-.preview img { width: 80%; max-height: 3.5rem; object-fit: contain; }
-.files--v .preview img { max-height: 5.5rem; }
-.files--icon .preview img { max-height: 3.25rem; }
-.file-meta { display: flex; align-items: center; gap: 0.75rem; padding: 0.8rem 0.9rem; border-top: 1px solid var(--hair); }
-.file-name { min-width: 0; font-size: var(--text-sm); font-weight: 600; line-height: 1.3; }
+.preview {
+  display: grid;
+  place-items: center;
+  height: 3.25rem;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--hair-strong);
+}
+.preview img { max-width: 72%; max-height: 1.6rem; }
+.preview--v img, .preview--icon img, .preview--ed img { max-height: 2.3rem; }
+.file-meta { display: grid; gap: 0.1rem; min-width: 0; }
+.file-name { font-size: var(--text-sm); font-weight: 600; line-height: 1.3; }
+.file-meta .mono { font-size: var(--text-xs); color: var(--ink-3); overflow-wrap: anywhere; }
 .file-dl {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  flex: none;
-  margin-left: auto;
   padding: 0.3rem 0.55rem;
   border-radius: var(--r-sm);
   border: 1px solid var(--hair-strong);
@@ -796,7 +817,15 @@ h3 { font-size: var(--text-lg); margin-bottom: 0.35rem; }
   color: var(--green-light);
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
+.file:hover .file-name, .file:focus-visible .file-name { color: var(--green-light); }
 .file:hover .file-dl, .file:focus-visible .file-dl { background: var(--green); border-color: var(--green); color: var(--on-green); }
+
+/* Under the hood: same rules, quieter. One h2 for the layer, a short title per part. */
+.hood .sec-head { padding-top: 2rem; border-top: 1px solid var(--hair); margin-bottom: 0; }
+.sec--hood { padding-top: var(--section-near); }
+.hood-title { margin-bottom: 1.5rem; font-size: var(--text-xl); letter-spacing: -0.02em; }
+.hood-title span { display: block; margin-top: 0.3rem; font-size: var(--text-label); font-weight: 450; letter-spacing: 0; color: var(--ink-2); }
+h4 { font-size: var(--text-lg); margin-bottom: 0.35rem; }
 
 @media (max-width: 900px) {
   .head, .grid-2, .grid-3, .motion, .rules-list, .dont-list, .depth { grid-template-columns: minmax(0, 1fr); }
@@ -806,13 +835,16 @@ h3 { font-size: var(--text-lg); margin-bottom: 0.35rem; }
   .shapes, .donts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .icon-set { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .editions { grid-template-columns: minmax(0, 1fr); }
-  .files ul, .files--icon ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .toc, .files-grid { grid-template-columns: minmax(0, 1fr); }
   .scale li, .voice li { grid-template-columns: minmax(0, 1fr); }
   .tab { margin-left: 0; }
-  .theme button { grid-template-columns: 1.5rem minmax(0, 1fr) auto; }
-  .theme .role { display: none; }
+  /* Role drops under the token name instead of disappearing. */
+  .theme button { grid-template-columns: 1.5rem minmax(0, 1fr) auto; row-gap: 0.1rem; }
+  .theme .dot { grid-row: span 2; }
+  .theme .mono { grid-column: 3; grid-row: 1 / span 2; }
+  .theme .role { grid-column: 2; font-size: var(--text-xs); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .wave img, .sw, .file, .file-dl { transition: none; }
+  .wave img, .sw, .file-dl { transition: none; }
 }
 </style>

@@ -285,7 +285,8 @@
           "Two themes",
           "Follows the system, dark by default. On light, text green drops to #007A4D for contrast."
         ]
-      ]
+      ],
+      "copyFailed": "Copy failed"
     },
     "type": {
       "title": "The type.",
@@ -350,7 +351,7 @@
           "Hero and page heads animate only position and blur, never opacity."
         ]
       ],
-      "try": "Hover the hand"
+      "try": "Hover or tap the hand"
     },
     "voice": {
       "title": "The voice.",
@@ -390,7 +391,7 @@
     },
     "files": {
       "title": "The files.",
-      "body": "SVG vectors, ready for web and print.",
+      "body": "SVG for web and print. The kit adds a PNG of each at 1x and 2x, plus the guide.",
       "icon": "Icon",
       "logoH": "Horizontal logo",
       "logoV": "Stacked logo",
@@ -401,6 +402,21 @@
         "white": "White · on jade or photos"
       },
       "editions": "Special editions"
+    },
+    "toc": {
+      "label": "On this page",
+      "brand": "The brand",
+      "rules": "The rules",
+      "hood": "Under the hood"
+    },
+    "hood": {
+      "title": "Under the hood.",
+      "body": "Shapes, components and motion: the rules for whoever touches this site's code, me first."
+    },
+    "close": {
+      "title": "Need another format?",
+      "mail": "Write me",
+      "subject": "HeyAtom brand"
     }
   }
 }

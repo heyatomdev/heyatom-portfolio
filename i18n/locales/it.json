@@ -285,7 +285,8 @@
           "Due temi",
           "Segue il sistema, scuro di default. Sul chiaro il verde dei testi scende a #007A4D per il contrasto."
         ]
-      ]
+      ],
+      "copyFailed": "Copia non riuscita"
     },
     "type": {
       "title": "La tipografia.",
@@ -350,7 +351,7 @@
           "Hero e testate si animano solo in posizione e blur, mai in opacità."
         ]
       ],
-      "try": "Passa sopra la mano"
+      "try": "Passa sopra o tocca la mano"
     },
     "voice": {
       "title": "La voce.",
@@ -390,7 +391,7 @@
     },
     "files": {
       "title": "I file.",
-      "body": "Vettoriali SVG, pronti per web e stampa.",
+      "body": "SVG per web e stampa. Il kit aggiunge un PNG di ciascuno a 1x e 2x, più la guida.",
       "icon": "Icona",
       "logoH": "Logo orizzontale",
       "logoV": "Logo verticale",
@@ -401,6 +402,21 @@
         "white": "Bianco · su jade o foto"
       },
       "editions": "Edizioni speciali"
+    },
+    "toc": {
+      "label": "In questa pagina",
+      "brand": "Il marchio",
+      "rules": "Le regole",
+      "hood": "Sotto il cofano"
+    },
+    "hood": {
+      "title": "Sotto il cofano.",
+      "body": "Forme, componenti e movimento: le regole per chi mette mano al codice di questo sito, io per primo."
+    },
+    "close": {
+      "title": "Ti serve un altro formato?",
+      "mail": "Scrivimi",
+      "subject": "Brand HeyAtom"
     }
   }
 }
