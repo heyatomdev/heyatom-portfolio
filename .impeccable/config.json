@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "brand/guide.html"
+        ],
+        "createdAt": "2026-10-25T15:50:57.818Z",
+        "reason": "Claude: detector composites the rgba grid gradient on white (#d6f1e7) and assumes black text; real ground is #1e201e, verified on the rendered PDF"
+      }
+    ]
+  }
+}

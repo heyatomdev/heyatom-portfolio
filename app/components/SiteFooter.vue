@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const { t, locale, setLocaleCookie } = useI18n()
 const localePath = useLocalePath()
+const mark = useMark()
 const switchLocalePath = useSwitchLocalePath()
 const colorMode = useColorMode()
 const light = computed(() => colorMode.value === 'light')
@@ -11,7 +12,7 @@ const toggleTheme = () => { colorMode.preference = light.value ? 'dark' : 'light
   <footer class="ftr hexed">
     <div class="wrap row">
       <p class="me">
-        <img src="/favicon.svg" alt="" width="22" height="22">
+        <img :src="mark" alt="" width="22" height="22">
         {{ t('footer.bio') }}
       </p>
       <div class="prefs">
@@ -35,6 +36,7 @@ const toggleTheme = () => { colorMode.preference = light.value ? 'dark' : 'light
         <li><a href="https://github.com/andreacw5" rel="me">GitHub</a></li>
         <li><a href="https://www.linkedin.com/in/atombolato" rel="me">LinkedIn</a></li>
         <li><NuxtLink :to="localePath('/uses')" lang="en">Uses</NuxtLink></li>
+        <li><NuxtLink :to="localePath('/brand')">Brand</NuxtLink></li>
         <li><a href="https://status.heyatom.dev/en">Status</a></li>
         <li><a href="mailto:hey@heyatom.dev">hey@heyatom.dev</a></li>
       </ul>

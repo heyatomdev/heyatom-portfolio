@@ -5,6 +5,7 @@ const available = useRuntimeConfig().public.freelanceAvailable === 'true'
 const route = useRoute()
 const { t } = useI18n()
 const localePath = useLocalePath()
+const mark = useMark()
 // Header slides away while reading down, returns on the way up; a hairline tracks page progress.
 const hdr = ref<HTMLElement>()
 const bar = ref<HTMLElement>()
@@ -47,7 +48,7 @@ const anchors = computed(() => [{ to: localePath('/#percorso'), label: t('nav.pa
   <header ref="hdr" class="hdr">
     <nav class="pill" :aria-label="t('nav.main')">
       <NuxtLink :to="localePath('/')" class="brand" aria-label="HeyAtom, home">
-        <img src="/favicon.svg" alt="" width="36" height="36">
+        <img :src="mark" alt="" width="36" height="36">
         <span>HeyAtom</span>
       </NuxtLink>
 

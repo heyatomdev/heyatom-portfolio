@@ -14,6 +14,8 @@ app/
   data/works.ts           # progetti IT (fonte) + projects/platform/platformBase/tools/localize
   data/works.en.ts        # override EN per slug
   data/uses.ts            # /uses, EN inline nel campo `en`
+  data/editions.ts        # edizioni speciali della mano + finestre di date
+  composables/useMark.ts  # mano del giorno (edizione o favicon)
   pages/                  # index, uses, works/index, works/[slug]
   utils/motion.ts         # gsap + useMotion, revealLines, magnetic
   utils/img.ts            # img/srcset per FileHarbor (?width=N)
@@ -21,6 +23,8 @@ app/
 i18n/locales/{it,en}.json # testi UI
 server/api/__sitemap__/   # URL /works/<slug> per la sitemap
 og/                       # sorgenti HTML delle og image + render.sh
+brand/render.py           # genera il kit SVG in public/brand/ (pagina /brand)
+brand/guide.html + pdf.sh  # guida di brand → public/brand/heyatom-brand.pdf
 cv/                       # cv.html + render.sh → public/assets/cv-tombolato.pdf
 scripts/shots.mjs         # screenshot siti cliente (Playwright)
 ```
@@ -44,6 +48,14 @@ scripts/shots.mjs         # screenshot siti cliente (Playwright)
 2. Screenshot: `pnpm shots <slug>` (aggiungere il sito in `SITES` di `scripts/shots.mjs`) oppure upload su FileHarbor.
 3. OG: `og/render.sh work`; se cambia il numero di progetti aggiornare il testo in `og/works.html` e rigenerare `works`.
 4. Sitemap: automatica.
+
+## Quando cambi il marchio
+
+Il kit di `/brand` (`public/brand/*.svg`) è generato, non disegnato a mano: mano da `public/favicon.svg`, scritta "HeyAtom" in Manrope 800 da `cv/fonts/` convertita in tracciati. Dopo aver cambiato favicon o font: `uvx --with fonttools --with brotli python brand/render.py`.
+
+La guida in PDF (`public/brand/heyatom-brand.pdf`, linkata da `/brand`) ha come sorgente `brand/guide.html`, solo in italiano: quando cambiano marchio, token o regole di `/brand`, aggiornarla e lanciare `brand/pdf.sh` (dopo `render.py` se sono cambiati gli SVG).
+
+Edizioni speciali (Pride, Halloween, Natale): disegnate in `brand/render.py`, date in `app/data/editions.ts`. `useMark()` sceglie la mano del giorno lato server; header, footer, home e favicon la usano, quindi la mano non va mai scritta come `/favicon.svg` fisso nei componenti.
 
 ## Quando aggiorni il CV
 
