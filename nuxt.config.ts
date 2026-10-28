@@ -48,7 +48,12 @@ export default defineNuxtConfig({
       meta: [
         { name: 'color-scheme', content: 'dark light' },
       ],
-      link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+      // Without a real favicon.ico Nitro answers /favicon.ico with a data: URI as text; the .ico is for crawlers and DuckDuckGo icons.
+      link: [
+        { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
+      ],
     },
   },
 })
