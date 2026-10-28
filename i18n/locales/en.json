@@ -221,13 +221,13 @@
     },
     "icon": {
       "title": "The icon.",
-      "body": "The hand alone, no frame and no bubble, on any ground. Jade by default; where it doesn't hold up, the light or dark step of the same green.",
+      "body": "The hand alone, no frame and no bubble, on any ground. green by default; where it doesn't hold up, the light or dark step of the same green.",
       "tab": "Browser tab",
       "variants": {
-        "mark": "Jade · default",
+        "mark": "green · default",
         "mark-green-light": "green-light · dark grounds",
         "mark-green-dark": "green-dark · light grounds",
-        "mark-white": "White · on jade or photos",
+        "mark-white": "White · on green or photos",
         "mark-black": "Black · one colour"
       }
     },
@@ -399,7 +399,7 @@
         "dark": "On dark grounds",
         "light": "On light grounds",
         "black": "Black · one colour",
-        "white": "White · on jade or photos"
+        "white": "White · on green or photos"
       },
       "editions": "Special editions"
     },
@@ -417,6 +417,13 @@
       "title": "Need another format?",
       "mail": "Write me",
       "subject": "HeyAtom brand"
-    }
+    },
+    "quick": {
+      "lead": "Just need the logo?",
+      "light": "on light",
+      "dark": "on dark",
+      "mark": "the hand alone"
+    },
+    "usage": "The kit is a {size} ZIP: SVG, PNG and the guide. Use them freely to talk about me or my work."
   }
 }

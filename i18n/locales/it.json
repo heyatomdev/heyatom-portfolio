@@ -221,13 +221,13 @@
     },
     "icon": {
       "title": "L'icona.",
-      "body": "La mano da sola, senza riquadri né fumetti, su qualsiasi fondo. Jade di default; sui fondi dove non regge, la variante chiara o scura dello stesso verde.",
+      "body": "La mano da sola, senza riquadri né fumetti, su qualsiasi fondo. green di default; sui fondi dove non regge, la variante chiara o scura dello stesso verde.",
       "tab": "Scheda del browser",
       "variants": {
-        "mark": "Jade · default",
+        "mark": "green · default",
         "mark-green-light": "green-light · fondi scuri",
         "mark-green-dark": "green-dark · fondi chiari",
-        "mark-white": "Bianca · su jade o foto",
+        "mark-white": "Bianca · su green o foto",
         "mark-black": "Nera · un colore"
       }
     },
@@ -399,7 +399,7 @@
         "dark": "Su fondi scuri",
         "light": "Su fondi chiari",
         "black": "Nero · un colore",
-        "white": "Bianco · su jade o foto"
+        "white": "Bianco · su green o foto"
       },
       "editions": "Edizioni speciali"
     },
@@ -417,6 +417,13 @@
       "title": "Ti serve un altro formato?",
       "mail": "Scrivimi",
       "subject": "Brand HeyAtom"
-    }
+    },
+    "quick": {
+      "lead": "Ti serve solo il logo?",
+      "light": "su fondo chiaro",
+      "dark": "su fondo scuro",
+      "mark": "solo la mano"
+    },
+    "usage": "Il kit è uno ZIP da {size}: SVG, PNG e guida. Usali liberamente per parlare di me o del mio lavoro."
   }
 }
