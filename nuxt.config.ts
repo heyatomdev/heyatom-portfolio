@@ -1,7 +1,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2026-09-01',
   devtools: { enabled: false },
-  modules: ['@nuxtjs/google-fonts', '@nuxtjs/i18n', '@nuxtjs/sitemap', '@nuxtjs/color-mode'],
+  modules: ['@nuxtjs/google-fonts', '@nuxtjs/i18n', '@nuxtjs/sitemap', '@nuxtjs/color-mode', '@heyatom/client/nuxt'],
   // Follows the OS (dark when there is none); the footer toggle overrides it and the cookie keeps SSR in sync.
   colorMode: {
     preference: 'system', // follow the OS; dark when it has no preference or JS is off
@@ -21,6 +21,8 @@ export default defineNuxtConfig({
   // Vite inlines files under 4KB as data: URIs: the small cyrillic-ext/greek font subsets landed in every page's HTML
   // (about 20KB) and the CSP blocks data: fonts anyway. Fonts stay files, fetched only when their unicode-range is used.
   vite: { build: { assetsInlineLimit: (file: string) => (file.endsWith('.woff2') ? false : undefined) } },
+  // Self-hosted Umami, proxied through this server at /_u (production builds only).
+  umami: { websiteId: '4de67d4d-9e05-43f3-b52f-ebb5ff0a3faa', domains: ['heyatom.dev', 'www.heyatom.dev'] },
   site: { url: 'https://heyatom.dev' },
   // Static pages are found from the routes; work pages come from the server list.
   sitemap: { sources: ['/api/__sitemap__/urls'] },
