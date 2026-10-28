@@ -221,13 +221,13 @@
     },
     "icon": {
       "title": "L'icona.",
-      "body": "La mano da sola, senza riquadri né fumetti, su qualsiasi fondo. Jade di default; sui fondi dove non regge, la variante chiara o scura dello stesso verde.",
+      "body": "La mano da sola, senza riquadri né fumetti, su qualsiasi fondo. green di default; sui fondi dove non regge, la variante chiara o scura dello stesso verde.",
       "tab": "Scheda del browser",
       "variants": {
-        "mark": "Jade · default",
+        "mark": "green · default",
         "mark-green-light": "green-light · fondi scuri",
         "mark-green-dark": "green-dark · fondi chiari",
-        "mark-white": "Bianca · su jade o foto",
+        "mark-white": "Bianca · su green o foto",
         "mark-black": "Nera · un colore"
       }
     },
@@ -285,7 +285,8 @@
           "Due temi",
           "Segue il sistema, scuro di default. Sul chiaro il verde dei testi scende a #007A4D per il contrasto."
         ]
-      ]
+      ],
+      "copyFailed": "Copia non riuscita"
     },
     "type": {
       "title": "La tipografia.",
@@ -350,7 +351,7 @@
           "Hero e testate si animano solo in posizione e blur, mai in opacità."
         ]
       ],
-      "try": "Passa sopra la mano"
+      "try": "Passa sopra o tocca la mano"
     },
     "voice": {
       "title": "La voce.",
@@ -390,7 +391,7 @@
     },
     "files": {
       "title": "I file.",
-      "body": "Vettoriali SVG, pronti per web e stampa.",
+      "body": "SVG per web e stampa. Il kit aggiunge un PNG di ciascuno a 1x e 2x, più la guida.",
       "icon": "Icona",
       "logoH": "Logo orizzontale",
       "logoV": "Logo verticale",
@@ -398,9 +399,31 @@
         "dark": "Su fondi scuri",
         "light": "Su fondi chiari",
         "black": "Nero · un colore",
-        "white": "Bianco · su jade o foto"
+        "white": "Bianco · su green o foto"
       },
       "editions": "Edizioni speciali"
-    }
+    },
+    "toc": {
+      "label": "In questa pagina",
+      "brand": "Il marchio",
+      "rules": "Le regole",
+      "hood": "Sotto il cofano"
+    },
+    "hood": {
+      "title": "Sotto il cofano.",
+      "body": "Forme, componenti e movimento: le regole per chi mette mano al codice di questo sito, io per primo."
+    },
+    "close": {
+      "title": "Ti serve un altro formato?",
+      "mail": "Scrivimi",
+      "subject": "Brand HeyAtom"
+    },
+    "quick": {
+      "lead": "Ti serve solo il logo?",
+      "light": "su fondo chiaro",
+      "dark": "su fondo scuro",
+      "mark": "solo la mano"
+    },
+    "usage": "Il kit è uno ZIP da {size}: SVG, PNG e guida. Usali liberamente per parlare di me o del mio lavoro."
   }
 }

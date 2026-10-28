@@ -25,6 +25,7 @@ server/api/__sitemap__/   # URL /works/<slug> per la sitemap
 og/                       # sorgenti HTML delle og image + render.sh
 brand/render.py           # genera il kit SVG in public/brand/ (pagina /brand)
 brand/guide.html + pdf.sh  # guida di brand → public/brand/heyatom-brand.pdf
+brand/kit.py              # zip del kit (SVG + PNG 1x/2x + PDF), bottone "Scarica il kit"
 cv/                       # cv.html + render.sh → public/assets/cv-tombolato.pdf
 scripts/shots.mjs         # screenshot siti cliente (Playwright)
 ```
@@ -55,7 +56,9 @@ Il kit di `/brand` (`public/brand/*.svg`) è generato, non disegnato a mano: man
 
 La guida in PDF (`public/brand/heyatom-brand.pdf`, linkata da `/brand`) ha come sorgente `brand/guide.html`, solo in italiano: quando cambiano marchio, token o regole di `/brand`, aggiornarla e lanciare `brand/pdf.sh` (dopo `render.py` se sono cambiati gli SVG).
 
-Edizioni speciali (Pride, Halloween, Natale): disegnate in `brand/render.py`, date in `app/data/editions.ts`. `useMark()` sceglie la mano del giorno lato server; header, footer, home e favicon la usano, quindi la mano non va mai scritta come `/favicon.svg` fisso nei componenti.
+Il bottone "Scarica il kit" punta a `public/brand/heyatom-brand-kit.zip`: dopo `render.py` o `pdf.sh` rigenerarlo con `DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib uvx --with cairosvg python brand/kit.py` (serve `cairo` da Homebrew), poi aggiornare `kitMB` in `app/pages/brand.vue` con la dimensione che stampa.
+
+Edizioni speciali (Pride, Halloween, Natale): disegnate in `brand/render.py`, date in `app/data/editions.ts`. `useMark()` sceglie la mano del giorno lato server; header, footer, home, hero di `/brand` e favicon la usano, quindi la mano non va mai scritta come `/favicon.svg` fisso nei componenti.
 
 ## Quando aggiorni il CV
 

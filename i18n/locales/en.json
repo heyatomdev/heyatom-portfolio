@@ -221,13 +221,13 @@
     },
     "icon": {
       "title": "The icon.",
-      "body": "The hand alone, no frame and no bubble, on any ground. Jade by default; where it doesn't hold up, the light or dark step of the same green.",
+      "body": "The hand alone, no frame and no bubble, on any ground. green by default; where it doesn't hold up, the light or dark step of the same green.",
       "tab": "Browser tab",
       "variants": {
-        "mark": "Jade · default",
+        "mark": "green · default",
         "mark-green-light": "green-light · dark grounds",
         "mark-green-dark": "green-dark · light grounds",
-        "mark-white": "White · on jade or photos",
+        "mark-white": "White · on green or photos",
         "mark-black": "Black · one colour"
       }
     },
@@ -285,7 +285,8 @@
           "Two themes",
           "Follows the system, dark by default. On light, text green drops to #007A4D for contrast."
         ]
-      ]
+      ],
+      "copyFailed": "Copy failed"
     },
     "type": {
       "title": "The type.",
@@ -350,7 +351,7 @@
           "Hero and page heads animate only position and blur, never opacity."
         ]
       ],
-      "try": "Hover the hand"
+      "try": "Hover or tap the hand"
     },
     "voice": {
       "title": "The voice.",
@@ -390,7 +391,7 @@
     },
     "files": {
       "title": "The files.",
-      "body": "SVG vectors, ready for web and print.",
+      "body": "SVG for web and print. The kit adds a PNG of each at 1x and 2x, plus the guide.",
       "icon": "Icon",
       "logoH": "Horizontal logo",
       "logoV": "Stacked logo",
@@ -398,9 +399,31 @@
         "dark": "On dark grounds",
         "light": "On light grounds",
         "black": "Black · one colour",
-        "white": "White · on jade or photos"
+        "white": "White · on green or photos"
       },
       "editions": "Special editions"
-    }
+    },
+    "toc": {
+      "label": "On this page",
+      "brand": "The brand",
+      "rules": "The rules",
+      "hood": "Under the hood"
+    },
+    "hood": {
+      "title": "Under the hood.",
+      "body": "Shapes, components and motion: the rules for whoever touches this site's code, me first."
+    },
+    "close": {
+      "title": "Need another format?",
+      "mail": "Write me",
+      "subject": "HeyAtom brand"
+    },
+    "quick": {
+      "lead": "Just need the logo?",
+      "light": "on light",
+      "dark": "on dark",
+      "mark": "the hand alone"
+    },
+    "usage": "The kit is a {size} ZIP: SVG, PNG and the guide. Use them freely to talk about me or my work."
   }
 }
