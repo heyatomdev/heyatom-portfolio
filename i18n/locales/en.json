@@ -130,7 +130,8 @@
       "text": "A couple of lines on what you need are enough: I reply to everyone, and it’s always me. If I’m not the right person, I’ll tell you.",
       "recruiter": "Are you a recruiter? I’m not looking for a job, but I’m happy to read an interesting offer.",
       "subject": "Project%20from%20heyatom.dev",
-      "mail": "Send me an email"
+      "mail": "Send me an email",
+      "copy": { "idle": "Copy the address", "copied": "Copied", "selected": "Selected, copy it yourself" }
     }
   },
   "uses": {
@@ -141,7 +142,8 @@
     "intro": "The hardware, software and services that make up my setup.",
     "updated": "Updated",
     "copyLink": "copy link to section",
-    "copied": "link copied"
+    "copied": "link copied",
+    "next": "Need a hand with a project?"
   },
   "works": {
     "seo": {
@@ -180,7 +182,9 @@
     "screenshotN": "Screenshot {n} of {title}",
     "enlarge": "Enlarge: {title}",
     "ask": "Need something like this?",
-    "askSubject": "Something like {title}"
+    "askText": "Drop me a couple of lines on what you need: I reply myself, from",
+    "askSubject": "Something like {title}",
+    "for": "For {client}"
   },
   "error": {
     "home": "Back to home",

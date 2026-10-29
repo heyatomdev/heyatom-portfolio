@@ -130,7 +130,8 @@
       "text": "Due righe su cosa ti serve bastano: rispondo a tutti, e rispondo io. Se non sono la persona giusta, te lo dico.",
       "recruiter": "Sei un recruiter? Non cerco un impiego, ma una proposta interessante la leggo volentieri.",
       "subject": "Progetto%20da%20heyatom.dev",
-      "mail": "Scrivimi una mail"
+      "mail": "Scrivimi una mail",
+      "copy": { "idle": "Copia l'indirizzo", "copied": "Copiato", "selected": "Selezionato, copialo tu" }
     }
   },
   "uses": {
@@ -141,7 +142,8 @@
     "intro": "Hardware, software e servizi che compongono la mia postazione.",
     "updated": "Aggiornata il",
     "copyLink": "copia link alla sezione",
-    "copied": "link copiato"
+    "copied": "link copiato",
+    "next": "Ti serve una mano con un progetto?"
   },
   "works": {
     "seo": {
@@ -180,7 +182,9 @@
     "screenshotN": "Schermata {n} di {title}",
     "enlarge": "Ingrandisci: {title}",
     "ask": "Ti serve qualcosa di simile?",
-    "askSubject": "Qualcosa come {title}"
+    "askText": "Scrivimi due righe su cosa ti serve: rispondo io, da",
+    "askSubject": "Qualcosa come {title}",
+    "for": "Per {client}"
   },
   "error": {
     "home": "Torna alla home",

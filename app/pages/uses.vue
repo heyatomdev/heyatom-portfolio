@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { updated, uses } from '~/data/uses'
-import { gsap, MOTION_OK, SplitText, useMotion } from '~/utils/motion'
+import { gsap, MOTION_OK, revealLines, SplitText, useMotion } from '~/utils/motion'
 
 const { t, locale } = useI18n()
+const ask = computed(() => `mailto:hey@heyatom.dev?subject=${t('home.close.subject')}`)
 
 useSeoMeta({
   title: 'Uses',
@@ -55,14 +56,16 @@ useMotion(root, (mm, el) => {
       const s = gsap.utils.selector(g)
       const count = s('.count')[0] as HTMLElement
       const n = { v: 0 }
-      count.textContent = pad(0)
+      // The server-rendered count stays until the group animates in: no lone "00" above hidden rows.
       gsap.timeline({ scrollTrigger: { trigger: g, start: 'top 82%' } })
         .from(s('.rule'), { scaleX: 0, duration: 1.1, ease: 'expo.inOut' })
-        .from(s('h2'), { x: -30, opacity: 0, duration: 0.9, ease: 'expo.out' }, 0.2)
-        .to(n, { v: s('li').length, duration: 0.9, ease: 'power2.out', snap: { v: 1 }, onUpdate: () => { count.textContent = pad(n.v) } }, 0.2)
+        .from(s('h2, .count'), { x: -30, opacity: 0, duration: 0.9, ease: 'expo.out' }, 0.2)
+        .to(n, { v: s('li').length, duration: 0.9, ease: 'power2.out', snap: { v: 1 }, onStart: () => { count.textContent = pad(0) }, onUpdate: () => { count.textContent = pad(n.v) } }, 0.2)
         .from(s('li'), { y: 34, rotation: 1.5, opacity: 0, duration: 0.9, ease: 'expo.out', stagger: 0.06 }, 0.3)
-        .from(s('.tag'), { scale: 0, rotation: -20, duration: 0.6, ease: 'back.out(3)', stagger: 0.06 }, 0.6)
+        // clearProps: the inline transform would otherwise override the hover tilt below.
+        .from(s('.tag'), { scale: 0, rotation: -20, duration: 0.6, ease: 'back.out(3)', stagger: 0.06, clearProps: 'transform,translate,rotate,scale' }, 0.6)
     }
+    revealLines(q('.cta-band h2')[0])
   })
 })
 </script>
@@ -96,6 +99,11 @@ useMotion(root, (mm, el) => {
           <span class="note">{{ i.note }}</span>
         </li>
       </ul>
+    </section>
+
+    <section class="cta-band hexed" aria-labelledby="uses-next">
+      <h2 id="uses-next">{{ t('uses.next') }}</h2>
+      <a class="btn btn--primary" :href="ask"><Icon name="mail" /> {{ t('common.tellMe') }}</a>
     </section>
   </div>
 </template>
@@ -158,8 +166,12 @@ useMotion(root, (mm, el) => {
 .anchor { color: inherit; text-decoration: none; }
 .hash { margin-left: 0.3rem; opacity: 0; color: var(--ink-3); transition: opacity 0.2s ease; }
 .anchor:hover .hash, .anchor:focus-visible .hash { opacity: 1; }
-.anchor:focus-visible { outline: 2px solid var(--green-light); outline-offset: 3px; border-radius: 4px; }
-@media (pointer: coarse) { .anchor { display: inline-block; padding-block: 0.6rem; } }
+.anchor:focus-visible { outline: 2px solid var(--green-light); outline-offset: 3px; border-radius: var(--r-sm); }
+/* Touch: no hover, so the link cue stays visible and the target reaches 44px. */
+@media (pointer: coarse) {
+  .anchor { display: inline-flex; align-items: center; min-height: 44px; }
+  .hash { opacity: 1; }
+}
 .copied { font-size: var(--text-xs); color: var(--green-light); }
 
 ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
@@ -172,27 +184,29 @@ li {
   border-radius: var(--r-sm);
   transition: background-color 0.25s ease;
 }
-li:hover { background: rgb(var(--green-rgb) / 0.07); }
+/* Hover only on rows that are links; keyboard focus gets the same treatment. */
+li:has(a):hover, li:has(a:focus-visible) { background: rgb(var(--green-rgb) / 0.07); }
 li strong {
   display: block;
   font-size: var(--text-md);
   font-weight: 700;
   letter-spacing: -0.02em;
-  transition: transform 0.4s var(--ease-out), color 0.2s ease;
+  /* Padding, not transform: a transformed strong would become the containing block of the row-wide a::after. */
+  transition: padding-left 0.4s var(--ease-out), color 0.2s ease;
 }
-li:hover strong { transform: translateX(6px); color: var(--green-light); }
+li:has(a):hover strong, li:has(a:focus-visible) strong { padding-left: 6px; color: var(--green-light); }
 li a { color: inherit; text-decoration: none; }
 /* The whole row is the link's hit area. */
-li a::after { content: ''; position: absolute; inset: 0; border-radius: inherit; }
+li a::after { content: ''; position: absolute; inset: 0; border-radius: var(--r-sm); }
 li a:focus-visible { outline: none; }
 li:has(a:focus-visible) { outline: 2px solid var(--green-light); outline-offset: 2px; }
 .out {
   margin-left: 0.2rem;
   vertical-align: -0.1em;
-  opacity: 0.45;
+  opacity: 0.6;
   transition: opacity 0.2s ease, transform 0.4s var(--ease-out);
 }
-li:hover .out { opacity: 1; transform: translate(2px, -2px); }
+li:has(a):hover .out, li:has(a:focus-visible) .out { opacity: 1; transform: translate(2px, -2px); }
 .note { color: var(--ink-2); font-size: var(--text-label); max-width: 62ch; }
 .tag {
   display: inline-block;
@@ -208,7 +222,9 @@ li:hover .out { opacity: 1; transform: translate(2px, -2px); }
   border: 1px solid var(--hair);
   transition: rotate 0.4s var(--ease-out), background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
-li:hover .tag { rotate: -6deg; color: var(--on-green); background: var(--green); border-color: var(--green); }
+li:has(a):hover .tag, li:has(a:focus-visible) .tag { rotate: -6deg; color: var(--on-green); background: var(--green); border-color: var(--green); }
+
+.cta-band { margin-top: var(--section); }
 
 @media (max-width: 900px) {
   .head, .group { grid-template-columns: minmax(0, 1fr); }

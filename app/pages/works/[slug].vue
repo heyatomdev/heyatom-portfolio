@@ -23,17 +23,18 @@ useSeoMeta({
   ogImageAlt: `HeyAtom: ${src.title}, ${src.year}`,
 })
 
-// Similar: most shared stack entries, newest first on ties.
+// Similar: same kind first (a client site next to client sites), then shared stack, newest first on ties.
 const similar = projects
   .filter(p => p.slug !== src.slug)
-  .map(p => ({ p, score: p.stack.filter(s => src.stack.includes(s)).length }))
+  .map(p => ({ p, score: (p.kind === src.kind ? 10 : 0) + p.stack.filter(s => src.stack.includes(s)).length }))
   .filter(x => x.score > 0)
   .sort((a, b) => b.score - a.score || b.p.year - a.p.year)
   .slice(0, 3)
   .map(x => x.p)
 
 // Lightbox on a native <dialog>: Esc, focus trap and backdrop come for free.
-const shots = computed(() => w.value.images ?? [])
+// The hero already shows the preview, so the gallery skips it.
+const shots = computed(() => (w.value.images ?? []).filter(s => s.image !== w.value.preview))
 const box = ref<HTMLDialogElement>()
 const at = ref(0)
 // The full-size image is only requested once the lightbox is first opened.
@@ -75,7 +76,7 @@ useMotion(root, (mm, el) => {
         {{ w.year }} · {{ kindLabel[w.kind] }}<template v-if="w.current"> · <em>{{ t('common.ongoing') }}</em></template>
       </p>
       <h1>{{ w.title }}</h1>
-      <p class="client">{{ w.client }}</p>
+      <p v-if="w.kind === 'cliente' && w.client !== w.title" class="client">{{ t('work.for', { client: w.client }) }}</p>
       <div class="links">
         <a v-if="w.website" class="btn btn--primary" :href="w.website">
           {{ t('common.visitSite') }} <Icon name="arrow-up-right" />
@@ -121,6 +122,14 @@ useMotion(root, (mm, el) => {
       </ul>
     </section>
 
+    <section class="cta-band hexed" aria-labelledby="ask-title">
+      <div>
+        <h2 id="ask-title">{{ t('work.ask') }}</h2>
+        <p>{{ t('work.askText') }} <a class="mail" :href="ask">hey@heyatom.dev</a></p>
+      </div>
+      <a class="btn btn--primary" :href="ask"><Icon name="mail" /> {{ t('home.close.mail') }}</a>
+    </section>
+
     <section v-if="similar.length" class="similar" aria-labelledby="sim-title">
       <div class="sim-head">
         <h2 id="sim-title">{{ t('work.similar') }}</h2>
@@ -136,11 +145,6 @@ useMotion(root, (mm, el) => {
           </NuxtLink>
         </li>
       </ul>
-    </section>
-
-    <section class="cta-band hexed" aria-labelledby="ask-title">
-      <h2 id="ask-title">{{ t('work.ask') }}</h2>
-      <a class="btn btn--primary" :href="ask"><Icon name="mail" /> {{ t('home.close.mail') }}</a>
     </section>
 
     <dialog v-if="shots.length" ref="box" class="box" :aria-label="t('common.screenshots')" @keydown="key" @click.self="box?.close()">
@@ -256,8 +260,11 @@ aside {
 .shots button:focus-visible { outline: 2px solid var(--green-light); outline-offset: 3px; }
 .shots span { font-size: var(--text-sm); color: var(--ink-3); padding-inline: 0.25rem; }
 
-.similar { margin-top: var(--section); padding-top: var(--section-near); border-top: 1px solid var(--hair); }
-.cta-band { margin: var(--section-near) 0 var(--section); }
+.cta-band { margin: var(--section) 0 0; }
+.cta-band p { margin-top: 0.8rem; color: var(--ink-2); font-size: var(--text-md); max-width: 46ch; }
+.cta-band .mail { color: var(--green-light); font-weight: 700; text-decoration-color: var(--hair-strong); text-underline-offset: 0.18em; overflow-wrap: anywhere; }
+.cta-band .mail:hover { color: var(--ink); text-decoration-color: var(--green); }
+.similar { margin: var(--section) 0; padding-top: var(--section-near); border-top: 1px solid var(--hair); }
 
 .sim-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 1rem; }
 .more { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 600; text-decoration: none; }
@@ -338,5 +345,11 @@ aside {
   .body { grid-template-columns: minmax(0, 1fr); }
   .sim-list { grid-template-columns: minmax(0, 1fr); }
   .prev, .next { top: auto; bottom: 1rem; translate: none; }
+}
+
+/* Phones: the gallery is a swipe strip, not a wall of full-width screenshots. */
+@media (max-width: 560px) {
+  .shots { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 82%; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scrollbar-width: none; padding-bottom: 0.25rem; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); }
+  .shots li { scroll-snap-align: start; }
 }
 </style>

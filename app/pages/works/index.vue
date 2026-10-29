@@ -20,6 +20,7 @@ const list = computed(() => projects.map(loc))
 const services = computed(() => platform.map(loc))
 const base = computed(() => loc(platformBase))
 const toolList = computed(() => tools.map(loc))
+const ask = computed(() => `mailto:hey@heyatom.dev?subject=${t('home.close.subject')}`)
 
 // Open the row targeted by the URL hash (links from the home page),
 // or, back from a project page, the row it was opened from (focus returns to it).
@@ -42,8 +43,12 @@ const motion = () => matchMedia(MOTION_OK).matches
 function toggle(slug: string, e: Event) {
   const details = e.target as HTMLDetailsElement
   if (details.open) {
+    // Exclusive accordion: closing the row above would move this one under the pointer, so the scroll follows it.
+    const summary = details.querySelector('summary')!
+    const top = summary.getBoundingClientRect().top
     open.value = slug
     lastOpen.value = slug
+    nextTick(() => window.scrollBy({ top: summary.getBoundingClientRect().top - top, behavior: 'instant' }))
     if (motion()) {
       gsap.timeline({ defaults: { ease: 'expo.out' } })
         .fromTo(details.querySelector('.detail img'), { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1, ease: 'expo.inOut' })
@@ -132,13 +137,13 @@ useMotion(root, (mm, el) => {
     <ul class="list" data-intro @pointermove="move">
       <li v-for="w in list" :id="w.slug" :key="w.slug">
         <details :open="open === w.slug" @toggle="toggle(w.slug, $event)">
-          <summary @pointerenter="peek = w" @pointerleave="peek = null">
+          <summary @pointerenter="(peek = w, move($event))" @pointerleave="peek = null">
             <!-- Touch screens have no peek: a small screenshot keeps the proof visible before opening. -->
             <img class="thumb" :src="img(w.preview!, 640)" alt="" width="640" height="360" loading="lazy">
             <span class="mono year">{{ w.year }}</span>
             <span class="name">
               <h2 class="title">{{ w.title }}</h2>
-              <span class="client">{{ w.client }}<template v-if="w.current"> · <em>{{ t('common.ongoing') }}</em></template></span>
+              <span class="client">{{ w.client }}<em v-if="w.current"> · {{ t('common.ongoing') }}</em></span>
             </span>
             <span class="mono tags">{{ w.stack.slice(0, 3).join(' · ') }}</span>
             <span class="plus" aria-hidden="true"><Icon name="plus" :size="20" /></span>
@@ -182,7 +187,7 @@ useMotion(root, (mm, el) => {
         </p>
       </div>
 
-      <div class="core" aria-hidden="true">{{ t('works.platform.core') }}</div>
+      <a class="core" :href="ask">{{ t('works.platform.core') }}</a>
       <ul class="services">
         <li v-for="p in services" :id="p.slug" :key="p.slug" class="service">
           <span class="wire" aria-hidden="true" />
@@ -236,7 +241,7 @@ useMotion(root, (mm, el) => {
 
     <section class="cta-band hexed" aria-labelledby="next-title">
       <h2 id="next-title">{{ t('works.next') }}</h2>
-      <a class="btn btn--primary" :href="localePath('/#contatti')">{{ t('common.tellMe') }} <Icon name="arrow-right" /></a>
+      <a class="btn btn--primary" :href="ask"><Icon name="mail" /> {{ t('common.tellMe') }}</a>
     </section>
   </div>
 
@@ -312,7 +317,7 @@ summary:focus-visible { outline-offset: -2px; }
   line-height: 1.15;
   transition: transform 0.4s var(--ease-out), color 0.2s ease;
 }
-summary:hover .title { transform: translateX(6px); }
+@media (hover: hover) { summary:hover .title { transform: translateX(6px); } }
 details[open] .title { color: var(--green-light); }
 .client { color: var(--ink-3); font-size: var(--text-label); font-weight: 500; }
 .client em { font-style: normal; color: var(--green-light); white-space: nowrap; }
@@ -420,6 +425,7 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
   color: var(--on-green);
   background: var(--green);
   box-shadow: 0 10px 30px -8px rgb(var(--green-rgb) / 0.6);
+  text-decoration: none;
   position: relative;
   z-index: 1;
 }
@@ -585,9 +591,12 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
     border: 1px solid var(--hair-strong);
     background: var(--surface-2);
   }
-  .year { grid-area: year; font-size: var(--text-xs); }
-  .name { grid-area: name; }
-  .plus { grid-area: plus; }
+  summary .year { grid-area: year; font-size: var(--text-xs); }
+  summary .name { grid-area: name; }
+  summary .plus { grid-area: plus; }
+  /* Open row: the full screenshot follows right below, so the thumb would show twice. */
+  details[open] .thumb { display: none; }
+  details[open] summary { grid-template-columns: minmax(0, 1fr) 2.5rem; grid-template-areas: 'year plus' 'name plus'; }
   .tags { display: none; }
   .platform-head { grid-template-columns: minmax(0, 1fr); }
   .services { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -595,7 +604,12 @@ details[open] .plus { transform: rotate(45deg); background: var(--green); border
   .service--base { grid-template-columns: minmax(0, 1fr); }
   .core { margin-bottom: 1rem; }
   .services { padding-top: 0; }
-  .tool-list a { grid-template-columns: 3.5rem minmax(0, 1fr) 2.5rem; gap: 1rem; }
+  /* Same shape as a project row: year above the title, icon at the right. */
+  .tool-list a { grid-template-columns: minmax(0, 1fr) 2.5rem; grid-template-areas: 'year gh' 'name gh'; gap: 0.15rem 1rem; align-items: start; }
+  .tool-list .year { grid-area: year; font-size: var(--text-xs); }
+  .tool-name { grid-area: name; }
+  .gh { grid-area: gh; align-self: center; }
+  .core { min-height: 44px; }
   .detail { grid-template-columns: minmax(0, 1fr); padding-left: 0.25rem; }
 }
 
