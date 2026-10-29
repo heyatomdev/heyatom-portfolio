@@ -15,7 +15,8 @@ useSeoMeta({
 
 const bySlug = (s: string) => works.find(w => w.slug === s)!
 // Last slot is dealt in front.
-const deck = ['beacon', 'sgweb', 'kaish-dbd'].map(bySlug)
+// Flagship set: two client sites and DBD Builds. Beacon stays in the picks below, so the deck repeats one card less.
+const deck = ['puma-arts', 'sgweb', 'kaish-dbd'].map(bySlug)
 
 const picks = computed(() => [
   { slug: 'kaish-dbd', line: t('home.picks.kaish') },
@@ -106,6 +107,24 @@ const travels = computed(() => [
 
 const years = new Date().getFullYear() - 2016
 const available = useRuntimeConfig().public.freelanceAvailable === 'true'
+
+const mailEl = ref<HTMLElement>()
+const copyState = ref<'idle' | 'copied' | 'selected'>('idle')
+let copiedTimer: ReturnType<typeof setTimeout> | undefined
+// Fallback for visitors without a mail client: the address goes to the clipboard;
+// where the clipboard is denied (in-app browsers), the address gets selected so they can copy it by hand.
+async function copyMail() {
+  try {
+    await navigator.clipboard.writeText('hey@heyatom.dev')
+    copyState.value = 'copied'
+  }
+  catch {
+    getSelection()?.selectAllChildren(mailEl.value!)
+    copyState.value = 'selected'
+  }
+  clearTimeout(copiedTimer)
+  copiedTimer = setTimeout(() => { copyState.value = 'idle' }, 2500)
+}
 
 const root = ref<HTMLElement>()
 // Coming back to home within the app replays the intro faster too.
@@ -402,13 +421,17 @@ function untilt(e: PointerEvent) {
       <div class="close-copy">
         <h2 id="close-title">{{ t('home.close.title') }}</h2>
         <p>{{ t('home.close.text') }}</p>
-        <p class="aside">{{ t('home.close.recruiter') }}</p>
-        <a class="mail" href="mailto:hey@heyatom.dev">hey@heyatom.dev</a>
+        <p class="mail-row">
+          <a ref="mailEl" class="mail" :href="`mailto:hey@heyatom.dev?subject=${t('home.close.subject')}`">hey@heyatom.dev</a>
+          <button type="button" class="copy" @click="copyMail">{{ t(`home.close.copy.${copyState}`) }}</button>
+          <span class="sr-only" role="status">{{ copyState === 'idle' ? '' : t(`home.close.copy.${copyState}`) }}</span>
+        </p>
         <div class="actions">
           <a class="btn btn--primary" :href="`mailto:hey@heyatom.dev?subject=${t('home.close.subject')}`"><Icon name="mail" /> {{ t('home.close.mail') }}</a>
           <a class="btn btn--ghost" href="https://www.linkedin.com/in/atombolato"><Icon name="linkedin" /> LinkedIn</a>
           <a class="btn btn--ghost" href="https://github.com/andreacw5"><Icon name="github" /> GitHub</a>
         </div>
+        <p class="aside">{{ t('home.close.recruiter') }}</p>
       </div>
     </div>
   </section>
@@ -930,10 +953,18 @@ function untilt(e: PointerEvent) {
 
 .close h2 { font-size: clamp(2.2rem, 4.8vw, 4rem); letter-spacing: -0.04em; max-width: 14ch; }
 .close p { margin-top: 1.2rem; color: var(--ink-2); font-size: var(--text-md); max-width: 46ch; }
-.close p.aside { margin-top: 0.8rem; color: var(--ink-3); font-size: var(--text-label); }
+.close p.aside { margin-top: 1.6rem; color: var(--ink-3); font-size: var(--text-label); }
+.close p.mail-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 1.1rem; margin-top: 1.8rem; max-width: none; }
+.copy {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  min-height: 44px; padding: 0 0.2rem;
+  font: inherit; font-size: var(--text-sm); font-weight: 600; color: var(--ink-3);
+  background: none; border: 0; cursor: pointer;
+  transition: color 0.2s ease;
+}
+.copy:hover, .copy:focus-visible { color: var(--green-light); }
 .mail {
   display: inline-block;
-  margin-top: 1.8rem;
   font-size: clamp(1.5rem, 3.4vw, 2.6rem);
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -962,6 +993,8 @@ function untilt(e: PointerEvent) {
     padding-top: 2.5rem;
   }
   .stage { width: min(86%, 520px); margin-inline: auto; aspect-ratio: 1 / 0.85; }
+  /* Stacked layout: every card scatters upward, away from the facts row underneath. */
+  .shot--2 { --lift: -120px; }
   .picks { grid-template-columns: minmax(0, 1fr); }
   .pick { flex-direction: column; align-items: stretch; }
   .pick-img { flex: none; }
